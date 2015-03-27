@@ -5,14 +5,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 
+// TODO : GET____ 함수 필요없으면 지우기
+// TODO : AlertDialog 띄어진 상태에서 화면 회전시 Dialog 사라지는 현상 해결
+// TODO : AlertDialog 에서 취소 버튼 또는 back 버튼 입력 시 값이 바뀌어 저장되는 것 해결
 /**
- * @brief This method occurs dialog about setting.
- * @brief This method involves information whether one or two hands mode, left or right hand mode, korean or english language.
+ * @file SettingActivity.java
+ *
+ * @brief This class occurs dialog about setting.
+ * @brief This class involves information whether one or two hands mode, left or right hand mode, korean or english language.
  *
  * @return dialog about setting.
  * @data bool_hand is information direction of hand.
@@ -21,7 +27,6 @@ import android.widget.RadioButton;
  *
  * @date 2015.03.27.
  * @author Soyeong Park
- *
  */
 public class SettingActivity extends AlertDialog implements View.OnTouchListener {
 
@@ -36,7 +41,7 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      *
      * @param context is object of function receiving a called Activity.
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     public SettingActivity(Context context) {
@@ -45,17 +50,16 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
     }
 
     /**
-     * @brief This method connect MainActivity to Custom Dialog Layout and call Listener Method.
+     * @brief This method connect MainActivity to AlertDialog Layout and call Listener Method.
      *
      * @param savedInstanceState restores previous information and screen.
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.dialog_setting);
 
         rbtn_right_hand = (RadioButton)findViewById(R.id.rbtn_right);
@@ -68,17 +72,18 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
         rbtn_left_hand = (RadioButton)findViewById(R.id.rbtn_left);
         rbtn_10finger = (RadioButton)findViewById(R.id.rbtn_10finger);
         rbtn_eng_language = (RadioButton)findViewById(R.id.rbtn_english);
-
+        Log.i("++Setting", "5");
         setInformation();
 
         btn_cancel.setOnTouchListener(this);
         btn_confirm.setOnTouchListener(this);
+        Log.i("++Setting", "6");
     }
 
     /**
-     * @brief This Method set Setting Dialog's changed information whenever Setting Button touches.
+     * @brief This Method set Setting AlertDialog's changed information whenever Setting Button touches.
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     private void setInformation() {
@@ -88,11 +93,13 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
             rbtn_right_hand.setChecked(true);
             rbtn_5finger.setChecked(true);
             rbtn_kor_language.setChecked(true);
+            Log.i("++Setting", "7");
         }
         else {
             setHand(pref_setting.getBoolean("DATA_HAND", true));
             setFinger(pref_setting.getBoolean("DATA_FINGER", true));
             setLanguage(pref_setting.getBoolean("DATA_LANGUAGE", true));
+            Log.i("++Setting", "8");
         }
     }
 
@@ -101,7 +108,7 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      *
      * @return bool_hand has information about hand's direction.
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     public boolean getHand() {
@@ -112,7 +119,7 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      *
      * @param state if state is true then hand's direction is right(default).
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     public void setHand(boolean state) {
@@ -128,7 +135,7 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      *
      * @return bool_finger has information about the number of fingers.
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     public boolean getFinger() {
@@ -139,7 +146,7 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      *
      * @param state if state is true then the number of fingers is 5(default).
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     public void setFinger(boolean state) {
@@ -155,7 +162,7 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      *
      * @return bool_language has information about selected language.
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     public boolean getLanguage() {
@@ -166,7 +173,7 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      *
      * @param state if state is true then the selected language is korean(default).
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     public void setLanguage(boolean state) {
@@ -184,18 +191,19 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      * @param event has click motion's occurrence information.
      * @return false
      *
-     * @author soyeong Park
+     * @author Soyeong Park
      * @date 2015-03-27
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        Log.i("--Set", "9");
         if(v == btn_confirm) {
             bool_hand = rbtn_right_hand.isChecked();
             bool_finger = rbtn_5finger.isChecked();
             bool_language = rbtn_kor_language.isChecked();
         }
         dismiss();
-
+        Log.i("--Set", "10");
         return false;
     }
 }
