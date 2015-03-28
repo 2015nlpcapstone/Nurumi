@@ -16,12 +16,15 @@ import android.util.Log;
 public class MainActivity extends Activity {
 
 	int[] motion;
-	private static final int SWIPE_MIN_DISTANCE = 50;
-	private static final int SWIPE_MAX_OFF_PATH = 250;
-	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+	int[] CircleNumLinkedWithptId;
+	//private static final int SWIPE_MIN_DISTANCE = 50;
+	//private static final int SWIPE_MAX_OFF_PATH = 250;
+	//private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 	
 	ArrayList<PointF> startPtArr;
+	ArrayList<PointF> oldPtArr;
 	ArrayList<PointF> ptArr;
+	
 	final Comparator<PointF> comparatorX = new Comparator<PointF> () {
 		public int compare(PointF pt1, PointF pt2)
 		{
@@ -43,11 +46,19 @@ public class MainActivity extends Activity {
 			super.onCreate(savedInstanceState);
 			start = false;
 			motion = new int[5];
+			CircleNumLinkedWithptId = new int[5];
+			for(int i=0; i<5; i++)
+				CircleNumLinkedWithptId[i]=-1;
 			MyView view = new MyView(this);
 			setContentView(view);
 			
 			startPtArr = new ArrayList<PointF>();
+			oldPtArr = new ArrayList<PointF>();
 			ptArr = new ArrayList<PointF>();
+			
+			startPtArr.clear();
+			oldPtArr.clear();
+			ptArr.clear();
 	}
 
 	protected class MyView extends View
@@ -64,7 +75,7 @@ public class MainActivity extends Activity {
 			canvas.drawColor(Color.WHITE);
 			pnt.setTextSize(64.0f);			
 			
-			/* start position */
+			/* standard position */
 			if(startPtArr.isEmpty())
 				return;
 			int index=0;
@@ -80,53 +91,105 @@ public class MainActivity extends Activity {
 				canvas.drawText(String.valueOf(index),spt.x,spt.y-114,pnt);
 			}
 			
-			/* current finger */
-			if(ptArr.isEmpty())
-				return;
-			
-			for (PointF pt : ptArr)
+			/* down event position */
+			if(!oldPtArr.isEmpty())
 			{
-				int circleNum = checkTouchedCircle((int)pt.x, (int)pt.y);
-				pnt.setStyle(Paint.Style.STROKE);
-				canvas.drawCircle(pt.x,pt.y, 100, pnt);
-
-				pnt.setStyle(Paint.Style.FILL);
-				canvas.drawText(String.valueOf(circleNum),pt.x,pt.y-114,pnt);
+				for (PointF pt : oldPtArr)
+				{
+					int circleNum = checkTouchedCircle((int)pt.x, (int)pt.y);
+					pnt.setStyle(Paint.Style.STROKE);
+					canvas.drawCircle(pt.x,pt.y, 100, pnt);
+	
+					pnt.setStyle(Paint.Style.FILL);
+					canvas.drawText(String.valueOf(circleNum),pt.x,pt.y-114,pnt);
+				}
 			}
+			
+			/* current finger */
+			index=0;
+			Log.d("index", "index : " + index);
+			if(!ptArr.isEmpty())
+			{			
+				for (PointF pt : ptArr)
+				{
+					int circleNum = -1; //= CircleNumLinkedWithptId[index++];//= checkTouchedCircle((int)pt.x, (int)pt.y);
+					while(index < 5 && circleNum == -1)
+						circleNum = CircleNumLinkedWithptId[index++];
+					
+					pnt.setStyle(Paint.Style.STROKE);
+					canvas.drawCircle(pt.x,pt.y, 100, pnt);
+	
+					pnt.setStyle(Paint.Style.FILL);
+					canvas.drawText(String.valueOf(circleNum),pt.x,pt.y-114,pnt);
+				}
+			}
+			
 		} 
 
 		//@Override
 		public boolean onTouchEvent (MotionEvent e)
 		{
-			//int action = e.getAction() & MotionEvent.ACTION_MASK;
+			int action = e.getAction() & MotionEvent.ACTION_MASK;
 			
 			if(start == false)
 				return startMultiTouch(e);
 			else
 			{
-				if ( e.getAction() == MotionEvent.ACTION_POINTER_DOWN )
+				
+				switch(action)
 				{
-					int touchC = e.getPointerCount();
-					Log.d("in", "down in TouchCount : " + touchC);
-				}
-				ptArr.clear();
-				if ( e.getAction() == MotionEvent.ACTION_DOWN || e.getAction() == MotionEvent.ACTION_MOVE )
-				{				
-					int touchCount = e.getPointerCount();
-					for (int i=0; i<touchCount; i++)
+					case MotionEvent.ACTION_DOWN :
+					case MotionEvent.ACTION_POINTER_DOWN :
 					{
+						int touchCount = e.getPointerCount();
+						if(touchCount>5)
+						{
+							invalidate();
+							return true;
+						}
 						PointF ptf = new PointF();
-						ptf.x = e.getX(i);
-						ptf.y = e.getY(i);
-						//Log.d("Pointer", "Pointer "+(i+1)+": x="+e.getX(i)+",y="+e.getY(i));
-						ptArr.add(ptf);
+						ptf.x = e.getX(touchCount-1);
+						ptf.y = e.getY(touchCount-1);
+						Log.d("DOWN", "PointerID : " + e.getPointerId(touchCount-1) + "| Grid) x="+e.getX(touchCount-1)+",y="+e.getY(touchCount-1));
+						CircleNumLinkedWithptId[touchCount-1] = checkTouchedCircle((int)e.getX(touchCount-1), (int)e.getY(touchCount-1));
+						oldPtArr.add(ptf);
+						invalidate();
+						return true;
 					}
-					invalidate();
-					return true;
+					
+					case MotionEvent.ACTION_MOVE :
+					{
+						ptArr.clear();
+						int touchCount = e.getPointerCount();
+						if(touchCount>5)
+							touchCount = 5;
+						for (int i=0; i<touchCount; i++)
+						{
+							PointF ptf = new PointF();
+							ptf.x = e.getX(i);
+							ptf.y = e.getY(i);
+							//Log.d("Moving", "PointerID : " + e.getPointerId(i) + "| Grid) x="+e.getX(i)+",y="+e.getY(i));
+							//Log.d("Pointer", "Pointer "+(i+1)+": x="+e.getX(i)+",y="+e.getY(i));
+							ptArr.add(ptf);
+						}
+						invalidate();
+						return true;
+					}
+					//case MotionEvent.ACTION_POINTER_UP :
+					case MotionEvent.ACTION_UP :
+					{
+						oldPtArr.clear();
+						ptArr.clear();
+						invalidate();
+						return true;
+					}
+					default :
+					{
+						invalidate();
+						return false;
+					}		
 				}
 			}
-			invalidate();
-			return false;
 		}
 		
 		
@@ -152,7 +215,7 @@ public class MainActivity extends Activity {
 				if(touchCount == 5)
 				{
 					start = true;
-					Log.d("start" , "start : " + start);
+					//Log.d("start" , "start : " + start);
 					for (int i=0; i<touchCount; i++)
 					{
 						PointF ptf = new PointF();
