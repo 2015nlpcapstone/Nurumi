@@ -9,13 +9,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Bundle;
-//import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 import android.util.Log;
 
+
 public class MainActivity extends Activity {
-	
+	Context ctx = this;
 	public class CircleLinkedWithPtId
 	{
 		int pointerId;
@@ -27,15 +28,16 @@ public class MainActivity extends Activity {
 		int pointerIndex;	
 	}
 	int[] motion;
-	
+	boolean[] circleAvailable;
 	boolean motionStartFlag;
-	
+	public String command = "";	
+	private static final int INVALID_CIRCLE		= -1;
 	private static final int INVALID_DIRECTION 	= -1;
-	private static final int DOT  				= 0;
-	private static final int DOWN  				= 1;
-	private static final int LEFT  				= 2;
-	private static final int UP  				= 3;
-	private static final int RIGHT  			= 4;
+	private static final int DIRECTION_DOT		= 0;
+	private static final int DIRECTION_DOWN 	= 1;
+	private static final int DIRECTION_LEFT 	= 2;
+	private static final int DIRECTION_UP  		= 3;
+	private static final int DIRECTION_RIGHT	= 4;
 	
 	private static final int SWIPE_MIN_DISTANCE = 140;
 	//private static final int SWIPE_MAX_OFF_PATH = 250;
@@ -62,7 +64,8 @@ public class MainActivity extends Activity {
 	};
 	
 	
-	boolean start;
+	private boolean start;
+	private boolean startFlag;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -72,9 +75,13 @@ public class MainActivity extends Activity {
 		MyView view = new MyView(this);
 		setContentView(view);
 		
+		startFlag = false;
 		start = false;
 		motionStartFlag = false;
 		motion = new int[5];
+		circleAvailable = new boolean[5];
+		for(int i=0; i<5; i++)
+			circleAvailable[i] = true;
 		
 		plp = new LinkedList<PtIdLinkedWithPtIndex>();
 		clp = new ArrayList<CircleLinkedWithPtId>();
@@ -170,6 +177,8 @@ public class MainActivity extends Activity {
 				{
 					case MotionEvent.ACTION_DOWN :
 					{
+						if( checkTouchedCircle((int)e.getX(), (int)e.getY()) == INVALID_CIRCLE )
+							return false;
 						for(int i=0; i<5; i++)
 							motion[i] = -1;
 						motionStartFlag = true;
@@ -179,21 +188,20 @@ public class MainActivity extends Activity {
 					{
 						int touchCount = e.getPointerCount();
 						int circleNum = checkTouchedCircle((int)e.getX(touchCount-1), (int)e.getY(touchCount-1));
-						if(touchCount>5 || circleNum == -1 || !motionStartFlag)
+						if(touchCount>5 || circleNum == -1 || !motionStartFlag || !circleAvailable[circleNum-1])
 						{
 							invalidate();
 							return true;
 						}
-						
-						motion[circleNum-1] = DOT;
+													
+						circleAvailable[circleNum-1] = false;
+						motion[circleNum-1] = DIRECTION_DOT;
 						
 						PointF ptf = new PointF();
 						ptf.x = e.getX(touchCount-1);
 						ptf.y = e.getY(touchCount-1);
 						oldPtArr.add(ptf);
-						
-						//Log.d("DOWN", "PointerID : " + e.getPointerId(touchCount-1) + "| Grid) x="+e.getX(touchCount-1)+",y="+e.getY(touchCount-1));
-						
+
 						CircleLinkedWithPtId cp = new CircleLinkedWithPtId();
 						cp.pointerId = e.getPointerId(touchCount-1);
 						cp.circleNum = circleNum;
@@ -216,95 +224,86 @@ public class MainActivity extends Activity {
 							ptf.x = e.getX(i);
 							ptf.y = e.getY(i);
 							ptArr.add(ptf);
-							//Log.d("Moving", "PointerID : " + e.getPointerId(i) + "| Grid) x="+e.getX(i)+",y="+e.getY(i));
-							//Log.d("Pointer", "Pointer "+(i+1)+": x="+e.getX(i)+",y="+e.getY(i));
 							
 							PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex();
 							pp.pointerIndex = i;
 							pp.pointerId = e.getPointerId(i);
 							plp.add(pp);
+							
+							checkDirection(pp, ptf);
 						}
 						invalidate();
 						return true;
 					}
 					case MotionEvent.ACTION_POINTER_UP :
 					{
-						plp.clear();
 						motionStartFlag = false;
 						
 						int touchCount = e.getPointerCount();
 						if(touchCount>5)
 							touchCount = 5;
-						
-						PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex();
-						for (int i=0; i<touchCount; i++)
-						{
-							pp.pointerIndex = i;
-							pp.pointerId = e.getPointerId(i);
-							plp.add(pp);
-						}
-						PointF pt = new PointF(e.getX(), e.getY());
-						for (int i=0; i<touchCount; i++)
-						{
-							if(plp.size() <= i)
-								break;
-							pp = plp.get(i);
-							checkDirection(pp, pt);
-						}
-						
 						return true;
 					}
 					case MotionEvent.ACTION_UP :
 					{
+						if(!startFlag && start)
+						{
+							startFlag = true;
+							return true;
+						}
 						int touchCount = e.getPointerCount();
 						if(touchCount>5)
 							touchCount = 5;
 						
-						PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex();
-						pp.pointerIndex = 0;
-						pp.pointerId = e.getPointerId(0);
-						
-						PointF pt = new PointF(e.getX(), e.getY());
-						
-						checkDirection(pp, pt);
 						for(int i=0; i<5; i++)
 						{
 							if(motion[i] != -1)
 							{
 								switch(motion[i])
 								{
-									case DOT :
+									case DIRECTION_DOT :
 									{
 										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) DOT");
+										command += "circleIndex : " + (i+1) + "| Dir) DOT\n";
 										break;
 									}
-									case UP :
+									case DIRECTION_UP :
 									{
 										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) UP");
+										command += "circleIndex : " + (i+1) + "| Dir) UP\n";
 										break;
 									}
-									case DOWN :
+									case DIRECTION_DOWN :
 									{
 										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) DOWN");
+										command += "circleIndex : " + (i+1) + "| Dir) DOWN\n";
 										break;
 									}
-									case LEFT :
+									case DIRECTION_LEFT :
 									{
 										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) LEFT");
+										command += "circleIndex : " + (i+1) + "| Dir) LEFT\n";
 										break;
 									}
-									case RIGHT :
+									case DIRECTION_RIGHT :
+									{
 										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) RIGHT");
+										command += "circleIndex : " + (i+1) + "| Dir) RIGHT\n";
+									}
 								}//switch end
 							}//motion check if end
 						}//motion check for end
 						Log.d("Motion End", "------------------------------");
-						
+						if(!command.equals(""))
+							Toast.makeText(ctx, command, android.widget.Toast.LENGTH_SHORT).show();
+						command = "";
 						/* initialization for next motion */
 						oldPtArr.clear();
 						ptArr.clear();
 						clp.clear();
 						plp.clear();
+						for(int i=0; i<5; i++)
+							circleAvailable[i] = true;
 						invalidate();
 						return true;
 					}
@@ -349,11 +348,13 @@ public class MainActivity extends Activity {
 						startPtArr.add(ptf);
 					}
 					Collections.sort(startPtArr, comparatorX);
+					/*
 					PointF pt1, pt2;
 					pt1 = startPtArr.get(0);
 					pt2 = startPtArr.get(4);
 					if(pt2.x-pt1.x < 800)
 						Collections.sort(startPtArr, comparatorY);
+					*/
 					return true;
 				}
 				else {return true;}
@@ -391,17 +392,17 @@ public class MainActivity extends Activity {
 			float distanceY = oldPt.y - pt.y;
 			
 			if( Math.abs(distanceX) < SWIPE_MIN_DISTANCE && Math.abs(distanceY) < SWIPE_MIN_DISTANCE )
-				motion[circleNum-1] = DOT;
+				motion[circleNum-1] = DIRECTION_DOT;
 			else if( Math.abs(distanceX) > SWIPE_MIN_DISTANCE && Math.abs(distanceY) > SWIPE_MIN_DISTANCE )
 				motion[circleNum-1] = INVALID_DIRECTION;
 			else if( Math.abs(distanceX) > SWIPE_MIN_DISTANCE && distanceX > 0)
-				motion[circleNum-1] = LEFT;
+				motion[circleNum-1] = DIRECTION_LEFT;
 			else if( Math.abs(distanceX) > SWIPE_MIN_DISTANCE && distanceX < 0)
-				motion[circleNum-1] = RIGHT;
+				motion[circleNum-1] = DIRECTION_RIGHT;
 			else if( Math.abs(distanceY) > SWIPE_MIN_DISTANCE && distanceY < 0)
-				motion[circleNum-1] = DOWN;
+				motion[circleNum-1] = DIRECTION_DOWN;
 			else if( Math.abs(distanceY) > SWIPE_MIN_DISTANCE && distanceY > 0)
-				motion[circleNum-1] = UP;
+				motion[circleNum-1] = DIRECTION_UP;
 			else
 				motion[circleNum-1] = INVALID_DIRECTION;
 		}
