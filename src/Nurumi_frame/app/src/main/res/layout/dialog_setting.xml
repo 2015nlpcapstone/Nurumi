@@ -11,13 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_margin="5dp"
         android:layout_weight="1">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:layout_gravity="center_vertical"
             android:gravity="center"
             android:text="사용할 손 방향"/>
@@ -28,12 +27,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_weight="5">
+            android:layout_weight="4">
 
             <RadioButton
                 android:id="@+id/rbtn_left"
                 android:text="왼손"
-                android:paddingRight="15dp"
+                android:paddingRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -56,7 +55,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:layout_gravity="center_vertical"
             android:gravity="center"
             android:text="한손 또는 양손"/>
@@ -66,12 +65,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_weight="5">
+            android:layout_weight="4">
 
             <RadioButton
                 android:id="@+id/rbtn_5finger"
                 android:text="한손"
-                android:paddingRight="15dp"
+                android:paddingRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -94,7 +93,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:layout_gravity="center_vertical"
             android:gravity="center"
             android:text="주요 사용 언어"/>
@@ -104,12 +103,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_weight="5">
+            android:layout_weight="4">
 
             <RadioButton
                 android:id="@+id/rbtn_english"
                 android:text="영어"
-                android:paddingRight="15dp"
+                android:paddingRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

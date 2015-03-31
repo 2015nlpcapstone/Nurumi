@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -20,7 +21,7 @@ import android.widget.ToggleButton;
  * 3) Apply Background Transparency to Layout [unsolved]
  * 4) Menu Button Function [unsolved]
  *      (1) Inform [03.28]
- *      (2) Tutorial
+ *      (2) Tutorial [03.31]
  *      (3) Mute
  *      (4) Setting [03.27]
  */
@@ -95,6 +96,8 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                     @Override
                     public void onClick(View v) {
                         if (tbtn_inform.isChecked() == true) {
+                            dlg_inform.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
                             dlg_inform.show();
                         } else {
                             Log.i("inform", "33");
@@ -102,6 +105,8 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                             dlg_inform.dismiss();
                             // spare LifeCycle
                             dlg_inform = new InformActivity(MainActivity.this);
+                            dlg_inform.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
                             dlg_inform.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dlg_inform.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
                         }

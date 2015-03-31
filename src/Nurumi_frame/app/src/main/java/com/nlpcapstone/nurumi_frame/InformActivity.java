@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
 import android.widget.ImageView;
 
 /**
@@ -46,9 +47,12 @@ public class InformActivity extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.dialog_inform);
 
+
         img_inform = (ImageView)findViewById(R.id.img_inform);
+
 
         Log.i("inform", "66");
         setImage();
