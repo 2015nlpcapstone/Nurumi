@@ -1,5 +1,6 @@
 package com.nlpcapstone.nurumi_frame;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -95,8 +96,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                     public void onClick(View v) {
                         if (tbtn_inform.isChecked() == true) {
                             dlg_inform.show();
-                       }
-                        else {
+                        } else {
                             Log.i("inform", "33");
                             // kill LifeCycle
                             dlg_inform.dismiss();
@@ -107,12 +107,24 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                         }
                     }
                 });
-            //    break;
+                //    break; // 꼭 해야하는지 연동 후 확인
             case R.id.tbtn_tutorial:
-                if (tbtn_tutorial.isChecked()) {
-                    tv.setText("TUTORIAL_ON");
+                SharedPreferences pref_setting = getSharedPreferences("setting", Activity.MODE_PRIVATE);
+                boolean bool_finger, bool_hand, bool_language, bool_tutorial;
+
+                bool_finger = pref_setting.getBoolean("DATA_FINGER", true);
+                bool_hand = pref_setting.getBoolean("DATA_HAND", true);
+                bool_language = pref_setting.getBoolean("DATA_LANGUAGE", true);
+                bool_tutorial = tbtn_tutorial.isChecked();
+
+                if (bool_tutorial == true) {
+                    setDefaultKeyImage(bool_finger);
+
+                    // Call Hyeongsoon's code
                 } else {
-                    tv.setText("TUTORIAL_OFF");
+                    setTutorialKeyImage(bool_finger, bool_hand, bool_language);
+
+                    // Call Hyeongsoon's code
                 }
                 break;
             case R.id.tbtn_mute:
@@ -191,5 +203,63 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         else { editor.putBoolean("DATA_LANGUAGE", false); }
 
         editor.commit();
+    }
+
+    /**
+     * @brief When tutorial button is pressed, This method sets right finger key's image.
+     *
+     * @param bool_finger is information about the number of finger.
+     * @param bool_hand is information direction of hand.
+     * @param bool_language is information about selecting language.
+     *
+     * @author Soyeong Park
+     * @date 2015-03-31
+     *
+     * @TODO 코드 연동 후 이미지 설정할 때 정확하게 구현 (현재 틀만 잡혀있음)
+     */
+    private void setTutorialKeyImage(boolean bool_finger, boolean bool_hand, boolean bool_language) {
+        // TODO : 실제로는 setImageResource 이용하여 이미지 설정해야 함
+        //    img_inform.setImageResource(R.drawable.ic_launcher);
+        if(bool_finger == true && bool_hand == true && bool_language == true) {
+
+        } // CASE1 : [5 손가락 / 오른손 / 한국어]
+        else if(bool_finger == true && bool_hand == true && bool_language == false) {
+
+        } // CASE2 : [5 손가락 / 오른손 / 영어]
+        else if(bool_finger == true && bool_hand == false && bool_language == true) {
+
+        } // CASE3 : [5 손가락 / 왼손 / 한국어]
+        else if(bool_finger == true && bool_hand == false && bool_language == false) {
+
+        } // CASE4 : [5 손가락 / 왼손 / 영어]
+    /*
+        else {
+
+        } // [10 손가락]
+    */
+    }
+    /**
+     * @brief When tutorial button is unpressed, This method sets default finger key's image.
+     *
+     * @param bool_finger is information about the number of finger.
+     *
+     * @author Soyeong Park
+     * @date 2015-03-31
+     *
+     * @TODO 코드 연동 후 이미지 설정할 때 정확하게 구현 (현재 틀만 잡혀있음)
+     */
+    private void setDefaultKeyImage(boolean bool_finger) {
+        if(bool_finger == true) {
+            // btn_1_finger.setImageResouce();
+            // btn_2_finger.setImageResouce();
+            // btn_3_finger.setImageResouce();
+            // btn_4_finger.setImageResouce();
+            // btn_5_finger.setImageResouce();
+        } // [5 손가락]
+    /*
+       else {
+
+        } // [10 손가락]
+    */
     }
 }

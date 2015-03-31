@@ -74,32 +74,21 @@ public class InformActivity extends Dialog {
 
         // TODO : 구분의 경우를 생각하여 구현해야함 (2 * 2 * 2 경우)
         if (bool_finger == true && bool_hand == true && bool_language == true) {
-        //    img_inform.setImageResource(R.drawable.ic_launcher);
         // TODO : 실제로는 setImageResource 이용하여 이미지 설정해야 함
-            img_inform.setBackgroundColor(Color.rgb(255, 0, 0));
-        } // default value인 경우 [5 손가락 / 오른손 / 한국어]
-        else
-            img_inform.setBackgroundColor(Color.rgb(0, 255, 0));
-       /* else if (bool_finger && bool_hand && !bool_language) {
-            img_inform.setImageResource(R.drawable.ic_launcher);
-        } // default value인 경우 [5 손가락 / 오른손 / 영어]
-        else if (bool_finger && !bool_hand && bool_language) {
-            img_inform.setImageResource(R.drawable.ic_launcher);
-        } // default value인 경우 [5 손가락 / 왼손 / 한국어]
-        else if (bool_finger && !bool_hand && !bool_language) {
-            img_inform.setImageResource(R.drawable.ic_launcher);
-        } // default value인 경우 [5 손가락 / 왼손 / 영어]
-        else if (!bool_finger && bool_hand && bool_language) {
-            img_inform.setImageResource(R.drawable.ic_launcher);
-        } // default value인 경우 [10 손가락 / 오른손 / 한국어]
-        else if (!bool_finger && bool_hand && !bool_language) {
-            img_inform.setImageResource(R.drawable.ic_launcher);
-        } // default value인 경우 [10 손가락 / 오른손 / 영어]
-        else if (!bool_finger && !bool_hand && bool_language) {
-            img_inform.setImageResource(R.drawable.ic_launcher);
-        } // default value인 경우 [10 손가락 / 왼손 / 한국어]
-        else if (!bool_finger && !bool_hand && !bool_language) {
-            img_inform.setImageResource(R.drawable.ic_launcher);
-        } // default value인 경우 [10 손가락 / 왼손 / 영어]*/
+        //    img_inform.setImageResource(R.drawable.ic_launcher);
+            img_inform.setBackgroundColor(Color.rgb(255, 0, 0)); // RED
+        } // CASE1 : [5 손가락 / 오른손 / 한국어]
+        else if(bool_finger == true && bool_hand == true && bool_language == false) {
+            img_inform.setBackgroundColor(Color.rgb(0, 0, 255)); // BLUE
+        } // CASE2 : [5 손가락 / 오른손 / 영어]
+        else if(bool_finger == true && bool_hand == false && bool_language == true) {
+            img_inform.setBackgroundColor(Color.rgb(0, 255, 0)); // GREEN
+        } // CASE3 : [5 손가락 / 왼손 / 한국어]
+        else if(bool_finger == true && bool_hand == false && bool_language == false) {
+            img_inform.setBackgroundColor(Color.rgb(255, 255, 0)); // YELLOW
+        } // CASE4 : [5 손가락 / 왼손 / 영어]
+        else {
+            img_inform.setBackgroundColor(Color.rgb(255, 0, 255)); // PINK
+        } // [10 손가락 / 그 외]
     }
 }
