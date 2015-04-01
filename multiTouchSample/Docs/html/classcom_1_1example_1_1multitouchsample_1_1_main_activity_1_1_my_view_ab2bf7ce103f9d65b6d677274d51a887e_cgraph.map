@@ -1,0 +1,6 @@
+<map id="com.example.multitouchsample.MainActivity.MyView.onTouchEvent" name="com.example.multitouchsample.MainActivity.MyView.onTouchEvent">
+<area shape="rect" id="node2" href="$classcom_1_1example_1_1multitouchsample_1_1_main_activity_1_1_my_view.html#a98da479657a7dabe6b6dee15e39b5a98" title="Function information : Start multi touch recognition. " alt="" coords="280,5,515,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1example_1_1multitouchsample_1_1_main_activity_1_1_my_view.html#a98456bf5be1085790b22ea0179fa2892" title="Function information : Find touched circle. " alt="" coords="563,86,793,142"/>
+<area shape="rect" id="node4" href="$classcom_1_1example_1_1multitouchsample_1_1_main_activity_1_1_my_view.html#a6fbf678025aa07a8024eddeb5431b30c" title="Function information : Check the direction of movement of pointers. " alt="" coords="281,123,513,164"/>
+<area shape="rect" id="node5" href="$classcom_1_1example_1_1multitouchsample_1_1_main_activity_1_1_my_view.html#aee59904e43e35df3dd7684f22b7dc65d" title="Function information : Motion checking method. " alt="" coords="286,188,509,229"/>
+</map>

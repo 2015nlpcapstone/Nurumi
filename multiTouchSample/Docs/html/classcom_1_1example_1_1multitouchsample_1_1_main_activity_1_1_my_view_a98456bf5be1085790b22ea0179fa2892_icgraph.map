@@ -1,0 +1,5 @@
+<map id="com.example.multitouchsample.MainActivity.MyView.checkTouchedCircle" name="com.example.multitouchsample.MainActivity.MyView.checkTouchedCircle">
+<area shape="rect" id="node2" href="$classcom_1_1example_1_1multitouchsample_1_1_main_activity_1_1_my_view.html#a26704cac8a42993a73637404da71988e" title="com.example.multitouchsample.\lMainActivity.MyView.onDraw" alt="" coords="295,5,505,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1example_1_1multitouchsample_1_1_main_activity_1_1_my_view.html#ab2bf7ce103f9d65b6d677274d51a887e" title="com.example.multitouchsample.\lMainActivity.MyView.onTouchEvent" alt="" coords="564,93,791,135"/>
+<area shape="rect" id="node4" href="$classcom_1_1example_1_1multitouchsample_1_1_main_activity_1_1_my_view.html#a6fbf678025aa07a8024eddeb5431b30c" title="Function information : Check the direction of movement of pointers. " alt="" coords="284,123,516,164"/>
+</map>

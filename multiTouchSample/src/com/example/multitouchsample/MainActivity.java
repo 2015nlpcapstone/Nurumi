@@ -16,56 +16,7 @@ import android.util.Log;
 
 
 public class MainActivity extends Activity {
-	Context ctx = this;
-	public class CircleLinkedWithPtId
-	{
-		int pointerId;
-		int circleNum;		
-	}
-	public class PtIdLinkedWithPtIndex
-	{
-		int pointerId;
-		int pointerIndex;	
-	}
-	int[] motion;
-	boolean[] circleAvailable;
-	boolean motionStartFlag;
-	public String command = "";	
-	private static final int INVALID_CIRCLE		= -1;
-	private static final int INVALID_DIRECTION 	= -1;
-	private static final int DIRECTION_DOT		= 0;
-	private static final int DIRECTION_DOWN 	= 1;
-	private static final int DIRECTION_LEFT 	= 2;
-	private static final int DIRECTION_UP  		= 3;
-	private static final int DIRECTION_RIGHT	= 4;
-	
-	private static final int SWIPE_MIN_DISTANCE = 140;
-	//private static final int SWIPE_MAX_OFF_PATH = 250;
-	//private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-	
-	LinkedList<PtIdLinkedWithPtIndex> plp;
-	ArrayList<CircleLinkedWithPtId> clp;
-	
-	ArrayList<PointF> startPtArr;
-	ArrayList<PointF> oldPtArr;
-	ArrayList<PointF> ptArr;
-	
-	final Comparator<PointF> comparatorX = new Comparator<PointF> () {
-		public int compare(PointF pt1, PointF pt2)
-		{
-			return (int) (pt1.x - pt2.x);
-		}
-	};
-	final Comparator<PointF> comparatorY = new Comparator<PointF> () {
-		public int compare(PointF pt1, PointF pt2)
-		{
-			return (int) (pt2.y - pt1.y);
-		}
-	};
-	
-	
-	private boolean start;
-	private boolean startFlag;
+	private Context ctx = this;	
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -74,38 +25,162 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		MyView view = new MyView(this);
 		setContentView(view);
-		
-		startFlag = false;
-		start = false;
-		motionStartFlag = false;
-		motion = new int[5];
-		circleAvailable = new boolean[5];
-		for(int i=0; i<5; i++)
-			circleAvailable[i] = true;
-		
-		plp = new LinkedList<PtIdLinkedWithPtIndex>();
-		clp = new ArrayList<CircleLinkedWithPtId>();
-		
-		startPtArr = new ArrayList<PointF>();
-		oldPtArr = new ArrayList<PointF>();
-		ptArr = new ArrayList<PointF>();
-		
-		plp.clear();
-		clp.clear();
-		
-		startPtArr.clear();
-		oldPtArr.clear();
-		ptArr.clear();
-			
 	}
 
 	protected class MyView extends View
 	{
+		/////////////////////////////////////////////
+		/// @fn 
+		/// @brief Constructor of Motion keyboard view
+		/// @remark
+		/// - Description : Initialize all variables and lists for gesture recognition.
+		/// @param context 
+		///~~~~~~~~~~~~~{.java}
+		/// // core code
+		///~~~~~~~~~~~~~
+		/////////////////////////////////////////////
 		public MyView(Context context)
 		{
 			super(context);
+			initialize();
 		}
+		
+		/////////////////////////////////////////////
+		/// @class CircleLinkedWithPtId
+		///com.example.multitouchsample \n
+		///   ¤¤ MainActivity.java
+		/// @section Class information
+		///    |    Item    |    Contents    |
+		///    | :-------------: | -------------   |
+		///    | Company | 4:00 A.M. |    
+		///    | Author | Park, Hyung Soon |
+		///    | Date | 2015. 3. 26. |
+		/// @section Description
+		///	- This class will bind pointerID with circleNum
+		/////////////////////////////////////////////
+		public class CircleLinkedWithPtId
+		{
+			int pointerId;
+			int circleNum;		
+		}
+		/////////////////////////////////////////////
+		/// @class PtIdLinkedWithPtIndex
+		///com.example.multitouchsample \n
+		///   ¤¤ MainActivity.java
+		/// @section Class information
+		///    |    Item    |    Contents    |
+		///    | :-------------: | -------------   |
+		///    | Company | 4:00 A.M. |    
+		///    | Author | Park, Hyung Soon |
+		///    | Date | 2015. 3. 26. |
+		/// @section Description
+		///  - This class will bind pointerID with pointerIndex
+		/// 
+		/////////////////////////////////////////////
+		public class PtIdLinkedWithPtIndex
+		{
+			int pointerId;
+			int pointerIndex;	
+		}
+		
+		private int[] motion;
+		private boolean[] circleAvailable;
+		private boolean motionStartFlag;
+		
+		private static final int INVALID_CIRCLE		= -1;
+		private static final int INVALID_DIRECTION 	= -1;
+		private static final int DIRECTION_DOT		= 0;
+		private static final int DIRECTION_DOWN 	= 1;
+		private static final int DIRECTION_LEFT 	= 2;
+		private static final int DIRECTION_UP  		= 3;
+		private static final int DIRECTION_RIGHT	= 4;
+		private static final int SWIPE_MIN_DISTANCE = 140;
+		
+		private LinkedList<PtIdLinkedWithPtIndex> plp;
+		private ArrayList<CircleLinkedWithPtId> clp;
+		
+		private ArrayList<PointF> startPtArr;
+		private ArrayList<PointF> oldPtArr;
+		private ArrayList<PointF> ptArr;
+		
+		private boolean start;
+		private boolean startFlag;
+		
+		final Comparator<PointF> comparatorX = 
+		/////////////////////////////////////////////
+		/// @class 1
+		///com.example.multitouchsample \n
+		///   ¤¤ MainActivity.java
+		/// @section Class information
+		///    |    Item    |    Contents    |
+		///    | :-------------: | -------------   |
+		///    | Company | 4:00 A.M. |    
+		///    | Author | Park, Hyung Soon |
+		///    | Date | 2015. 3. 26. |
+		/// @section Description
+		///  - Comparator function for sort Circle number
+		/// 
+		/////////////////////////////////////////////
+		new Comparator<PointF> () {
 
+			public int compare(PointF pt1, PointF pt2)
+			{
+				return (int) (pt1.x - pt2.x);
+			}
+		};
+		/*
+		final Comparator<PointF> comparatorY = new Comparator<PointF> () {
+			public int compare(PointF pt1, PointF pt2)
+			{
+				return (int) (pt2.y - pt1.y);
+			}
+		};*/
+
+		
+		/////////////////////////////////////////////
+		/// @fn initialize
+		/// @brief Function information : Initialize function
+		/// @remark
+		/// - Description : 
+		/// Initialize all variables and lists 
+		///
+		///~~~~~~~~~~~~~{.java}
+		/// // core code
+		///~~~~~~~~~~~~~
+		/////////////////////////////////////////////
+		public void initialize()
+		{
+			startFlag = false;
+			start = false;
+			motionStartFlag = false;
+			motion = new int[5];
+			circleAvailable = new boolean[5];
+			for(int i=0; i<5; i++)
+				circleAvailable[i] = true;
+			
+			plp = new LinkedList<PtIdLinkedWithPtIndex>();
+			clp = new ArrayList<CircleLinkedWithPtId>();
+			
+			startPtArr = new ArrayList<PointF>();
+			oldPtArr = new ArrayList<PointF>();
+			ptArr = new ArrayList<PointF>();
+			
+			plp.clear();
+			clp.clear();
+			
+			startPtArr.clear();
+			oldPtArr.clear();
+			ptArr.clear();
+		}
+		
+		/////////////////////////////////////////////
+		/// @fn 
+		/// @brief (Override method) Function information : Screen drawing function.
+		/// @remark
+		/// - Description
+		///	Draw 5 or 10 start point circles and touched point circles.
+		/// @see android.view.View#onDraw(android.graphics.Canvas)
+		/////////////////////////////////////////////
 		@Override
 		protected void onDraw(Canvas canvas)
 		{
@@ -165,6 +240,21 @@ public class MainActivity extends Activity {
 		} 
 
 		//@Override
+		/////////////////////////////////////////////
+		/// @fn 
+		/// @brief (Override method) Function information : Touch event method
+		/// @remark
+		/// - Description : This method will classify motion events.\n
+		///	Used MotionEvent.ACTION_MASK for recognize ACTION_POINTER events.\n
+		/// ACTION_DOWN, ACTION_POINTER_DOWN, ACTION_UP, ACTION_POINTER_UP, ACTION_MOVE and other event(default) will be recognzied.
+		/// @param e A motion event
+		/// @return Returns boolean value wether the touch event is valid or not.
+		///
+		///~~~~~~~~~~~~~{.java}
+		/// // core code
+		///~~~~~~~~~~~~~
+		/// @see android.view.View#onTouchEvent(android.view.MotionEvent)
+		/////////////////////////////////////////////
 		public boolean onTouchEvent (MotionEvent e)
 		{
 			int action = e.getAction() & MotionEvent.ACTION_MASK;
@@ -254,49 +344,8 @@ public class MainActivity extends Activity {
 						int touchCount = e.getPointerCount();
 						if(touchCount>5)
 							touchCount = 5;
+						motionCheck();
 						
-						for(int i=0; i<5; i++)
-						{
-							if(motion[i] != -1)
-							{
-								switch(motion[i])
-								{
-									case DIRECTION_DOT :
-									{
-										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) DOT");
-										command += "circleIndex : " + (i+1) + "| Dir) DOT\n";
-										break;
-									}
-									case DIRECTION_UP :
-									{
-										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) UP");
-										command += "circleIndex : " + (i+1) + "| Dir) UP\n";
-										break;
-									}
-									case DIRECTION_DOWN :
-									{
-										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) DOWN");
-										command += "circleIndex : " + (i+1) + "| Dir) DOWN\n";
-										break;
-									}
-									case DIRECTION_LEFT :
-									{
-										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) LEFT");
-										command += "circleIndex : " + (i+1) + "| Dir) LEFT\n";
-										break;
-									}
-									case DIRECTION_RIGHT :
-									{
-										Log.d("UP", "circleIndex : " + (i+1) + "| Dir) RIGHT");
-										command += "circleIndex : " + (i+1) + "| Dir) RIGHT\n";
-									}
-								}//switch end
-							}//motion check if end
-						}//motion check for end
-						Log.d("Motion End", "------------------------------");
-						if(!command.equals(""))
-							Toast.makeText(ctx, command, android.widget.Toast.LENGTH_SHORT).show();
-						command = "";
 						/* initialization for next motion */
 						oldPtArr.clear();
 						ptArr.clear();
@@ -316,9 +365,77 @@ public class MainActivity extends Activity {
 			}
 		}
 		
+		/////////////////////////////////////////////
+		/// @fn motionCheck
+		/// @brief Function information : Motion checking method
+		/// @remark
+		/// - Description : In ACTION_UP motion event, this method will be called.\n 
+		/// Checks motion array and check motion of each pointer.\n
+		///~~~~~~~~~~~~~{.java}
+		/// // core code
+		///~~~~~~~~~~~~~
+		/////////////////////////////////////////////
+		public void motionCheck()
+		{
+			String command = "";
+			for(int i=0; i<5; i++)
+			{
+				if(motion[i] != -1)
+				{
+					switch(motion[i])
+					{
+						case DIRECTION_DOT :
+						{
+							Log.d("UP", "circleIndex : " + (i+1) + "| Dir) DOT");
+							command += "circleIndex : " + (i+1) + "| Dir) DOT\n";
+							break;
+						}
+						case DIRECTION_UP :
+						{
+							Log.d("UP", "circleIndex : " + (i+1) + "| Dir) UP");
+							command += "circleIndex : " + (i+1) + "| Dir) UP\n";
+							break;
+						}
+						case DIRECTION_DOWN :
+						{
+							Log.d("UP", "circleIndex : " + (i+1) + "| Dir) DOWN");
+							command += "circleIndex : " + (i+1) + "| Dir) DOWN\n";
+							break;
+						}
+						case DIRECTION_LEFT :
+						{
+							Log.d("UP", "circleIndex : " + (i+1) + "| Dir) LEFT");
+							command += "circleIndex : " + (i+1) + "| Dir) LEFT\n";
+							break;
+						}
+						case DIRECTION_RIGHT :
+						{
+							Log.d("UP", "circleIndex : " + (i+1) + "| Dir) RIGHT");
+							command += "circleIndex : " + (i+1) + "| Dir) RIGHT\n";
+						}
+					}//switch end
+				}//motion check if end
+			}//motion check for end
+			Log.d("Motion End", "------------------------------");
+			if(!command.equals(""))
+				Toast.makeText(ctx, command, android.widget.Toast.LENGTH_SHORT).show();
+		}
 		
+		/////////////////////////////////////////////
+		/// @fn checkTouchedCircle
+		/// @brief Function information : Find touched circle
+		/// @remark
+		/// - Description : This method will check which circle is touched
+		/// @param x x grid of touched point
+		/// @param y y grid of touched point
+		/// @return Returns touched circle number. If any of circle is touched, return -1.
+		///
+		///~~~~~~~~~~~~~{.java}
+		/// // core code
+		///~~~~~~~~~~~~~
+		/////////////////////////////////////////////
 		public int checkTouchedCircle(int x, int y)
-		{		
+		{
 			int index=0;
 			for(PointF spt : startPtArr)
 			{
@@ -330,6 +447,19 @@ public class MainActivity extends Activity {
 		}
 		
 		
+		/////////////////////////////////////////////
+		/// @fn startMultiTouch
+		/// @brief Function information : Start multi touch recognition. 
+		/// @remark
+		/// - Description : If 'numFingers' of fingers are touched, set 'start' flag true and start multi touch motion recognition.\n
+		/// Set 'numFingers' of starting points.
+		/// @param e A motion event
+		/// @return Returns the boolean value of motion event is valid or not.
+		///
+		///~~~~~~~~~~~~~{.java}
+		/// // core code
+		///~~~~~~~~~~~~~
+		/////////////////////////////////////////////
 		public boolean startMultiTouch(MotionEvent e)
 		{
 			startPtArr.clear();
@@ -363,6 +493,18 @@ public class MainActivity extends Activity {
 		}
 		
 		
+		/////////////////////////////////////////////
+		/// @fn checkDirection
+		/// @brief Function information : Check the direction of movement of pointers
+		/// @remark
+		/// - Description : Calculate the moved distances of pointers and save them in 'motion' array. 
+		/// @param pp : List of class which has Pointer ID and Pointer Index to link them.
+		/// @param pt : Grid of currently moving pointer.
+		///
+		///~~~~~~~~~~~~~{.java}
+		/// // core code
+		///~~~~~~~~~~~~~
+		/////////////////////////////////////////////
 		public void checkDirection(PtIdLinkedWithPtIndex pp, PointF pt)
 		{
 			CircleLinkedWithPtId cp = new CircleLinkedWithPtId();
