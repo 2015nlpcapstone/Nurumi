@@ -440,7 +440,7 @@ public class MainActivity extends Activity {
 			for(PointF spt : startPtArr)
 			{
 				index++;
-				if( (Math.abs((int)spt.x - x) < 180) && (Math.abs((int)spt.y - y) < 140) )
+				if( (Math.abs((int)spt.x - x) < 140) && (Math.abs((int)spt.y - y) < 140) )
 					return index;
 			}
 			return -1;
