@@ -35,8 +35,9 @@ public class Automata_type_3 {
 
   public static final int LEVEL_CHO_SEONG = 0;
   public static final int LEVEL_JUNG_SEONG = 1;
-  public static final int LEVEL_HOUT_JA_EUM_JONG_SEONG = 2;
-  public static final int LEVEL_BOK_JA_EUM_JONG_SEONG = 3;
+  public static final int LEVEL_BOK_MO_EUM_JUNG_SEONG = 2;
+  public static final int LEVEL_HOUT_JA_EUM_JONG_SEONG = 3;
+  public static final int LEVEL_BOK_JA_EUM_JONG_SEONG = 4;
 
   public static int buffer[] = {'\0','\0','\0','\0'};
   public static int automata_level;
@@ -143,7 +144,7 @@ public class Automata_type_3 {
                   buffer[LEVEL_JUNG_SEONG] = 0; // 'ㅏ'
                   break;
                 case DIRECTION_DOWN:
-                  buffer[LEVEL_JUNG_SEONG] = 14;// 'ㅜ'
+                  buffer[LEVEL_JUNG_SEONG] = 13;// 'ㅜ'
                   break;
                 case DIRECTION_LEFT:
                   buffer[LEVEL_JUNG_SEONG] = 4; // 'ㅓ'
@@ -163,7 +164,12 @@ public class Automata_type_3 {
             break; // yoon // 150413 // break for two fingers
         }
         break; // yoon // 150413 // break for 'LEVEL_JUNG_SEONG'
+        
+      case LEVEL_BOK_MO_EUM_JUNG_SEONG:
 
+        automata_level += 1;
+        break;
+        
       case LEVEL_HOUT_JA_EUM_JONG_SEONG:
 
         automata_level += 1;
