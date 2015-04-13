@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+import android.widget.Gallery;
 import android.widget.ImageView;
 
 /**
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 public class InformActivity extends Dialog {
 
     private ImageView img_inform;
+
     Context context;
     /**
      * @brief This method is custom dialog's constructor.
@@ -49,10 +51,7 @@ public class InformActivity extends Dialog {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.dialog_inform);
-
-
         img_inform = (ImageView)findViewById(R.id.img_inform);
-
 
         Log.i("inform", "66");
         setImage();
@@ -94,5 +93,19 @@ public class InformActivity extends Dialog {
         else {
             img_inform.setBackgroundColor(Color.rgb(255, 0, 255)); // PINK
         } // [10 손가락 / 그 외]
+    }
+
+    @Override
+    /////////////////////////////////////////////
+    /// @fn
+    /// @brief (Override method) Override onBackPressed method.
+    /// @author Park, Hyung Soon
+    /// @date 2015-04-13
+    /// @remark
+    /// - Description
+    ///	This dialog will not be disappears by back pressed event.
+    /////////////////////////////////////////////
+    public void onBackPressed() {
+        return;
     }
 }

@@ -46,7 +46,6 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private SettingActivity dlg_setting;
     private InformActivity dlg_inform;
 
-
     TextView tv; // sample textview (나중에 삭제)
     /**
      * @brief This method finds View's IDs and maps them on variables.
@@ -54,6 +53,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
      * @author Soyeong Park
      * @date 2015-03-26
      */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -266,5 +266,23 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
 
         } // [10 손가락]
     */
+    }
+
+    @Override
+    /////////////////////////////////////////////
+    /// @fn
+    /// @brief (Override method) Override onDestroy method.
+    /// @author Park, Hyung Soon
+    /// @date 2015-04-13
+    /// @remark
+    /// - Description
+    ///	If the dialog is activated, dismiss it to evade leak.\n
+    /////////////////////////////////////////////
+    public void onDestroy() {
+        super.onDestroy();
+        if(dlg_inform != null && dlg_inform.isShowing()) {
+            dlg_inform.dismiss();
+            dlg_inform = null;
+        }
     }
 }
