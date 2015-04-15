@@ -1,6 +1,7 @@
 package com.nlpcapstone.nurumi_frame;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import static com.nlpcapstone.nurumi_frame.R.layout.dialog_setting;
 
 /*
  * - Developed by Soyeong Park
@@ -156,7 +159,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         switch (v.getId()) {
             // about Setting CustomDialog
             case R.id.btn_setting:
-                SharedPreferences pref_setting = getSharedPreferences("setting", MODE_PRIVATE);
+            /*    SharedPreferences pref_setting = getSharedPreferences("setting", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref_setting.edit();
                 Log.i("++Main", "1");
                if(!pref_setting.getString("DATA_FIRST_SETTING", "").equals("NO")) {
@@ -164,14 +167,15 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                     editor.commit();
                     Log.i("++Main", "2");
                 }
-                dlg_setting = new SettingActivity(MainActivity.this);
+            */    dlg_setting = new SettingActivity(MainActivity.this);
                 dlg_setting.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        saveSettingState();
+                //        saveSettingState();
                         Log.i("++Main", "4");
                     }
                 });
+
                 dlg_setting.show();
 
                 break;

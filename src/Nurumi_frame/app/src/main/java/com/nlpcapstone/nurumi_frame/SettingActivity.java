@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
 
@@ -47,6 +48,9 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
     public SettingActivity(Context context) {
         super(context);
         this.context = context;
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.dialog_setting);
     }
 
     /**
@@ -60,7 +64,6 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_setting);
 
         rbtn_right_hand = (RadioButton)findViewById(R.id.rbtn_right);
         rbtn_5finger = (RadioButton)findViewById(R.id.rbtn_5finger);
@@ -73,7 +76,7 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
         rbtn_10finger = (RadioButton)findViewById(R.id.rbtn_10finger);
         rbtn_eng_language = (RadioButton)findViewById(R.id.rbtn_english);
         Log.i("++Setting", "5");
-        setInformation();
+    //    setInformation();
 
         btn_cancel.setOnTouchListener(this);
         btn_confirm.setOnTouchListener(this);
@@ -196,14 +199,14 @@ public class SettingActivity extends AlertDialog implements View.OnTouchListener
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.i("--Set", "9");
+   /*     Log.i("--Set", "9");
         if(v == btn_confirm) {
             bool_hand = rbtn_right_hand.isChecked();
             bool_finger = rbtn_5finger.isChecked();
             bool_language = rbtn_kor_language.isChecked();
         }
-        dismiss();
-        Log.i("--Set", "10");
+    //    dismiss();
+        Log.i("--Set", "10");*/
         return false;
     }
 }
