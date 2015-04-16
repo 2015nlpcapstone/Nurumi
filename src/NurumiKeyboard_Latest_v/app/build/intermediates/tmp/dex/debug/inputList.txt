@@ -1,0 +1,4 @@
+/Users/soyeong/AndroidStudioProjects/NurumiKeyboard_Latest_v/app/build/intermediates/classes/debug
+/Users/soyeong/AndroidStudioProjects/NurumiKeyboard_Latest_v/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-4c90eee7ec5ffd2284742471de5a359cf4ee5fe2.jar
+/Users/soyeong/AndroidStudioProjects/NurumiKeyboard_Latest_v/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-72050d3563ebbd90464edc95a494bb6403c1b28c.jar
+/Users/soyeong/AndroidStudioProjects/NurumiKeyboard_Latest_v/app/build/intermediates/pre-dexed/debug/classes-77e5ac04422db9d6de3ee5afafadb8b8ceab251e.jar

@@ -1,8 +1,0 @@
-<map id="com.fouram.nurumikeyboard.NurumiIME.MKeyboardView.onTouchEvent" name="com.fouram.nurumikeyboard.NurumiIME.MKeyboardView.onTouchEvent">
-<area shape="rect" id="node2" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_m_keyboard_view.html#a2e05b77b14ceb804926bc33e9e3e88fa" title="Start multi touch recognition. " alt="" coords="323,5,600,47"/>
-<area shape="rect" id="node3" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_m_keyboard_view.html#ad7701634206a8ad8fb6ad5bc72fc39d1" title="Find touched circle. " alt="" coords="648,82,920,138"/>
-<area shape="rect" id="node4" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_m_keyboard_view.html#aa548466053ead7d81890a197df4e0665" title="Check the direction of movement of pointers. " alt="" coords="324,123,599,164"/>
-<area shape="rect" id="node5" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_m_keyboard_view.html#a657f24f9888d141266179c6dc971103f" title="Motion checking method. " alt="" coords="329,188,593,229"/>
-<area shape="rect" id="node7" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_m_keyboard_view.html#a6af440ca9c6043f361e51ead2e95620a" title="com.fouram.nurumikeyboard.\lNurumiIME.MKeyboardView.performClick" alt="" coords="331,253,591,295"/>
-<area shape="rect" id="node6" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_nurumi_i_m_e.html#a539ed018248c5459a89e102ea4c8d5c5" title="com.fouram.nurumikeyboard.\lNurumiIME.NurumiIME.onFinishGesture" alt="" coords="657,188,911,229"/>
-</map>

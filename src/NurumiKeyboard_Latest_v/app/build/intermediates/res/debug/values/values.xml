@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/soyeong/AndroidStudioProjects/NurumiKeyboard_Latest_v/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">MotionKeyboard</string>
+    <string name="button1">Button 1</string>
+    <string name="button2">Button 2</string>
+    <string name="button3">Button 3</string>
+    <string name="button4">Button 4</string>
+    <string name="nurumi_ime">Nurumi IME</string>
+    <string name="subtype_en_US">English (US)</string>
+    <!-- From: file:/Users/soyeong/AndroidStudioProjects/NurumiKeyboard_Latest_v/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>
