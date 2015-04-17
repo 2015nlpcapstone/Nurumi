@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.KeyEvent;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ToggleButton;
 
 import org.w3c.dom.Text;
@@ -64,7 +65,6 @@ public class NurumiIME extends InputMethodService
     private ToggleButton btn_mute;
     private Button btn_setting;
     private Setting mSetting;
-    private Information mInform;
 
 	@Override
 	public void onFinishInputView(boolean finishingInput) {
@@ -88,7 +88,7 @@ public class NurumiIME extends InputMethodService
 		vg = (ViewGroup) entireView;
 		mKeyboardView = (MKeyboardView) vg.findViewById(R.id.MKeyboardView);
 		mKeyboardView.setIme(this);
-		
+
 		numFingers = FIVE_FINGERS;
 		motion = new int[numFingers];
         Log.i("++MAIN", "SUCCESS");
@@ -134,7 +134,8 @@ public class NurumiIME extends InputMethodService
                 case R.id.btn_inform: // DEFAULT: OFF
                     Log.i("++INFORM", "1SUCCESS");
                     onCreateSetting(v);
-                    mInform = new Information(NurumiIME.this);
+                    //mInform = new Information(NurumiIME.this);
+
                     break;
             /*    case R.id.btn_tutorial: // DEFAULT: OFF
                     Log.i("++TUTORIAL", "1SUCCESS");
@@ -167,7 +168,12 @@ public class NurumiIME extends InputMethodService
                 builder.setView(getLayoutInflater().inflate(R.layout.setting, null));
                 break;
             case R.id.btn_inform:
-                builder.setView(getLayoutInflater().inflate(R.layout.inform, null));
+                View infView = (View)getLayoutInflater().inflate(R.layout.inform, null);
+                ViewGroup vg2 = (ViewGroup) infView;
+                Information mInform = (Information) vg2.findViewById(R.id.Inform);
+
+                vg2.removeView(mInform);
+                builder.setView(mInform);
                 break;
         }
 
