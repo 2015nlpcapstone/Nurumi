@@ -78,8 +78,8 @@ public class InformActivity extends Dialog {
         // TODO : 구분의 경우를 생각하여 구현해야함 (2 * 2 * 2 경우)
         if (bool_finger == true && bool_hand == true && bool_language == true) {
         // TODO : 실제로는 setImageResource 이용하여 이미지 설정해야 함
-        //    img_inform.setImageResource(R.drawable.ic_launcher);
-            img_inform.setBackgroundColor(Color.rgb(255, 0, 0)); // RED
+            img_inform.setImageResource(R.drawable.img_inform);
+        //    img_inform.setBackgroundColor(Color.rgb(255, 0, 0)); // RED
         } // CASE1 : [5 손가락 / 오른손 / 한국어]
         else if(bool_finger == true && bool_hand == true && bool_language == false) {
             img_inform.setBackgroundColor(Color.rgb(0, 0, 255)); // BLUE

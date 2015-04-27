@@ -1,10 +1,15 @@
 package com.fouram.nurumikeyboard.NurumiIME;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+
+import java.util.jar.Attributes;
 
 /**
  * @file Setting.java
@@ -17,16 +22,15 @@ import android.widget.RadioButton;
  * @data bool_finger is information about the number of finger.
  * @data bool_language is information about selecting language.
  *
- * @date 2015.03.27.
+ * @date 2015-04-30
  * @author Soyeong Park
  */
-public class Setting extends View {
+public class Setting extends AlertDialog {
     private Context context;
 
     private RadioButton rbtn_right_hand, rbtn_left_hand;
     private RadioButton rbtn_5finger, rbtn_10finger;
     private RadioButton rbtn_kor_language, rbtn_eng_language;
-    private Button btn_cancel, btn_confirm;
     private boolean bool_hand, bool_finger, bool_language;
 
     /**
@@ -35,45 +39,25 @@ public class Setting extends View {
      * @param context is object of function receiving a called View.
      *
      * @author Soyeong Park
-     * @date 2015-04-15
+     * @date 2015-04-30
      */
     public Setting(Context context) {
         super(context);
         this.context = context;
+        setContentView(R.layout.setting);
 
-        Log.i("+A+SETTING", "11SUCCESS");
         initSetting();
 
-  //      btn_confirm.setOnClickListener(mClickListener_setting);
-   //     btn_cancel.setOnClickListener(mClickListener_setting);
-
-        Log.i("+A+SETTING", "22SUCCESS");
-
-
     }
+
     // TODO: SHAREDPREFERENCES/ DATA STORE FUNCTION
-    // TODO: CANCEL, APPLY FUNCTION
-    Button.OnClickListener mClickListener_setting = new View.OnClickListener() {
-        public void onClick(View v) {
-            switch(v.getId()) {
-                case R.id.btn_cancel:
-                    Log.i("+A+SETTING", "CANCEL");
-
-                case R.id.btn_confirm:
-                    Log.i("+A+SETTING", "CONFIRM");
-
-                    break;
-            }
-        }
-    };
-
 
     /**
      * @function initSetting
      * @brief This method sets view ID when 'Setting' button clicks.
      *
      * @author Soyeong Park
-     * @date 2015-04-15
+     * @date 2015-04-30
      */
     private void initSetting() {
         rbtn_right_hand = (RadioButton)findViewById(R.id.rbtn_right);
@@ -84,9 +68,6 @@ public class Setting extends View {
 
         rbtn_kor_language = (RadioButton)findViewById(R.id.rbtn_korean);
         rbtn_eng_language = (RadioButton)findViewById(R.id.rbtn_english);
-
-        btn_cancel = (Button)findViewById(R.id.btn_cancel);
-        btn_confirm = (Button)findViewById(R.id.btn_confirm);
     }
 
 

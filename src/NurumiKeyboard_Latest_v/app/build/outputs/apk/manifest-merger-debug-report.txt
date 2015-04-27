@@ -35,23 +35,25 @@ MERGED from com.android.support:support-v4:22.0.0:22:5
 		ADDED from AndroidManifest.xml:12:9
 	android:theme
 		ADDED from AndroidManifest.xml:14:9
+	android:largeHeap
+		ADDED from AndroidManifest.xml:15:9
 service#com.fouram.nurumikeyboard.NurumiIME.NurumiIME
-ADDED from AndroidManifest.xml:16:9
+ADDED from AndroidManifest.xml:17:9
 	android:label
-		ADDED from AndroidManifest.xml:17:7
-	android:permission
 		ADDED from AndroidManifest.xml:18:7
+	android:permission
+		ADDED from AndroidManifest.xml:19:7
 	android:name
-		ADDED from AndroidManifest.xml:16:18
+		ADDED from AndroidManifest.xml:17:18
 meta-data#android.view.im
-ADDED from AndroidManifest.xml:20:7
-	android:resource
-		ADDED from AndroidManifest.xml:20:49
-	android:name
-		ADDED from AndroidManifest.xml:20:18
-intent-filter#android.view.InputMethod
 ADDED from AndroidManifest.xml:21:7
-action#android.view.InputMethod
-ADDED from AndroidManifest.xml:22:11
+	android:resource
+		ADDED from AndroidManifest.xml:21:49
 	android:name
-		ADDED from AndroidManifest.xml:22:19
+		ADDED from AndroidManifest.xml:21:18
+intent-filter#android.view.InputMethod
+ADDED from AndroidManifest.xml:22:7
+action#android.view.InputMethod
+ADDED from AndroidManifest.xml:23:11
+	android:name
+		ADDED from AndroidManifest.xml:23:19

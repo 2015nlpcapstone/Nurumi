@@ -20,19 +20,20 @@ public final class R {
         public static final int u_arrow=0x7f020006;
     }
     public static final class id {
+        public static final int Inform=0x7f070000;
         public static final int MKeyboardView=0x7f070005;
-        public static final int btn_cancel=0x7f07000d;
-        public static final int btn_confirm=0x7f07000e;
+        public static final int btn_cancel=0x7f07000e;
+        public static final int btn_confirm=0x7f07000f;
         public static final int btn_inform=0x7f070001;
         public static final int btn_setting=0x7f070004;
-        public static final int img_inform=0x7f070000;
-        public static final int rbtn_10finger=0x7f07000a;
-        public static final int rbtn_5finger=0x7f070009;
-        public static final int rbtn_english=0x7f07000b;
-        public static final int rbtn_korean=0x7f07000c;
-        public static final int rbtn_left=0x7f070007;
-        public static final int rbtn_right=0x7f070008;
-        public static final int rg_hand=0x7f070006;
+        public static final int layout_setting=0x7f070006;
+        public static final int rbtn_10finger=0x7f07000b;
+        public static final int rbtn_5finger=0x7f07000a;
+        public static final int rbtn_english=0x7f07000c;
+        public static final int rbtn_korean=0x7f07000d;
+        public static final int rbtn_left=0x7f070008;
+        public static final int rbtn_right=0x7f070009;
+        public static final int rg_hand=0x7f070007;
         public static final int tbtn_mute=0x7f070003;
         public static final int tbtn_tutorial=0x7f070002;
     }

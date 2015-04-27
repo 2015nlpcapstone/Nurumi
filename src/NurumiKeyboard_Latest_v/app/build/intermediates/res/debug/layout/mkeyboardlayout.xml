@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:imeOptions="actionDone"
             android:text="@string/button1" />
 
         <ToggleButton
@@ -38,7 +37,6 @@
             android:textOff="Mute_on"/>
         
         <Button
-            class="com.fouram.nurumikeyboard.NurumiIME.Setting"
             android:id="@+id/btn_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
