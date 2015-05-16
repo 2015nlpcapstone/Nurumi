@@ -33,10 +33,14 @@ public class Automata_type_3 {
 
   public static final int LEVEL_CHO_SEONG = 0;
   public static final int LEVEL_JUNG_SEONG = 1;
-  public static final int LEVEL_BOK_MO_EUM_JUNG_SEONG = 2;
-  public static final int LEVEL_HOUT_JA_EUM_JONG_SEONG = 3;
-  public static final int LEVEL_BOK_JA_EUM_JONG_SEONG = 4;
+  public static final int LEVEL_JUNG_SEONG_TO_JONG_SEONG = 2;
+  public static final int LEVEL_JONG_SEONG = 3;
+  public static final int LEVEL_JONG_SEONG_TO_CHO_SEONG = 4;
 
+  public static final int CHO_SEONG  = 0;
+  public static final int JUNG_SEONG = 1;
+  public static final int JONG_SEONG = 2;
+  
   public static int buffer[] = {'\0', '\0', '\0', '\0'};
   public static int automata_level;
   
@@ -44,7 +48,13 @@ public class Automata_type_3 {
   public static String str_to_write = null;
   public static int[] finger;
   public static InputConnection ic;
- 
+  
+  //yoon // 150516 // get a Korean character code key value
+  
+  public static int generate_korean_char_code(int cho_seong, int jung_seong, int jong_seong) {
+    return ((AC00 + ((cho_seong * 21) + jung_seong) * 28)+jong_seong);
+  }
+  
   // yoon // 150516 // div&conq.
   
   public static void LEVEL_CHO_SEONG() {
@@ -219,9 +229,8 @@ public class Automata_type_3 {
           }
           ic.deleteSurroundingText(1, 0);
           str_to_write =
-              String.format("%c",
-                  (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
-          automata_level += 1;
+              String.format("%c",generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+          automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
         }
 
         break; // yoon // 150413 // break for single finger
@@ -259,6 +268,7 @@ public class Automata_type_3 {
         }
 
         // yoon // 150507 // Conditional Statements for 'mo-eum jung_seong'
+        
         else if (finger[INDEX_FINGER] != DIRECTION_EMPTY
             && finger[MIDLE_FINGER] != DIRECTION_EMPTY) {
           switch (finger[INDEX_FINGER]) {
@@ -276,36 +286,57 @@ public class Automata_type_3 {
               buffer[LEVEL_JUNG_SEONG] = 6; // 'ㅕ'
               break;
           }
+          
           ic.deleteSurroundingText(1, 0);
           str_to_write =
-              String.format("%c",
-                  (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
-          automata_level += 1;
+              String.format("%c",generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+          automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
         }
 
         break; // yoon // 150413 // break for two fingers
 
-      case 3: // yoon // 150507 // case for two fingers
+      case 3: // yoon // 150507 // case for three fingers
 
         break;
+        
+      case 4: // yoon // 150516 // case for four fingers
 
+        if (finger[INDEX_FINGER] != DIRECTION_EMPTY && finger[MIDLE_FINGER] != DIRECTION_EMPTY
+            && finger[RING__FINGER] != DIRECTION_EMPTY&& finger[PINKY_FINGER] != DIRECTION_EMPTY) {
+          switch (finger[INDEX_FINGER]) {
+            case DIRECTION_RIGHT:
+              buffer[LEVEL_JUNG_SEONG] = 18; //'ㅡ'
+              break;
+            case DIRECTION_DOWN:
+              buffer[LEVEL_JUNG_SEONG] = 20; //'ㅣ'
+              break;
+              
+          };
+
+         ic.deleteSurroundingText(1, 0);
+         str_to_write =
+             String.format("%c",generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+         automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
+        }
     }
+  };
+  public static void LEVEL_JUNG_SEONG_TO_JONG_SEONG() {
+    
+  };
+  public static void LEVEL_JONG_SEONG() {
+    
+  };
+  public static void LEVEL_JONG_SEONG_TO_CHO_SEONG() {
+    
+  };
 
-  };
-  public static void LEVEL_BOK_MO_EUM_JUNG_SEONG() {
-    
-  };
-  public static void LEVEL_HOUT_JA_EUM_JONG_SEONG() {
-    
-  };
-  public static void LEVEL_BOK_JA_EUM_JONG_SEONG() {
-    
-  };
-
+  
+  // yoon // THIS IS WHAT I'M REALLY WANT TO DO !!
   public static String execute(int[] finger_array, InputConnection input_connection) {
-    int idx = 5;
+
 
     // yoon // 150516 // init values
+    int idx = 5;
     finger = finger_array;
     ic = input_connection;
     count_finger = 0;
@@ -345,6 +376,7 @@ public class Automata_type_3 {
     }
 
     // yoon // 150413 // switch by automata level
+    // yoon // 150516 // Code refactoring : Devide & Conquer
     
     switch (automata_level) { // yoon // step 1. switch by automata level
 
@@ -354,19 +386,19 @@ public class Automata_type_3 {
         
       case LEVEL_JUNG_SEONG:
         LEVEL_JUNG_SEONG();
-        break; // yoon // 150413 // break for 'LEVEL_JUNG_SEONG'
+        break; 
 
-      case LEVEL_BOK_MO_EUM_JUNG_SEONG:
-
-        automata_level = 0;
-        break;
-
-      case LEVEL_HOUT_JA_EUM_JONG_SEONG:
+      case LEVEL_JUNG_SEONG_TO_JONG_SEONG:
 
         automata_level = 0;
         break;
 
-      case LEVEL_BOK_JA_EUM_JONG_SEONG:
+      case LEVEL_JONG_SEONG:
+
+        automata_level = 0;
+        break;
+
+      case LEVEL_JONG_SEONG_TO_CHO_SEONG:
 
         automata_level = LEVEL_CHO_SEONG;
         break;
