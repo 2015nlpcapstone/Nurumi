@@ -63,8 +63,8 @@ public class MKeyboardView extends View {
 	//public static final int TEN_FINGERS 		= 10;
 	
 	public static final int SWIPE_MIN_DISTANCE = 40; /// dp value
-	public static final int STD_CIRCLE_SIZE	= 90; /// dp value
-	public static final int INNER_CIRCLE_SIZE	= 40; /// dp value
+	public static final int STD_CIRCLE_SIZE	= 80; /// dp value
+	public static final int INNER_CIRCLE_SIZE	= 70; /// dp value
 	public static final int FONT_SIZE = 21; // sp value
 	
 	/////////////////////////////////////////////
@@ -119,7 +119,8 @@ public class MKeyboardView extends View {
 	///  - For right handed user.\n
 	/////////////////////////////////////////////
 	new Comparator<PointF> () {
-		public int compare(PointF pt1, PointF pt2) {
+		@Override
+    public int compare(PointF pt1, PointF pt2) {
 			return (int) (pt1.x - pt2.x);
 		}
 	};
@@ -141,7 +142,8 @@ public class MKeyboardView extends View {
 	///  - For left handed user.\n
 	/////////////////////////////////////////////
 	new Comparator<PointF> () {
-		public int compare(PointF pt1, PointF pt2) {
+		@Override
+    public int compare(PointF pt1, PointF pt2) {
 			return (int) (pt2.x - pt1.x);
 		}
 	};
@@ -428,7 +430,8 @@ public class MKeyboardView extends View {
 	/// // core code
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
-	public boolean onTouchEvent (MotionEvent e)	{
+	@Override
+  public boolean onTouchEvent (MotionEvent e)	{
 		int action = e.getAction() & MotionEvent.ACTION_MASK;
 		
 		if(start == false)

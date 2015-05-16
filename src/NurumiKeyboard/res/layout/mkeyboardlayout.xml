@@ -11,27 +11,33 @@
         android:layout_height="match_parent"
         android:layout_weight="0.08"
         android:orientation="vertical" >
-
-        <ImageButton
-            android:id="@+id/ibtn_inform"
+        <Button
+            android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/img_information"
-            android:tag="@string/txt_inform"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
+            android:text="@string/button1" />
 
-        <ImageButton
-            android:id="@+id/ibtn_setting"
+        <Button
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/img_setting"
             android:layout_weight="1"
-            android:tag="@string/txt_setting"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
-
+            android:text="@string/button2" />
+        
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button3" />
+        
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button4" />
     </LinearLayout>
 
     <LinearLayout
