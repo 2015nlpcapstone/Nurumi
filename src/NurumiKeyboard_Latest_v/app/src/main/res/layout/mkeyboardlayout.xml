@@ -12,36 +12,26 @@
         android:layout_weight="0.08"
         android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/btn_inform"
+        <ImageButton
+            android:id="@+id/ibtn_inform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/button1" />
+            android:background="@drawable/img_information"
+            android:tag="@string/txt_inform"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
 
-        <ToggleButton
-            android:id="@+id/tbtn_tutorial"
+        <ImageButton
+            android:id="@+id/ibtn_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/img_setting"
             android:layout_weight="1"
-            android:textOn="@string/button2"
-            android:textOff="Tut_off"/>
-        
-        <ToggleButton
-            android:id="@+id/tbtn_mute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:textOn="@string/button3"
-            android:textOff="Mute_on"/>
-        
-        <Button
-            android:id="@+id/btn_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button4" />
+            android:tag="@string/txt_setting"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
     </LinearLayout>
 
     <LinearLayout

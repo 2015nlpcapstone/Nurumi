@@ -1,21 +1,34 @@
 package com.fouram.nurumikeyboard.NurumiIME;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import org.w3c.dom.Text;
+
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
 //import android.widget.EditText;
 
 /////////////////////////////////////////////
@@ -47,7 +60,7 @@ import org.w3c.dom.Text;
 ///  - Input method service class.\n
 ///  - This class makes user to replace keyboard.\n
 /////////////////////////////////////////////
-public class NurumiIME extends InputMethodService 
+public class NurumiIME extends InputMethodService
 					   implements OnMKeyboardGestureListener {
 	
 	private final int FIVE_FINGERS = 5;
@@ -58,13 +71,11 @@ public class NurumiIME extends InputMethodService
 	private MKeyboardView mKeyboardView;
 	private int[] motion;
 
-    // Soyeong [2015.04.14]
-    private Button btn_inform;
-    private ToggleButton btn_tutorial;
-    private ToggleButton btn_mute;
-    private Button btn_setting;
+    private ImageButton ibtnInform;
+    private ImageButton ibtnSetting;
 
-	@Override
+
+    @Override
 	public void onFinishInputView(boolean finishingInput) {
 		super.onFinishInputView(finishingInput);
 	}
@@ -87,12 +98,7 @@ public class NurumiIME extends InputMethodService
 		mKeyboardView = (MKeyboardView) vg.findViewById(R.id.MKeyboardView);
 		mKeyboardView.setIme(this);
 
-        layoutId = R.layout.inform;
-        View view = (View) getLayoutInflater().inflate(layoutId, null);
-        ViewGroup vg2 = (ViewGroup) view;
-     //   mInform = (Information) vg2.findViewById(R.id.inform); // 여기 수정해야함
-
-		
+        mKeyboardView.setIme(this);
 		numFingers = FIVE_FINGERS;
 		motion = new int[numFingers];
         Log.i("++MAIN", "SUCCESS");
@@ -100,6 +106,7 @@ public class NurumiIME extends InputMethodService
 
 		return entireView;
 	}
+
     /**
      * @function setViewId
      * @brief This method sets default value when the application executes.
@@ -110,122 +117,44 @@ public class NurumiIME extends InputMethodService
      * @date 2015-04-15
      */
     private void setViewId() {
-        btn_inform = (Button)vg.findViewById(R.id.btn_inform);
-        btn_inform.setOnClickListener(mClickListener);
+        ibtnInform = (ImageButton)vg.findViewById(R.id.ibtn_inform);
+        ibtnInform.setOnClickListener(mClickListener);
 
-        btn_tutorial = (ToggleButton)vg.findViewById(R.id.tbtn_tutorial);
-        btn_tutorial.setOnClickListener(mClickListener);
-
-        btn_mute = (ToggleButton)vg.findViewById(R.id.tbtn_mute);
-        btn_mute.setOnClickListener(mClickListener);
-
-        btn_setting = (Button)vg.findViewById(R.id.btn_setting);
-        btn_setting.setOnClickListener(mClickListener);
+        ibtnSetting = (ImageButton)vg.findViewById(R.id.ibtn_setting);
+        ibtnSetting.setOnClickListener(mClickListener);
     }
 
     /**
      * @brief This method manages all View's function through one Listener like 'onClick'
      * @brief Examples about View are Button, TextView, ImageView ...
-     * @details If you touch back button in Setting Dialog, setting's dialog will cancel. (->setCancelable(true))
      *
      * @param v has all View's ID information.
      *
      * @author Soyeong Park
-     * @date 2015-04-15
+     * @date 2015-05-05
      */
     Button.OnClickListener mClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.btn_inform: // DEFAULT: OFF
+                case R.id.ibtn_inform: // DEFAULT: OFF
                     Log.i("++INFORM", v.toString());
-                    onCreateDialog(v);
-                    break;
-            /*    case R.id.btn_tutorial: // DEFAULT: OFF
-                    Log.i("++TUTORIAL", "1SUCCESS");
+
+                    Intent intentInform = new Intent(NurumiIME.this, InformationActivity.class);
+					intentInform.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intentInform);
 
                     break;
-                case R.id.btn_mute: // DEFAULT: ON
-                    Log.i("++MUTE", "1SUCCESS");
-
-                    break;*/
-                case R.id.btn_setting: // DEFAULT: OFF
+                case R.id.ibtn_setting: // DEFAULT: OFF
                     Log.i("++SETTING", "1SUCCESS");
-                    onCreateDialog(v);
+
+                    Intent intentSetting = new Intent(NurumiIME.this, SettingActivity.class);
+					intentSetting.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intentSetting);
+
                     break;
             }
         }
     };
-
-
-    /**
-     * @brief This method open AlertDialog about Setting and Information.
-     *
-     * @author Soyeong Park
-     * @date 2015-04-15
-     */
-    private void onCreateDialog(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(NurumiIME.this);
-
-        // Get size of display
-        Display display = ((WindowManager)getSystemService((Context.WINDOW_SERVICE))).getDefaultDisplay();
-        int width = (int)(display.getWidth() * 0.95);
-        int height = (int)(display.getHeight() * 0.95);
-
-        switch(v.getId()) {
-            case R.id.btn_inform:
-                View infView = (View)getLayoutInflater().inflate(R.layout.inform, null);
-                ViewGroup vg = (ViewGroup)infView;
-                Information mInform = (Information)vg.findViewById(R.id.Inform);
-
-                width = mInform.getImageWidth();
-                height = mInform.getImageHeight();
-
-                vg.removeView(mInform);
-                builder.setView(mInform);
-
-                break;
-            case R.id.btn_setting:
-                View view_setting = (View)getLayoutInflater().inflate(R.layout.setting, null);
-                Setting mSetting = new Setting(getBaseContext());
-
-            // TODO: reset width, height
-            //    width = view_setting.getWidth(;
-            //    height = view_setting.getHeight();
-
-
-                builder.setView(view_setting);
-                break;
-        }
-
-        final AlertDialog alert = builder.create();
-        Window window = alert.getWindow();
-        WindowManager.LayoutParams lp = window.getAttributes();
-        lp.token = mKeyboardView.getWindowToken();
-        lp.type = WindowManager.LayoutParams.TYPE_APPLICATION_ATTACHED_DIALOG;
-
-        window.setAttributes(lp);
-        window.addFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-
-        alert.show();
-        // Set alertdialog's size
-        alert.getWindow().setLayout(width, (int) (height * 1.2));
-
-        Button cancel = (Button)alert.findViewById(R.id.btn_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alert.cancel();
-            }
-        });
-
-        Button confirm = (Button)alert.findViewById(R.id.btn_confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alert.dismiss();
-            }
-        });
-    }
 
 	@Override
 	public boolean onShowInputRequested (int flags, boolean configChange) {

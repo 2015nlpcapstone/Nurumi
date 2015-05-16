@@ -57,3 +57,15 @@ action#android.view.InputMethod
 ADDED from AndroidManifest.xml:23:11
 	android:name
 		ADDED from AndroidManifest.xml:23:19
+activity#com.fouram.nurumikeyboard.NurumiIME.InformationActivity
+ADDED from AndroidManifest.xml:27:9
+	android:theme
+		ADDED from AndroidManifest.xml:28:13
+	android:name
+		ADDED from AndroidManifest.xml:27:19
+activity#com.fouram.nurumikeyboard.NurumiIME.SettingActivity
+ADDED from AndroidManifest.xml:31:9
+	android:theme
+		ADDED from AndroidManifest.xml:33:13
+	android:name
+		ADDED from AndroidManifest.xml:32:13

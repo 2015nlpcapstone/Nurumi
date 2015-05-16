@@ -26,6 +26,15 @@
                 <action android:name="android.view.InputMethod" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name="com.fouram.nurumikeyboard.NurumiIME.InformationActivity"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="com.fouram.nurumikeyboard.NurumiIME.SettingActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>
