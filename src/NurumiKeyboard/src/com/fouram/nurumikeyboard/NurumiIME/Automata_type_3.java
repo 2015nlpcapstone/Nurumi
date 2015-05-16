@@ -37,44 +37,53 @@ public class Automata_type_3 {
   public static final int LEVEL_JONG_SEONG = 3;
   public static final int LEVEL_JONG_SEONG_TO_CHO_SEONG = 4;
 
-  public static final int CHO_SEONG  = 0;
+  public static final int CHO_SEONG = 0;
   public static final int JUNG_SEONG = 1;
   public static final int JONG_SEONG = 2;
-  
+
   public static int buffer[] = {'\0', '\0', '\0', '\0'};
   public static int automata_level;
-  
+
   public static int count_finger = 0;
   public static String str_to_write = null;
   public static int[] finger;
   public static InputConnection ic;
-  
-  //yoon // 150516 // get a Korean character code key value
-  
+
+  // yoon // 150516 // get a Korean character code key value
   public static int generate_korean_char_code(int cho_seong, int jung_seong, int jong_seong) {
-    return ((AC00 + ((cho_seong * 21) + jung_seong) * 28)+jong_seong);
+    return ((AC00 + ((cho_seong * 21) + jung_seong) * 28) + jong_seong);
   }
   
+  // yoon // 150517 // replace character macro
+  public static int replace_to(int ret) {
+    ic.deleteSurroundingText(1, 0);
+    return ret;
+  }
+
   // yoon // 150516 // div&conq.
-  
+
   public static void LEVEL_CHO_SEONG() {
-    
+
     switch (count_finger) { // yoon // step 2. switch by finger counts for accuracy
 
       case 1: // yoon // 150413 // case for single finger
 
         // yoon // 150413 // Conditional Statements for 'ja-eum cho-seong'
-
+                // 150517 // mod ipt method
         if (finger[INDEX_FINGER] == DIRECTION_DOT) {
           buffer[LEVEL_CHO_SEONG] = 11;// 'ㅇ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          buffer[LEVEL_CHO_SEONG] = 2; // 'ㄴ'
+          buffer[LEVEL_CHO_SEONG] = 6; // 'ㅁ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[LEVEL_CHO_SEONG] = 0; // 'ㄱ'
+          buffer[LEVEL_CHO_SEONG] = 2; // 'ㄴ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[PINKY_FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = 5; // 'ㄹ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
           automata_level = LEVEL_JUNG_SEONG;
         }
@@ -100,27 +109,23 @@ public class Automata_type_3 {
         break; // yoon // 150413 // break for single finger
 
       case 2: // yoon // 150424 // case for two fingers
+                      // 150517 // mod ipt method
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          buffer[LEVEL_CHO_SEONG] = 9;// 'ㅅ'
+          buffer[LEVEL_CHO_SEONG] = 0;// 'ㄱ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
           automata_level = LEVEL_JUNG_SEONG;
-        } 
-        else if (finger[MIDLE_FINGER] == DIRECTION_DOT
-            && finger[RING__FINGER] == DIRECTION_DOT) {
+        } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
           buffer[LEVEL_CHO_SEONG] = 3;// 'ㄷ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
           automata_level = LEVEL_JUNG_SEONG;
-        } 
-        else if (finger[INDEX_FINGER] == DIRECTION_DOT
-            && finger[RING__FINGER] == DIRECTION_DOT) {
+        } else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
           buffer[LEVEL_CHO_SEONG] = 7;// 'ㅂ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
           automata_level = LEVEL_JUNG_SEONG;
         }
-        
+
         // yoon // 150507 // Conditional Statements for 'mo-eum jung_seong'
-        else if (finger[INDEX_FINGER] != DIRECTION_EMPTY
-            && finger[MIDLE_FINGER] != DIRECTION_EMPTY) {
+        else if (finger[INDEX_FINGER] != DIRECTION_EMPTY && finger[MIDLE_FINGER] != DIRECTION_EMPTY) {
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_UP:
@@ -141,18 +146,32 @@ public class Automata_type_3 {
         break; // yoon // 150413 // break for two fingers
 
       case 3: // yoon // 150507 // case for three fingers
+                      // 150517 // mod ipt method
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
             && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[LEVEL_CHO_SEONG] = 12;// 'ㅈ'
+          buffer[LEVEL_CHO_SEONG] = 12; // 'ㅈ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT
+            && finger[PINKY_FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = 9; // 'ㅅ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
           automata_level = LEVEL_JUNG_SEONG;
         }
 
         break;// yoon // 150507 // break for three fingers
+
       case 4: // yoon // 150507 // case for four fingers
 
-        if (finger[INDEX_FINGER] != DIRECTION_EMPTY && finger[MIDLE_FINGER] != DIRECTION_EMPTY
-            && finger[RING__FINGER] != DIRECTION_EMPTY&& finger[PINKY_FINGER] != DIRECTION_EMPTY) {
+        if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] != DIRECTION_EMPTY && finger[PINKY_FINGER] != DIRECTION_EMPTY) {
+          buffer[LEVEL_CHO_SEONG] = 18;// 'ㅎ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        }
+
+        else {
+
           switch (finger[INDEX_FINGER]) {
             case DIRECTION_RIGHT:
               str_to_write = "ㅡ";
@@ -160,57 +179,46 @@ public class Automata_type_3 {
             case DIRECTION_DOWN:
               str_to_write = "ㅣ";
               break;
-              
-            default :
-              str_to_write="";
+
+            default:
+              str_to_write = "";
               break;
-                
+
           }
-          
+
         }
         break;// yoon // 150507 // break for four fingers
 
-      default :
-        str_to_write="";
+      default:
+        str_to_write = "";
     }
   };
+
   public static void LEVEL_JUNG_SEONG() {
     switch (count_finger) { // yoon // step 2. switch by finger counts for accuracy
 
       case 1: // yoon // 150413 // case for single finger
-
-        // yoon // 150424 // Conditional Statements for 'ja-eum cho-seong'
+                      // 150517 // mod ipt method
         if (finger[INDEX_FINGER] == DIRECTION_DOT) {
-          if (buffer[LEVEL_CHO_SEONG] == 11) { // 'ㅇ' to 'ㅁ'
-            ic.deleteSurroundingText(1, 0);
-            buffer[LEVEL_CHO_SEONG] = 6;// 'ㅁ'
-          } else {
-            buffer[LEVEL_CHO_SEONG] = 11;// 'ㅇ'
-          }
+          buffer[LEVEL_CHO_SEONG] = 11;// 'ㅇ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[MIDLE_FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = 6; // 'ㅁ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = 2; // 'ㄴ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[PINKY_FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = 5; // 'ㄹ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
         }
 
-        else if (finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          if (buffer[LEVEL_CHO_SEONG] == 2) { // 'ㄴ' to 'ㄹ'
-            ic.deleteSurroundingText(1, 0);
-            buffer[LEVEL_CHO_SEONG] = 5; // 'ㄹ'
-          } else {
-            buffer[LEVEL_CHO_SEONG] = 2; // 'ㄴ'
-          }
-          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
-        }
-
-        else if (finger[RING__FINGER] == DIRECTION_DOT) {
-          if (buffer[LEVEL_CHO_SEONG] == 0) { // 'ㄱ' to 'ㅋ'
-            ic.deleteSurroundingText(1, 0);
-            buffer[LEVEL_CHO_SEONG] = 15; // 'ㅋ'
-          } else {
-            buffer[LEVEL_CHO_SEONG] = 0; // 'ㄱ'
-          }
-          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
-        }
-
-        // yoon // 150413 // Conditional Statements for 'mo-eum jung_seong'
+        // yoon // 150413 // Conditional Statements for 'mo-eum jung_seong' 
+        
         else if (finger[INDEX_FINGER] != DIRECTION_EMPTY) {
           switch (finger[INDEX_FINGER]) {
 
@@ -229,48 +237,33 @@ public class Automata_type_3 {
           }
           ic.deleteSurroundingText(1, 0);
           str_to_write =
-              String.format("%c",generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+              String.format("%c",
+                  generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
           automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
         }
 
         break; // yoon // 150413 // break for single finger
 
-      case 2: // yoon // 150413 // case for two fingers
+      case 2: // yoon // 150413 // case for two fingers 
+                      // 150517 // mod ipt method
 
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          if (buffer[LEVEL_CHO_SEONG] == 9) { // 'ㅅ' to 'ㅎ'
-            ic.deleteSurroundingText(1, 0);
-            buffer[LEVEL_CHO_SEONG] = 18; // 'ㅎ'
-          } else {
-            buffer[LEVEL_CHO_SEONG] = 9;// 'ㅅ'
-          }
+          buffer[LEVEL_CHO_SEONG] = (buffer[LEVEL_CHO_SEONG] == 0 ? replace_to(15) : 0);// 'ㄱ' or 'ㅋ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
-        }
-
-        else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-          if (buffer[LEVEL_CHO_SEONG] == 3) { // 'ㄷ' to 'ㅌ'
-            ic.deleteSurroundingText(1, 0);
-            buffer[LEVEL_CHO_SEONG] = 16; // 'ㅎ'
-          } else {
-            buffer[LEVEL_CHO_SEONG] = 3;// 'ㄷ'
-          }
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = (buffer[LEVEL_CHO_SEONG] == 3 ? replace_to(16) : 3);// 'ㄷ' or 'ㅌ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
-        }
-
-        else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-          if (buffer[LEVEL_CHO_SEONG] == 7) { // 'ㅂ' to 'ㅍ'
-            ic.deleteSurroundingText(1, 0);
-            buffer[LEVEL_CHO_SEONG] = 17; // 'ㅂ'
-          } else {
-            buffer[LEVEL_CHO_SEONG] = 7; // 'ㅍ'
-          }
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = (buffer[LEVEL_CHO_SEONG] == 7 ? replace_to(17) : 7);// 'ㅂ' or 'ㅍ'
           str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
         }
 
         // yoon // 150507 // Conditional Statements for 'mo-eum jung_seong'
-        
-        else if (finger[INDEX_FINGER] != DIRECTION_EMPTY
-            && finger[MIDLE_FINGER] != DIRECTION_EMPTY) {
+
+        else if (finger[INDEX_FINGER] != DIRECTION_EMPTY && finger[MIDLE_FINGER] != DIRECTION_EMPTY) {
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_UP:
@@ -286,51 +279,79 @@ public class Automata_type_3 {
               buffer[LEVEL_JUNG_SEONG] = 6; // 'ㅕ'
               break;
           }
-          
+
           ic.deleteSurroundingText(1, 0);
           str_to_write =
-              String.format("%c",generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+              String.format("%c",
+                  generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
           automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
         }
 
         break; // yoon // 150413 // break for two fingers
 
       case 3: // yoon // 150507 // case for three fingers
-
+        if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = (buffer[LEVEL_CHO_SEONG] == 12 ? replace_to(14) : 12); // 'ㅈ' or 'ㅊ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT
+            && finger[PINKY_FINGER] == DIRECTION_DOT) {
+          buffer[LEVEL_CHO_SEONG] = 9; // 'ㅅ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        }
         break;
-        
+
       case 4: // yoon // 150516 // case for four fingers
 
-        if (finger[INDEX_FINGER] != DIRECTION_EMPTY && finger[MIDLE_FINGER] != DIRECTION_EMPTY
-            && finger[RING__FINGER] != DIRECTION_EMPTY&& finger[PINKY_FINGER] != DIRECTION_EMPTY) {
+        if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] != DIRECTION_EMPTY && finger[PINKY_FINGER] != DIRECTION_EMPTY) {
+          buffer[LEVEL_CHO_SEONG] = 18;// 'ㅎ'
+          str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[INDEX_FINGER] != DIRECTION_EMPTY
+            && finger[MIDLE_FINGER] != DIRECTION_EMPTY && finger[RING__FINGER] != DIRECTION_EMPTY
+            && finger[PINKY_FINGER] != DIRECTION_EMPTY) {
           switch (finger[INDEX_FINGER]) {
             case DIRECTION_RIGHT:
-              buffer[LEVEL_JUNG_SEONG] = 18; //'ㅡ'
+              buffer[LEVEL_JUNG_SEONG] = 18; // 'ㅡ'
               break;
             case DIRECTION_DOWN:
-              buffer[LEVEL_JUNG_SEONG] = 20; //'ㅣ'
+              buffer[LEVEL_JUNG_SEONG] = 20; // 'ㅣ'
               break;
-              
           };
-
-         ic.deleteSurroundingText(1, 0);
-         str_to_write =
-             String.format("%c",generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
-         automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
+          ic.deleteSurroundingText(1, 0);
+          str_to_write =
+              String.format("%c",
+                  generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+          automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
         }
     }
   };
+
   public static void LEVEL_JUNG_SEONG_TO_JONG_SEONG() {
-    
-  };
-  public static void LEVEL_JONG_SEONG() {
-    
-  };
-  public static void LEVEL_JONG_SEONG_TO_CHO_SEONG() {
-    
+    switch (count_finger) { // yoon // step 2. switch by finger counts for accuracy
+
+      case 1: // yoon // 150413 // case for single finger
+
+        // yoon // 150527 // Conditional Statements for 'ja-eum jong-seong'
+        if (finger[INDEX_FINGER] == DIRECTION_DOT) {
+
+        }
+    }
+
   };
 
-  
+  public static void LEVEL_JONG_SEONG() {
+
+  };
+
+  public static void LEVEL_JONG_SEONG_TO_CHO_SEONG() {
+
+  };
+
+
   // yoon // THIS IS WHAT I'M REALLY WANT TO DO !!
   public static String execute(int[] finger_array, InputConnection input_connection) {
 
@@ -340,7 +361,7 @@ public class Automata_type_3 {
     finger = finger_array;
     ic = input_connection;
     count_finger = 0;
-    
+
     // yoon // 150412 // count finger
     while (idx-- > 0)
       if (finger[idx] != DIRECTION_EMPTY)
@@ -369,7 +390,7 @@ public class Automata_type_3 {
       return "";
     }
 
-    else if (count_finger == 2 && finger[PINKY_FINGER] == DIRECTION_DOT
+    else if (count_finger == 2 && finger[THUMB_FINGER] == DIRECTION_DOT
         && finger[PINKY_FINGER] == DIRECTION_DOT) {
       automata_level = LEVEL_CHO_SEONG;
       return "\n";
@@ -377,16 +398,16 @@ public class Automata_type_3 {
 
     // yoon // 150413 // switch by automata level
     // yoon // 150516 // Code refactoring : Devide & Conquer
-    
+
     switch (automata_level) { // yoon // step 1. switch by automata level
 
       case LEVEL_CHO_SEONG:
         LEVEL_CHO_SEONG();
         break;
-        
+
       case LEVEL_JUNG_SEONG:
         LEVEL_JUNG_SEONG();
-        break; 
+        break;
 
       case LEVEL_JUNG_SEONG_TO_JONG_SEONG:
 
@@ -403,7 +424,7 @@ public class Automata_type_3 {
         automata_level = LEVEL_CHO_SEONG;
         break;
     }
-    
+
     return str_to_write;
   }
 
