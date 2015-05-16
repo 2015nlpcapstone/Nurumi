@@ -1,10 +1,35 @@
 package com.fouram.nurumikeyboard.NurumiIME;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import org.w3c.dom.Text;
+
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
+//import android.widget.EditText;
 
 /////////////////////////////////////////////
 /// @class NurumiIME
@@ -35,8 +60,8 @@ import android.view.inputmethod.InputConnection;
 ///  - Input method service class.\n
 ///  - This class makes user to replace keyboard.\n
 /////////////////////////////////////////////
-public class NurumiIME extends InputMethodService 
-					   implements OnMKeyboardGestureListener{
+public class NurumiIME extends InputMethodService
+					   implements OnMKeyboardGestureListener {
 	
 	private final int FIVE_FINGERS = 5;
 	//private final int TEN_FINGERS = 10;
@@ -45,7 +70,12 @@ public class NurumiIME extends InputMethodService
 	private ViewGroup vg;
 	private MKeyboardView mKeyboardView;
 	private int[] motion;
-	@Override
+
+    private ImageButton ibtnInform;
+    private ImageButton ibtnSetting;
+
+
+    @Override
 	public void onFinishInputView(boolean finishingInput) {
 		super.onFinishInputView(finishingInput);
 	}
@@ -63,17 +93,69 @@ public class NurumiIME extends InputMethodService
 	@Override
 	public View onCreateInputView() {
 		int layoutId = R.layout.mkeyboardlayout;
-		entireView = getLayoutInflater().inflate(layoutId, null);
+		entireView = (View)getLayoutInflater().inflate(layoutId, null);
 		vg = (ViewGroup) entireView;
 		mKeyboardView = (MKeyboardView) vg.findViewById(R.id.MKeyboardView);
 		mKeyboardView.setIme(this);
-		
+
+        mKeyboardView.setIme(this);
 		numFingers = FIVE_FINGERS;
 		motion = new int[numFingers];
-		
+        Log.i("++MAIN", "SUCCESS");
+        setViewId();
+
 		return entireView;
 	}
-	
+
+    /**
+     * @function setViewId
+     * @brief This method sets default value when the application executes.
+     *
+     * @data vg is Layout's View Group.
+     * @see android.inputmethodservice.InputMethodService#onCreateInputView()
+     * @author Soyeong Park
+     * @date 2015-04-15
+     */
+    private void setViewId() {
+        ibtnInform = (ImageButton)vg.findViewById(R.id.ibtn_inform);
+        ibtnInform.setOnClickListener(mClickListener);
+
+        ibtnSetting = (ImageButton)vg.findViewById(R.id.ibtn_setting);
+        ibtnSetting.setOnClickListener(mClickListener);
+    }
+
+    /**
+     * @brief This method manages all View's function through one Listener like 'onClick'
+     * @brief Examples about View are Button, TextView, ImageView ...
+     *
+     * @param v has all View's ID information.
+     *
+     * @author Soyeong Park
+     * @date 2015-05-05
+     */
+    Button.OnClickListener mClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            switch(v.getId()) {
+                case R.id.ibtn_inform: // DEFAULT: OFF
+                    Log.i("++INFORM", v.toString());
+
+                    Intent intentInform = new Intent(NurumiIME.this, InformationActivity.class);
+					intentInform.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intentInform);
+
+                    break;
+                case R.id.ibtn_setting: // DEFAULT: OFF
+                    Log.i("++SETTING", "1SUCCESS");
+
+                    Intent intentSetting = new Intent(NurumiIME.this, SettingActivity.class);
+					intentSetting.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intentSetting);
+
+                    break;
+            }
+        }
+    };
+
 	@Override
 	public boolean onShowInputRequested (int flags, boolean configChange) {
 		return true;
