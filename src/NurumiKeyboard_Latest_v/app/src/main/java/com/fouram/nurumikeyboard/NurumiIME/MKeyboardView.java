@@ -272,23 +272,23 @@ public class MKeyboardView extends View {
 	private void setBitmap() {
 		BitmapDrawable drawable;
 			
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.dot);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_dot);
 		bitmap = drawable.getBitmap();
 		dotImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 				
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.u_arrow);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_up);
 		bitmap = drawable.getBitmap();
 		upImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 				
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.d_arrow);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_down);
 		bitmap = drawable.getBitmap();
 		downImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 				
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.l_arrow);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_left);
 		bitmap = drawable.getBitmap();
 		leftImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 				
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.r_arrow);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_right);
 		bitmap = drawable.getBitmap();
 		rightImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 		

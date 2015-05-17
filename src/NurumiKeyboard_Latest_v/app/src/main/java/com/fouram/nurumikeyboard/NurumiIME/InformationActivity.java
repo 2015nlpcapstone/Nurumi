@@ -10,59 +10,125 @@ import android.view.Window;
 import android.widget.ImageView;
 
 /**
- * Created by soyeong on 15. 5. 16..
+ * @class InformationActivity
+ *
+ * @brief The function of InformationActivity is showing
+ *        Automata's image according to setting's conditions.
+ *
+ * @variable String stateAutomata is a setting's condition about Automata like automata[1, 2, 3]
+ * @variable Booelan stateHand is a setting's condition about Hand's direction like left and right
+ * @variable Boolean stateLanguage is a setting's condition about Language like Korean, English...
+ *
+ * @function onCreate
+ * @function setInformImage
+ *
+ * @author Soyeong Park
+ * @date 2015-05-08
  */
 public class InformationActivity extends Activity {
     public String stateAutomata;
     public Boolean stateHand;
     public Boolean stateLanguage;
 
+    /**
+     * @function onCreate(Bundle savedInstanceState)
+     *
+     * @brief The functions of onCreate are setting Image according to setting's conditions
+     *
+     * @variable sharedPref is a Object including setting's conditions
+     * @variable dr is to converter resource file into image
+     * @variable imageView is a frame to set image
+     * @variable stateAutomata is a setting's condition about Automata like automata[1, 2, 3]
+     * @variable stateHand is a setting's condition about Hand's direction like left and right
+     * @variable stateLanguage is a setting's condition about Language like Korean, English...
+     *
+     * @param savedInstanceState is setting previous data
+     *
+     * @author Soyeong Park
+     * @date 2015-05-08
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Delete Dialog's title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        // Store setting's conditions at new variable using SharedPreferences
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        stateAutomata = sharedPref.getString("prefAutomata", "");
+        stateAutomata = sharedPref.getString("prefAutomata", "3");
         stateHand = sharedPref.getBoolean("prefHand", true);
         stateLanguage = sharedPref.getBoolean("prefLanguage", true);
 
+        // Set Layout to xml file
         setContentView(R.layout.information);
 
+        // Set Image according to setting's conditions using BitmapDrawable
         BitmapDrawable dr = (BitmapDrawable)getResources().getDrawable(setInformImage());
         ImageView imageView = (ImageView)findViewById(R.id.imgView);
         imageView.setImageDrawable(dr);
 
-        Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefAutomata", "")));
+        Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefAutomata", "3")));
         Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getBoolean("prefHand", true)));
         Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getBoolean("prefLanguage", true)));
     }
 
-
-    public int setInformImage() {
+    /**
+     * @function setInformImage()
+     *
+     * @brief The function of setInformImage is returning an image's value according to setting's conditions
+     *
+     * @variable stateAutomata is a setting's condition about Automata like automata[1, 2, 3]
+     * @variable stateHand is a setting's condition about Hand's direction like left and right
+     * @variable stateLanguage is a setting's condition about Language like Korean, English...
+     *
+     * @return R.drawable.? is an image according to setting's conditions
+     *
+     * @author Soyeong Park
+     * @date 2015-05-08
+     */
+    private int setInformImage() {
         // Hand: RIGHT && Language: Korean && Automata: 1
-        if(stateHand && stateLanguage && stateAutomata.equals("automata1"))
-            return R.drawable.img_automata1;
+        if(stateHand && stateLanguage && stateAutomata.equals("1"))
+            return R.drawable.img_auto1_rig_kor;
         // Hand: RIGHT && Language: Korean && Automata: 2
-        else if(stateHand && stateLanguage && stateAutomata.equals("automata2"))
-            return R.drawable.img_automata2;
+        else if(stateHand && stateLanguage && stateAutomata.equals("2"))
+            return R.drawable.img_auto2_rig_kor;
         // Hand: RIGHT && Language: Korean && Automata: 3
-        else if(stateHand && stateLanguage && stateAutomata.equals("automata3"))
-            return R.drawable.img_automata3;
-    /*    // Hand: LEFT && Language: Korean && Automata: 1
-        else if(!stateHand && stateLanguage && stateAutomata.equals("automata1"))
-            return R.drawable.img_automata1;
+        else if(stateHand && stateLanguage && stateAutomata.equals("3"))
+            return R.drawable.img_auto3_rig_kor;
+
+        // Hand: LEFT && Language: Korean && Automata: 1
+        else if(!stateHand && stateLanguage && stateAutomata.equals("1"))
+            return R.drawable.img_auto1_lef_kor;
         // Hand: LEFT && Language: Korean && Automata: 2
-        else if(!stateHand && stateLanguage && stateAutomata.equals("automata2"))
-            return R.drawable.img_automata1;
+        else if(!stateHand && stateLanguage && stateAutomata.equals("2"))
+            return R.drawable.img_auto2_lef_kor;
         // Hand: LEFT && Language: Korean && Automata: 3
-        else if(!stateHand && stateLanguage && stateAutomata.equals("automata3"))
-            return R.drawable.img_automata1;
+        else if(!stateHand && stateLanguage && stateAutomata.equals("3"))
+            return R.drawable.img_auto3_lef_kor;
+
+    /*    // Hand: RIGHT && Language: English && Automata: 1
+        else if(stateHand && !stateLanguage && stateAutomata.equals("1"))
+            return R.drawable.img_auto1_rig_eng;
+        // Hand: RIGHT && Language: English && Automata: 2
+        else if(stateHand && !stateLanguage && stateAutomata.equals("2"))
+            return R.drawable.img_auto2_rig_eng;
+        // Hand: RIGHT && Language: English && Automata: 3
+        else if(stateHand && !stateLanguage && stateAutomata.equals("3"))
+            return R.drawable.img_auto3_rig_eng;
+
+        // Hand: LEFT && Language: English && Automata: 1
+        else if(stateHand && !stateLanguage && stateAutomata.equals("1"))
+            return R.drawable.img_auto1_leg_eng;
+        // Hand: LEFT && Language: English && Automata: 2
+        else if(stateHand && !stateLanguage && stateAutomata.equals("2"))
+            return R.drawable.img_auto2_leg_eng;
+        // Hand: LEFT && Language: English && Automata: 3
+        else if(stateHand && !stateLanguage && stateAutomata.equals("3"))
+            return R.drawable.img_auto3_leg_eng;
     */
-        // TODO: ADD ENGLISH MODE
         else // default setting [RIGHT/KOREAN/AUTOMATA3]
-            return R.drawable.img_automata3;
+            return R.drawable.img_auto3_rig_kor;
     }
-
-
 }

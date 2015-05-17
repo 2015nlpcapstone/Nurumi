@@ -18,14 +18,17 @@ public final class R {
         public static final int d_arrow=0x7f020000;
         public static final int dot=0x7f020001;
         public static final int ic_launcher=0x7f020002;
-        public static final int img_automata1=0x7f020003;
-        public static final int img_automata2=0x7f020004;
-        public static final int img_automata3=0x7f020005;
-        public static final int img_information=0x7f020006;
-        public static final int img_setting=0x7f020007;
-        public static final int l_arrow=0x7f020008;
-        public static final int r_arrow=0x7f020009;
-        public static final int u_arrow=0x7f02000a;
+        public static final int img_auto1_lef_kor=0x7f020003;
+        public static final int img_auto1_rig_kor=0x7f020004;
+        public static final int img_auto2_lef_kor=0x7f020005;
+        public static final int img_auto2_rig_kor=0x7f020006;
+        public static final int img_auto3_lef_kor=0x7f020007;
+        public static final int img_auto3_rig_kor=0x7f020008;
+        public static final int img_information=0x7f020009;
+        public static final int img_setting=0x7f02000a;
+        public static final int l_arrow=0x7f02000b;
+        public static final int r_arrow=0x7f02000c;
+        public static final int u_arrow=0x7f02000d;
     }
     public static final class id {
         public static final int MKeyboardView=0x7f080003;
@@ -41,30 +44,26 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f060000;
         public static final int nurumi_ime=0x7f060001;
-        public static final int nurumi_setting=0x7f060002;
-        public static final int subtype_en_US=0x7f060003;
-        public static final int txt_10finger=0x7f060004;
-        public static final int txt_5finger=0x7f060005;
-        public static final int txt_automata=0x7f060006;
-        public static final int txt_automata1=0x7f060007;
-        public static final int txt_automata2=0x7f060008;
-        public static final int txt_automata3=0x7f060009;
-        public static final int txt_developer_mail=0x7f06000a;
-        public static final int txt_developer_summary=0x7f06000b;
-        public static final int txt_developer_title=0x7f06000c;
-        public static final int txt_english=0x7f06000d;
-        public static final int txt_finger=0x7f06000e;
-        public static final int txt_hand=0x7f06000f;
-        public static final int txt_inform=0x7f060010;
-        public static final int txt_keyboard_information=0x7f060011;
-        public static final int txt_korean=0x7f060012;
-        public static final int txt_language=0x7f060013;
-        public static final int txt_left=0x7f060014;
-        public static final int txt_right=0x7f060015;
-        public static final int txt_setting=0x7f060016;
-        public static final int txt_title_setting=0x7f060017;
-        public static final int txt_tutorial_off=0x7f060018;
-        public static final int txt_tutorial_on=0x7f060019;
+        public static final int subtype_en_US=0x7f060002;
+        public static final int txt_10finger=0x7f060003;
+        public static final int txt_5finger=0x7f060004;
+        public static final int txt_automata=0x7f060005;
+        public static final int txt_developer_mail=0x7f060006;
+        public static final int txt_developer_summary=0x7f060007;
+        public static final int txt_developer_title=0x7f060008;
+        public static final int txt_english=0x7f060009;
+        public static final int txt_finger=0x7f06000a;
+        public static final int txt_hand=0x7f06000b;
+        public static final int txt_inform=0x7f06000c;
+        public static final int txt_keyboard_information=0x7f06000d;
+        public static final int txt_korean=0x7f06000e;
+        public static final int txt_language=0x7f06000f;
+        public static final int txt_left=0x7f060010;
+        public static final int txt_right=0x7f060011;
+        public static final int txt_setting=0x7f060012;
+        public static final int txt_title_setting=0x7f060013;
+        public static final int txt_tutorial_off=0x7f060014;
+        public static final int txt_tutorial_on=0x7f060015;
     }
     public static final class style {
         /** 

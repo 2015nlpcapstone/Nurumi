@@ -4,14 +4,6 @@
     <PreferenceCategory
         android:title="@string/txt_title_setting" >
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="prefHand"
-            android:summaryOn="@string/txt_right"
-            android:summaryOff="@string/txt_left"
-            android:title="@string/txt_hand" >
-        </CheckBoxPreference>
-
         <ListPreference
             android:key="prefAutomata"
             android:defaultValue="3"
@@ -22,6 +14,14 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
+            android:key="prefHand"
+            android:summaryOn="@string/txt_right"
+            android:summaryOff="@string/txt_left"
+            android:title="@string/txt_hand" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
             android:key="prefLanguage"
             android:summaryOn="@string/txt_korean"
             android:summaryOff="@string/txt_english"
@@ -29,4 +29,5 @@
         </CheckBoxPreference>
 
     </PreferenceCategory>
+
 </PreferenceScreen>

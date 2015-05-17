@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">MotionKeyboard</string>
     <string name="nurumi_ime">Nurumi IME</string>
-    <string name="nurumi_setting">Nurumi Setting</string>
     <string name="subtype_en_US">English (US)</string>
 
     <string name="txt_inform">Inform</string>
@@ -16,9 +15,6 @@
     <string name="txt_developer_mail">개발자에게 메일 보내기</string>
 
     <string name="txt_automata">입력 방법</string>
-    <string name="txt_automata1">방법1</string>
-    <string name="txt_automata2">방법2</string>
-    <string name="txt_automata3">방법3</string>
 
     <string name="txt_hand">주로 사용할 손의 방향 선택 [On: 오른손, Off: 왼손]</string>
     <string name="txt_left">왼손</string>

@@ -1,30 +1,16 @@
 package com.fouram.nurumikeyboard.NurumiIME;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import org.w3c.dom.Text;
 
@@ -71,9 +57,13 @@ public class NurumiIME extends InputMethodService
 	private MKeyboardView mKeyboardView;
 	private int[] motion;
 
+	// Soyeong
     private ImageButton ibtnInform;
     private ImageButton ibtnSetting;
 
+	private String stateAutomata;
+	private Boolean stateHand;
+	private Boolean stateLanguage;
 
     @Override
 	public void onFinishInputView(boolean finishingInput) {
@@ -104,7 +94,35 @@ public class NurumiIME extends InputMethodService
         Log.i("++MAIN", "SUCCESS");
         setViewId();
 
+		setState();
+
 		return entireView;
+	}
+
+	/**
+	 * @function onStart(Intent intetn, int startId)
+	 *
+	 * @brief The function of onStart is to start main screen
+	 * @brief Main function is updating setting's information and storing it
+	 *
+	 * @variable stateAutomata is a setting's condition about Automata like automata[1, 2, 3]
+	 * @variable stateHand is a setting's condition about Hand's direction like left and right
+	 * @variable stateLanguage is a setting's condition about Language like Korean, English...
+	 *
+	 * @param intent is to get SettingActivity information
+	 * @param startId is a separator about onStart
+	 */
+	@Override
+	public void onStart(Intent intent, int startId) {
+		super.onStart(intent, startId);
+
+		stateHand = intent.getBooleanExtra("prefHand", true);
+		stateLanguage = intent.getBooleanExtra("prefLanguage", true);
+		stateAutomata = intent.getStringExtra("prefAutomata");
+
+		Log.i("STATE", String.valueOf(stateAutomata));
+		Log.i("STATE", String.valueOf(stateHand));
+		Log.i("STATE", String.valueOf(stateLanguage));
 	}
 
     /**
@@ -134,24 +152,30 @@ public class NurumiIME extends InputMethodService
      * @date 2015-05-05
      */
     Button.OnClickListener mClickListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            switch(v.getId()) {
-                case R.id.ibtn_inform: // DEFAULT: OFF
+		public void onClick(View v) {
+			Intent intentService = new Intent(NurumiIME.this, NurumiIME.class);
+
+			switch(v.getId()) {
+                case R.id.ibtn_inform:
                     Log.i("++INFORM", v.toString());
 
                     Intent intentInform = new Intent(NurumiIME.this, InformationActivity.class);
 					intentInform.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intentInform);
 
+					stopService(intentService);
+
                     break;
-                case R.id.ibtn_setting: // DEFAULT: OFF
-                    Log.i("++SETTING", "1SUCCESS");
+                case R.id.ibtn_setting:
+					Log.i("++SETTING", "1SUCCESS");
 
                     Intent intentSetting = new Intent(NurumiIME.this, SettingActivity.class);
 					intentSetting.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intentSetting);
+					startActivity(intentSetting);
 
-                    break;
+					stopService(intentService);
+
+					break;
             }
         }
     };
@@ -226,6 +250,26 @@ public class NurumiIME extends InputMethodService
 		else
 			ic.commitText(String.valueOf('a'),1);
 		*/
-		ic.commitText(String.valueOf(Automata_type_3.execute(motion,ic)),1);// yoon // 150412 // automata 3 
+		ic.commitText(String.valueOf(Automata_type_3.execute(motion, ic)), 1);// yoon // 150412 // automata 3
+	}
+
+	/**
+	 * @function setState()
+	 *
+	 * @brief The function of setState is to get and set SettingActivity's information
+	 *
+	 * @variable stateAutomata is a setting's condition about Automata like automata[1, 2, 3]
+	 * @variable stateHand is a setting's condition about Hand's direction like left and right
+	 * @variable stateLanguage is a setting's condition about Language like Korean, English...
+	 *
+	 * @author Hyungsoon Park
+	 * @date 2015-05-15
+	 */
+	private void setState() {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		stateAutomata = sharedPref.getString("prefAutomata", "");
+		stateHand = sharedPref.getBoolean("prefHand", true);
+		stateLanguage = sharedPref.getBoolean("prefLanguage", true);
+		Log.d("shPref", "" + stateAutomata + " " + stateHand + " " + stateLanguage);
 	}
 }

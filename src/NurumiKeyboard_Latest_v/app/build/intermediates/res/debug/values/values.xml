@@ -3,27 +3,23 @@
     <!-- From: file:/Users/soyeong/AndroidStudioProjects/NurumiKeyboard_Latest_v/app/src/main/res/values/array.xml -->
     <eat-comment/>
     <string-array name="arrayAutomata">
-        <item name="1">천지인 기반</item>
-        <item name="2">나랏글 기반</item>
-        <item name="3">천지인 + 나랏글</item>
+        <item>천지인 기반</item>
+        <item>나랏글 기반</item>
+        <item>천지인 + 나랏글</item>
     </string-array>
     <string-array name="arrayAutomataValues">
-        <item name="1">automata1</item>
-        <item name="2">automata2</item>
-        <item name="3">automata3</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
     <!-- From: file:/Users/soyeong/AndroidStudioProjects/NurumiKeyboard_Latest_v/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">MotionKeyboard</string>
     <string name="nurumi_ime">Nurumi IME</string>
-    <string name="nurumi_setting">Nurumi Setting</string>
     <string name="subtype_en_US">English (US)</string>
     <string name="txt_10finger">양손</string>
     <string name="txt_5finger">한손</string>
     <string name="txt_automata">입력 방법</string>
-    <string name="txt_automata1">방법1</string>
-    <string name="txt_automata2">방법2</string>
-    <string name="txt_automata3">방법3</string>
     <string name="txt_developer_mail">개발자에게 메일 보내기</string>
     <string name="txt_developer_summary">개발자 정보 확인하기</string>
     <string name="txt_developer_title">개발자 정보</string>
