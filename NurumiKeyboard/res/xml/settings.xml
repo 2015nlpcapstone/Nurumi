@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="@string/txt_title_setting" >
+
+        <ListPreference
+            android:key="prefAutomata"
+            android:defaultValue="3"
+            android:title="@string/txt_automata"
+            android:entries="@array/arrayAutomata"
+            android:entryValues="@array/arrayAutomataValues" >
+        </ListPreference>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefHand"
+            android:summaryOn="@string/txt_right"
+            android:summaryOff="@string/txt_left"
+            android:title="@string/txt_hand" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefLanguage"
+            android:summaryOn="@string/txt_korean"
+            android:summaryOff="@string/txt_english"
+            android:title="@string/txt_language" >
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
