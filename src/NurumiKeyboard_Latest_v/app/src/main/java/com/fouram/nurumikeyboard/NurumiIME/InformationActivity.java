@@ -26,9 +26,10 @@ import android.widget.ImageView;
  * @date 2015-05-08
  */
 public class InformationActivity extends Activity {
-    public String stateAutomata;
-    public Boolean stateHand;
-    public Boolean stateLanguage;
+    private String stateAutomata;
+    private Boolean stateHand;
+    private Boolean stateLanguage;
+    private Boolean stateSpecial;
 
     /**
      * @function onCreate(Bundle savedInstanceState)
@@ -59,6 +60,8 @@ public class InformationActivity extends Activity {
         stateAutomata = sharedPref.getString("prefAutomata", "3");
         stateHand = sharedPref.getBoolean("prefHand", true);
         stateLanguage = sharedPref.getBoolean("prefLanguage", true);
+        // TODO
+    //    stateSpecial = ;
 
         // Set Layout to xml file
         setContentView(R.layout.information);
@@ -81,6 +84,7 @@ public class InformationActivity extends Activity {
      * @variable stateAutomata is a setting's condition about Automata like automata[1, 2, 3]
      * @variable stateHand is a setting's condition about Hand's direction like left and right
      * @variable stateLanguage is a setting's condition about Language like Korean, English...
+     * @variable stateSpecial is a mode's condition about Special Character & Numbers.
      *
      * @return R.drawable.? is an image according to setting's conditions
      *
@@ -89,45 +93,39 @@ public class InformationActivity extends Activity {
      */
     private int setInformImage() {
         // Hand: RIGHT && Language: Korean && Automata: 1
-        if(stateHand && stateLanguage && stateAutomata.equals("1"))
+        if(stateHand && stateLanguage && stateAutomata.equals("1") && !stateSpecial)
             return R.drawable.img_auto1_rig_kor;
         // Hand: RIGHT && Language: Korean && Automata: 2
-        else if(stateHand && stateLanguage && stateAutomata.equals("2"))
+        else if(stateHand && stateLanguage && stateAutomata.equals("2") && !stateSpecial)
             return R.drawable.img_auto2_rig_kor;
         // Hand: RIGHT && Language: Korean && Automata: 3
-        else if(stateHand && stateLanguage && stateAutomata.equals("3"))
+        else if(stateHand && stateLanguage && stateAutomata.equals("3") && !stateSpecial)
             return R.drawable.img_auto3_rig_kor;
 
         // Hand: LEFT && Language: Korean && Automata: 1
-        else if(!stateHand && stateLanguage && stateAutomata.equals("1"))
+        else if(!stateHand && stateLanguage && stateAutomata.equals("1") && !stateSpecial)
             return R.drawable.img_auto1_lef_kor;
         // Hand: LEFT && Language: Korean && Automata: 2
-        else if(!stateHand && stateLanguage && stateAutomata.equals("2"))
+        else if(!stateHand && stateLanguage && stateAutomata.equals("2") && !stateSpecial)
             return R.drawable.img_auto2_lef_kor;
         // Hand: LEFT && Language: Korean && Automata: 3
-        else if(!stateHand && stateLanguage && stateAutomata.equals("3"))
+        else if(!stateHand && stateLanguage && stateAutomata.equals("3") && !stateSpecial)
             return R.drawable.img_auto3_lef_kor;
 
-    /*    // Hand: RIGHT && Language: English && Automata: 1
-        else if(stateHand && !stateLanguage && stateAutomata.equals("1"))
-            return R.drawable.img_auto1_rig_eng;
-        // Hand: RIGHT && Language: English && Automata: 2
-        else if(stateHand && !stateLanguage && stateAutomata.equals("2"))
-            return R.drawable.img_auto2_rig_eng;
-        // Hand: RIGHT && Language: English && Automata: 3
-        else if(stateHand && !stateLanguage && stateAutomata.equals("3"))
-            return R.drawable.img_auto3_rig_eng;
+        // Hand: RIGHT && Language: English && Automata: X
+        else if(stateHand && !stateLanguage && !stateSpecial/* && stateAutomata.equals("1")*/)
+            return R.drawable.img_auto_rig_eng;
+        // Hand: LEFT && Language: English && Automata: X
+        else if(!stateHand && !stateLanguage && !stateSpecial /*&& stateAutomata.equals("1")*/)
+            return R.drawable.img_auto_lef_eng;
 
-        // Hand: LEFT && Language: English && Automata: 1
-        else if(stateHand && !stateLanguage && stateAutomata.equals("1"))
-            return R.drawable.img_auto1_leg_eng;
-        // Hand: LEFT && Language: English && Automata: 2
-        else if(stateHand && !stateLanguage && stateAutomata.equals("2"))
-            return R.drawable.img_auto2_leg_eng;
-        // Hand: LEFT && Language: English && Automata: 3
-        else if(stateHand && !stateLanguage && stateAutomata.equals("3"))
-            return R.drawable.img_auto3_leg_eng;
-    */
+        // Hand: RIGHT && Language: Special Character && Automata: X
+        else if(stateHand && stateSpecial)
+            return R.drawable.img_auto_rig_spe;
+        // Hand: LEFT && Language: Special Character && Automata: X
+        else if(!stateHand && stateSpecial)
+            return R.drawable.img_auto_lef_spe;
+
         else // default setting [RIGHT/KOREAN/AUTOMATA3]
             return R.drawable.img_auto3_rig_kor;
     }

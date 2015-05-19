@@ -15,20 +15,24 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int d_arrow=0x7f020000;
-        public static final int dot=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int img_auto1_lef_kor=0x7f020003;
-        public static final int img_auto1_rig_kor=0x7f020004;
-        public static final int img_auto2_lef_kor=0x7f020005;
-        public static final int img_auto2_rig_kor=0x7f020006;
-        public static final int img_auto3_lef_kor=0x7f020007;
-        public static final int img_auto3_rig_kor=0x7f020008;
-        public static final int img_information=0x7f020009;
-        public static final int img_setting=0x7f02000a;
-        public static final int l_arrow=0x7f02000b;
-        public static final int r_arrow=0x7f02000c;
-        public static final int u_arrow=0x7f02000d;
+        public static final int ic_launcher=0x7f020000;
+        public static final int img_auto1_lef_kor=0x7f020001;
+        public static final int img_auto1_rig_kor=0x7f020002;
+        public static final int img_auto2_lef_kor=0x7f020003;
+        public static final int img_auto2_rig_kor=0x7f020004;
+        public static final int img_auto3_lef_kor=0x7f020005;
+        public static final int img_auto3_rig_kor=0x7f020006;
+        public static final int img_auto_lef_eng=0x7f020007;
+        public static final int img_auto_lef_spe=0x7f020008;
+        public static final int img_auto_rig_eng=0x7f020009;
+        public static final int img_auto_rig_spe=0x7f02000a;
+        public static final int img_btn_information=0x7f02000b;
+        public static final int img_btn_setting=0x7f02000c;
+        public static final int img_finger_dot=0x7f02000d;
+        public static final int img_finger_down=0x7f02000e;
+        public static final int img_finger_left=0x7f02000f;
+        public static final int img_finger_right=0x7f020010;
+        public static final int img_finger_up=0x7f020011;
     }
     public static final class id {
         public static final int MKeyboardView=0x7f080003;
