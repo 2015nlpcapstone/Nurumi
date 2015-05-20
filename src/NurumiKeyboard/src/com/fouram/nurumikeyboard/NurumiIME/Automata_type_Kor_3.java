@@ -132,15 +132,19 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
             case DIRECTION_UP:
               text_to_commit( "ㅗ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_RIGHT:
               text_to_commit( "ㅏ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_DOWN:
               text_to_commit( "ㅜ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_LEFT:
               text_to_commit( "ㅓ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
           }
         break; // yoon // 150413 // break for single finger
@@ -167,15 +171,19 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
             case DIRECTION_UP:
               text_to_commit( "ㅛ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_RIGHT:
               text_to_commit( "ㅑ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_DOWN:
               text_to_commit( "ㅠ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_LEFT:
               text_to_commit( "ㅕ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
 
           }
@@ -240,9 +248,11 @@ public class Automata_type_Kor_3 extends IME_Automata {
           switch (finger[INDEX_FINGER]) {
             case DIRECTION_RIGHT:
               text_to_commit( "ㅡ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_DOWN:
               text_to_commit( "ㅣ" );
+              automata_level = LEVEL_CHO_SEONG;
               break;
             default:
               text_to_commit( "" );
@@ -356,17 +366,25 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
             case DIRECTION_RIGHT:
               buffer[JUNG_SEONG] = 1; // 'ㅐ'
+              
+              ic.deleteSurroundingText(1, 0);
+              text_to_commit(
+                  String.format("%c",
+                      generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
+              automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
               break;
             case DIRECTION_LEFT:
               buffer[JUNG_SEONG] = 5; // 'ㅔ'
+
+              ic.deleteSurroundingText(1, 0);
+              text_to_commit(
+                  String.format("%c",
+                      generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
+              automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
+              
               break;
           }
 
-          ic.deleteSurroundingText(1, 0);
-          text_to_commit(
-              String.format("%c",
-                  generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
-          automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
         }
 
         break; // yoon // 150413 // break for two fingers
@@ -583,9 +601,12 @@ public class Automata_type_Kor_3 extends IME_Automata {
                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
             automata_level = JONG_SEONG;
           }
+          else LEVEL_CHO_SEONG();
         }
+        else LEVEL_CHO_SEONG();
+        
+        break;
     }
-
   };
 
   public static void LEVEL_JONG_SEONG() {
@@ -634,7 +655,7 @@ public class Automata_type_Kor_3 extends IME_Automata {
                   generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],
                       buffer[JONG_SEONG])) );
           automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
-        }
+        }else LEVEL_CHO_SEONG();
         break;
       case 2: // yoon // 150424 // case for two fingers
 
@@ -669,7 +690,13 @@ public class Automata_type_Kor_3 extends IME_Automata {
                   generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],
                       buffer[JONG_SEONG])) );
           automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
-        }
+        } 
+        else LEVEL_CHO_SEONG();
+        break;
+        
+      case 3: // yoon // 150521 // case for three fingers
+        LEVEL_CHO_SEONG();
+        break;
     }
   };
 
