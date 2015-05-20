@@ -6,14 +6,14 @@ import android.view.inputmethod.InputConnection;
 public class Automata_type_Kor_3 extends IME_Automata {
 
   public static final boolean ENABLE_DEBUG = true;
-  // 0.�� 1.�� 2.�� 3.�� 4.�� 5.�� 6.�� 7.�� 8.�� 9.�� 10.�� 11.�� 12.�� 13.�� 14.�� 15.�� 16.�� 17.�� 18��
+  // 0.ㄱ 1.ㄲ 2.ㄴ 3.ㄷ 4.ㄸ 5.ㄹ 6.ㅁ 7.ㅂ 8.ㅃ 9.ㅅ 10.ㅆ 11.ㅇ 12.ㅈ 13.ㅉ 14.ㅊ 15.ㅋ 16.ㅌ 17.ㅍ 18ㅎ
   private static final int[] PREF_CHO = {12593, 12594, 12596, 12599, 12600, 12601, 12609, 12610,
       12611, 12613, 12614, 12615, 12616, 12617, 12618, 12619, 12620, 12621, 12622};
-  // 0.�� 1.�� 2.�� 3.�� 4.�� 5.�� 6.�� 7.�� 8.�� 9.�� 10.�� 11.�� 12.�� 13.�� 14.�� 15.�� 16.�� 17.�� 18.�� 19.�� 20.��
+  // 0.ㅏ 1.ㅐ 2.ㅑ 3.ㅒ 4.ㅓ 5.ㅔ 6.ㅕ 7.ㅖ 8.ㅗ 9.ㅘ 10.ㅙ 11.ㅚ 12.ㅛ 13.ㅜ 14.ㅝ 15.ㅞ 16.ㅟ 17.ㅠ 18.ㅡ 19.ㅢ 20.ㅣ
   private static final int[] PREF_JUNG = {12623, 12624, 12625, 12626, 12627, 12628, 12629, 12630,
       12631, 12632, 12633, 12634, 12635, 12636, 12637, 12638, 12639, 12640, 12641, 12642, 12643};
-  // 0.�� 1.�� 2.�� 3.�� 4.�� 5.�� 6.�� 7.�� 8.�� 9.�� 10.�� 11.�� 12.�� 13.�� 14.�� 15.�� 16.�� 17.��
-  // 18.�� 19.�� 20.�� 21.�� 22.�� 23.�� 24.�� 25.�� 26.��
+  // 0.ㄱ 1.ㄲ 2.ㄳ 3.ㄴ 4.ㄵ 5.ㄶ 6.ㄷ 7.ㄹ 8.ㄺ 9.ㄻ 10.ㄼ 11.ㄽ 12.ㄾ 13.ㄿ 14.ㅀ 15.ㅁ 16.ㅂ 17.ㅄ
+  // 18.ㅅ 19.ㅆ 20.ㅇ 21.ㅈ 22.ㅊ 23.ㅋ 24.ㅌ 25.ㅍ 26.ㅎ
   private static final int[] PREF_JONG = {12593, 12594, 12595, 12596, 12597, 12598, 12599, 12601,
       12602, 12603, 12604, 12605, 12606, 12607, 12608, 12609, 12610, 12612, 12613, 12614, 12615,
       12616, 12618, 12619, 12620, 12621, 12622};
@@ -108,19 +108,19 @@ public class Automata_type_Kor_3 extends IME_Automata {
         // yoon // 150413 // Conditional Statements for 'ja-eum cho-seong'
         // 150517 // mod ipt method
         if (finger[INDEX_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 11;// '��'
+          buffer[CHO_SEONG] = 11;// 'ㅇ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 6; // '��'
+          buffer[CHO_SEONG] = 6; // 'ㅁ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 2; // '��'
+          buffer[CHO_SEONG] = 2; // 'ㄴ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[PINKY_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 5; // '��'
+          buffer[CHO_SEONG] = 5; // 'ㄹ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
@@ -131,16 +131,16 @@ public class Automata_type_Kor_3 extends IME_Automata {
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_UP:
-              text_to_commit( "��" );
+              text_to_commit( "ㅗ" );
               break;
             case DIRECTION_RIGHT:
-              text_to_commit( "��" );
+              text_to_commit( "ㅏ" );
               break;
             case DIRECTION_DOWN:
-              text_to_commit( "��" );
+              text_to_commit( "ㅜ" );
               break;
             case DIRECTION_LEFT:
-              text_to_commit( "��" );
+              text_to_commit( "ㅓ" );
               break;
           }
         break; // yoon // 150413 // break for single finger
@@ -148,15 +148,15 @@ public class Automata_type_Kor_3 extends IME_Automata {
       case 2: // yoon // 150424 // case for two fingers
               // 150517 // mod ipt method
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 0;// '��'
+          buffer[CHO_SEONG] = 0;// 'ㄱ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 3;// '��'
+          buffer[CHO_SEONG] = 3;// 'ㄷ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 7;// '��'
+          buffer[CHO_SEONG] = 7;// 'ㅂ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
@@ -166,16 +166,16 @@ public class Automata_type_Kor_3 extends IME_Automata {
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_UP:
-              text_to_commit( "��" );
+              text_to_commit( "ㅛ" );
               break;
             case DIRECTION_RIGHT:
-              text_to_commit( "��" );
+              text_to_commit( "ㅑ" );
               break;
             case DIRECTION_DOWN:
-              text_to_commit( "��" );
+              text_to_commit( "ㅠ" );
               break;
             case DIRECTION_LEFT:
-              text_to_commit( "��" );
+              text_to_commit( "ㅕ" );
               break;
 
           }
@@ -186,13 +186,30 @@ public class Automata_type_Kor_3 extends IME_Automata {
               // 150517 // mod ipt method
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
             && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 12; // '��'
+          buffer[CHO_SEONG] = 12; // 'ㅈ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT
             && finger[PINKY_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 9; // '��'
+          buffer[CHO_SEONG] = 9; // 'ㅅ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
+          automata_level = LEVEL_JUNG_SEONG;
+        }
+        // yoon // 150520 // cond. statements for 'doen-so-ri' 
+        else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT
+            && finger[MIDLE_FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 1;// 'ㄲ'
+          text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]));
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 4;// 'ㄸ'
+          text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]));
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 8;// 'ㅃ'
+          text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
 
@@ -202,19 +219,30 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
             && finger[RING__FINGER] != DIRECTION_EMPTY && finger[PINKY_FINGER] != DIRECTION_EMPTY) {
-          buffer[CHO_SEONG] = 18;// '��'
+          buffer[CHO_SEONG] = 18;// 'ㅎ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
-
+        // yoon // 150520 // cond. statements for 'doen-so-ri'
+        else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT
+            && finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 13; // 'ㅉ'
+          text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]));
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 10; // 'ㅆ'
+          text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
+          automata_level = LEVEL_JUNG_SEONG;
+        }
         else {
 
           switch (finger[INDEX_FINGER]) {
             case DIRECTION_RIGHT:
-              text_to_commit( "��" );
+              text_to_commit( "ㅡ" );
               break;
             case DIRECTION_DOWN:
-              text_to_commit( "��" );
+              text_to_commit( "ㅣ" );
               break;
             default:
               text_to_commit( "" );
@@ -234,19 +262,19 @@ public class Automata_type_Kor_3 extends IME_Automata {
       case 1: // yoon // 150413 // case for single finger
               // 150517 // mod ipt method
         if (finger[INDEX_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 11;// '��'
+          buffer[CHO_SEONG] = 11;// 'ㅇ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 6; // '��'
+          buffer[CHO_SEONG] = 6; // 'ㅁ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 2; // '��'
+          buffer[CHO_SEONG] = 2; // 'ㄴ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[PINKY_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 5; // '��'
+          buffer[CHO_SEONG] = 5; // 'ㄹ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
@@ -257,16 +285,16 @@ public class Automata_type_Kor_3 extends IME_Automata {
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_UP:
-              buffer[JUNG_SEONG] = 8; // '��'
+              buffer[JUNG_SEONG] = 8; // 'ㅗ'
               break;
             case DIRECTION_RIGHT:
-              buffer[JUNG_SEONG] = 0; // '��'
+              buffer[JUNG_SEONG] = 0; // 'ㅏ'
               break;
             case DIRECTION_DOWN:
-              buffer[JUNG_SEONG] = 13;// '��'
+              buffer[JUNG_SEONG] = 13;// 'ㅜ'
               break;
             case DIRECTION_LEFT:
-              buffer[JUNG_SEONG] = 4; // '��'
+              buffer[JUNG_SEONG] = 4; // 'ㅓ'
               break;
           }
           ic.deleteSurroundingText(1, 0);
@@ -282,15 +310,15 @@ public class Automata_type_Kor_3 extends IME_Automata {
               // 150517 // mod ipt method
 
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 0 ? replace_to(15) : 0);// '��' or '��'
+          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 0 ? replace_to(15) : 0);// 'ㄱ' or 'ㅋ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 3 ? replace_to(16) : 3);// '��' or '��'
+          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 3 ? replace_to(16) : 3);// 'ㄷ' or 'ㅌ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 7 ? replace_to(17) : 7);// '��' or '��'
+          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 7 ? replace_to(17) : 7);// 'ㅂ' or 'ㅍ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
@@ -301,16 +329,16 @@ public class Automata_type_Kor_3 extends IME_Automata {
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_UP:
-              buffer[JUNG_SEONG] = 12;// '��'
+              buffer[JUNG_SEONG] = 12;// 'ㅛ'
               break;
             case DIRECTION_RIGHT:
-              buffer[JUNG_SEONG] = 2; // '��'
+              buffer[JUNG_SEONG] = 2; // 'ㅑ'
               break;
             case DIRECTION_DOWN:
-              buffer[JUNG_SEONG] = 17; // '��'
+              buffer[JUNG_SEONG] = 17; // 'ㅠ'
               break;
             case DIRECTION_LEFT:
-              buffer[JUNG_SEONG] = 6; // '��'
+              buffer[JUNG_SEONG] = 6; // 'ㅕ'
               break;
           }
 
@@ -327,10 +355,10 @@ public class Automata_type_Kor_3 extends IME_Automata {
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_RIGHT:
-              buffer[JUNG_SEONG] = 1; // '��'
+              buffer[JUNG_SEONG] = 1; // 'ㅐ'
               break;
             case DIRECTION_LEFT:
-              buffer[JUNG_SEONG] = 5; // '��'
+              buffer[JUNG_SEONG] = 5; // 'ㅔ'
               break;
           }
 
@@ -346,12 +374,12 @@ public class Automata_type_Kor_3 extends IME_Automata {
       case 3: // yoon // 150507 // case for three fingers
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
             && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 12 ? replace_to(14) : 12); // '��' or '��'
+          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 12 ? replace_to(14) : 12); // 'ㅈ' or 'ㅊ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT
             && finger[PINKY_FINGER] == DIRECTION_DOT) {
-          buffer[CHO_SEONG] = 9; // '��'
+          buffer[CHO_SEONG] = (buffer[CHO_SEONG] == 9 ? replace_to(10) : 9);;  // 'ㅅ' or 'ㅆ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
@@ -363,10 +391,10 @@ public class Automata_type_Kor_3 extends IME_Automata {
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_RIGHT:
-              buffer[JUNG_SEONG] = 3; // '��'
+              buffer[JUNG_SEONG] = 3; // 'ㅒ'
               break;
             case DIRECTION_LEFT:
-              buffer[JUNG_SEONG] = 7; // '��'
+              buffer[JUNG_SEONG] = 7; // 'ㅖ'
               break;
           }
           ic.deleteSurroundingText(1, 0);
@@ -375,13 +403,30 @@ public class Automata_type_Kor_3 extends IME_Automata {
                   generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
           automata_level = JONG_SEONG;
         }
+        // yoon // 150520 // cond. statements for 'doen-so-ri' 
+        else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT
+            && finger[MIDLE_FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 1;// 'ㄲ'
+          text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]));
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 4;// 'ㄸ'
+          text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]));
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 8;// 'ㅃ'
+          text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
+          automata_level = LEVEL_JUNG_SEONG;
+        }
         break;
 
       case 4: // yoon // 150516 // case for four fingers
 
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
             && finger[RING__FINGER] != DIRECTION_EMPTY && finger[PINKY_FINGER] != DIRECTION_EMPTY) {
-          buffer[CHO_SEONG] = 18;// '��'
+          buffer[CHO_SEONG] = 18;// 'ㅎ'
           text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         } else if (finger[INDEX_FINGER] != DIRECTION_EMPTY
@@ -389,10 +434,10 @@ public class Automata_type_Kor_3 extends IME_Automata {
             && finger[PINKY_FINGER] != DIRECTION_EMPTY) {
           switch (finger[INDEX_FINGER]) {
             case DIRECTION_RIGHT:
-              buffer[JUNG_SEONG] = 18; // '��'
+              buffer[JUNG_SEONG] = 18; // 'ㅡ'
               break;
             case DIRECTION_DOWN:
-              buffer[JUNG_SEONG] = 20; // '��'
+              buffer[JUNG_SEONG] = 20; // 'ㅣ'
               break;
           }
           ic.deleteSurroundingText(1, 0);
@@ -400,6 +445,18 @@ public class Automata_type_Kor_3 extends IME_Automata {
               String.format("%c",
                   generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
           automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
+        }
+        // yoon // 150520 // cond. statements for 'doen-so-ri'
+        else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT
+            && finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 13; // 'ㅉ'
+          text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]));
+          automata_level = LEVEL_JUNG_SEONG;
+        } else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
+            && finger[RING__FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT) {
+          buffer[CHO_SEONG] = 10; // 'ㅆ'
+          text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
+          automata_level = LEVEL_JUNG_SEONG;
         }
     }
   };
@@ -409,16 +466,16 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
       case 1: // yoon // 150517 // case for single finger
 
-        if (buffer[JUNG_SEONG] == 8 && finger[INDEX_FINGER] == DIRECTION_RIGHT) { // '��' + '��'
-          buffer[JUNG_SEONG] = 9; // '��'
+        if (buffer[JUNG_SEONG] == 8 && finger[INDEX_FINGER] == DIRECTION_RIGHT) { // 'ㅗ' + 'ㅏ'
+          buffer[JUNG_SEONG] = 9; // 'ㅘ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format("%c",
                   generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
           automata_level = JONG_SEONG;
-        } else if (buffer[JUNG_SEONG] == 13 && finger[INDEX_FINGER] == DIRECTION_LEFT) { // '��' +
-                                                                                         // '��'
-          buffer[JUNG_SEONG] = 14; // '��'
+        } else if (buffer[JUNG_SEONG] == 13 && finger[INDEX_FINGER] == DIRECTION_LEFT) { // 'ㅜ' +
+                                                                                         // 'ㅓ'
+          buffer[JUNG_SEONG] = 14; // 'ㅝ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format("%c",
@@ -432,16 +489,16 @@ public class Automata_type_Kor_3 extends IME_Automata {
       case 2: // yoon // 150517 // case for two fingers
 
         if (buffer[JUNG_SEONG] == 8 && finger[INDEX_FINGER] == DIRECTION_RIGHT
-            && finger[RING__FINGER] != DIRECTION_EMPTY) { // '��' + '��'
-          buffer[JUNG_SEONG] = 10; // '��'
+            && finger[RING__FINGER] != DIRECTION_EMPTY) { // 'ㅗ' + 'ㅐ'
+          buffer[JUNG_SEONG] = 10; // 'ㅙ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format("%c",
                   generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
           automata_level = JONG_SEONG;
         } else if (buffer[JUNG_SEONG] == 13 && finger[INDEX_FINGER] == DIRECTION_LEFT
-            && finger[RING__FINGER] != DIRECTION_EMPTY) { // '��' + '��'
-          buffer[JUNG_SEONG] = 15; // '��'
+            && finger[RING__FINGER] != DIRECTION_EMPTY) { // 'ㅜ' + 'ㅔ'
+          buffer[JUNG_SEONG] = 15; // 'ㅞ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format("%c",
@@ -460,50 +517,66 @@ public class Automata_type_Kor_3 extends IME_Automata {
       case 4: // yoon // 150517 // case for four fingers
         if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN
             && finger[RING__FINGER] != DIRECTION_EMPTY && finger[PINKY_FINGER] != DIRECTION_EMPTY) {
-          if (buffer[JUNG_SEONG] == 8) { // '��'
-            buffer[JUNG_SEONG] = 11; // '��'
+          if (buffer[JUNG_SEONG] == 8) { // 'ㅗ'
+            buffer[JUNG_SEONG] = 11; // 'ㅚ'
             ic.deleteSurroundingText(1, 0);
             text_to_commit(
                 String.format("%c",
                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
             automata_level = JONG_SEONG;
-          } else if (buffer[JUNG_SEONG] == 13) { // '��'
-            buffer[JUNG_SEONG] = 16; // '��'
+          } else if (buffer[JUNG_SEONG] == 13) { // 'ㅜ'
+            buffer[JUNG_SEONG] = 16; // 'ㅟ'
             ic.deleteSurroundingText(1, 0);
             text_to_commit(
                 String.format("%c",
                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
             automata_level = JONG_SEONG;
-          } else if (buffer[JUNG_SEONG] == 0) { // '��'
-            buffer[JUNG_SEONG] = 1; // '��'
+          } else if (buffer[JUNG_SEONG] == 0) { // 'ㅏ'
+            buffer[JUNG_SEONG] = 1; // 'ㅐ'
             ic.deleteSurroundingText(1, 0);
             text_to_commit(
                 String.format("%c",
                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
             automata_level = JONG_SEONG;
-          } else if (buffer[JUNG_SEONG] == 2) { // '��'
-            buffer[JUNG_SEONG] = 3; // '��'
+          } else if (buffer[JUNG_SEONG] == 2) { // 'ㅑ'
+            buffer[JUNG_SEONG] = 3; // 'ㅒ'
             ic.deleteSurroundingText(1, 0);
             text_to_commit(
                 String.format("%c",
                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
             automata_level = JONG_SEONG;
-          } else if (buffer[JUNG_SEONG] == 4) { // '��'
-            buffer[JUNG_SEONG] = 5; // '��'
+          } else if (buffer[JUNG_SEONG] == 4) { // 'ㅓ'
+            buffer[JUNG_SEONG] = 5; // 'ㅔ'
             ic.deleteSurroundingText(1, 0);
             text_to_commit(
                 String.format("%c",
                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
             automata_level = JONG_SEONG;
-          } else if (buffer[JUNG_SEONG] == 6) { // '��'
-            buffer[JUNG_SEONG] = 7; // '��'
+          } else if (buffer[JUNG_SEONG] == 6) { // 'ㅕ'
+            buffer[JUNG_SEONG] = 7; // 'ㅖ'
             ic.deleteSurroundingText(1, 0);
             text_to_commit(
                 String.format("%c",
                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
             automata_level = JONG_SEONG;
-          } else if (buffer[JUNG_SEONG] == 18) { // '��'
-            buffer[JUNG_SEONG] = 19; // '��'
+          } else if (buffer[JUNG_SEONG] == 18) { // 'ㅡ'
+            buffer[JUNG_SEONG] = 19; // 'ㅢ'
+            ic.deleteSurroundingText(1, 0);
+            text_to_commit(
+                String.format("%c",
+                    generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
+            automata_level = JONG_SEONG;
+          }
+          // yoon // 150520 // triple lutz
+          else if (buffer[JUNG_SEONG] == 9) { // 'ㅘ' + 'ㅣ'
+            buffer[JUNG_SEONG] = 10; // 'ㅙ'
+            ic.deleteSurroundingText(1, 0);
+            text_to_commit(
+                String.format("%c",
+                    generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)) );
+            automata_level = JONG_SEONG;
+          } else if (buffer[JUNG_SEONG] == 14) { // 'ㅝ' + 'ㅣ'
+            buffer[JUNG_SEONG] = 15; // 'ㅞ'
             ic.deleteSurroundingText(1, 0);
             text_to_commit(
                 String.format("%c",
@@ -522,8 +595,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
         // yoon // 150517 // Conditional Statements for 'ja-eum jong-seong'
         if (finger[INDEX_FINGER] == DIRECTION_DOT) {
-          buffer[JONG_SEONG] = 21;// '��'
-          buffer[WISP_FLARE] = 11;// '��'
+          buffer[JONG_SEONG] = 21;// 'ㅇ'
+          buffer[WISP_FLARE] = 11;// 'ㅇ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format(
@@ -532,8 +605,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
                       buffer[JONG_SEONG])) );
           automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          buffer[JONG_SEONG] = 16;// '��'
-          buffer[WISP_FLARE] = 6;// '��'
+          buffer[JONG_SEONG] = 16;// 'ㅁ'
+          buffer[WISP_FLARE] = 6;// 'ㅁ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format(
@@ -542,8 +615,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
                       buffer[JONG_SEONG])) );
           automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
         } else if (finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[JONG_SEONG] = 4;// '��'
-          buffer[WISP_FLARE] = 2;// '��'
+          buffer[JONG_SEONG] = 4;// 'ㄴ'
+          buffer[WISP_FLARE] = 2;// 'ㄴ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format(
@@ -552,8 +625,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
                       buffer[JONG_SEONG])) );
           automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
         } else if (finger[PINKY_FINGER] == DIRECTION_DOT) {
-          buffer[JONG_SEONG] = 8;// '��'
-          buffer[WISP_FLARE] = 5;// '��'
+          buffer[JONG_SEONG] = 8;// 'ㄹ'
+          buffer[WISP_FLARE] = 5;// 'ㄹ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format(
@@ -567,8 +640,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
         // yoon // 150517 // Conditional Statements for 'ja-eum jong-seong'
         if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) {
-          buffer[JONG_SEONG] = 1;// '��'
-          buffer[WISP_FLARE] = 0;// '��'
+          buffer[JONG_SEONG] = 1;// 'ㄱ'
+          buffer[WISP_FLARE] = 0;// 'ㄱ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format(
@@ -577,8 +650,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
                       buffer[JONG_SEONG])) );
           automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
         } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[JONG_SEONG] = 7;// '��'
-          buffer[WISP_FLARE] = 3;// '��'
+          buffer[JONG_SEONG] = 7;// 'ㄷ'
+          buffer[WISP_FLARE] = 3;// 'ㄷ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format(
@@ -587,8 +660,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
                       buffer[JONG_SEONG])) );
           automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
         } else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-          buffer[JONG_SEONG] = 17;// '��'
-          buffer[WISP_FLARE] = 7;// '��'
+          buffer[JONG_SEONG] = 17;// 'ㅂ'
+          buffer[WISP_FLARE] = 7;// 'ㅂ'
           ic.deleteSurroundingText(1, 0);
           text_to_commit(
               String.format(
@@ -602,7 +675,7 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
   public static void LEVEL_JONG_SEONG_TO_CHO_SEONG() {
 
-    // yoon // 150517 // Conditional Statements for Wisp phenomenon
+    // yoon // 150517 // Conditional Statements for Wisp phenomenon, jong-seong becomes to cho-seong 
     if (finger[INDEX_FINGER] != DIRECTION_EMPTY && finger[INDEX_FINGER] != DIRECTION_DOT) {
 
       text_to_commit(
@@ -620,9 +693,9 @@ public class Automata_type_Kor_3 extends IME_Automata {
       LEVEL_JUNG_SEONG();
 
     } else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT
-        && finger[PINKY_FINGER] == DIRECTION_DOT) { // '��'
+        && finger[PINKY_FINGER] == DIRECTION_DOT) { // 'ㅅ'
 
-      if (buffer[JONG_SEONG] == 1) { // '��' + '��'
+      if (buffer[JONG_SEONG] == 1) { // 'ㄱ' + 'ㅅ'
         bok_ja_eum_jong_seong = buffer[JONG_SEONG];
         buffer[JONG_SEONG] = 3;
         buffer[WISP_FLARE] = 9;
@@ -634,7 +707,7 @@ public class Automata_type_Kor_3 extends IME_Automata {
                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],
                         buffer[JONG_SEONG])) );
         automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
-      } else if (buffer[JONG_SEONG] == 17) { // '��' + '��'
+      } else if (buffer[JONG_SEONG] == 17) { // 'ㅂ' + 'ㅅ'
         bok_ja_eum_jong_seong = buffer[JONG_SEONG];
         buffer[JONG_SEONG] = 18;
         buffer[WISP_FLARE] = 9;
