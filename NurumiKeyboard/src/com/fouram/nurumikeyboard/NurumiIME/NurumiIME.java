@@ -20,7 +20,7 @@ import android.widget.ImageButton;
 /////////////////////////////////////////////
 /// @class NurumiIME
 ///com.fouram.nurumikeyboard.NurumiIME \n
-///   ã„´ NurumiIME.java
+///   ¤¤ NurumiIME.java
 /// @section Class information
 ///    |    Item    |    Contents    |
 ///    | :-------------: | -------------   |
@@ -37,9 +37,9 @@ public class NurumiIME extends InputMethodService
 	protected static final int FIVE_FINGERS = 5;
 	//private final int TEN_FINGERS = 10;
 	
-	private final int KOR = 0;
-	private final int ENG = 1;
-	private final int SPC = 2;
+	private final int KOR = 1;
+	private final int ENG = 2;
+	private final int SPC = 3;
 	
 	private int numFingers;
 	private View entireView;
@@ -53,7 +53,7 @@ public class NurumiIME extends InputMethodService
 
 	private String stateAutomata;
 	private Boolean stateHand;
-	private Boolean stateLanguage;
+	private String stateLanguage;
 	private IME_Automata automata;
 	private int keyboardTypeFlag;
 
@@ -78,15 +78,15 @@ public class NurumiIME extends InputMethodService
 		entireView = (View)getLayoutInflater().inflate(layoutId, null);
 		vg = (ViewGroup) entireView;
 		mKeyboardView = (MKeyboardView) vg.findViewById(R.id.MKeyboardView);
-		mKeyboardView.setIme(this);
-
-        mKeyboardView.setIme(this);
+		mKeyboardView.setIme(this);		
 		numFingers = FIVE_FINGERS;
 		motion = new int[numFingers];
         Log.i("++MAIN", "SUCCESS");
         setViewId();
+        
+        keyboardTypeFlag = KOR;
 		setState();
-		keyboardTypeFlag = KOR;
+		
 		return entireView;
 	}
 
@@ -232,9 +232,9 @@ public class NurumiIME extends InputMethodService
 	 */
 	private void setState() {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		stateAutomata = sharedPref.getString("prefAutomata", "");
+		stateAutomata = sharedPref.getString("prefAutomata", "3");
 		stateHand = sharedPref.getBoolean("prefHand", true);
-		stateLanguage = sharedPref.getBoolean("prefLanguage", true);
+		stateLanguage = sharedPref.getString("prefLanguage", "1");
 		Log.d("shPref", "" + stateAutomata + " " + stateHand + " " + stateLanguage);
 		setAutomata(keyboardTypeFlag, stateAutomata);
 	}
@@ -276,19 +276,17 @@ public class NurumiIME extends InputMethodService
 			SharedPreferences.Editor prefEdit = pref.edit();
 			switch(keyboardTypeFlag) {
 				case KOR :
-					prefEdit.putBoolean("prefLanguage", false);
+					prefEdit.putString("prefLanguage", "2");
 					prefEdit.commit();
 					keyboardTypeFlag = ENG;
 					break;
 				case ENG :
-					/*
-					prefEdit.putBoolean("prefSpecial", true);
+					prefEdit.putString("prefLanguage", "3");
 					prefEdit.commit();
-					 */
 					keyboardTypeFlag = SPC;
 					break;
 				case SPC :
-					prefEdit.putBoolean("prefLanguage", true);
+					prefEdit.putString("prefLanguage", "1");
 					prefEdit.commit();
 					keyboardTypeFlag = KOR;
 			}
@@ -302,7 +300,7 @@ public class NurumiIME extends InputMethodService
 		if(keyboardTypeFlag != KOR){
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			SharedPreferences.Editor prefEdit = pref.edit();
-			prefEdit.putBoolean("prefLanguage", true);
+			prefEdit.putString("prefLanguage", "1");
 			prefEdit.commit();
 			keyboardTypeFlag = KOR;
 			setAutomata(keyboardTypeFlag, stateAutomata);

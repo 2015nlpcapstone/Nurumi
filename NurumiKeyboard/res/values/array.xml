@@ -2,15 +2,27 @@
 <resources>
     <!-- Based on Automata -->
     <string-array name="arrayAutomata">
-        <item>천지인 기반</item>
-        <item>나랏글 기반</item>
-        <item>천지인 + 나랏글</item>
+        <item name="automata1">천지인 기반</item>
+        <item name="automata2">나랏글 기반</item>
+        <item name="automata3">천지인 + 나랏글</item>
     </string-array>
 
     <string-array name="arrayAutomataValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item name="automata1">1</item>
+        <item name="automata2">2</item>
+        <item name="automata3">3</item>
     </string-array>
 
+    <!-- Based on Languages -->
+    <string-array name="arrayLanguage">
+        <item name="language1">한글 기반</item>
+        <item name="language2">영어 기반</item>
+        <item name="language3">숫자 및 특수문자 기반</item>
+    </string-array>
+
+    <string-array name="arrayLanguageValues">
+        <item name="language1">1</item>
+        <item name="language2">2</item>
+        <item name="language3">3</item>
+    </string-array>
 </resources>

@@ -24,8 +24,6 @@
     <string name="txt_5finger">한손</string>
     <string name="txt_10finger">양손</string>
 
-    <string name="txt_language">주로 사용할 언어 선택 [On: 한국어, Off: 영어]</string>
-    <string name="txt_english">영어</string>
-    <string name="txt_korean">한국어</string>
+    <string name="txt_language">사용할 언어 선택</string>
 
 </resources>

@@ -1,4 +1,4 @@
-﻿package com.fouram.nurumikeyboard.NurumiIME;
+package com.fouram.nurumikeyboard.NurumiIME;
 
 import java.util.ArrayList;
 import java.util.Collections;

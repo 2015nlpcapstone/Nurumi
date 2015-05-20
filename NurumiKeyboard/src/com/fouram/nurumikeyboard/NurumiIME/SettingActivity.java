@@ -110,9 +110,9 @@ public class SettingActivity extends PreferenceActivity {
         super.onDestroy();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        String stateAutomata = sharedPref.getString("prefAutomata", "");
+        String stateAutomata = sharedPref.getString("prefAutomata", "3");
         Boolean stateHand = sharedPref.getBoolean("prefHand", true);
-        boolean stateLanguage = sharedPref.getBoolean("prefLanguage", true);
+        String stateLanguage = sharedPref.getString("prefLanguage", "1");
 
         Intent intentService = new Intent(this, NurumiIME.class);
         intentService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
