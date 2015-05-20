@@ -87,6 +87,7 @@ public class NurumiIME extends InputMethodService
         setViewId();
 		setState();
 		keyboardTypeFlag = KOR;
+		automata = new Automata_type_Kor_3();
 		return entireView;
 	}
 
