@@ -93,7 +93,7 @@ public class MKeyboardView extends View {
 		int pointerIndex;	
 	}
 	
-	private final static Comparator<PointF> comparator =
+	private final static Comparator<PointF> comparatorRHand =
 	/////////////////////////////////////////////
 	/// @class 1
 	///com.fouram.nurumikeyboard.NurumiIME \n
@@ -113,7 +113,29 @@ public class MKeyboardView extends View {
 			return (int) (pt1.x - pt2.x);
 		}
 	};
-		
+	
+	@SuppressWarnings("unused")
+	private final static Comparator<PointF> comparatorLHand =
+	/////////////////////////////////////////////
+	/// @class 2
+	///com.fouram.nurumikeyboard.NurumiIME \n
+	///   �� MKeyboardView.java
+	/// @section Class information
+	///    |    Item    |    Contents    |
+	///    | :-------------: | -------------   |
+	///    | Company | 4:00 A.M. |    
+	///    | Author | Park, Hyung Soon |
+	///    | Date | 2015. 4. 12. |
+	/// @section Description
+	///  - Comparator function for sort Circle number.\n
+	///  - For left handed user.\n
+	/////////////////////////////////////////////
+	new Comparator<PointF> () {
+		public int compare(PointF pt1, PointF pt2) {
+			return (int) (pt2.x - pt1.x);
+		}
+	};
+	
 	// variables in MKeyboardView
 	private Paint pnt;
 	
@@ -142,7 +164,6 @@ public class MKeyboardView extends View {
 	private Bitmap downImg;
 	private Bitmap leftImg;
 	private Bitmap rightImg;
-	private Bitmap stdCircleImg;
 	
 	/////////////////////////////////////////////
 	/// @fn 
@@ -261,10 +282,6 @@ public class MKeyboardView extends View {
 		bitmap = drawable.getBitmap();
 		rightImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 		
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_std_circle);
-		bitmap = drawable.getBitmap();
-		stdCircleImg = Bitmap.createScaledBitmap(drawable.getBitmap(), standardCircleSize*2, standardCircleSize*2, true);
-		
 		drawable.setCallback(null);
 	}
 	
@@ -290,9 +307,6 @@ public class MKeyboardView extends View {
 			leftImg.recycle();
 		if(rightImg != null)
 			rightImg.recycle();
-		if(stdCircleImg != null)
-			stdCircleImg.recycle();
-			
 	}
 	
 	/////////////////////////////////////////////
@@ -327,14 +341,20 @@ public class MKeyboardView extends View {
 	    /* standard position */
 		if(startPtArr.isEmpty())
 			return;
-		
+		int index=0;
 		for(PointF spt : startPtArr) {
-			float pointX = spt.x - (stdCircleImg.getWidth()/2);
-			float pointY = spt.y - (stdCircleImg.getHeight()/2);
-			canvas.drawBitmap(stdCircleImg, pointX, pointY, pnt);
+			index++;
+			pnt.setColor(Color.BLACK);
+			pnt.setStyle(Paint.Style.STROKE);
+			pnt.setStrokeWidth(1);
+			canvas.drawCircle(spt.x,spt.y, standardCircleSize, pnt);
+
+			pnt.setStyle(Paint.Style.FILL);
+			canvas.drawText(String.valueOf(index),spt.x,spt.y-((int)(standardCircleSize/0.8)),pnt);
 		}
 		
-		/* down event position */
+		/* down event position */		
+		index = 0;
 		if(!oldPtArr.isEmpty())	{			
 			for (PointF pt : oldPtArr) {
 				int circleNum = checkTouchedCircle((int)pt.x, (int)pt.y);
@@ -365,6 +385,23 @@ public class MKeyboardView extends View {
 						break;
 				} // switch end
 			} // oldPtArr for-each end
+		} // if end
+		
+		/* current finger */
+		index=0;
+		if(!ptArr.isEmpty() && !plp.isEmpty() && !clp.isEmpty()) {			
+			for (PointF pt : ptArr)	{
+				int pointerId = plp.get(index++).pointerId;
+				if(pointerId >= clp.size())
+					break;					
+				int circleNum = clp.get(pointerId).circleNum;
+				
+				pnt.setStyle(Paint.Style.STROKE);
+				canvas.drawCircle(pt.x,pt.y, innerCircleSize, pnt);
+
+				pnt.setStyle(Paint.Style.FILL);
+				canvas.drawText(String.valueOf(circleNum),pt.x,pt.y-((int)(standardCircleSize/0.8)),pnt);
+			} // ptArr for-each end
 		} // if end
 	} // onDraw fin
 	
@@ -562,7 +599,10 @@ public class MKeyboardView extends View {
 					ptf.y = e.getY(i);
 					startPtArr.add(ptf);
 				}
-				Collections.sort(startPtArr, comparator);
+				Collections.sort(startPtArr, comparatorRHand);
+				/*
+				Collections.sort(startPtArr, comparatorLHand);
+				*/
 				return true;
 			} // if(touchCount == numFingers) end
 			else {return true;}
