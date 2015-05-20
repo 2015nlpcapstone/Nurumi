@@ -12,8 +12,8 @@ import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-//import org.w3c.dom.Text;
-//import static android.support.v4.app.ActivityCompat.startActivityForResult;
+import org.w3c.dom.Text;
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
 //import android.widget.EditText;
 
 
@@ -165,7 +165,6 @@ public class NurumiIME extends InputMethodService
 	public void onWindowHidden() {
 		super.onWindowHidden();
 		mKeyboardView.initialize();
-		setToKorKeyboard();
 	}	
 	
 	/* From here for full-screen mode */
@@ -195,7 +194,6 @@ public class NurumiIME extends InputMethodService
 		super.onDestroy();
 		if(mKeyboardView != null)
 			mKeyboardView.recycleBitmap();
-		setToKorKeyboard();
 	}
 
 	/* Custom gesture listener */
@@ -215,7 +213,8 @@ public class NurumiIME extends InputMethodService
 		else {
 			InputConnection ic = getCurrentInputConnection();
 			ic.commitText(String.valueOf(automata.execute(motion,ic)),1);
-		} 
+		}
+		//ic.commitText(String.valueOf(Automata_type_3.execute(motion,ic)),1);// yoon // 150412 // automata 3 
 	}
 
 	/**
@@ -259,7 +258,8 @@ public class NurumiIME extends InputMethodService
 				automata = new Automata_type_Eng();
 				break;
 			case SPC :
-				automata = new Automata_type_Spc(); // not implemented
+				automata = new Automata_type_Eng();
+				//automata = new Automata_type_Spc(); // not implemented
 				break;
 			default :
 				//no nothing
@@ -296,17 +296,6 @@ public class NurumiIME extends InputMethodService
 		}
 		else
 			return false;
-	}
-	
-	private void setToKorKeyboard() {
-		if(keyboardTypeFlag != KOR){
-			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-			SharedPreferences.Editor prefEdit = pref.edit();
-			prefEdit.putBoolean("prefLanguage", true);
-			prefEdit.commit();
-			keyboardTypeFlag = KOR;
-			setAutomata(keyboardTypeFlag, stateAutomata);
-		}
 	}
 	
 }
