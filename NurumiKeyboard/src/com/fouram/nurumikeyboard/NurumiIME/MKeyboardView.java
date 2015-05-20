@@ -1,4 +1,4 @@
-package com.fouram.nurumikeyboard.NurumiIME;
+﻿package com.fouram.nurumikeyboard.NurumiIME;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -329,8 +329,8 @@ public class MKeyboardView extends View {
 			return;
 		
 		for(PointF spt : startPtArr) {
-			float pointX = spt.x - (stdCircleImg.getWidth()/2);
-			float pointY = spt.y - (stdCircleImg.getHeight()/2);
+			float pointX = spt.x - standardCircleSize;
+			float pointY = spt.y - standardCircleSize;
 			canvas.drawBitmap(stdCircleImg, pointX, pointY, pnt);
 		}
 		
@@ -342,8 +342,8 @@ public class MKeyboardView extends View {
 				
 				/// Start points are the center points of circles.
 				/// Images will be drawn from upper left corner.
-				float pointX = spt.x - (dotImg.getWidth()/2);
-				float pointY = spt.y - (dotImg.getHeight()/2);
+				float pointX = spt.x - innerCircleSize;
+				float pointY = spt.y - innerCircleSize;
 				
 				switch(motion[circleNum-1])	{				
 					case IME_Automata.DIRECTION_DOT :		
