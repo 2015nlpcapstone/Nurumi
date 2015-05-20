@@ -135,7 +135,6 @@ public class NurumiIME extends InputMethodService
                     Intent intentInform = new Intent(NurumiIME.this, InformationActivity.class);
 					intentInform.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intentInform);
-					stopService(intentService);
                     break;
                 case R.id.ibtn_setting:
 					Log.i("++SETTING", "1SUCCESS");
@@ -165,7 +164,7 @@ public class NurumiIME extends InputMethodService
 	public void onWindowHidden() {
 		super.onWindowHidden();
 		mKeyboardView.initialize();
-		setToKorKeyboard();
+		//setToKorKeyboard();
 	}	
 	
 	/* From here for full-screen mode */
