@@ -52,19 +52,9 @@ public class MKeyboardView extends View {
 	private NurumiIME ime;
 	
 	public static final int INVALID_CIRCLE		= -1;	
-	public static final int DIRECTION_EMPTY 	= -1;
-	public static final int DIRECTION_DOT		= 0;
-	public static final int DIRECTION_DOWN 	= 1;
-	public static final int DIRECTION_LEFT 	= 2;
-	public static final int DIRECTION_UP  		= 3;
-	public static final int DIRECTION_RIGHT	= 4;
-	
-	public static final int FIVE_FINGERS 		= 5;
-	//public static final int TEN_FINGERS 		= 10;
-	
 	public static final int SWIPE_MIN_DISTANCE = 40; /// dp value
-	public static final int STD_CIRCLE_SIZE	= 80; /// dp value
-	public static final int INNER_CIRCLE_SIZE	= 70; /// dp value
+	public static final int STD_CIRCLE_SIZE	= 90; /// dp value
+	public static final int INNER_CIRCLE_SIZE	= 40; /// dp value
 	public static final int FONT_SIZE = 21; // sp value
 	
 	/////////////////////////////////////////////
@@ -119,8 +109,7 @@ public class MKeyboardView extends View {
 	///  - For right handed user.\n
 	/////////////////////////////////////////////
 	new Comparator<PointF> () {
-		@Override
-    public int compare(PointF pt1, PointF pt2) {
+		public int compare(PointF pt1, PointF pt2) {
 			return (int) (pt1.x - pt2.x);
 		}
 	};
@@ -142,8 +131,7 @@ public class MKeyboardView extends View {
 	///  - For left handed user.\n
 	/////////////////////////////////////////////
 	new Comparator<PointF> () {
-		@Override
-    public int compare(PointF pt1, PointF pt2) {
+		public int compare(PointF pt1, PointF pt2) {
 			return (int) (pt2.x - pt1.x);
 		}
 	};
@@ -232,7 +220,7 @@ public class MKeyboardView extends View {
 	/////////////////////////////////////////////
 	protected void initialize()	{
 		pnt = new Paint();
-		numFingers = FIVE_FINGERS;
+		numFingers = NurumiIME.FIVE_FINGERS;
 		
 		startFlag = false;
 		start = false;
@@ -274,23 +262,23 @@ public class MKeyboardView extends View {
 	private void setBitmap() {
 		BitmapDrawable drawable;
 			
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.dot);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_dot);
 		bitmap = drawable.getBitmap();
 		dotImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 				
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.u_arrow);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_up);
 		bitmap = drawable.getBitmap();
 		upImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 				
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.d_arrow);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_down);
 		bitmap = drawable.getBitmap();
 		downImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 				
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.l_arrow);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_left);
 		bitmap = drawable.getBitmap();
 		leftImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 				
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.r_arrow);
+		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_right);
 		bitmap = drawable.getBitmap();
 		rightImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
 		
@@ -307,12 +295,18 @@ public class MKeyboardView extends View {
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	protected void recycleBitmap() {
-		bitmap.recycle();
-		dotImg.recycle();
-		upImg.recycle();
-		downImg.recycle();
-		leftImg.recycle();
-		rightImg.recycle();
+		if(bitmap != null)
+			bitmap.recycle();
+		if(dotImg != null)
+			dotImg.recycle();
+		if(upImg != null)
+			upImg.recycle();
+		if(downImg != null)
+			downImg.recycle();
+		if(leftImg != null)
+			leftImg.recycle();
+		if(rightImg != null)
+			rightImg.recycle();
 	}
 	
 	/////////////////////////////////////////////
@@ -372,19 +366,19 @@ public class MKeyboardView extends View {
 				float pointY = spt.y - (dotImg.getHeight()/2);
 				
 				switch(motion[circleNum-1])	{				
-					case DIRECTION_DOT :		
+					case IME_Automata.DIRECTION_DOT :		
 						canvas.drawBitmap(dotImg, pointX, pointY, pnt);
 						break;
-					case DIRECTION_UP :
+					case IME_Automata.DIRECTION_UP :
 						canvas.drawBitmap(upImg, pointX, pointY, pnt);
 						break;
-					case DIRECTION_DOWN :
+					case IME_Automata.DIRECTION_DOWN :
 						canvas.drawBitmap(downImg, pointX, pointY, pnt);
 						break;
-					case DIRECTION_LEFT :
+					case IME_Automata.DIRECTION_LEFT :
 						canvas.drawBitmap(leftImg, pointX, pointY, pnt);
 						break;
-					case DIRECTION_RIGHT :
+					case IME_Automata.DIRECTION_RIGHT :
 						canvas.drawBitmap(rightImg, pointX, pointY, pnt);
 						break;
 					default :
@@ -430,8 +424,7 @@ public class MKeyboardView extends View {
 	/// // core code
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
-	@Override
-  public boolean onTouchEvent (MotionEvent e)	{
+	public boolean onTouchEvent (MotionEvent e)	{
 		int action = e.getAction() & MotionEvent.ACTION_MASK;
 		
 		if(start == false)
@@ -442,7 +435,7 @@ public class MKeyboardView extends View {
 					if( checkTouchedCircle((int)e.getX(), (int)e.getY()) == INVALID_CIRCLE )
 						return false;
 					for(int i=0; i<numFingers; i++) // initialize motion array
-						motion[i] = DIRECTION_EMPTY;
+						motion[i] = IME_Automata.DIRECTION_EMPTY;
 					motionStartFlag = true;
 					Log.d("Motion Start", "------------------------------");
 				}
@@ -454,7 +447,7 @@ public class MKeyboardView extends View {
 						return true;
 					}
 					circleAvailable[circleNum-1] = false; // One finger in one circle.
-					motion[circleNum-1] = DIRECTION_DOT;
+					motion[circleNum-1] = IME_Automata.DIRECTION_DOT;
 					
 					PointF ptf = new PointF(); // Add start position.
 					ptf.x = e.getX(touchCount-1);
@@ -657,21 +650,21 @@ public class MKeyboardView extends View {
 		float distanceY = oldPt.y - pt.y;
 		
 		if( Math.abs(distanceX) < swipeThreshold && Math.abs(distanceY) < swipeThreshold )
-			motion[circleNum-1] = DIRECTION_DOT;
+			motion[circleNum-1] = IME_Automata.DIRECTION_DOT;
 		else if( Math.abs(distanceX) > swipeThreshold || Math.abs(distanceY) > swipeThreshold ) {
 			if( Math.abs(distanceY/distanceX) < 1 && Math.abs(distanceX) > swipeThreshold) {
 				// Gradient is smaller than 1.
 				if(distanceX > 0)
-					motion[circleNum-1] = DIRECTION_LEFT;
+					motion[circleNum-1] = IME_Automata.DIRECTION_LEFT;
 				else
-					motion[circleNum-1] = DIRECTION_RIGHT;
+					motion[circleNum-1] = IME_Automata.DIRECTION_RIGHT;
 			}
 			else if( Math.abs(distanceY/distanceX) >= 1 && Math.abs(distanceY) > swipeThreshold) {
 				// Gradient is 1 or larger.
 				if(distanceY > 0)
-					motion[circleNum-1] = DIRECTION_UP;
+					motion[circleNum-1] = IME_Automata.DIRECTION_UP;
 				else
-					motion[circleNum-1] = DIRECTION_DOWN;
+					motion[circleNum-1] = IME_Automata.DIRECTION_DOWN;
 			}
 		} // direction UDLR end
 	} // checkDirection fin

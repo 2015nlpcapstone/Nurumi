@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Based on Automata -->
+    <string-array name="arrayAutomata">
+        <item>천지인 기반</item>
+        <item>나랏글 기반</item>
+        <item>천지인 + 나랏글</item>
+    </string-array>
+
+    <string-array name="arrayAutomataValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+</resources>

@@ -1,5 +1,0 @@
- - All pixel values changed to DP and SP values.
- - Changed and unified all indentations.
- - Modified inside of checkDirection() method (changed normal for loop to for-each loop)
- - Added some comments.
- - Size of bitmap images are changed to converted DP values.

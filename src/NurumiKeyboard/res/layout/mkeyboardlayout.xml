@@ -11,33 +11,27 @@
         android:layout_height="match_parent"
         android:layout_weight="0.08"
         android:orientation="vertical" >
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button1" />
 
-        <Button
-            android:id="@+id/button2"
+        <ImageButton
+            android:id="@+id/ibtn_inform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/button2" />
-        
-        <Button
-            android:id="@+id/button3"
+            android:background="@drawable/img_btn_information"
+            android:tag="@string/txt_inform"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
+        <ImageButton
+            android:id="@+id/ibtn_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/img_btn_setting"
             android:layout_weight="1"
-            android:text="@string/button3" />
-        
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button4" />
+            android:tag="@string/txt_setting"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
     </LinearLayout>
 
     <LinearLayout

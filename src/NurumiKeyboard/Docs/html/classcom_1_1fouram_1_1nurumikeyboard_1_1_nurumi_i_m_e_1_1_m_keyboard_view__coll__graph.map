@@ -1,4 +1,0 @@
-<map id="com.fouram.nurumikeyboard.NurumiIME.MKeyboardView" name="com.fouram.nurumikeyboard.NurumiIME.MKeyboardView">
-<area shape="rect" id="node3" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_nurumi_i_m_e.html" title="{com.fouram.nurumikeyboard.\lNurumiIME.NurumiIME\n|&#45; FIVE_FINGERS\l&#45; numFingers\l&#45; motion\l|+ onFinishInputView()\l+ onCreateInputView()\l+ onShowInputRequested()\l+ onWindowHidden()\l+ onUpdateExtractingVisibility()\l+ onEvaluateFullscreenMode()\l+ isFullscreenMode()\l+ setExtractViewShown()\l+ onDestroy()\l+ onFinishGesture()\l}" alt="" coords="816,916,1021,1169"/>
-<area shape="rect" id="node5" href="$interfacecom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_on_m_keyboard_gesture_listener.html" title="{com.fouram.nurumikeyboard.\lNurumiIME.OnMKeyboardGestureListener\n||+ onFinishGesture()\l}" alt="" coords="1035,505,1301,597"/>
-</map>

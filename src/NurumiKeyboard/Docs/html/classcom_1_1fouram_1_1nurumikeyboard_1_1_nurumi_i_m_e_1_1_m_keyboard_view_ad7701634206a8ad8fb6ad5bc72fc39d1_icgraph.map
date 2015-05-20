@@ -1,5 +1,0 @@
-<map id="com.fouram.nurumikeyboard.NurumiIME.MKeyboardView.checkTouchedCircle" name="com.fouram.nurumikeyboard.NurumiIME.MKeyboardView.checkTouchedCircle">
-<area shape="rect" id="node2" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_m_keyboard_view.html#a775825f89451ffcdacfbceb7fa201d48" title="com.fouram.nurumikeyboard.\lNurumiIME.MKeyboardView.onDraw" alt="" coords="347,5,578,47"/>
-<area shape="rect" id="node3" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_m_keyboard_view.html#a18509488a51daf21c5b16841aaa035c9" title="Touch event method. " alt="" coords="648,93,917,135"/>
-<area shape="rect" id="node4" href="$classcom_1_1fouram_1_1nurumikeyboard_1_1_nurumi_i_m_e_1_1_m_keyboard_view.html#aa548466053ead7d81890a197df4e0665" title="Check the direction of movement of pointers. " alt="" coords="325,123,600,164"/>
-</map>
