@@ -86,6 +86,7 @@ public class NurumiIME extends InputMethodService
         
         keyboardTypeFlag = KOR;
 		setState();
+		setToKorKeyboard();
 		
 		return entireView;
 	}
@@ -164,7 +165,6 @@ public class NurumiIME extends InputMethodService
 	public void onWindowHidden() {
 		super.onWindowHidden();
 		mKeyboardView.initialize();
-		//setToKorKeyboard();
 	}	
 	
 	/* From here for full-screen mode */
@@ -234,7 +234,8 @@ public class NurumiIME extends InputMethodService
 		stateAutomata = sharedPref.getString("prefAutomata", "3");
 		stateHand = sharedPref.getBoolean("prefHand", true);
 		stateLanguage = sharedPref.getString("prefLanguage", "1");
-		Log.d("shPref", "" + stateAutomata + " " + stateHand + " " + stateLanguage);
+		setKeyboardFlag(stateLanguage);
+		Log.d("shPref", "" + stateAutomata + " " + stateHand + " " + stateLanguage + " " + keyboardTypeFlag);
 		setAutomata(keyboardTypeFlag, stateAutomata);
 	}
 	
@@ -258,10 +259,10 @@ public class NurumiIME extends InputMethodService
 				automata = new Automata_type_Eng();
 				break;
 			case SPC :
-				automata = new Automata_type_Spc(); // not implemented
+				automata = new Automata_type_Spc();
 				break;
 			default :
-				//no nothing
+				Log.d("setAutomata", "Error : keyboardTypeFlag");
 		}
 	}
 	/*TODO comment*/
@@ -296,13 +297,28 @@ public class NurumiIME extends InputMethodService
 	}
 	
 	private void setToKorKeyboard() {
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor prefEdit = pref.edit();
+		prefEdit.putString("prefLanguage", "1");
+		prefEdit.commit();
 		if(keyboardTypeFlag != KOR){
-			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-			SharedPreferences.Editor prefEdit = pref.edit();
-			prefEdit.putString("prefLanguage", "1");
-			prefEdit.commit();
 			keyboardTypeFlag = KOR;
 			setAutomata(keyboardTypeFlag, stateAutomata);
+		}
+	}
+	private void setKeyboardFlag(String stateLanguage) {
+		switch(stateLanguage) {
+			case "1" :
+				keyboardTypeFlag = KOR;
+				break;
+			case "2" :
+				keyboardTypeFlag = ENG;
+				break;
+			case "3" :
+				keyboardTypeFlag = SPC;
+				break;
+			default :
+				Log.d("setKeyboardFlag", "Error : stateLanguage");
 		}
 	}
 	
