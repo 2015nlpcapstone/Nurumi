@@ -1,9 +1,11 @@
-package com.fouram.nurumikeyboard.NurumiIME;
+﻿package com.fouram.nurumikeyboard.NurumiIME;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
+
+import com.fouram.nurumikeyboard.IME_Automata.IME_Automata;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,7 +16,6 @@ import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.MotionEvent;
 import android.util.DisplayMetrics;
-//import android.widget.Toast;
 import android.util.Log;
 import android.util.AttributeSet;
 import android.view.View;
@@ -291,8 +292,7 @@ public class MKeyboardView extends View {
 		if(rightImg != null)
 			rightImg.recycle();
 		if(stdCircleImg != null)
-			stdCircleImg.recycle();
-			
+			stdCircleImg.recycle();			
 	}
 	
 	/////////////////////////////////////////////

@@ -1,5 +1,12 @@
 package com.fouram.nurumikeyboard.NurumiIME;
 
+import com.fouram.nurumikeyboard.IME_Automata.Automata_type_Eng;
+import com.fouram.nurumikeyboard.IME_Automata.Automata_type_Kor_1;
+import com.fouram.nurumikeyboard.IME_Automata.Automata_type_Kor_2;
+import com.fouram.nurumikeyboard.IME_Automata.Automata_type_Kor_3;
+import com.fouram.nurumikeyboard.IME_Automata.Automata_type_Spc;
+import com.fouram.nurumikeyboard.IME_Automata.IME_Automata;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
@@ -91,7 +98,13 @@ public class NurumiIME extends InputMethodService
 		return entireView;
 	}
 
-	/*TODO comment*/
+	/////////////////////////////////////////////
+	/// @fn 
+	/// @brief (Override method) When the IME service started from SettingActivity
+	/// @remark
+	/// - Description Load settings preferences.
+	/// @see android.app.Service#onStartCommand(android.content.Intent, int, int)
+	/////////////////////////////////////////////
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
@@ -189,6 +202,14 @@ public class NurumiIME extends InputMethodService
     }
 
 	
+	/////////////////////////////////////////////
+	/// @fn 
+	/// @brief (Override method) Destructor of IME
+	/// @remark
+	/// - Description Free all bitmap objects.\n
+	/// Initialize language to Korean(default value when start).
+	/// @see android.inputmethodservice.InputMethodService#onDestroy()
+	/////////////////////////////////////////////
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -238,8 +259,19 @@ public class NurumiIME extends InputMethodService
 		Log.d("shPref", "" + stateAutomata + " " + stateHand + " " + stateLanguage + " " + keyboardTypeFlag);
 		setAutomata(keyboardTypeFlag, stateAutomata);
 	}
-	
-	/*TODO comment*/
+
+	/////////////////////////////////////////////
+	/// @fn setAutomata
+	/// @brief Function information : Set input automata
+	/// @remark
+	/// - Description : Set input automata with flag and preference.
+	/// @param keyboardTypeFlag Flag for language
+	/// @param automataType Preference value of automata type.
+	///
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private void setAutomata(int keyboardTypeFlag, String automataType) {
 		switch(keyboardTypeFlag) {
 			case KOR : {
@@ -262,16 +294,29 @@ public class NurumiIME extends InputMethodService
 				automata = new Automata_type_Spc();
 				break;
 			default :
-				Log.d("setAutomata", "Error : keyboardTypeFlag");
+				Log.d("Error", "Error : keyboardTypeFlag at setAutomata");
 		}
+		System.gc();
 	}
-	/*TODO comment*/
+
+	/////////////////////////////////////////////
+	/// @fn changeKeyboardType
+	/// @brief Function information : Change keyboard language.
+	/// @remark
+	/// - Description : If motion is language change motion, change preference and flag.
+	/// @param motion Input motion event.
+	/// @return If motion is language change motion, return true.
+	///
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private boolean changeKeyboardType(int[] motion) {
-		if(motion[0] == IME_Automata.DIRECTION_DOT
-		&& motion[1] == IME_Automata.DIRECTION_DOT
-		&& motion[2] == IME_Automata.DIRECTION_DOT
-		&& motion[3] == IME_Automata.DIRECTION_DOT
-		&& motion[4] == IME_Automata.DIRECTION_DOT) {
+		if(motion[IME_Automata.THUMB_FINGER] == IME_Automata.DIRECTION_DOT
+		&& motion[IME_Automata.INDEX_FINGER] == IME_Automata.DIRECTION_DOT
+		&& motion[IME_Automata.MIDLE_FINGER] == IME_Automata.DIRECTION_DOT
+		&& motion[IME_Automata.RING__FINGER] == IME_Automata.DIRECTION_DOT
+		&& motion[IME_Automata.PINKY_FINGER] == IME_Automata.DIRECTION_DOT) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			SharedPreferences.Editor prefEdit = pref.edit();
 			switch(keyboardTypeFlag) {
@@ -296,6 +341,16 @@ public class NurumiIME extends InputMethodService
 			return false;
 	}
 	
+	/////////////////////////////////////////////
+	/// @fn setToKorKeyboard
+	/// @brief Function information : Set Language to Korean
+	/// @remark
+	/// - Description : Set Language to Korean forcibly
+	///
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private void setToKorKeyboard() {
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor prefEdit = pref.edit();
@@ -306,6 +361,18 @@ public class NurumiIME extends InputMethodService
 			setAutomata(keyboardTypeFlag, stateAutomata);
 		}
 	}
+	
+	/////////////////////////////////////////////
+	/// @fn setKeyboardFlag
+	/// @brief Function information : Set keyboarTypeFlag with using stateLanguage.
+	/// @remark
+	/// - Description : Synchronize with current language state preference.
+	/// @param stateLanguage Current language state preference.
+	///
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private void setKeyboardFlag(String stateLanguage) {
 		switch(stateLanguage) {
 			case "1" :
@@ -318,7 +385,7 @@ public class NurumiIME extends InputMethodService
 				keyboardTypeFlag = SPC;
 				break;
 			default :
-				Log.d("setKeyboardFlag", "Error : stateLanguage");
+				Log.d("Error", "Error : stateLanguage at setKeyboardFlag");
 		}
 	}
 	
