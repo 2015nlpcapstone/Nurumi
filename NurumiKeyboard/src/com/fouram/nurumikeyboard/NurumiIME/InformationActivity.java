@@ -28,9 +28,8 @@ import android.widget.ImageView;
 public class InformationActivity extends Activity {
 	private String stateAutomata;
 	private Boolean stateHand;
-	private String stateLanguage;
-	//private Boolean stateSpecial;
-
+	private String stateLanguage;	
+	private ImageView imageView;
 	/**
 	* @function onCreate(Bundle savedInstanceState)
 	*
@@ -49,29 +48,27 @@ public class InformationActivity extends Activity {
 	* @date 2015-05-08
 	*/
 	@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// Delete Dialog's title
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		// Store setting's conditions at new variable using SharedPreferences
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		stateAutomata = sharedPref.getString("prefAutomata", "3");
+		stateHand = sharedPref.getBoolean("prefHand", true);
+		stateLanguage = sharedPref.getString("prefLanguage", "1");
 
-			// Delete Dialog's title
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
+		// Set Layout to xml file
+		setContentView(R.layout.information);
 
-			// Store setting's conditions at new variable using SharedPreferences
-			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-			stateAutomata = sharedPref.getString("prefAutomata", "3");
-			stateHand = sharedPref.getBoolean("prefHand", true);
-			stateLanguage = sharedPref.getString("prefLanguage", "1");
+		// Set Image according to setting's conditions using BitmapDrawable
+		BitmapDrawable dr = (BitmapDrawable)getResources().getDrawable(setInformImage());
+		imageView = (ImageView)findViewById(R.id.imgView);
+		imageView.setImageDrawable(dr);
 
-			// Set Layout to xml file
-			setContentView(R.layout.information);
-
-			// Set Image according to setting's conditions using BitmapDrawable
-			BitmapDrawable dr = (BitmapDrawable)getResources().getDrawable(setInformImage());
-			ImageView imageView = (ImageView)findViewById(R.id.imgView);
-			imageView.setImageDrawable(dr);
-
-			Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefAutomata", "3")));
-			Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getBoolean("prefHand", true)));
-			Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefLanguage", "1")));
+		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefAutomata", "3")));
+		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getBoolean("prefHand", true)));
+		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefLanguage", "1")));
 	}
 
 	/**
@@ -127,4 +124,25 @@ public class InformationActivity extends Activity {
 		else // default setting [RIGHT/KOREAN/AUTOMATA3]
 			return R.drawable.img_auto3_rig_kor;
 	}
+	
+	/////////////////////////////////////////////
+	/// @fn 
+	/// @brief (Override method) Destructor for evade memory leakage.
+	/// @remark
+	/// - Description
+	/// @see android.app.Activity#onDestroy()
+	/////////////////////////////////////////////
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		try {
+			if(imageView != null) {
+				BitmapDrawable dr = (BitmapDrawable) imageView.getDrawable();
+				if (dr != null)
+					dr.setCallback(null);
+				imageView.setImageDrawable(null);
+			}
+		} catch (Exception ignore) {}		
+	}
+	
 }

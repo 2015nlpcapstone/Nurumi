@@ -214,8 +214,10 @@ public class NurumiIME extends InputMethodService
 	public void onDestroy() {
 		super.onDestroy();
 		if(mKeyboardView != null)
-			mKeyboardView.recycleBitmap();
-		setToKorKeyboard();
+			mKeyboardView.onDestroyView();
+		try {
+			setToKorKeyboard();
+		} catch(Exception ignore) {}
 	}
 
 	/* Custom gesture listener */
@@ -356,7 +358,7 @@ public class NurumiIME extends InputMethodService
 		SharedPreferences.Editor prefEdit = pref.edit();
 		prefEdit.putString("prefLanguage", "1");
 		prefEdit.commit();
-		if(keyboardTypeFlag != KOR){
+		if(keyboardTypeFlag != KOR) {
 			keyboardTypeFlag = KOR;
 			setAutomata(keyboardTypeFlag, stateAutomata);
 		}

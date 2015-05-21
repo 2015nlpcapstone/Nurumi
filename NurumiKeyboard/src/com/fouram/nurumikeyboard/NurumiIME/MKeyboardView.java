@@ -245,40 +245,48 @@ public class MKeyboardView extends View {
 		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_dot);
 		bitmap = drawable.getBitmap();
 		dotImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
-				
+		drawable.getBitmap().recycle();
+		
 		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_up);
 		bitmap = drawable.getBitmap();
 		upImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
+		drawable.getBitmap().recycle();
 				
 		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_down);
 		bitmap = drawable.getBitmap();
 		downImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
+		drawable.getBitmap().recycle();
 				
 		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_left);
 		bitmap = drawable.getBitmap();
 		leftImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
+		drawable.getBitmap().recycle();
 				
 		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_right);
 		bitmap = drawable.getBitmap();
 		rightImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
+		drawable.getBitmap().recycle();
 		
 		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_std_circle);
 		bitmap = drawable.getBitmap();
 		stdCircleImg = Bitmap.createScaledBitmap(drawable.getBitmap(), standardCircleSize*2, standardCircleSize*2, true);
+		drawable.getBitmap().recycle();
 		
 		drawable.setCallback(null);
+		drawable.getBitmap().recycle();
 	}
 	
 	/////////////////////////////////////////////
-	/// @fn recycleBitmap
-	/// @brief Function information : Free all Bitmap objects to evade memory leak.
+	/// @fn onDestroyView
+	/// @brief Function information : Free all objects in this view.
 	/// @remark
 	/// - Description : To evade memory leak user have to free up Bitmap object. Android OS will not free up all Bitmaps.
 	///~~~~~~~~~~~~~{.java}
 	/// // core code
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
-	protected void recycleBitmap() {
+	protected void onDestroyView() {
+		try {
 		if(bitmap != null)
 			bitmap.recycle();
 		if(dotImg != null)
@@ -292,7 +300,9 @@ public class MKeyboardView extends View {
 		if(rightImg != null)
 			rightImg.recycle();
 		if(stdCircleImg != null)
-			stdCircleImg.recycle();			
+			stdCircleImg.recycle();
+		} catch (Exception ignore) {}
+		setIme(null);
 	}
 	
 	/////////////////////////////////////////////
@@ -628,4 +638,5 @@ public class MKeyboardView extends View {
 			}
 		} // direction UDLR end
 	} // checkDirection fin
+	
 }
