@@ -6,7 +6,7 @@ import android.view.inputmethod.InputConnection;
 public class Automata_type_Kor_2 extends IME_Automata {
 
 	/*
-  public static final boolean ENABLE_DEBUG = true;
+  private final boolean ENABLE_DEBUG = true;
   // ぁ あ い ぇ え ぉ け げ こ さ ざ し じ す ず せ ぜ そ ぞ
   private static final int[] PREF_CHO = {12593, 12594, 12596, 12599, 12600, 12601, 12609, 12610,
       12611, 12613, 12614, 12615, 12616, 12617, 12618, 12619, 12620, 12621, 12622};
@@ -20,20 +20,20 @@ public class Automata_type_Kor_2 extends IME_Automata {
   private static final int AC00 = 44032;
 */
 
-  public static final int LEVEL_CHO_SEONG = 0;
-  public static final int LEVEL_JUNG_SEONG = 1;
-  public static final int LEVEL_BOK_MO_EUM_JUNG_SEONG = 2;
-  public static final int LEVEL_HOUT_JA_EUM_JONG_SEONG = 3;
-  public static final int LEVEL_BOK_JA_EUM_JONG_SEONG = 4;
+  private final int LEVEL_CHO_SEONG = 0;
+  private final int LEVEL_JUNG_SEONG = 1;
+  private final int LEVEL_BOK_MO_EUM_JUNG_SEONG = 2;
+  private final int LEVEL_HOUT_JA_EUM_JONG_SEONG = 3;
+  private final int LEVEL_BOK_JA_EUM_JONG_SEONG = 4;
 
 
-  public static int buffer[] = {'\0', '\0', '\0', '\0'};
-  public static int automata_level;
+  private int buffer[] = {'\0', '\0', '\0', '\0'};
+  private int automata_level;
 
   public String execute(int[] finger_array, InputConnection input_connection) {
     int idx = 5;
     count_finger = 0;
-    str_to_write = null;
+    text_to_commit = null;
     finger = finger_array;
     ic = input_connection;
 
@@ -67,15 +67,15 @@ public class Automata_type_Kor_2 extends IME_Automata {
 
             if (finger[INDEX_FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 11;// 'し'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } else if (finger[MIDLE_FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 2; // 'い'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } else if (finger[RING__FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 0; // 'ぁ'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             }
 
@@ -85,16 +85,16 @@ public class Automata_type_Kor_2 extends IME_Automata {
               switch (finger[INDEX_FINGER]) {
 
                 case DIRECTION_UP:
-                  str_to_write = "で";
+                  text_to_commit = "で";
                   break;
                 case DIRECTION_RIGHT:
-                  str_to_write = "た";
+                  text_to_commit = "た";
                   break;
                 case DIRECTION_DOWN:
-                  str_to_write = "ぬ";
+                  text_to_commit = "ぬ";
                   break;
                 case DIRECTION_LEFT:
-                  str_to_write = "っ";
+                  text_to_commit = "っ";
                   break;
               }
 	    }
@@ -102,16 +102,16 @@ public class Automata_type_Kor_2 extends IME_Automata {
               switch (finger[MIDLE_FINGER]) {
 
                 case DIRECTION_UP:
-                  str_to_write = "ぱ";
+                  text_to_commit = "ぱ";
                   break;
                 case DIRECTION_RIGHT:
-                  str_to_write = "だ";
+                  text_to_commit = "だ";
                   break;
                 case DIRECTION_DOWN:
-                  str_to_write = "び";
+                  text_to_commit = "び";
                   break;
                 case DIRECTION_LEFT:
-                  str_to_write = "つ";
+                  text_to_commit = "つ";
                   break;
               }
 	    }
@@ -121,22 +121,22 @@ public class Automata_type_Kor_2 extends IME_Automata {
             if (finger[INDEX_FINGER] == DIRECTION_DOT 
                 && finger[MIDLE_FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 9;// 'さ'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } else if (finger[MIDLE_FINGER] == DIRECTION_DOT
                 && finger[RING__FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 3;// 'ぇ'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } else if (finger[INDEX_FINGER] == DIRECTION_DOT
                 && finger[RING__FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 7;// 'げ'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } else if (finger[THUMB_FINGER] == DIRECTION_DOT
                 && finger[RING__FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 1;// 'あ'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             }
 
@@ -146,16 +146,16 @@ public class Automata_type_Kor_2 extends IME_Automata {
               switch (finger[INDEX_FINGER]) {  // 嬢託杷 旭精 号狽戚艦猿 しさし
 
                 case DIRECTION_UP:
-                  str_to_write = "に";
+                  text_to_commit = "に";
                   break;
                 case DIRECTION_RIGHT:
-                  str_to_write = "ち";
+                  text_to_commit = "ち";
                   break;
                 case DIRECTION_DOWN:
-                  str_to_write = "ば";
+                  text_to_commit = "ば";
                   break;
                 case DIRECTION_LEFT:
-                  str_to_write = "づ";
+                  text_to_commit = "づ";
                   break;
               }
 	    }
@@ -167,25 +167,25 @@ public class Automata_type_Kor_2 extends IME_Automata {
                 && finger[MIDLE_FINGER] == DIRECTION_DOT
 		&& finger[RING__FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 12;// 'じ'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } else if (finger[THUMB_FINGER] == DIRECTION_DOT
                 && finger[MIDLE_FINGER] == DIRECTION_DOT
 		&& finger[RING__FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 4;// 'え'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } else if (finger[THUMB_FINGER] == DIRECTION_DOT
 		&& finger[INDEX_FINGER] == DIRECTION_DOT
                 && finger[RING__FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 8;// 'こ'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } else if (finger[THUMB_FINGER] == DIRECTION_DOT
                 && finger[MIDLE_FINGER] == DIRECTION_DOT
 		&& finger[INDEX_FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 10;// 'ざ'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             } 
             break; // doo // 150506 // break for three fingers
@@ -197,7 +197,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
                 && finger[MIDLE_FINGER] == DIRECTION_DOT
 		&& finger[RING__FINGER] == DIRECTION_DOT) {
               buffer[LEVEL_CHO_SEONG] = 13;// 'す'
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
               automata_level += 1;
             }
             break; // doo // 150506 // break for four fingers
@@ -220,7 +220,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               } else {
                 buffer[LEVEL_CHO_SEONG] = 11;// 'し'
               }
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
             }
 
             else if (finger[MIDLE_FINGER] == DIRECTION_DOT) {
@@ -230,7 +230,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               } else {
                 buffer[LEVEL_CHO_SEONG] = 2; // 'い'
               }
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
             }
 
             else if (finger[RING__FINGER] == DIRECTION_DOT) {
@@ -240,7 +240,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               } else {
                 buffer[LEVEL_CHO_SEONG] = 0; // 'ぁ'
               }
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
             }
 
             // doo // 150506 // Conditional Statements for 'mo-eum jung_seong'
@@ -262,7 +262,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               }
 
               ic.deleteSurroundingText(1, 0);
-              str_to_write =
+              text_to_commit =
                   String.format("%c",
                       (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
               automata_level += 1;
@@ -286,7 +286,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               }
 
               ic.deleteSurroundingText(1, 0);
-              str_to_write =
+              text_to_commit =
                   String.format("%c",
                       (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
               automata_level += 1;
@@ -303,7 +303,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               } else {
                 buffer[LEVEL_CHO_SEONG] = 9;// 'さ'
               }
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
             }
 
             else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
@@ -313,7 +313,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               } else {
                 buffer[LEVEL_CHO_SEONG] = 3;// 'ぇ'
               }
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
             }
             
             else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
@@ -323,7 +323,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               } else {
                 buffer[LEVEL_CHO_SEONG] = 7; // 'そ'
               }
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
             }
 
 	    // doo // 150508
@@ -345,7 +345,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               }
 
               ic.deleteSurroundingText(1, 0);
-              str_to_write =
+              text_to_commit =
                   String.format("%c",
                       (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
               automata_level += 1;
@@ -362,7 +362,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               }
 
               ic.deleteSurroundingText(1, 0);
-              str_to_write =
+              text_to_commit =
                   String.format("%c",
                       (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
               automata_level += 1;
@@ -378,7 +378,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
               } else {
                 buffer[LEVEL_CHO_SEONG] = 12; // 'じ'
               }
-              str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+              text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
             } 
 
             break; // doo // 150508// break for three fingers
@@ -402,7 +402,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
 		ic.deleteSurroundingText(1, 0);
 		buffer[LEVEL_JUNG_SEONG] = 11;
 	    }
-              str_to_write =
+              text_to_commit =
                   String.format("%c",
                       (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
               automata_level += 1;
@@ -420,7 +420,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
 		ic.deleteSurroundingText(1, 0);
 		buffer[LEVEL_JUNG_SEONG] = 16;
 	    }
-              str_to_write =
+              text_to_commit =
                   String.format("%c",
                       (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
               automata_level += 1;
@@ -432,7 +432,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
 		ic.deleteSurroundingText(1, 0);
 		buffer[LEVEL_JUNG_SEONG] = 19;
 	    }
-              str_to_write =
+              text_to_commit =
                   String.format("%c",
                       (AC00 + ((buffer[LEVEL_CHO_SEONG] * 21) + buffer[LEVEL_JUNG_SEONG]) * 28));
               automata_level += 1;
@@ -455,7 +455,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
     Log.d("Automata end", "finger count : " + count_finger);
     Log.d("Automata bgn", "current buffer : " + buffer[0] + " " + buffer[1] + " " + buffer[2] + " "
         + buffer[3]);
-    return str_to_write;
+    return text_to_commit;
   }
 
 

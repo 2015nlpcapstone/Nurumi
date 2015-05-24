@@ -25,155 +25,155 @@ public class Automata_type_Eng extends IME_Automata {
 		switch (count_finger) {
 		case 1: // [A, B, C, D, I, J, L, T]
 			if (finger[INDEX_FINGER] == DIRECTION_DOT) { // a
-				str_to_write = String.format("%c", PREF_ENGLISH_S[0]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[0]);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_DOT) { // b
-				str_to_write = String.format("%c", PREF_ENGLISH_S[1]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[1]);
 			} else if (finger[RING__FINGER] == DIRECTION_DOT) { // c
-				str_to_write = String.format("%c", PREF_ENGLISH_S[2]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[2]);
 			} else if (finger[PINKY_FINGER] == DIRECTION_DOT) { // d
-				str_to_write = String.format("%c", PREF_ENGLISH_S[3]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[3]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN) { // i
-				str_to_write = String.format("%c", PREF_ENGLISH_S[8]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[8]);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_DOWN) { // j
-				str_to_write = String.format("%c", PREF_ENGLISH_S[9]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[9]);
 			} else if (finger[RING__FINGER] == DIRECTION_RIGHT) { // l
-				str_to_write = String.format("%c", PREF_ENGLISH_S[11]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[11]);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_RIGHT) { // t
-				str_to_write = String.format("%c", PREF_ENGLISH_S[19]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[19]);
 			}
 			else {
-				str_to_write="";
+				text_to_commit="";
 			}
 			break;
 
 		case 2: // [F, G, H, K, N, O, P, Q, R, S, U, V, X, Y, Z]
 			if(finger[THUMB_FINGER] == DIRECTION_DOT){
 				if (finger[INDEX_FINGER] == DIRECTION_DOT) { // a
-					str_to_write = String.format("%c", PREF_ENGLISH_B[0]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[0]);
 				} else if (finger[MIDLE_FINGER] == DIRECTION_DOT) { // b
-					str_to_write = String.format("%c", PREF_ENGLISH_B[1]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[1]);
 				} else if (finger[RING__FINGER] == DIRECTION_DOT) { // c
-					str_to_write = String.format("%c", PREF_ENGLISH_B[2]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[2]);
 				} else if (finger[PINKY_FINGER] == DIRECTION_DOT) { // d
-					str_to_write = String.format("%c", PREF_ENGLISH_B[3]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[3]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOWN) { // i
-					str_to_write = String.format("%c", PREF_ENGLISH_B[8]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[8]);
 				} else if (finger[MIDLE_FINGER] == DIRECTION_DOWN) { // j
-					str_to_write = String.format("%c", PREF_ENGLISH_B[9]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[9]);
 				} else if (finger[RING__FINGER] == DIRECTION_RIGHT) { // l
-					str_to_write = String.format("%c", PREF_ENGLISH_B[11]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[11]);
 				} else if (finger[MIDLE_FINGER] == DIRECTION_RIGHT) { // t
-					str_to_write = String.format("%c", PREF_ENGLISH_B[19]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[19]);
 				}else {
-					str_to_write="";
+					text_to_commit="";
 				}
 			} else if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT) { // F
-				str_to_write = String.format("%c", PREF_ENGLISH_S[5]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[5]);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_RIGHT && finger[RING__FINGER] == DIRECTION_RIGHT) { // G
-				str_to_write = String.format("%c", PREF_ENGLISH_S[6]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[6]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[RING__FINGER] == DIRECTION_DOWN) { // H
-				str_to_write = String.format("%c", PREF_ENGLISH_S[7]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[7]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOWN) { // K
-				str_to_write = String.format("%c", PREF_ENGLISH_S[10]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[10]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN) { // N
-				str_to_write = String.format("%c", PREF_ENGLISH_S[13]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[13]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) { // O
-				str_to_write = String.format("%c", PREF_ENGLISH_S[14]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[14]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) { // P
-				str_to_write = String.format("%c", PREF_ENGLISH_S[15]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[15]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT) { // Q
-				str_to_write = String.format("%c", PREF_ENGLISH_S[16]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[16]);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) { // R
-				str_to_write = String.format("%c", PREF_ENGLISH_S[17]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[17]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_LEFT && finger[MIDLE_FINGER] == DIRECTION_LEFT) { // S
-				str_to_write = String.format("%c", PREF_ENGLISH_S[18]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[18]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[RING__FINGER] == DIRECTION_UP) { // U
-				str_to_write = String.format("%c", PREF_ENGLISH_S[20]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[20]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[MIDLE_FINGER] == DIRECTION_UP) { // V
-				str_to_write = String.format("%c", PREF_ENGLISH_S[21]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[21]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_UP) { // X
-				str_to_write = String.format("%c", PREF_ENGLISH_S[23]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[23]);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_UP && finger[RING__FINGER] == DIRECTION_UP) { // Y
-				str_to_write = String.format("%c", PREF_ENGLISH_S[24]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[24]);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_LEFT && finger[RING__FINGER] == DIRECTION_LEFT) { // Z
-				str_to_write = String.format("%c", PREF_ENGLISH_S[25]);
+				text_to_commit = String.format("%c", PREF_ENGLISH_S[25]);
 			}
 			else {
-				str_to_write="";
+				text_to_commit="";
 			}
 			break;
 
 		case 3: // [E, M, W]
 			if(finger[THUMB_FINGER] == DIRECTION_DOT){
 				if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT) { // F
-					str_to_write = String.format("%c", PREF_ENGLISH_B[5]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[5]);
 				} else if (finger[MIDLE_FINGER] == DIRECTION_RIGHT && finger[RING__FINGER] == DIRECTION_RIGHT) { // G
-					str_to_write = String.format("%c", PREF_ENGLISH_B[6]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[6]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[RING__FINGER] == DIRECTION_DOWN) { // H
-					str_to_write = String.format("%c", PREF_ENGLISH_B[7]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[7]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOWN) { // K
-					str_to_write = String.format("%c", PREF_ENGLISH_B[10]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[10]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN) { // N
-					str_to_write = String.format("%c", PREF_ENGLISH_B[13]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[13]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) { // O
-					str_to_write = String.format("%c", PREF_ENGLISH_B[14]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[14]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) { // P
-					str_to_write = String.format("%c", PREF_ENGLISH_B[15]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[15]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT) { // Q
-					str_to_write = String.format("%c", PREF_ENGLISH_B[16]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[16]);
 				} else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) { // R
-					str_to_write = String.format("%c", PREF_ENGLISH_B[17]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[17]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_LEFT && finger[MIDLE_FINGER] == DIRECTION_LEFT) { // S
-					str_to_write = String.format("%c", PREF_ENGLISH_B[18]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[18]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[RING__FINGER] == DIRECTION_UP) { // U
-					str_to_write = String.format("%c", PREF_ENGLISH_B[20]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[20]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[MIDLE_FINGER] == DIRECTION_UP) { // V
-					str_to_write = String.format("%c", PREF_ENGLISH_B[21]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[21]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_UP) { // X
-					str_to_write = String.format("%c", PREF_ENGLISH_B[23]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[23]);
 				} else if (finger[MIDLE_FINGER] == DIRECTION_UP && finger[RING__FINGER] == DIRECTION_UP) { // Y
-					str_to_write = String.format("%c", PREF_ENGLISH_B[24]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[24]);
 				} else if (finger[MIDLE_FINGER] == DIRECTION_LEFT && finger[RING__FINGER] == DIRECTION_LEFT) { // Z
-					str_to_write = String.format("%c", PREF_ENGLISH_B[25]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_B[25]);
 				}
 				else {
-					str_to_write="";
+					text_to_commit="";
 				}
 			}else if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT
 				&& finger[RING__FINGER] == DIRECTION_RIGHT) { // E
-					str_to_write = String.format("%c", PREF_ENGLISH_S[4]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_S[4]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN
 				&& finger[RING__FINGER] == DIRECTION_DOWN) { // M
-					str_to_write = String.format("%c", PREF_ENGLISH_S[12]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_S[12]);
 			} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[MIDLE_FINGER] == DIRECTION_UP
 				&& finger[RING__FINGER] == DIRECTION_UP) { // W
-					str_to_write = String.format("%c", PREF_ENGLISH_S[22]);
+					text_to_commit = String.format("%c", PREF_ENGLISH_S[22]);
 			}
 			else {
-				str_to_write="";
+				text_to_commit="";
 			}
 			break;
 		case 4:
 			if(finger[THUMB_FINGER] == DIRECTION_DOT){
 				if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT
 					&& finger[RING__FINGER] == DIRECTION_RIGHT) { // E
-						str_to_write = String.format("%c", PREF_ENGLISH_B[4]);
+						text_to_commit = String.format("%c", PREF_ENGLISH_B[4]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN
 					&& finger[RING__FINGER] == DIRECTION_DOWN) { // M
-						str_to_write = String.format("%c", PREF_ENGLISH_B[12]);
+						text_to_commit = String.format("%c", PREF_ENGLISH_B[12]);
 				} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[MIDLE_FINGER] == DIRECTION_UP
 					&& finger[RING__FINGER] == DIRECTION_UP) { // W
-						str_to_write = String.format("%c", PREF_ENGLISH_B[22]);
+						text_to_commit = String.format("%c", PREF_ENGLISH_B[22]);
 				}
 				else {
-					str_to_write="";
+					text_to_commit="";
 				}
 			}
 			else {
-				str_to_write="";
+				text_to_commit="";
 			}
 		default:
-			str_to_write="";
+			text_to_commit="";
 			break;
 		}
 	}
@@ -213,6 +213,6 @@ public class Automata_type_Eng extends IME_Automata {
 		}// kim // 150413 // switch by automata level
 
 
-		return str_to_write;
+		return text_to_commit;
 	}
 }

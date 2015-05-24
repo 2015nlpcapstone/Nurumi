@@ -68,7 +68,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 	private void CHO_SEONG_JAEUM(int jaeum){ //use when choseong is jaeum
 		buffer[LEVEL_CHO_SEONG] = jaeum;
 		lastbuffer=buffer[LEVEL_CHO_SEONG];
-		str_to_write = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
+		text_to_commit = String.format("%c", PREF_CHO[buffer[LEVEL_CHO_SEONG]]);
 		automata_level += 1;
 	}
 	private void CHO_SEONG_MOEUM(int moeum){ //use when choseong is moeum
@@ -77,13 +77,13 @@ public class Automata_type_Kor_1 extends IME_Automata {
 		buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level - 1];
 		ic.deleteSurroundingText(1, 0);
 		checkmoeumcomplete=true;
-		str_to_write = String.format("%c", choseong_moeum(Moeumbuffer[Moeumautomata_level-1]));
+		text_to_commit = String.format("%c", choseong_moeum(Moeumbuffer[Moeumautomata_level-1]));
 	}
 	private void JONG_SEONG_JAEUM(int jaeum){    //use when jongseong is jaeum
 		buffer[LEVEL_JONG_SEONG] = jaeum;
 		buffer[LEVEL_BOK_JA_EUM_JONG_SEONG] = jaeum;
 		ic.deleteSurroundingText(1, 0);
-		str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG],buffer[JUNG_SEONG],buffer[JONG_SEONG]));
+		text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG],buffer[JUNG_SEONG],buffer[JONG_SEONG]));
 		automata_level += 1;
 	}
 	private void JUNG_SEONG_MOEUM(int moeum){    //use when jungseong is moeum
@@ -92,11 +92,11 @@ public class Automata_type_Kor_1 extends IME_Automata {
 		buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level - 1];
 		ic.deleteSurroundingText(1, 0);
 		checkmoeumcomplete=true;
-		str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+		text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
 	}
 	private void BOK_JAEUM(){ //use when bokjaeum
 		ic.deleteSurroundingText(1, 0);
-		str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], buffer[JONG_SEONG]));
+		text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], buffer[JONG_SEONG]));
 		automata_level += 1;
 	}
 
@@ -129,7 +129,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 			} else if (finger[RING__FINGER] == DIRECTION_DOWN) {
 				CHO_SEONG_JAEUM(4);
 			} else {
-				str_to_write="";
+				text_to_commit="";
 			}
 			break; // kim // 150413 // break for single finger
 
@@ -144,17 +144,17 @@ public class Automata_type_Kor_1 extends IME_Automata {
 			} else if (finger[MIDLE_FINGER] == DIRECTION_DOWN&&finger[RING__FINGER] == DIRECTION_DOWN) {
 				CHO_SEONG_JAEUM(8);
 			} else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT) {
-				str_to_write = String.format("%c", area_a);//'.'
+				text_to_commit = String.format("%c", area_a);//'.'
 				Moeumbuffer[Moeumautomata_level]=area_a;
 				Moeumautomata_level += 1;
 				automata_level += 1;
 			}else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) {
-				str_to_write = String.format("%c", 12641);//'天'
+				text_to_commit = String.format("%c", 12641);//'天'
 				Moeumbuffer[Moeumautomata_level]=18;
 				Moeumautomata_level += 1;
 				automata_level += 1;
 			}else {
-				str_to_write="";
+				text_to_commit="";
 			}
 			break; // kim // 150413 // break for two fingers
 
@@ -175,12 +175,12 @@ public class Automata_type_Kor_1 extends IME_Automata {
 					CHO_SEONG_JAEUM(10);
 			} else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT
 				&& finger[MIDLE_FINGER] == DIRECTION_DOT) {
-					str_to_write = String.format("%c", 12643);//'太'
+					text_to_commit = String.format("%c", 12643);//'太'
 					Moeumbuffer[Moeumautomata_level]=20;
 					Moeumautomata_level += 1;
 					automata_level += 1;
 			} else {
-				str_to_write="";
+				text_to_commit="";
 
 			}
 			break;// kim // 150519 // break for three fingers
@@ -198,11 +198,11 @@ public class Automata_type_Kor_1 extends IME_Automata {
 				&&finger[RING__FINGER] == DIRECTION_DOWN&&finger[PINKY_FINGER] == DIRECTION_DOWN) {
 					CHO_SEONG_JAEUM(13);
 			} else {
-				str_to_write="";
+				text_to_commit="";
 			}
 			break;// kim // 150519 // break for four fingers
 		default :
-			str_to_write="";
+			text_to_commit="";
 
 		}
 	};
@@ -218,7 +218,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 					Moeumbuffer[Moeumautomata_level] = area_a;
 					Moeumautomata_level += 1;
 					buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level-1];
-					str_to_write = String.format("%c", (area_a));
+					text_to_commit = String.format("%c", (area_a));
 					checkmoeumcomplete=false;
 					break;
 				case 1:
@@ -228,7 +228,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 						Moeumbuffer[Moeumautomata_level] = ssangarea_a;
 						Moeumautomata_level += 1;
 						buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level - 1];
-						str_to_write = String.format("%c", (area_a));
+						text_to_commit = String.format("%c", (area_a));
 						checkmoeumcomplete=false;
 								 }
 								 break;
@@ -261,7 +261,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 						Moeumbuffer[Moeumautomata_level] = ssangarea_a;
 						Moeumautomata_level = 2;
 						buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level];
-						str_to_write = String.format("%c", (area_a));
+						text_to_commit = String.format("%c", (area_a));
 						checkmoeumcomplete=false;
 									 }
 									 break;
@@ -319,7 +319,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 					Moeumautomata_level += 1;
 					buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level-1];
 					ic.deleteSurroundingText(1, 0);
-					str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG],buffer[JUNG_SEONG],0));
+					text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG],buffer[JUNG_SEONG],0));
 					break;
 				case 1:
 					switch(Moeumbuffer[Moeumautomata_level-1]){
@@ -331,7 +331,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 							ic.deleteSurroundingText(1, 0);
 							ic.deleteSurroundingText(1, 0);
 							checkmoeumcomplete=true;
-							str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+							text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
 						}else{
 							CHO_SEONG_MOEUM(8);
 						}
@@ -353,7 +353,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 							ic.deleteSurroundingText(1, 0);
 							ic.deleteSurroundingText(1, 0);
 							checkmoeumcomplete=true;
-							str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+							text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
 						}
 						else {
 							Moeumbuffer[Moeumautomata_level] = 12;
@@ -362,7 +362,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 							ic.deleteSurroundingText(1, 0);
 							ic.deleteSurroundingText(1, 0);
 							checkmoeumcomplete=true;
-							str_to_write = String.format("%c", choseong_moeum(Moeumbuffer[Moeumautomata_level-1]));
+							text_to_commit = String.format("%c", choseong_moeum(Moeumbuffer[Moeumautomata_level-1]));
 						}
 						break;
 					default:
@@ -396,7 +396,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 					buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level-1];
 					ic.deleteSurroundingText(1, 0);
 					checkmoeumcomplete=true;
-					str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG],buffer[JUNG_SEONG],0));
+					text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG],buffer[JUNG_SEONG],0));
 					break;
 				case 1:
 					switch(Moeumbuffer[Moeumautomata_level-1]){
@@ -408,7 +408,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 							ic.deleteSurroundingText(1, 0);
 							ic.deleteSurroundingText(1, 0);
 							checkmoeumcomplete=true;
-							str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+							text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
 						}
 						else {
 							CHO_SEONG_MOEUM(4);
@@ -439,7 +439,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 							ic.deleteSurroundingText(1, 0);
 							ic.deleteSurroundingText(1, 0);
 							checkmoeumcomplete=true;
-							str_to_write = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
+							text_to_commit = String.format("%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0));
 						}
 						else {
 							Moeumbuffer[Moeumautomata_level] = 6;
@@ -448,7 +448,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 							ic.deleteSurroundingText(1, 0);
 							ic.deleteSurroundingText(1, 0);
 							checkmoeumcomplete=true;
-							str_to_write = String.format("%c", choseong_moeum(Moeumbuffer[Moeumautomata_level - 1]));
+							text_to_commit = String.format("%c", choseong_moeum(Moeumbuffer[Moeumautomata_level - 1]));
 						}
 						break;
 					case 8:
@@ -667,7 +667,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 			}
 			break;
 		default :
-			str_to_write="";
+			text_to_commit="";
 		}
 	};
 	private void LEVEL_BOK_JA_EUM_JONG_SEONG() {
@@ -724,7 +724,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 					LEVEL_CHO_SEONG();
 			}else if (finger[THUMB_FINGER] == DIRECTION_DOT&&finger[INDEX_FINGER] == DIRECTION_DOT){
 				ic.deleteSurroundingText(1,0);
-				str_to_write = String.format("%c%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],0),PREF_CHO[firstjaeum_bokjaeum],area_a);
+				text_to_commit = String.format("%c%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],0),PREF_CHO[firstjaeum_bokjaeum],area_a);
 				buffer_clear();
 				Moeumbuffer_clear();
 				buffer[LEVEL_CHO_SEONG]=firstjaeum_bokjaeum;
@@ -736,7 +736,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 				automata_level=1;
 			}else if(finger[THUMB_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT){
 				ic.deleteSurroundingText(1,0);
-				str_to_write = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],0),generate_korean_char_code(firstjaeum_bokjaeum,18,0));
+				text_to_commit = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],0),generate_korean_char_code(firstjaeum_bokjaeum,18,0));
 				buffer_clear();
 				Moeumbuffer_clear();
 				buffer[LEVEL_CHO_SEONG]=firstjaeum_bokjaeum;
@@ -788,7 +788,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 						LEVEL_CHO_SEONG();
 			} else if(finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT&& finger[MIDLE_FINGER] == DIRECTION_DOT){
 				ic.deleteSurroundingText(1,0);
-				str_to_write = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],0),generate_korean_char_code(firstjaeum_bokjaeum,20,0));
+				text_to_commit = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],0),generate_korean_char_code(firstjaeum_bokjaeum,20,0));
 				buffer_clear();
 				Moeumbuffer_clear();
 				buffer[LEVEL_CHO_SEONG]=firstjaeum_bokjaeum;
@@ -819,7 +819,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 				LEVEL_CHO_SEONG();
 			break;
 		default :
-			str_to_write="";
+			text_to_commit="";
 		}
 
 	};
@@ -829,7 +829,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 		case 2:
 			if (finger[THUMB_FINGER] == DIRECTION_DOT&&finger[INDEX_FINGER] == DIRECTION_DOT) {
 				ic.deleteSurroundingText(1, 0);
-				str_to_write = String.format("%c%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], buffer[LEVEL_BOK_JA_EUM_JONG_SEONG]), PREF_CHO[nextjaeum], area_a);
+				text_to_commit = String.format("%c%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], buffer[LEVEL_BOK_JA_EUM_JONG_SEONG]), PREF_CHO[nextjaeum], area_a);
 				buffer_clear();
 				Moeumbuffer_clear();
 				buffer[LEVEL_CHO_SEONG] = nextjaeum;
@@ -842,7 +842,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 			}
 			else if(finger[THUMB_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT){
 				ic.deleteSurroundingText(1,0);
-				str_to_write = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],buffer[LEVEL_BOK_JA_EUM_JONG_SEONG]),generate_korean_char_code(nextjaeum,18,0));
+				text_to_commit = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],buffer[LEVEL_BOK_JA_EUM_JONG_SEONG]),generate_korean_char_code(nextjaeum,18,0));
 				buffer_clear();
 				Moeumbuffer_clear();
 				buffer[LEVEL_CHO_SEONG]=nextjaeum;
@@ -858,7 +858,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 		case 3:
 			if(finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT&& finger[MIDLE_FINGER] == DIRECTION_DOT){
 				ic.deleteSurroundingText(1,0);
-				str_to_write = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],buffer[LEVEL_BOK_JA_EUM_JONG_SEONG]),generate_korean_char_code(nextjaeum,20,0));
+				text_to_commit = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],buffer[LEVEL_BOK_JA_EUM_JONG_SEONG]),generate_korean_char_code(nextjaeum,20,0));
 				buffer_clear();
 				Moeumbuffer_clear();
 				buffer[LEVEL_CHO_SEONG]=nextjaeum;
@@ -947,7 +947,7 @@ public class Automata_type_Kor_1 extends IME_Automata {
 			break;
 		}
 
-		return str_to_write;
+		return text_to_commit;
 	}
 
 

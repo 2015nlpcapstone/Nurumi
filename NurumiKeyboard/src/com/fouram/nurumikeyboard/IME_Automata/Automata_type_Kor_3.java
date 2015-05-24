@@ -5,22 +5,6 @@ import android.view.inputmethod.InputConnection;
 
 public class Automata_type_Kor_3 extends IME_Automata {
 
-  /*
-  private final boolean ENABLE_DEBUG = true;
-  // 0.ぁ 1.あ 2.い 3.ぇ 4.え 5.ぉ 6.け 7.げ 8.こ 9.さ 10.ざ 11.し 12.じ 13.す 14.ず 15.せ 16.ぜ 17.そ 18ぞ
-  private static final int[] PREF_CHO = {12593, 12594, 12596, 12599, 12600, 12601, 12609, 12610,
-      12611, 12613, 12614, 12615, 12616, 12617, 12618, 12619, 12620, 12621, 12622};
-  // 0.た 1.だ 2.ち 3.ぢ 4.っ 5.つ 6.づ 7.て 8.で 9.と 10.ど 11.な 12.に 13.ぬ 14.ね 15.の 16.は 17.ば 18.ぱ 19.ひ 20.び
-  private static final int[] PREF_JUNG = {12623, 12624, 12625, 12626, 12627, 12628, 12629, 12630,
-      12631, 12632, 12633, 12634, 12635, 12636, 12637, 12638, 12639, 12640, 12641, 12642, 12643};
-  // 0.ぁ 1.あ 2.ぃ 3.い 4.ぅ 5.う 6.ぇ 7.ぉ 8.お 9.か 10.が 11.き 12.ぎ 13.く 14.ぐ 15.け 16.げ 17.ご
-  // 18.さ 19.ざ 20.し 21.じ 22.ず 23.せ 24.ぜ 25.そ 26.ぞ
-  private static final int[] PREF_JONG = {12593, 12594, 12595, 12596, 12597, 12598, 12599, 12601,
-      12602, 12603, 12604, 12605, 12606, 12607, 12608, 12609, 12610, 12612, 12613, 12614, 12615,
-      12616, 12618, 12619, 12620, 12621, 12622};
-  private static final int AC00 = 44032;
-*/
-
   private final int LEVEL_CHO_SEONG = 0;
   private final int LEVEL_JUNG_SEONG = 1;
   private final int LEVEL_JUNG_SEONG_TO_JONG_SEONG = 2;
@@ -36,7 +20,6 @@ public class Automata_type_Kor_3 extends IME_Automata {
   private int automata_level = 0;
   private int bok_ja_eum_jong_seong = 0;
 
-  private String text_to_commit = null;
   private Boolean ready_to_commit_text;
 
   // yoon // 150516 // get a Korean character code key value

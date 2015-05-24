@@ -13,123 +13,123 @@ public class Automata_type_Spc extends IME_Automata {
                 if (finger[INDEX_FINGER] != DIRECTION_EMPTY) {
                     switch(finger[INDEX_FINGER]){
                         case DIRECTION_DOT:
-                            str_to_write = String.format("%c", 49);
+                            text_to_commit = String.format("%c", 49);
                             break;
                         case DIRECTION_DOWN:
-                            str_to_write = String.format("%c", 44);
+                            text_to_commit = String.format("%c", 44);
                             break;
                         case DIRECTION_LEFT:
-                            str_to_write = String.format("%c", 63);
+                            text_to_commit = String.format("%c", 63);
                             break;
                         case DIRECTION_UP:
-                            str_to_write = String.format("%c", 46);
+                            text_to_commit = String.format("%c", 46);
                             break;
                         case DIRECTION_RIGHT:
-                            str_to_write = String.format("%c", 33);
+                            text_to_commit = String.format("%c", 33);
                             break;
                     }
                 }
                 else if (finger[MIDLE_FINGER] != DIRECTION_EMPTY){
                     switch(finger[MIDLE_FINGER]){
                         case DIRECTION_DOT:
-                            str_to_write = String.format("%c", 50);
+                            text_to_commit = String.format("%c", 50);
                             break;
                         case DIRECTION_DOWN:
-                            str_to_write = String.format("%c", 126);
+                            text_to_commit = String.format("%c", 126);
                             break;
                         case DIRECTION_LEFT:
-                            str_to_write = String.format("%c", 59);
+                            text_to_commit = String.format("%c", 59);
                             break;
                         case DIRECTION_UP:
-                            str_to_write = String.format("%c", 94);
+                            text_to_commit = String.format("%c", 94);
                             break;
                         case DIRECTION_RIGHT:
-                            str_to_write = String.format("%c", 47);
+                            text_to_commit = String.format("%c", 47);
                             break;
                     }
                 }
                 else if (finger[RING__FINGER] != DIRECTION_EMPTY){
 	                switch(finger[RING__FINGER]){
 	                    case DIRECTION_DOT:
-	                        str_to_write = String.format("%c", 51);
+	                        text_to_commit = String.format("%c", 51);
 	                        break;
 	                    case DIRECTION_DOWN:
-	                        str_to_write = String.format("%c", 95);
+	                        text_to_commit = String.format("%c", 95);
 	                        break;
 	                    case DIRECTION_LEFT:
-	                        str_to_write = String.format("%c", 41);
+	                        text_to_commit = String.format("%c", 41);
 	                        break;
 	                    case DIRECTION_UP:
-	                        str_to_write = String.format("%c", 45);
+	                        text_to_commit = String.format("%c", 45);
 	                        break;
 	                    case DIRECTION_RIGHT:
-	                        str_to_write = String.format("%c", 40);
+	                        text_to_commit = String.format("%c", 40);
 	                        break;
                 	}
                 }
                 else if (finger[PINKY_FINGER] != DIRECTION_EMPTY){
 	                switch(finger[PINKY_FINGER]){
 	                    case DIRECTION_DOT:
-	                        str_to_write = String.format("%c", 52);
+	                        text_to_commit = String.format("%c", 52);
 	                        break;
 	                    case DIRECTION_DOWN:
-	                        str_to_write = String.format("%c", 42);
+	                        text_to_commit = String.format("%c", 42);
 	                        break;
 	                    case DIRECTION_LEFT:
-	                        str_to_write = String.format("%c", 61);
+	                        text_to_commit = String.format("%c", 61);
 	                        break;
 	                    case DIRECTION_UP:
-	                        str_to_write = String.format("%c", 43);
+	                        text_to_commit = String.format("%c", 43);
 	                        break;
 	                    case DIRECTION_RIGHT:
-	                        str_to_write = String.format("%c", 64);
+	                        text_to_commit = String.format("%c", 64);
 	                        break;
 	                }
                }
                else{
-                    str_to_write="";
+                    text_to_commit="";
                }
                break;
 
             case 2:
                 if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) {
-                    str_to_write = String.format("%c", 53);
+                    text_to_commit = String.format("%c", 53);
                 }
                 else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-                    str_to_write = String.format("%c", 54);
+                    text_to_commit = String.format("%c", 54);
                 }
                 else if (finger[RING__FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT) {
-                    str_to_write = String.format("%c", 55);
+                    text_to_commit = String.format("%c", 55);
                 }
                 else{
-                    str_to_write="";
+                    text_to_commit="";
                 }
                 break;
 
             case 3:
                 if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) {
-                    str_to_write = String.format("%c", 56);
+                    text_to_commit = String.format("%c", 56);
                 }
                 else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT ) {
-                    str_to_write = String.format("%c", 57);
+                    text_to_commit = String.format("%c", 57);
                 }
                 else{
-                    str_to_write="";
+                    text_to_commit="";
                 }
                 break;
 
             case 4:
                 if(finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT
                         && finger[RING__FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT){
-                    str_to_write = String.format("%c", 48);
+                    text_to_commit = String.format("%c", 48);
                 }
                 else{
-                    str_to_write="";
+                    text_to_commit="";
                 }
                 break;
                 
             default:
-                    str_to_write="";
+                    text_to_commit="";
         }
     }
     
@@ -163,6 +163,6 @@ public class Automata_type_Spc extends IME_Automata {
         }
         // kim // 150507 // functional keys
         // kim // 150413 // switch by automata level
-        return str_to_write;
+        return text_to_commit;
     }
 }

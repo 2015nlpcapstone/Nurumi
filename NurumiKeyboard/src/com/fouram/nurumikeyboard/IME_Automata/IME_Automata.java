@@ -62,7 +62,7 @@ public abstract class IME_Automata {
 	public static final int PINKY_FINGER = 4;
 	
 	protected int count_finger = 0;
-	protected String str_to_write = null;
+	protected String text_to_commit = null;
 	protected int[] finger;
 	protected InputConnection ic;
 	
