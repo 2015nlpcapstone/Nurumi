@@ -1,11 +1,9 @@
 <resources>
-    <string name="app_name">MotionKeyboard</string>
-    <string name="nurumi_ime">Nurumi IME</string>
-    <string name="subtype_en_US">English (US)</string>
+    <string name="app_name">NurumiKeyboard</string>
+    <string name="nurumi_ime">누루미 키보드</string>
+    <string name="subtype_lang">한국어, English (US)</string>
 
     <string name="txt_inform">Inform</string>
-    <string name="txt_tutorial_on">Tut_on</string>
-    <string name="txt_tutorial_off">Tut_off</string>
     <string name="txt_setting">Setting</string>
 
     <string name="txt_title_setting">사용자 사용 조건 선택</string>

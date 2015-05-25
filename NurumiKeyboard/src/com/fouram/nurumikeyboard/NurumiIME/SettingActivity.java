@@ -39,6 +39,7 @@ public class SettingActivity extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.settings);
         setOnPreferenceChange(findPreference("prefAutomata"));
+        setOnPreferenceChange(findPreference("prefLanguage"));
         
     }
     
