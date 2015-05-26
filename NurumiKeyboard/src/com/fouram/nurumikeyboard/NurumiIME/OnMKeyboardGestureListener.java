@@ -1,9 +1,9 @@
-﻿package com.fouram.nurumikeyboard.NurumiIME;
+package com.fouram.nurumikeyboard.NurumiIME;
 
 /////////////////////////////////////////////
 /// @class OnMKeyboardGestureListener
 ///com.fouram.nurumikeyboard.NurumiIME \n
-///   ㄴ OnMKeyboardGestureListener.java
+///    OnMKeyboardGestureListener.java
 /// @section Class information
 ///    |    Item    |    Contents    |
 ///    | :-------------: | -------------   |
