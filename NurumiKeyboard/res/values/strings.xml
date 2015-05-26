@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <string name="app_name">NurumiKeyboard</string>
     <string name="nurumi_ime">누루미 키보드</string>
     <string name="subtype_lang">한국어, English (US)</string>
@@ -6,7 +6,7 @@
     <string name="txt_inform">Inform</string>
     <string name="txt_setting">Setting</string>
 
-    <string name="txt_title_setting">사용자 사용 조건 선택</string>
+    <string name="txt_title_setting">사용자 사용 조건</string>
     <string name="txt_keyboard_information">해당 키보드 정보</string>
     <string name="txt_developer_title">개발자 정보</string>
     <string name="txt_developer_summary">개발자 정보 확인하기</string>
@@ -14,7 +14,7 @@
 
     <string name="txt_automata">입력 방법</string>
 
-    <string name="txt_hand">주로 사용할 손의 방향 선택 [On: 오른손, Off: 왼손]</string>
+    <string name="txt_hand">사용할 손의 방향 [On: 오른손, Off: 왼손]</string>
     <string name="txt_left">왼손</string>
     <string name="txt_right">오른손</string>
 
@@ -22,6 +22,6 @@
     <string name="txt_5finger">한손</string>
     <string name="txt_10finger">양손</string>
 
-    <string name="txt_language">사용할 언어 선택</string>
+    <string name="txt_language">사용할 언어</string>
 
 </resources>
