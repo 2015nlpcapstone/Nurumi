@@ -127,26 +127,26 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
 
         // yoon // 150413 // Conditional Statements for 'mo-eum letter'
-        else if (finger[INDEX_FINGER] != DIRECTION_EMPTY)
+        else if (finger[INDEX_FINGER] != DIRECTION_EMPTY) {
+          automata_level = LEVEL_CHO_SEONG; // yoon // 150525 // for wrong motion ipt.
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_UP:
               text_to_commit( "ㅗ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_RIGHT:
               text_to_commit( "ㅏ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_DOWN:
               text_to_commit( "ㅜ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_LEFT:
               text_to_commit( "ㅓ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
           }
+        }
+        else automata_level = LEVEL_CHO_SEONG; // yoon // 150525 // for wrong motion ipt.
+
         break; // yoon // 150413 // break for single finger
 
       case 2: // yoon // 150424 // case for two fingers
@@ -167,27 +167,25 @@ public class Automata_type_Kor_3 extends IME_Automata {
 
         // yoon // 150507 // Conditional Statements for 'mo-eum jung_seong'
         else if (finger[INDEX_FINGER] != DIRECTION_EMPTY && finger[MIDLE_FINGER] != DIRECTION_EMPTY) {
+          automata_level = LEVEL_CHO_SEONG; // yoon // 150525 // for wrong motion ipt.
           switch (finger[INDEX_FINGER]) {
 
             case DIRECTION_UP:
               text_to_commit( "ㅛ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_RIGHT:
               text_to_commit( "ㅑ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_DOWN:
               text_to_commit( "ㅠ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_LEFT:
               text_to_commit( "ㅕ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
-
           }
         }
+        else automata_level = LEVEL_CHO_SEONG; // yoon // 150525 // for wrong motion ipt.
+
         break; // yoon // 150413 // break for two fingers
 
       case 3: // yoon // 150507 // case for three fingers
@@ -220,6 +218,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
           text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
+        else automata_level = LEVEL_CHO_SEONG; // yoon // 150525 // for wrong motion ipt.
+
 
         break;// yoon // 150507 // break for three fingers
 
@@ -244,25 +244,18 @@ public class Automata_type_Kor_3 extends IME_Automata {
           automata_level = LEVEL_JUNG_SEONG;
         }
         else {
+          automata_level = LEVEL_CHO_SEONG; // yoon // 150525 // for wrong motion ipt.
 
           switch (finger[INDEX_FINGER]) {
             case DIRECTION_RIGHT:
               text_to_commit( "ㅡ" );
-              automata_level = LEVEL_CHO_SEONG;
               break;
             case DIRECTION_DOWN:
               text_to_commit( "ㅣ" );
-              automata_level = LEVEL_CHO_SEONG;
-              break;
-            default:
-              text_to_commit( "" );
               break;
           }
         }
         break;// yoon // 150507 // break for four fingers
-
-      default:
-        text_to_commit( "" );
     }
   };
 
@@ -438,6 +431,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
           text_to_commit(String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
           automata_level = LEVEL_JUNG_SEONG;
         }
+        
+        else automata_level = LEVEL_CHO_SEONG; // yoon // 150525 // for wrong motion ipt.
         break;
 
       case 4: // yoon // 150516 // case for four fingers
