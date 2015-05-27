@@ -1,5 +1,6 @@
 ﻿package com.fouram.nurumikeyboard.NurumiIME;
 
+import com.fouram.nurumikeyboard.AutoTest.AutomataTest;
 import com.fouram.nurumikeyboard.IME_Automata.Automata_type_Eng;
 import com.fouram.nurumikeyboard.IME_Automata.Automata_type_Kor_1;
 import com.fouram.nurumikeyboard.IME_Automata.Automata_type_Kor_2;
@@ -66,6 +67,8 @@ public class NurumiIME extends InputMethodService
 	
 	private Boolean restart;
 
+	private AutomataTest test;
+	
     @Override
 	public void onFinishInputView(boolean finishingInput) {
 		super.onFinishInputView(finishingInput);
@@ -101,6 +104,10 @@ public class NurumiIME extends InputMethodService
 		setToKorKeyboard();
 
 		restartMng();
+		
+		Log.i("++TEST", "testStart");
+		test = new AutomataTest(getCurrentInputConnection());
+		test.testAutomata();
 		
 		return entireView;
 	}
