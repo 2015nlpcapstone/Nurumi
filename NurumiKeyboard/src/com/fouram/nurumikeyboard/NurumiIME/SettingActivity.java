@@ -111,7 +111,7 @@ public class SettingActivity extends PreferenceActivity {
         super.onDestroy();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        String stateAutomata = sharedPref.getString("prefAutomata", "3");
+        String stateAutomata = sharedPref.getString("prefAutomata", "1");
         Boolean stateHand = sharedPref.getBoolean("prefHand", true);
         String stateLanguage = sharedPref.getString("prefLanguage", "1");
 

@@ -54,7 +54,7 @@ public class InformationActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Store setting's conditions at new variable using SharedPreferences
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		stateAutomata = sharedPref.getString("prefAutomata", "3");
+		stateAutomata = sharedPref.getString("prefAutomata", "1");
 		stateHand = sharedPref.getBoolean("prefHand", true);
 		stateLanguage = sharedPref.getString("prefLanguage", "1");
 
@@ -66,7 +66,7 @@ public class InformationActivity extends Activity {
 		imageView = (ImageView)findViewById(R.id.imgView);
 		imageView.setImageDrawable(dr);
 
-		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefAutomata", "3")));
+		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefAutomata", "1")));
 		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getBoolean("prefHand", true)));
 		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefLanguage", "1")));
 	}

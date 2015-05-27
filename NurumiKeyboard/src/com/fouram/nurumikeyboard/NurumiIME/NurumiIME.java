@@ -255,8 +255,13 @@ public class NurumiIME extends InputMethodService
 	/////////////////////////////////////////////
 	@Override
 	public void onFinishGesture(int[] motion) {
-		for(int i = 0; i<numFingers; i++)
-			this.motion[i] = motion[i]; // get gesture input
+		if(stateHand == true) // right handed
+			for(int i = 0; i<numFingers; i++)
+				this.motion[i] = motion[i]; // get gesture input
+		else // left handed
+			for(int i = 0; i<numFingers; i++)
+				this.motion[i] = motion[(numFingers-1)-i]; // get gesture input
+		
 		if( changeKeyboardType(motion) )
 			setAutomata(keyboardTypeFlag, stateAutomata);
 		else {
@@ -279,7 +284,7 @@ public class NurumiIME extends InputMethodService
 	 */
 	private void setState() {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-		stateAutomata = sharedPref.getString("prefAutomata", "3");
+		stateAutomata = sharedPref.getString("prefAutomata", "1");
 		stateHand = sharedPref.getBoolean("prefHand", true);
 		stateLanguage = sharedPref.getString("prefLanguage", "1");
 		setKeyboardFlag(stateLanguage);
