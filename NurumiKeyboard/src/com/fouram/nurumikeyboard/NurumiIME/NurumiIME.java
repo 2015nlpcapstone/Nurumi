@@ -255,18 +255,19 @@ public class NurumiIME extends InputMethodService
 	/////////////////////////////////////////////
 	@Override
 	public void onFinishGesture(int[] motion) {
-		if(stateHand == true) // right handed
+		if(stateHand == true) {// right handed
 			for(int i = 0; i<numFingers; i++)
 				this.motion[i] = motion[i]; // get gesture input
-		else // left handed
+		} else { // left handed
+			Log.d("LeftHanded", "leftHanded");
 			for(int i = 0; i<numFingers; i++)
 				this.motion[i] = motion[(numFingers-1)-i]; // get gesture input
-		
-		if( changeKeyboardType(motion) )
+		}
+		if( changeKeyboardType(this.motion) )
 			setAutomata(keyboardTypeFlag, stateAutomata);
 		else {
 			InputConnection ic = getCurrentInputConnection();
-			ic.commitText(String.valueOf(automata.execute(motion,ic)),1);
+			ic.commitText(String.valueOf(automata.execute(this.motion,ic)),1);
 		}
 	}
 
