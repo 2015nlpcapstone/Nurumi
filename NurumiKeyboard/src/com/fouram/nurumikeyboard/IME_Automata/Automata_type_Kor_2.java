@@ -311,9 +311,6 @@ public class Automata_type_Kor_2 extends IME_Automata {
                     automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
                 }
 
-
-
-
                 // yoon // 150517 // Conditional Statements for 'bok-mo-eum jung_seong'
 
 
@@ -896,7 +893,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
                                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],
                                             buffer[JONG_SEONG])) );
             automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
-        }    else
+        } else
             LEVEL_CHO_SEONG();
 
     };
