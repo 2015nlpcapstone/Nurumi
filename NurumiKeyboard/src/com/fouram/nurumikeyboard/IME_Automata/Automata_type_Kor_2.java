@@ -976,3 +976,4 @@ public class Automata_type_Kor_2 extends IME_Automata {
 
 
 }
+

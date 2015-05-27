@@ -27,35 +27,75 @@ public abstract class MotionInput {
 	
 	public void test() {
 		
-		yieung(); ah(); // æ∆
-		enter();
-		yieung(); ah(); giyeok(); // æ«
-		enter();
-		yieung(); ah(); keeuk(); // ù⁄
-		enter();
-		yieung(); ah(); dbKiyoek(); // ù–
-		enter();
-		yieung(); yeh(); giyeok(); // ûë
-		enter();
-		yieung(); yeh(); giyeok(); seeot();// ûì
-		enter();
-		yieung(); yeh(); lieul(); teeut();// ûõ
+		giyeok(); space(); nieun(); space(); digut(); space(); lieul(); space(); mieum(); enter();
+		beeup(); space(); seeot(); space(); yieung(); space(); jieut(); space(); chiut(); enter();
+		keeuk(); space(); teeut(); space(); peeup(); space(); heeut(); enter();
+		dbKiyoek(); space(); dbDigut(); space(); dbBeeup(); space(); dbSeeot(); space(); dbJieut(); enter();
+		ah(); space(); ya(); space(); uh(); space(); yuh(); space(); o(); yo(); enter();
+		u(); space(); yu(); space(); eu(); space(); yi(); space(); ae(); space(); e(); enter();
+		yae(); space(); yeh(); space(); wa(); space(); wae(); enter();
+		woe(); space(); wuh(); space(); weh(); space(); wui(); space(); ui();
 		
 		/*
-		dbJieut(); ah(); // ¬•
-		jieut(); ah(); yieung(); // ¿Â
-		mieum(); yuh(); nieun(); // ∏È
-		enter();
+		nieun(); ah(); space();
+		nieun(); ya(); space();
+		nieun(); uh(); space();
+		nieun(); yuh(); space();
+		nieun(); o(); space();
+		nieun(); yo(); space();
+		nieun(); u(); space();
+		nieun(); yu(); space();
+		nieun(); eu(); space();
+		nieun(); yi(); space();
+		nieun(); ae(); space();
+		nieun(); e(); space();
+		nieun(); yae(); space();
+		nieun(); yeh(); space();
+		nieun(); wa(); space();
+		nieun(); wae(); space();
+		nieun(); woe(); space();
+		nieun(); wuh(); space();
+		nieun(); weh(); space();
+		nieun(); wui(); space();
+		nieun(); ui(); space();
+		*/
+		/*
+		beeup(); yae(); giyeok(); space();
+		beeup(); yae(); dbKiyoek(); space();
+		beeup(); yae(); giyeok(); seeot(); space();
+		beeup(); yae(); nieun(); space();
+		beeup(); yae(); nieun(); jieut(); space();
+		beeup(); yae(); nieun(); heeut(); space();
+		beeup(); yae(); digut(); space();
 		
-		beeup(); u(); //∫Œ
-		yieung(); uh(); keeuk(); //æ˝
-		enter();
+		beeup(); yae(); lieul(); space();
+		beeup(); yae(); lieul(); giyeok(); space();
+		beeup(); yae(); lieul(); mieum(); space();		
+		beeup(); yae(); lieul(); beeup(); space();
+		beeup(); yae(); lieul(); seeot(); space();
+		beeup(); yae(); lieul(); teeut(); space();
+		beeup(); yae(); lieul(); peeup(); space();
+		beeup(); yae(); lieul(); heeut(); space();
 		
-		beeup(); ah(); lieul(); beeup(); //π‚
-		giyeok(); o(); // ∞Ì
-		enter();
-		
-		giyeok(); ah(); beeup(); seeot(); //∞™
+		beeup(); yae(); mieum(); space();
+		beeup(); yae(); beeup(); space();
+		beeup(); yae(); beeup(); seeot(); space();
+		beeup(); yae(); seeot(); space();
+		beeup(); yae(); dbSeeot(); space();
+		beeup(); yae(); yieung(); space();
+		beeup(); yae(); jieut(); space();
+		beeup(); yae(); chiut(); space();
+		beeup(); yae(); keeuk(); space();
+		beeup(); yae(); teeut(); space();
+		beeup(); yae(); peeup(); space();
+		beeup(); yae(); heeut(); space();
+		*/
+		/*
+		nieun(); empty(); ah(); space();
+		nieun(); ah(); empty(); nieun(); space();
+		nieun(); ah(); nieun(); empty(); ah(); space();
+		nieun(); ah(); nieun(); jieut(); empty(); ah(); space();
+		nieun(); ah(); nieun(); heeut(); ya(); yieung(); empty(); ah(); space();
 		*/
 	};
 	
@@ -101,9 +141,13 @@ public abstract class MotionInput {
 	abstract public void weh(); //§Œ
 	abstract public void wui(); //§œ
 	abstract public void ui(); //§“
-	public void empty() {
-		automata.execute(new int[] {-1,-1,-1,-1,-1}, ic);
+	public void space() {
+		automata.execute(new int[] {D_RIGHT,-1,-1,-1,-1}, ic);
 	}
+	public void empty() {
+		automata.execute(new int[] {-1,-1,-1,D_UP,-1}, ic);
+	}
+	
 	public void enter() {
 		automata.execute(new int[] {0,-1,-1,-1,0}, ic);
 		Log.d("TestResult", "next----------------------");

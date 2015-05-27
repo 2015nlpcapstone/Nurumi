@@ -94,8 +94,8 @@ public class NurumiIME extends InputMethodService
 		vg = (ViewGroup) entireView;
 		mKeyboardView = (MKeyboardView) vg.findViewById(R.id.MKeyboardView);
 		mKeyboardView.setIme(this);		
-		numFingers = FIVE_FINGERS;
-		motion = new int[numFingers];
+		//numFingers = FIVE_FINGERS;
+		//motion = new int[numFingers];
         Log.i("++MAIN", "SUCCESS");
         setViewId();
         
@@ -107,7 +107,7 @@ public class NurumiIME extends InputMethodService
 		
 		Log.i("++TEST", "testStart");
 		test = new AutomataTest(getCurrentInputConnection());
-		test.testAutomata();
+		//test.testAutomata();
 		
 		return entireView;
 	}
@@ -262,6 +262,7 @@ public class NurumiIME extends InputMethodService
 	/////////////////////////////////////////////
 	@Override
 	public void onFinishGesture(int[] motion) {
+		/*
 		for(int i = 0; i<numFingers; i++)
 			this.motion[i] = motion[i]; // get gesture input
 		if( changeKeyboardType(motion) )
@@ -270,6 +271,8 @@ public class NurumiIME extends InputMethodService
 			InputConnection ic = getCurrentInputConnection();
 			ic.commitText(String.valueOf(automata.execute(motion,ic)),1);
 		}
+		*/
+		test.testAutomata();
 	}
 
 	/**
@@ -286,7 +289,7 @@ public class NurumiIME extends InputMethodService
 	 */
 	private void setState() {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-		stateAutomata = sharedPref.getString("prefAutomata", "3");
+		stateAutomata = sharedPref.getString("prefAutomata", "1");
 		stateHand = sharedPref.getBoolean("prefHand", true);
 		stateLanguage = sharedPref.getString("prefLanguage", "1");
 		setKeyboardFlag(stateLanguage);

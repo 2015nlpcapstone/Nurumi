@@ -19,8 +19,8 @@ public class Automata_type_Kor_3 extends IME_Automata {
 	private int buffer[] = {'\0', '\0', '\0', '\0'};
 	private int automata_level = 0;
 	private int bok_ja_eum_jong_seong = 0;
-	private Boolean ready_to_commit_text;
 
+	private Boolean ready_to_commit_text;
 
 	// yoon // 150516 // get a Korean character code key value
 	private int generate_korean_char_code(int cho_seong, int jung_seong, int jong_seong) {
@@ -931,6 +931,7 @@ public class Automata_type_Kor_3 extends IME_Automata {
 	// yoon // THIS IS WHAT I'M REALLY WANT TO DO !!
 
 	public String execute(int[] finger_array, InputConnection input_connection) {
+
 
 		// yoon // 150516 // init values
 		int idx = 5;
