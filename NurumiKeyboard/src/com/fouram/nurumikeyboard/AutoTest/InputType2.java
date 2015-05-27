@@ -363,7 +363,7 @@ public class InputType2 extends MotionInput {
 	public void wae() {
 		// TODO Auto-generated method stub
 		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_UP, -1, -1, -1},ic)),1);
-		ic.commitText(String.valueOf(automata.execute(new int[] {-1, -1, D_RIGHT, -1, -1},ic)),1);
+		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_RIGHT, -1, D_RIGHT, -1},ic)),1);
 		/*
 		str = automata.execute(new int[] {-1, D_UP, -1, -1, -1}, ic);
 		str = automata.execute(new int[] {-1, -1, D_RIGHT, -1, -1}, ic);
@@ -375,7 +375,7 @@ public class InputType2 extends MotionInput {
 	public void woe() {
 		// TODO Auto-generated method stub
 		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_UP, -1, -1, -1},ic)),1);
-		ic.commitText(String.valueOf(automata.execute(new int[] {-1, -1, D_DOWN, -1, -1},ic)),1);
+		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_DOWN, D_DOWN, D_DOWN, -1},ic)),1);
 		/*
 		str = automata.execute(new int[] {-1, D_UP, -1, -1, -1}, ic);
 		str = automata.execute(new int[] {-1, -1, D_DOWN, -1, -1}, ic);
@@ -399,7 +399,7 @@ public class InputType2 extends MotionInput {
 	public void weh() {
 		// TODO Auto-generated method stub
 		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_DOWN, -1, -1, -1},ic)),1);
-		ic.commitText(String.valueOf(automata.execute(new int[] {-1, -1, D_LEFT, -1, -1},ic)),1);
+		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_LEFT, -1, D_LEFT, -1},ic)),1);
 		/*
 		str = automata.execute(new int[] {-1, D_DOWN, -1, -1, -1}, ic);
 		str = automata.execute(new int[] {-1, -1, D_LEFT, -1, -1}, ic);
@@ -411,7 +411,7 @@ public class InputType2 extends MotionInput {
 	public void wui() {
 		// TODO Auto-generated method stub
 		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_DOWN, -1, -1, -1},ic)),1);
-		ic.commitText(String.valueOf(automata.execute(new int[] {-1, -1, D_DOWN, -1, -1},ic)),1);
+		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_DOWN, D_DOWN, D_DOWN, -1},ic)),1);
 		/*
 		str = automata.execute(new int[] {-1, D_DOWN, -1, -1, -1}, ic);
 		str = automata.execute(new int[] {-1, -1, D_DOWN, -1, -1}, ic);
@@ -422,8 +422,8 @@ public class InputType2 extends MotionInput {
 	@Override
 	public void ui() {
 		// TODO Auto-generated method stub
-		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_DOWN, -1, -1, -1},ic)),1);
-		ic.commitText(String.valueOf(automata.execute(new int[] {-1, -1, D_DOWN, -1, -1},ic)),1);
+		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_RIGHT, D_RIGHT, D_RIGHT, -1},ic)),1);
+		ic.commitText(String.valueOf(automata.execute(new int[] {-1, D_DOWN, D_DOWN, D_DOWN, -1},ic)),1);
 		/*
 		str = automata.execute(new int[] {-1, D_DOWN, -1, -1, -1}, ic);
 		str = automata.execute(new int[] {-1, -1, D_DOWN, -1, -1}, ic);
