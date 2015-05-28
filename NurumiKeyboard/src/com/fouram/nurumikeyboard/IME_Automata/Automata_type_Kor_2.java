@@ -149,6 +149,12 @@ public class Automata_type_Kor_2 extends IME_Automata {
                             break;
 
                     }
+                } else if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_EMPTY
+                && finger[RING__FINGER] == DIRECTION_RIGHT && finger[THUMB_FINGER] == DIRECTION_EMPTY) {
+                    text_to_commit( "ㅐ" ); //'ㅐ'
+                }else if (finger[INDEX_FINGER] == DIRECTION_LEFT && finger[MIDLE_FINGER] == DIRECTION_EMPTY
+                && finger[RING__FINGER] == DIRECTION_LEFT && finger[THUMB_FINGER] == DIRECTION_EMPTY) {
+                    text_to_commit( "ㅔ" ); //'ㅔ'
                 }
                 break; // yoon // 150413 // break for two fingers
 
@@ -174,6 +180,12 @@ public class Automata_type_Kor_2 extends IME_Automata {
                     buffer[CHO_SEONG] = 10; // 'ㅆ'
                     text_to_commit( String.format("%c", PREF_CHO[buffer[CHO_SEONG]]) );
                     automata_level = LEVEL_JUNG_SEONG;
+                } else if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT
+                && finger[RING__FINGER] == DIRECTION_RIGHT && finger[THUMB_FINGER] == DIRECTION_EMPTY) {
+                    text_to_commit( "ㅡ" ); //'ㅡ'
+                }else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN
+                && finger[RING__FINGER] == DIRECTION_DOWN && finger[THUMB_FINGER] == DIRECTION_EMPTY) {
+                    text_to_commit( "ㅣ" ); //'ㅣ'
                 }
 
                 break;// yoon // 150507 // break for three fingers
@@ -298,9 +310,6 @@ public class Automata_type_Kor_2 extends IME_Automata {
                                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG], 0)));
                     automata_level = LEVEL_JUNG_SEONG_TO_JONG_SEONG;
                 }
-
-
-
 
                 // yoon // 150517 // Conditional Statements for 'bok-mo-eum jung_seong'
 
@@ -884,7 +893,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
                                     generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],
                                             buffer[JONG_SEONG])) );
             automata_level = LEVEL_JONG_SEONG_TO_CHO_SEONG;
-        }    else
+        } else
             LEVEL_CHO_SEONG();
 
     };
@@ -922,7 +931,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
             }
         }
 
-        else if (count_finger == 1 && finger[PINKY_FINGER] == DIRECTION_LEFT) {
+        else if (count_finger == 1 && finger[THUMB_FINGER] == DIRECTION_LEFT) {
             automata_level = LEVEL_CHO_SEONG;
             ic.deleteSurroundingText(1, 0);
             return "";
