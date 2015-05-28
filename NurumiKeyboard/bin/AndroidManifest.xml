@@ -1,0 +1,38 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fouram.nurumikeyboard.NurumiIME"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="12"
+        android:targetSdkVersion="22" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_nurumi"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:largeHeap="true" >
+        
+        <service android:name=".NurumiIME"
+		    android:label="@string/subtype_lang"
+		    android:permission="android.permission.BIND_INPUT_METHOD"
+            >
+		    <meta-data android:name="android.view.im" android:resource="@xml/method"/>
+		    <intent-filter>
+		        <action android:name="android.view.InputMethod" />
+            </intent-filter>
+		</service>
+
+        <activity android:name=".InformationActivity"
+            android:theme="@android:style/Theme.Dialog">
+        </activity>
+
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+
+    </application>
+
+</manifest>
