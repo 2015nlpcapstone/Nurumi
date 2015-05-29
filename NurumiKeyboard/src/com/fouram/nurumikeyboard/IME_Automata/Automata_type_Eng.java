@@ -199,7 +199,7 @@ public class Automata_type_Eng extends IME_Automata {
 			return " ";
 		}
 
-		else if (count_finger == 1 && finger[PINKY_FINGER] == DIRECTION_LEFT) {
+		else if (count_finger == 1 && finger[THUMB_FINGER] == DIRECTION_LEFT) {
 			ic.deleteSurroundingText(1, 0);
 			return "";
 		}
@@ -214,5 +214,47 @@ public class Automata_type_Eng extends IME_Automata {
 
 
 		return text_to_commit;
+	}
+
+
+	@Override
+	public boolean isAllocatedMotion(int[] finger) {
+		count_finger = 0;
+		int idx = 5;
+		while (idx-- > 0)
+			if (finger[idx] != DIRECTION_EMPTY)
+				count_finger++;
+		
+		if(count_finger == 1 && ( (finger[INDEX_FINGER] == DIRECTION_DOT)  || (finger[MIDLE_FINGER] == DIRECTION_DOT)   || // a b
+								  (finger[RING__FINGER] == DIRECTION_DOT)  || (finger[PINKY_FINGER] == DIRECTION_DOT)   || // c d
+								  (finger[INDEX_FINGER] == DIRECTION_DOWN) || (finger[MIDLE_FINGER] == DIRECTION_DOWN)  || // i j
+								  (finger[RING__FINGER] == DIRECTION_RIGHT)|| (finger[MIDLE_FINGER] == DIRECTION_RIGHT) || // l t
+								  (finger[THUMB_FINGER] == DIRECTION_RIGHT)|| (finger[THUMB_FINGER] == DIRECTION_LEFT)  )) // space backspace
+			return true;
+		else if(count_finger == 2 && (((finger[INDEX_FINGER] == DIRECTION_RIGHT) && (finger[MIDLE_FINGER] == DIRECTION_RIGHT))|| //F
+									  ((finger[MIDLE_FINGER] == DIRECTION_RIGHT) && (finger[RING__FINGER] == DIRECTION_RIGHT))|| //G
+									  ((finger[INDEX_FINGER] == DIRECTION_DOWN)  && (finger[RING__FINGER] == DIRECTION_DOWN)) || //H
+									  ((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_DOWN)) || //K
+									  ((finger[INDEX_FINGER] == DIRECTION_DOWN)  && (finger[MIDLE_FINGER] == DIRECTION_DOWN)) || //N
+									  ((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_DOT))  || //O
+									  ((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[RING__FINGER] == DIRECTION_DOT))  || //P
+									  ((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[PINKY_FINGER] == DIRECTION_DOT))  || //Q
+									  ((finger[MIDLE_FINGER] == DIRECTION_DOT)   && (finger[RING__FINGER] == DIRECTION_DOT))  || //R
+									  ((finger[INDEX_FINGER] == DIRECTION_LEFT)  && (finger[MIDLE_FINGER] == DIRECTION_LEFT)) || //S
+									  ((finger[INDEX_FINGER] == DIRECTION_UP)    && (finger[RING__FINGER] == DIRECTION_UP))   || //U
+									  ((finger[INDEX_FINGER] == DIRECTION_UP)    && (finger[MIDLE_FINGER] == DIRECTION_UP))   || //V
+									  ((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_UP))   || //X
+									  ((finger[MIDLE_FINGER] == DIRECTION_UP)    && (finger[RING__FINGER] == DIRECTION_UP))   || //Y
+									  ((finger[MIDLE_FINGER] == DIRECTION_LEFT)  && (finger[RING__FINGER] == DIRECTION_LEFT)) || //Z
+									  ((finger[THUMB_FINGER] == DIRECTION_DOT)   && (finger[PINKY_FINGER] == DIRECTION_DOT))  || //enter
+									  ((finger[THUMB_FINGER] == DIRECTION_RIGHT) && (finger[MIDLE_FINGER] == DIRECTION_RIGHT))|| //right move
+									  ((finger[THUMB_FINGER] == DIRECTION_LEFT)  && (finger[MIDLE_FINGER] == DIRECTION_LEFT)) )) //left move
+			return true;
+		else if(count_finger == 3 && ( ((finger[INDEX_FINGER] == DIRECTION_RIGHT) && (finger[MIDLE_FINGER] == DIRECTION_RIGHT) && (finger[RING__FINGER] == DIRECTION_RIGHT)) || //E
+									   ((finger[INDEX_FINGER] == DIRECTION_DOWN)  && (finger[MIDLE_FINGER] == DIRECTION_DOWN)  && (finger[RING__FINGER] == DIRECTION_DOWN))  || //M
+									   ((finger[INDEX_FINGER] == DIRECTION_UP)    && (finger[MIDLE_FINGER] == DIRECTION_UP)    && (finger[RING__FINGER] == DIRECTION_UP))    )) //W
+			return true;
+		else
+			return false;
 	}
 }

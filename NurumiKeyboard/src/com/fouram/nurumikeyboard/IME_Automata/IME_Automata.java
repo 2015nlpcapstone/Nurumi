@@ -19,6 +19,9 @@ import android.view.inputmethod.InputConnection;
 /// 
 /////////////////////////////////////////////
 public abstract class IME_Automata {
+	
+	public abstract boolean isAllocatedMotion(int[] finger_array);
+	
 	/////////////////////////////////////////////
 	/// @fn execute
 	/// @brief Function information : Abstract method which returns output string from motion input.

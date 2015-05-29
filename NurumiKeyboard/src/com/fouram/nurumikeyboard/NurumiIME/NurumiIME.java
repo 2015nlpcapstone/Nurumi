@@ -265,10 +265,11 @@ public class NurumiIME extends InputMethodService
 		}
 		if( changeKeyboardType(this.motion) )
 			setAutomata(keyboardTypeFlag, stateAutomata);
-		else {
+		else if(automata.isAllocatedMotion(motion)) {
 			InputConnection ic = getCurrentInputConnection();
 			ic.commitText(String.valueOf(automata.execute(this.motion,ic)),1);
-		}
+		}			
+		// Ignore if the motion is not allocated motion
 	}
 
 	/**

@@ -23,7 +23,7 @@ import android.view.View;
 /////////////////////////////////////////////
 /// @class MKeyboardView
 ///com.fouram.nurumikeyboard.NurumiIME \n
-///   �� MKeyboardView.java
+///   ㄴ MKeyboardView.java
 /// @section Class information
 ///    |    Item    |    Contents    |
 ///    | :-------------: | -------------   |
@@ -34,29 +34,15 @@ import android.view.View;
 ///	- This file is for the view of motion keyboard.\n
 ///	- This view will popup when user\n put cursor in textbox.\n
 /////////////////////////////////////////////
-//
-///////////////////////////////////////////
-/// @class MKeyboardView
-///com.fouram.nurumikeyboard.NurumiIME \n
-///   �� MKeyboardView.java
-/// @section Class information
-///    |    Item    |    Contents    |
-///    | :-------------: | -------------   |
-///    | Company | 4:00 A.M. |    
-///    | Author | Park, Hyung Soon |
-///    | Date | 2015. 3. 26. |
-/// @section Description
-///	- View of motion keyboard.\n
-/////////////////////////////////////////////
 public class MKeyboardView extends View {
 	private Context ctx; 
 	private NurumiIME ime;
 	
-	public static final int INVALID_CIRCLE		= -1;	
-	public static final int SWIPE_MIN_DISTANCE = 33; //40; /// dp value
-	public static final int STD_CIRCLE_SIZE	= 47; //90; /// dp value
-	public static final int INNER_CIRCLE_SIZE	= 33; //40; /// dp value
-	public static final int FONT_SIZE = 21; // sp value
+	public static final int INVALID_CIRCLE	   = -1;	
+	public static final int SWIPE_MIN_DISTANCE = 40; /// dp value
+	public static final int STD_CIRCLE_SIZE	   = 70; /// dp value
+	public static final int INNER_CIRCLE_SIZE  = 40; /// dp value
+	
 	
 	/////////////////////////////////////////////
 	/// @class CircleLinkedWithPtId
@@ -120,7 +106,6 @@ public class MKeyboardView extends View {
 	
 	private int innerCircleSize;
 	private int standardCircleSize;
-	private int fontSize;
 	private int swipeThreshold;
 	private int numFingers;
 	
@@ -168,7 +153,6 @@ public class MKeyboardView extends View {
 		standardCircleSize = (int) dpToPx(STD_CIRCLE_SIZE, ctx.getApplicationContext());
 		innerCircleSize = (int) dpToPx(INNER_CIRCLE_SIZE, ctx.getApplicationContext());
 		swipeThreshold = (int) dpToPx(SWIPE_MIN_DISTANCE, ctx.getApplicationContext());
-		fontSize = (int) dpToPx(FONT_SIZE, ctx.getApplicationContext());
 	}
 	
 	/////////////////////////////////////////////
@@ -332,8 +316,7 @@ public class MKeyboardView extends View {
 		super.onDraw(canvas);
 	    canvas.drawColor(Color.TRANSPARENT);
 	    
-	    pnt.setTextSize(fontSize);
-	    
+	      
 	    /* standard position */
 		if(startPtArr.isEmpty())
 			return;
@@ -402,7 +385,7 @@ public class MKeyboardView extends View {
 		
 		if(start == false)
 			return startMultiTouch(e);
-		else {				
+		else {
 			switch(action) {
 				case MotionEvent.ACTION_DOWN : {
 					if( checkTouchedCircle((int)e.getX(), (int)e.getY()) == INVALID_CIRCLE )
