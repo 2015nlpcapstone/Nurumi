@@ -50,6 +50,8 @@ public class InformationActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.i("IME_LOG", "Location : InformationActivity - onCreate()");
+		
 		// Delete Dialog's title
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Store setting's conditions at new variable using SharedPreferences
@@ -66,9 +68,9 @@ public class InformationActivity extends Activity {
 		imageView = (ImageView)findViewById(R.id.imgView);
 		imageView.setImageDrawable(dr);
 
-		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefAutomata", "1")));
-		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getBoolean("prefHand", true)));
-		Log.i("SHAREDPREFERENCE", String.valueOf(sharedPref.getString("prefLanguage", "1")));
+		Log.d("IME_LOG", "Process : onCreate(). Pref. Automata : " + String.valueOf(sharedPref.getString("prefAutomata", "1")));
+		Log.d("IME_LOG", "Process : onCreate(). Pref. Hand     : " + String.valueOf(sharedPref.getBoolean("prefHand", true)) + "(Right = true | Left = false)");
+		Log.d("IME_LOG", "Process : onCreate(). Pref. Language : " + String.valueOf(sharedPref.getString("prefLanguage", "1")) + "(Kor = 1 | Eng = 2 | Spc = 3)");
 	}
 
 	/**
@@ -87,6 +89,7 @@ public class InformationActivity extends Activity {
 	* @date 2015-05-08
 	*/
 	private int setInformImage() {
+		Log.i("IME_LOG", "Location : InformationActivity - setInformImage()");
 		// Hand: RIGHT && Language: Korean && Automata: 1
 		if(stateHand && stateLanguage.equals("1") && stateAutomata.equals("1"))
 			return R.drawable.img_auto1_rig_kor;
@@ -135,6 +138,7 @@ public class InformationActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		Log.i("IME_LOG", "Location : InformationActivity - onDestroy()");
 		try {
 			if(imageView != null) {
 				BitmapDrawable dr = (BitmapDrawable) imageView.getDrawable();
@@ -142,7 +146,7 @@ public class InformationActivity extends Activity {
 					dr.setCallback(null);
 				imageView.setImageDrawable(null);
 			}
-		} catch (Exception ignore) {}		
+		} catch (Exception ignore) {}
 	}
 	
 }

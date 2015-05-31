@@ -20,20 +20,24 @@ import android.view.inputmethod.InputConnection;
 /////////////////////////////////////////////
 public abstract class IME_Automata {
 	
+	/////////////////////////////////////////////
+	/// @fn isAllocatedMotion
+	/// @brief Function information : Check motion array.
+	/// @remark
+	/// - Description : This method will check whether the motion is allocated in automata or not.
+	/// @param finger_array : motion array.
+	/// @return If motion is allocated, return true. If not, return false.
+	/////////////////////////////////////////////
 	public abstract boolean isAllocatedMotion(int[] finger_array);
 	
 	/////////////////////////////////////////////
 	/// @fn execute
-	/// @brief Function information : Abstract method which returns output string from motion input.
+	/// @brief Function information : Get motion and returns output string.
 	/// @remark
-	/// - Description : 
-	/// @param finger_array
-	/// @param input_connection
-	/// @return 
-	///
-	///~~~~~~~~~~~~~{.java}
-	/// // core code
-	///~~~~~~~~~~~~~
+	/// - Description : returns output string from motion input.
+	/// @param finger_array : motion array
+	/// @param input_connection : InputConnection in InputMethodService.
+	/// @return Output string.
 	/////////////////////////////////////////////
 	public abstract String execute(int[] finger_array, InputConnection input_connection);
 	
@@ -70,6 +74,6 @@ public abstract class IME_Automata {
 	protected InputConnection ic;
 	
 	public void finalize() {
-		Log.d("GC Free", "finalize automata object");
+		Log.i("IME_LOG", "Location : IME_Automata - finalize()");
 	}
 }

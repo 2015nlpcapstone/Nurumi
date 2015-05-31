@@ -1,5 +1,6 @@
 ﻿package com.fouram.nurumikeyboard.IME_Automata;
 
+import android.util.Log;
 import android.view.inputmethod.InputConnection;
 
 /**
@@ -134,6 +135,7 @@ public class Automata_type_Spc extends IME_Automata {
     }
     
     public String execute(int[] finger_array, InputConnection input_connection) {
+    	Log.i("AUTOMATA_LOG", "Location : Automata_type_Spc - execute()");
         // kim // 150516 // init values
         int idx = 5;
         finger = finger_array;
@@ -168,6 +170,7 @@ public class Automata_type_Spc extends IME_Automata {
     
     @Override
 	public boolean isAllocatedMotion(int[] finger) {
+    	Log.i("AUTOMATA_LOG", "Location : Automata_type_Spc - isAllocatedMotion()");
 		count_finger = 0;
 		int idx = 5;
 		while (idx-- > 0)

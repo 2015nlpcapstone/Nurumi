@@ -15,9 +15,9 @@
 
     <!-- Based on Languages -->
     <string-array name="arrayLanguage">
-        <item name="language1">한글 기반</item>
-        <item name="language2">영어 기반</item>
-        <item name="language3">숫자 및 특수문자 기반</item>
+        <item name="language1">한글</item>
+        <item name="language2">영어</item>
+        <item name="language3">숫자 및 특수문자</item>
     </string-array>
 
     <string-array name="arrayLanguageValues">

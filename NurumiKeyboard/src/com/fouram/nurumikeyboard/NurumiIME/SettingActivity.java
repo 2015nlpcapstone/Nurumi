@@ -7,6 +7,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 /**
  * @class SettingActivity
@@ -36,11 +37,10 @@ public class SettingActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.i("IME_LOG", "Location : SettingActivity - onCreate()");
         addPreferencesFromResource(R.xml.settings);
         setOnPreferenceChange(findPreference("prefAutomata"));
-        setOnPreferenceChange(findPreference("prefLanguage"));
-        
+        setOnPreferenceChange(findPreference("prefLanguage"));        
     }
     
     /**
@@ -62,6 +62,7 @@ public class SettingActivity extends PreferenceActivity {
             = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
+        	Log.i("IME_LOG", "Location : SettingActivity - onPreferenceChange()");
             String stringValue = newValue.toString();
 
             /* ListPreference의 경우 stringValue가 entryValues이기 때문에
@@ -72,7 +73,6 @@ public class SettingActivity extends PreferenceActivity {
                  int index = listPreference.findIndexOfValue(stringValue);
                  preference.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
              }
-
             return true;
         }
     };
@@ -86,8 +86,9 @@ public class SettingActivity extends PreferenceActivity {
      * @date 2015-05-04
      */
     private void setOnPreferenceChange(Preference mPreference) {
+    	Log.i("IME_LOG", "Location : SettingActivity - setOnPreferenceChange()");
         mPreference.setOnPreferenceChangeListener(onPreferenceChangeListener);
-
+        
         onPreferenceChangeListener.onPreferenceChange(mPreference,
                 PreferenceManager.getDefaultSharedPreferences(mPreference.getContext()).getString(mPreference.getKey(), ""));
     }
@@ -109,6 +110,7 @@ public class SettingActivity extends PreferenceActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("IME_LOG", "Location : SettingActivity - onDestroy()");
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         String stateAutomata = sharedPref.getString("prefAutomata", "1");

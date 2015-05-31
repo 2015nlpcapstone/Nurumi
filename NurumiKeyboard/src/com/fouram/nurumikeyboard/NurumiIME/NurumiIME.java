@@ -39,15 +39,15 @@ import android.widget.ImageButton;
 ///  - This class makes user to replace keyboard.\n
 /////////////////////////////////////////////
 public class NurumiIME extends InputMethodService
-					   implements OnMKeyboardGestureListener {
-	
+implements OnMKeyboardGestureListener {
+
 	protected static final int FIVE_FINGERS = 5;
 	//private final int TEN_FINGERS = 10;
-	
+
 	private final int KOR = 1;
 	private final int ENG = 2;
 	private final int SPC = 3;
-	
+
 	private int numFingers;
 	private View entireView;
 	private ViewGroup vg;
@@ -55,22 +55,22 @@ public class NurumiIME extends InputMethodService
 	private int[] motion;
 
 	// Soyeong
-    private ImageButton ibtnInform;
-    private ImageButton ibtnSetting;
+	private ImageButton ibtnInform;
+	private ImageButton ibtnSetting;
 
 	private String stateAutomata;
 	private Boolean stateHand;
 	private String stateLanguage;
 	private IME_Automata automata;
 	private int keyboardTypeFlag;
-	
+
 	private Boolean restart;
 
-    @Override
+	@Override
 	public void onFinishInputView(boolean finishingInput) {
 		super.onFinishInputView(finishingInput);
 	}
-	
+
 	/////////////////////////////////////////////
 	/// @fn 
 	/// @brief (Override method) Function information
@@ -83,9 +83,9 @@ public class NurumiIME extends InputMethodService
 	/////////////////////////////////////////////
 	@Override
 	public View onCreateInputView() {
-		
+		Log.i("IME_LOG", "Location : NurumiIME - onCreateView()");
+
 		restart = true;
-		
 		int layoutId = R.layout.mkeyboardlayout;
 		entireView = (View)getLayoutInflater().inflate(layoutId, null);
 		vg = (ViewGroup) entireView;
@@ -93,27 +93,27 @@ public class NurumiIME extends InputMethodService
 		mKeyboardView.setIme(this);		
 		numFingers = FIVE_FINGERS;
 		motion = new int[numFingers];
-        Log.i("++MAIN", "SUCCESS");
-        setViewId();
-        
-        keyboardTypeFlag = KOR;
+
+		setViewId();
+		keyboardTypeFlag = KOR;
 		setState();
 		setToKorKeyboard();
 
 		restartMng();
-		
+
 		return entireView;
 	}
-	
+
 	private void restartMng() {
+		Log.i("IME_LOG", "Location : NurumiIME - restartMng()");
 		SharedPreferences sharedPref = getSharedPreferences("RestartMng", MODE_PRIVATE);
 		restart = sharedPref.getBoolean("restart", true);
-		
+
 		SharedPreferences.Editor prefEdit = sharedPref.edit();
 		if(restart) {
 			prefEdit.putBoolean("restart", false);
 			prefEdit.commit();
-			
+
 			android.os.Process.killProcess(android.os.Process.myPid());
 		} else {
 			prefEdit.putBoolean("restart", true);
@@ -130,62 +130,65 @@ public class NurumiIME extends InputMethodService
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
-		setState();
-		Log.d("++ONSTARTCOMMAND", "SUCCESS");
+		Log.i("IME_LOG", "Location : NurumiIME - onStartCommand()");
+		setState();		
 		// We want this service to continue running until it is explicitly
-	    // stopped, so return sticky.
+		// stopped, so return sticky.
 		return START_STICKY;
 	}
 
-    /**
-     * @function setViewId
-     * @brief This method sets default value when the application executes.
-     *
-     * @data vg is Layout's View Group.
-     * @see android.inputmethodservice.InputMethodService#onCreateInputView()
-     * @author Soyeong Park
-     * @date 2015-04-15
-     */
-    private void setViewId() {
-        ibtnInform = (ImageButton)vg.findViewById(R.id.ibtn_inform);
-        ibtnInform.setOnClickListener(mClickListener);
-        ibtnSetting = (ImageButton)vg.findViewById(R.id.ibtn_setting);
-        ibtnSetting.setOnClickListener(mClickListener);
-    }
+	/**
+	 * @function setViewId
+	 * @brief This method sets default value when the application executes.
+	 *
+	 * @data vg is Layout's View Group.
+	 * @see android.inputmethodservice.InputMethodService#onCreateInputView()
+	 * @author Soyeong Park
+	 * @date 2015-04-15
+	 */
+	private void setViewId() {
+		Log.i("IME_LOG", "Location : NurumiIME - setViewID()");
+		ibtnInform = (ImageButton)vg.findViewById(R.id.ibtn_inform);
+		ibtnInform.setOnClickListener(mClickListener);
+		ibtnSetting = (ImageButton)vg.findViewById(R.id.ibtn_setting);
+		ibtnSetting.setOnClickListener(mClickListener);
+	}
 
-    /**
-     * @brief This method manages all View's function through one Listener like 'onClick'
-     * @brief Examples about View are Button, TextView, ImageView ...
-     *
-     * @param v has all View's ID information.
-     *
-     * @author Soyeong Park
-     * @date 2015-05-05
-     */
-    Button.OnClickListener mClickListener = new View.OnClickListener() {
+	/**
+	 * @brief This method manages all View's function through one Listener like 'onClick'
+	 * @brief Examples about View are Button, TextView, ImageView ...
+	 *
+	 * @param v has all View's ID information.
+	 *
+	 * @author Soyeong Park
+	 * @date 2015-05-05
+	 */
+	Button.OnClickListener mClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
-			Intent intentService = new Intent(NurumiIME.this, NurumiIME.class);
+			Log.i("IME_LOG", "Location : NurumiIME - onClick()");
 
+			Intent intentService = new Intent(NurumiIME.this, NurumiIME.class);			
 			switch(v.getId()) {
-                case R.id.ibtn_inform:
-                    Log.i("++INFORM", v.toString());
-                    Intent intentInform = new Intent(NurumiIME.this, InformationActivity.class);
-					intentInform.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intentInform);
-                    break;
-                case R.id.ibtn_setting:
-					Log.i("++SETTING", "1SUCCESS");
-                    Intent intentSetting = new Intent(NurumiIME.this, SettingActivity.class);
-					intentSetting.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(intentSetting);
-					stopService(intentService);
-					break;
-            }
-        }
-    };
+			case R.id.ibtn_inform:
+				Log.d("IME_LOG", "Process : onClick(). Inform button. " + v.toString());
+				Intent intentInform = new Intent(NurumiIME.this, InformationActivity.class);
+				intentInform.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intentInform);
+				break;
+			case R.id.ibtn_setting:
+				Log.d("IME_LOG", "Process : onClick(). Settings button. " + v.toString());
+				Intent intentSetting = new Intent(NurumiIME.this, SettingActivity.class);
+				intentSetting.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intentSetting);
+				stopService(intentService);
+				break;
+			}
+		}
+	};
 
 	@Override
 	public boolean onShowInputRequested (int flags, boolean configChange) {
+		Log.v("IME_LOG", "Location : NurumiIME - onShowInputReqested()");
 		return true;
 	}
 
@@ -200,31 +203,32 @@ public class NurumiIME extends InputMethodService
 	@Override
 	public void onWindowHidden() {
 		super.onWindowHidden();
-		mKeyboardView.initialize();
+		Log.v("IME_LOG", "Location : NurumiIME - onWindowHidden()");
+		mKeyboardView.initialize(MKeyboardView.ALL);
 	}	
-	
+
 	/* From here for full-screen mode */
 	@Override
-    public void onUpdateExtractingVisibility(EditorInfo ei) {
-        setExtractViewShown(true);
-    }
-	
-	@Override
-    public boolean onEvaluateFullscreenMode() {
-        return false;
-    }
-	
-	@Override
-    public boolean isFullscreenMode() {
-        return true;
-    }
-	
-	@Override
-    public void setExtractViewShown(boolean shown) {
-        super.setExtractViewShown(true);
-    }
+	public void onUpdateExtractingVisibility(EditorInfo ei) {
+		setExtractViewShown(true);
+	}
 
-	
+	@Override
+	public boolean onEvaluateFullscreenMode() {
+		return false;
+	}
+
+	@Override
+	public boolean isFullscreenMode() {
+		return true;
+	}
+
+	@Override
+	public void setExtractViewShown(boolean shown) {
+		super.setExtractViewShown(true);
+	}
+
+
 	/////////////////////////////////////////////
 	/// @fn 
 	/// @brief (Override method) Destructor of IME
@@ -236,11 +240,12 @@ public class NurumiIME extends InputMethodService
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		Log.i("IME_LOG", "Location : NurumiIME - onDestroy()");
 		if(mKeyboardView != null)
 			mKeyboardView.onDestroyView();
 		try {
 			setToKorKeyboard();
-		} catch(Exception ignore) {}
+		} catch(Exception ignore) {} // If memory free failed, ignore any kind of exception.
 		restartMng();
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
@@ -255,17 +260,24 @@ public class NurumiIME extends InputMethodService
 	/////////////////////////////////////////////
 	@Override
 	public void onFinishGesture(int[] motion) {
+		Log.i("IME_LOG", "Location : NurumiIME - onFinishGesture()");
+
 		if(stateHand == true) {// right handed
 			for(int i = 0; i<numFingers; i++)
 				this.motion[i] = motion[i]; // get gesture input
+			Log.d("IME_LOG", "Process : onFinishGesture(). HandSetting : Right handed");
 		} else { // left handed
-			Log.d("LeftHanded", "leftHanded");
 			for(int i = 0; i<numFingers; i++)
 				this.motion[i] = motion[(numFingers-1)-i]; // get gesture input
+			Log.d("IME_LOG", "Process : onFinishGesture(). HandSetting : Left handed");
 		}
-		if( changeKeyboardType(this.motion) )
+
+		if( changeKeyboardType(this.motion) ) {
 			setAutomata(keyboardTypeFlag, stateAutomata);
-		else if(automata.isAllocatedMotion(motion)) {
+			Log.d("IME_LOG", "Process : onFinishGesture(). Language setting changed");
+		}
+		else if(automata.isAllocatedMotion(motion)) { // If motion is allocated motion, do automata.execute()
+			Log.d("IME_LOG", "Process : onFinishGesture(). Write text");
 			InputConnection ic = getCurrentInputConnection();
 			ic.commitText(String.valueOf(automata.execute(this.motion,ic)),1);
 		}			
@@ -285,13 +297,18 @@ public class NurumiIME extends InputMethodService
 	 * @date 2015-05-15
 	 */
 	private void setState() {
+		Log.i("IME_LOG", "Location : NurumiIME - setState()");
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 		stateAutomata = sharedPref.getString("prefAutomata", "1");
 		stateHand = sharedPref.getBoolean("prefHand", true);
 		stateLanguage = sharedPref.getString("prefLanguage", "1");
 		setKeyboardFlag(stateLanguage);
-		Log.d("shPref", "" + stateAutomata + " " + stateHand + " " + stateLanguage + " " + keyboardTypeFlag);
+
 		setAutomata(keyboardTypeFlag, stateAutomata);
+		Log.d("IME_LOG", "Process : setState(). Pref. Automata : " + stateAutomata);
+		Log.d("IME_LOG", "Process : setState(). Pref. Hand     : " + stateHand + "(Right = true | Left = false)");
+		Log.d("IME_LOG", "Process : setState(). Pref. Language : " + stateLanguage + "(Kor = 1 | Eng = 2 | Spc = 3)");
+		Log.v("IME_LOG", "Process : setState(). Flag - keyboardTypeFlag : " + keyboardTypeFlag + "(KOR = 1 | ENG = 2 | SPC = 3)");
 	}
 
 	/////////////////////////////////////////////
@@ -307,28 +324,34 @@ public class NurumiIME extends InputMethodService
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	private void setAutomata(int keyboardTypeFlag, String automataType) {
+		Log.i("IME_LOG", "Location : NurumiIME - setAutomata()");
 		switch(keyboardTypeFlag) {
-			case KOR : {
-				switch(automataType) {
-				case "1":
-					automata = new Automata_type_Kor_1();
-					break;
-				case "2":
-					automata = new Automata_type_Kor_2();
-					break;
-				case "3":
-					automata = new Automata_type_Kor_3();
-					break;			
-				}
-			} break;
-			case ENG :
-				automata = new Automata_type_Eng();
+		case KOR : {
+			switch(automataType) {
+			case "1":
+				automata = new Automata_type_Kor_1();
+				Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_1");
 				break;
-			case SPC :
-				automata = new Automata_type_Spc();
+			case "2":
+				automata = new Automata_type_Kor_2();
+				Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_2");
 				break;
-			default :
-				Log.d("Error", "Error : keyboardTypeFlag at setAutomata");
+			case "3":
+				automata = new Automata_type_Kor_3();
+				Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_3");
+				break;			
+			}
+		} break;
+		case ENG :
+			automata = new Automata_type_Eng();
+			Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Eng");
+			break;
+		case SPC :
+			automata = new Automata_type_Spc();
+			Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Spc");
+			break;
+		default :
+			Log.e("IME_LOG", "Process : setAutomata(). Error : keyboardTypeFlag error. (Value : " + stateLanguage + ")");
 		}
 		System.gc();
 	}
@@ -346,35 +369,39 @@ public class NurumiIME extends InputMethodService
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	private boolean changeKeyboardType(int[] motion) {
+		Log.i("IME_LOG", "Location : NurumiIME - changeKeyboardType()");
 		if(motion[IME_Automata.THUMB_FINGER] == IME_Automata.DIRECTION_DOT
-		&& motion[IME_Automata.INDEX_FINGER] == IME_Automata.DIRECTION_DOT
-		&& motion[IME_Automata.MIDLE_FINGER] == IME_Automata.DIRECTION_DOT
-		&& motion[IME_Automata.RING__FINGER] == IME_Automata.DIRECTION_DOT
-		&& motion[IME_Automata.PINKY_FINGER] == IME_Automata.DIRECTION_DOT) {
+				&& motion[IME_Automata.INDEX_FINGER] == IME_Automata.DIRECTION_DOT
+				&& motion[IME_Automata.MIDLE_FINGER] == IME_Automata.DIRECTION_DOT
+				&& motion[IME_Automata.RING__FINGER] == IME_Automata.DIRECTION_DOT
+				&& motion[IME_Automata.PINKY_FINGER] == IME_Automata.DIRECTION_DOT) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 			SharedPreferences.Editor prefEdit = pref.edit();
 			switch(keyboardTypeFlag) {
-				case KOR :
-					prefEdit.putString("prefLanguage", "2");
-					prefEdit.commit();
-					keyboardTypeFlag = ENG;
-					break;
-				case ENG :
-					prefEdit.putString("prefLanguage", "3");
-					prefEdit.commit();
-					keyboardTypeFlag = SPC;
-					break;
-				case SPC :
-					prefEdit.putString("prefLanguage", "1");
-					prefEdit.commit();
-					keyboardTypeFlag = KOR;
+			case KOR :
+				prefEdit.putString("prefLanguage", "2");
+				prefEdit.commit();
+				keyboardTypeFlag = ENG;
+				break;
+			case ENG :
+				prefEdit.putString("prefLanguage", "3");
+				prefEdit.commit();
+				keyboardTypeFlag = SPC;
+				break;
+			case SPC :
+				prefEdit.putString("prefLanguage", "1");
+				prefEdit.commit();
+				keyboardTypeFlag = KOR;
 			}
+			Log.v("IME_LOG", "Process : changeKeyboardType(). Flag - keyboardTypeFlag : " + keyboardTypeFlag + "(KOR = 1 | ENG = 2 | SPC = 3)");
 			return true;
 		}
-		else
+		else {
+			Log.v("IME_LOG", "Process : changeKeyboardType(). No change");
 			return false;
+		}
 	}
-	
+
 	/////////////////////////////////////////////
 	/// @fn setToKorKeyboard
 	/// @brief Function information : Set Language to Korean
@@ -386,6 +413,7 @@ public class NurumiIME extends InputMethodService
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	private void setToKorKeyboard() {
+		Log.i("IME_LOG", "Location : NurumiIME - setToKorKeyboard()");
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 		SharedPreferences.Editor prefEdit = pref.edit();
 		prefEdit.putString("prefLanguage", "1");
@@ -394,8 +422,9 @@ public class NurumiIME extends InputMethodService
 			keyboardTypeFlag = KOR;
 			setAutomata(keyboardTypeFlag, stateAutomata);
 		}
+		Log.v("IME_LOG", "Process : setToKorKeyboard(). Set keyboard to KOR");
 	}
-	
+
 	/////////////////////////////////////////////
 	/// @fn setKeyboardFlag
 	/// @brief Function information : Set keyboarTypeFlag with using stateLanguage.
@@ -408,19 +437,21 @@ public class NurumiIME extends InputMethodService
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	private void setKeyboardFlag(String stateLanguage) {
+		Log.i("IME_LOG", "Location : NurumiIME - setKeyboardFlag()");
 		switch(stateLanguage) {
-			case "1" :
-				keyboardTypeFlag = KOR;
-				break;
-			case "2" :
-				keyboardTypeFlag = ENG;
-				break;
-			case "3" :
-				keyboardTypeFlag = SPC;
-				break;
-			default :
-				Log.d("Error", "Error : stateLanguage at setKeyboardFlag");
+		case "1" :
+			keyboardTypeFlag = KOR;
+			break;
+		case "2" :
+			keyboardTypeFlag = ENG;
+			break;
+		case "3" :
+			keyboardTypeFlag = SPC;
+			break;
+		default :
+			Log.e("IME_LOG", "Process : setKeyboardFlag(). Error : stateLanguage error. (Value : " + stateLanguage + ")");
 		}
+		Log.v("IME_LOG", "Process : setKeyboardFlag(). Flag - keyboardTypeFlag : " + keyboardTypeFlag + "(KOR = 1 | ENG = 2 | SPC = 3)");
 	}
-	
+
 }
