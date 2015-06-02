@@ -9,34 +9,34 @@ import com.fouram.nurumikeyboard.IME_Automata.*;
 
 
 public abstract class MotionInput {
-	
+
 	protected IME_Automata automata;
 	protected String str=null;
 	protected InputConnection ic;
-	
+
 	public MotionInput(InputConnection ic) {
 		this.ic = ic;
 	}
-	
+
 	protected static final int D_EPT = -1;
 	protected static final int D_DOT = 0;
 	protected static final int D_DOWN = 1;
 	protected static final int D_LEFT = 2;
 	protected static final int D_UP = 3;
 	protected static final int D_RIGHT = 4;
-	
+
 	public void test() {
-		
-		giyeok(); space(); nieun(); space(); digut(); space(); lieul(); space(); mieum(); enter();
-		beeup(); space(); seeot(); space(); yieung(); space(); jieut(); space(); chiut(); enter();
-		keeuk(); space(); teeut(); space(); peeup(); space(); heeut(); enter();
+
+		giyeok(); space(); nieun(); space(); digut(); space(); lieul(); space(); mieum(); space();
+		beeup(); space(); seeot(); space(); yieung(); space(); jieut(); space(); chiut(); space();
+		keeuk(); space(); teeut(); space(); peeup(); space(); heeut(); space();
 		dbKiyoek(); space(); dbDigut(); space(); dbBeeup(); space(); dbSeeot(); space(); dbJieut(); enter();
-		ah(); space(); ya(); space(); uh(); space(); yuh(); space(); o(); yo(); enter();
-		u(); space(); yu(); space(); eu(); space(); yi(); space(); ae(); space(); e(); enter();
-		yae(); space(); yeh(); space(); wa(); space(); wae(); enter();
-		woe(); space(); wuh(); space(); weh(); space(); wui(); space(); ui();
-		
-		/*
+		ah(); space(); ya(); space(); uh(); space(); yuh(); space(); o(); space(); yo(); space();
+		u(); space(); yu(); space(); eu(); space(); yi(); space(); ae(); space(); e(); space();
+		yae(); space(); yeh(); space(); wa(); space(); wae(); space();
+		woe(); space(); wuh(); space(); weh(); space(); wui(); space(); ui(); enter();
+
+
 		nieun(); ah(); space();
 		nieun(); ya(); space();
 		nieun(); uh(); space();
@@ -57,9 +57,9 @@ public abstract class MotionInput {
 		nieun(); wuh(); space();
 		nieun(); weh(); space();
 		nieun(); wui(); space();
-		nieun(); ui(); space();
-		*/
-		/*
+		nieun(); ui(); enter();
+
+
 		beeup(); yae(); giyeok(); space();
 		beeup(); yae(); dbKiyoek(); space();
 		beeup(); yae(); giyeok(); seeot(); space();
@@ -67,7 +67,7 @@ public abstract class MotionInput {
 		beeup(); yae(); nieun(); jieut(); space();
 		beeup(); yae(); nieun(); heeut(); space();
 		beeup(); yae(); digut(); space();
-		
+
 		beeup(); yae(); lieul(); space();
 		beeup(); yae(); lieul(); giyeok(); space();
 		beeup(); yae(); lieul(); mieum(); space();		
@@ -76,7 +76,7 @@ public abstract class MotionInput {
 		beeup(); yae(); lieul(); teeut(); space();
 		beeup(); yae(); lieul(); peeup(); space();
 		beeup(); yae(); lieul(); heeut(); space();
-		
+
 		beeup(); yae(); mieum(); space();
 		beeup(); yae(); beeup(); space();
 		beeup(); yae(); beeup(); seeot(); space();
@@ -88,68 +88,63 @@ public abstract class MotionInput {
 		beeup(); yae(); keeuk(); space();
 		beeup(); yae(); teeut(); space();
 		beeup(); yae(); peeup(); space();
-		beeup(); yae(); heeut(); space();
-		*/
-		/*
-		nieun(); empty(); ah(); space();
-		nieun(); ah(); empty(); nieun(); space();
-		nieun(); ah(); nieun(); empty(); ah(); space();
-		nieun(); ah(); nieun(); jieut(); empty(); ah(); space();
-		nieun(); ah(); nieun(); heeut(); ya(); yieung(); empty(); ah(); space();
-		*/
+		beeup(); yae(); heeut(); enter();
+
+		yieung(); u(); lieul(); teeut(); ah(); lieul(); yi(); space(); // μΈνƒ€λ¦¬
+		seeot(); ah(); lieul(); mieum(); yieung(); ui();
+		heeut(); yuh(); nieun(); jieut(); ah(); yieung(); enter(); //μ‚¶μν„μ¥
 	};
-	
-	abstract public void giyeok(); //¤΅
-	abstract public void nieun(); //¤¤
-	abstract public void digut(); //¤§
-	abstract public void lieul(); //¤©
-	abstract public void mieum(); //¤±
-	abstract public void beeup(); //¤²
-	abstract public void seeot(); //¤µ
-	abstract public void yieung(); //¤·
-	abstract public void jieut(); //¤Έ
-	abstract public void chiut(); //¤Ί
-	abstract public void keeuk(); //¤»
-	abstract public void teeut(); //¤Ό
-	abstract public void peeup(); //¤½
-	abstract public void heeut(); //¤Ύ
-	
-	abstract public void dbKiyoek(); //¤Ά
-	abstract public void dbDigut(); //¤¨
-	abstract public void dbBeeup(); //¤³
-	abstract public void dbSeeot(); //¤¶
-	abstract public void dbJieut(); //¤Ή
-	
-	abstract public void ah(); //¤Ώ
-	abstract public void ya(); //¤Α
-	abstract public void uh(); //¤Γ
-	abstract public void yuh(); //¤Ε
-	abstract public void o(); //¤Η
-	abstract public void yo(); //¤Λ
-	abstract public void u(); //¤Μ
-	abstract public void yu(); //¤Π
-	abstract public void eu(); //¤Ρ
-	abstract public void yi(); //¤Σ
-	abstract public void ae(); //¤ΐ
-	abstract public void e(); //¤Δ
-	abstract public void yae(); //¤Β
-	abstract public void yeh(); //¤Ζ
-	abstract public void wa(); //¤Θ
-	abstract public void wae(); //¤Ι
-	abstract public void woe(); //¤Κ
-	abstract public void wuh(); //¤Ν
-	abstract public void weh(); //¤Ξ
-	abstract public void wui(); //¤Ο
-	abstract public void ui(); //¤Ò
+
+	abstract public void giyeok(); // γ„±
+	abstract public void nieun(); // γ„΄
+	abstract public void digut(); // γ„·
+	abstract public void lieul(); // γ„Ή
+	abstract public void mieum(); // γ…
+	abstract public void beeup(); // γ…‚
+	abstract public void seeot(); // γ……
+	abstract public void yieung(); // γ…‡
+	abstract public void jieut(); // γ…
+	abstract public void chiut(); // γ…
+	abstract public void keeuk(); // γ…‹
+	abstract public void teeut(); // γ…
+	abstract public void peeup(); // γ…
+	abstract public void heeut(); // γ…
+
+	abstract public void dbKiyoek(); // γ„²
+	abstract public void dbDigut(); // γ„Έ
+	abstract public void dbBeeup(); // γ…ƒ
+	abstract public void dbSeeot(); // γ…†
+	abstract public void dbJieut(); // γ…‰
+
+	abstract public void ah(); // γ…
+	abstract public void ya(); // γ…‘
+	abstract public void uh(); // γ…“
+	abstract public void yuh(); // γ…•
+	abstract public void o(); // γ…—
+	abstract public void yo(); // γ…›
+	abstract public void u(); // γ…
+	abstract public void yu(); // γ… 
+	abstract public void eu(); // γ…΅
+	abstract public void yi(); // γ…£
+	abstract public void ae(); // γ…
+	abstract public void e(); // γ…”
+	abstract public void yae(); // γ…’
+	abstract public void yeh(); // γ…–
+	abstract public void wa(); // γ…
+	abstract public void wae(); // γ…™
+	abstract public void woe(); // γ…
+	abstract public void wuh(); // γ…
+	abstract public void weh(); // γ…
+	abstract public void wui(); // γ…
+	abstract public void ui(); // γ…Ά
 	public void space() {
 		automata.execute(new int[] {D_RIGHT,-1,-1,-1,-1}, ic);
+		ic.commitText(" ", 1);
 	}
-	public void empty() {
-		automata.execute(new int[] {-1,-1,-1,D_UP,-1}, ic);
-	}
-	
+
 	public void enter() {
 		automata.execute(new int[] {0,-1,-1,-1,0}, ic);
-		Log.d("TestResult", "next----------------------");
+		ic.commitText("\n", 1);
+		//Log.d("TestResult", "next----------------------");
 	}
 }

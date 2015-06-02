@@ -1,6 +1,6 @@
 ﻿<resources>
     <string name="app_name">NurumiKeyboard</string>
-    <string name="nurumi_ime">누루미 키보드</string>
+    <string name="nurumi_ime">누르미 키보드</string>
     <string name="subtype_lang">한국어, English (US)</string>
 
     <string name="txt_inform">Inform</string>

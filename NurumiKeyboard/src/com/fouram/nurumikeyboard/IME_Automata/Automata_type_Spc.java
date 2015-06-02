@@ -1,5 +1,6 @@
 ﻿package com.fouram.nurumikeyboard.IME_Automata;
 
+import android.util.Log;
 import android.view.inputmethod.InputConnection;
 
 /**
@@ -134,6 +135,7 @@ public class Automata_type_Spc extends IME_Automata {
     }
     
     public String execute(int[] finger_array, InputConnection input_connection) {
+    	Log.i("AUTOMATA_LOG", "Location : Automata_type_Spc - execute()");
         // kim // 150516 // init values
         int idx = 5;
         finger = finger_array;
@@ -165,4 +167,42 @@ public class Automata_type_Spc extends IME_Automata {
         // kim // 150413 // switch by automata level
         return text_to_commit;
     }
+    
+    @Override
+	public boolean isAllocatedMotion(int[] finger) {
+    	Log.i("AUTOMATA_LOG", "Location : Automata_type_Spc - isAllocatedMotion()");
+		count_finger = 0;
+		int idx = 5;
+		while (idx-- > 0)
+			if (finger[idx] != DIRECTION_EMPTY)
+				count_finger++;
+		
+		if(count_finger == 1 && ( (finger[INDEX_FINGER] == DIRECTION_DOT)  || (finger[MIDLE_FINGER] == DIRECTION_DOT)   || // 1 2
+								  (finger[RING__FINGER] == DIRECTION_DOT)  || (finger[PINKY_FINGER] == DIRECTION_DOT)   || // 3 4
+								  (finger[INDEX_FINGER] == DIRECTION_UP)   || (finger[INDEX_FINGER] == DIRECTION_DOWN)  || // . ,
+								  (finger[INDEX_FINGER] == DIRECTION_RIGHT)|| (finger[INDEX_FINGER] == DIRECTION_LEFT)  || // ! ?
+								  (finger[MIDLE_FINGER] == DIRECTION_UP)   || (finger[MIDLE_FINGER] == DIRECTION_DOWN)  || // ^ ~
+								  (finger[MIDLE_FINGER] == DIRECTION_RIGHT)|| (finger[MIDLE_FINGER] == DIRECTION_LEFT)  || // / ;
+								  (finger[RING__FINGER] == DIRECTION_UP)   || (finger[RING__FINGER] == DIRECTION_DOWN)  || // - _
+								  (finger[RING__FINGER] == DIRECTION_RIGHT)|| (finger[RING__FINGER] == DIRECTION_LEFT)  || // ( )
+								  (finger[PINKY_FINGER] == DIRECTION_UP)   || (finger[PINKY_FINGER] == DIRECTION_DOWN)  || // + *
+								  (finger[PINKY_FINGER] == DIRECTION_RIGHT)|| (finger[PINKY_FINGER] == DIRECTION_LEFT)  || // @ =
+								  (finger[THUMB_FINGER] == DIRECTION_RIGHT)|| (finger[THUMB_FINGER] == DIRECTION_LEFT)  )) // space backspace
+			return true;
+		else if(count_finger == 2 && (((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_DOT))  || //5
+									  ((finger[MIDLE_FINGER] == DIRECTION_DOT)   && (finger[RING__FINGER] == DIRECTION_DOT))  || //6
+									  ((finger[RING__FINGER] == DIRECTION_DOT)   && (finger[PINKY_FINGER] == DIRECTION_DOT))  || //7
+									  ((finger[THUMB_FINGER] == DIRECTION_DOT)   && (finger[PINKY_FINGER] == DIRECTION_DOT))  || //enter
+									  ((finger[THUMB_FINGER] == DIRECTION_RIGHT) && (finger[MIDLE_FINGER] == DIRECTION_RIGHT))|| //right move
+									  ((finger[THUMB_FINGER] == DIRECTION_LEFT)  && (finger[MIDLE_FINGER] == DIRECTION_LEFT)) )) //left move
+			return true;
+		else if(count_finger == 3 && ( ((finger[INDEX_FINGER] == DIRECTION_DOT) && (finger[MIDLE_FINGER] == DIRECTION_DOT) && (finger[RING__FINGER] == DIRECTION_DOT)) || //8
+									   ((finger[MIDLE_FINGER] == DIRECTION_DOT) && (finger[RING__FINGER] == DIRECTION_DOT) && (finger[PINKY_FINGER] == DIRECTION_DOT)) )) //9
+			return true;
+		else if(count_finger == 4 && ( ((finger[INDEX_FINGER] == DIRECTION_DOT) && (finger[MIDLE_FINGER] == DIRECTION_DOT) &&
+										(finger[RING__FINGER] == DIRECTION_DOT) && (finger[PINKY_FINGER] == DIRECTION_DOT)))) //0
+			return true;
+		else
+			return false;
+	}
 }

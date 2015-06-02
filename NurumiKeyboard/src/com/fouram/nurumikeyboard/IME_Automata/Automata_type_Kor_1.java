@@ -162,23 +162,23 @@ public class Automata_type_Kor_1 extends IME_Automata {
 
 
 			if (finger[INDEX_FINGER] == DIRECTION_DOT&&finger[MIDLE_FINGER] == DIRECTION_DOT
-				&&finger[RING__FINGER] == DIRECTION_DOT) {
-					CHO_SEONG_JAEUM(9);
+			&&finger[RING__FINGER] == DIRECTION_DOT) {
+				CHO_SEONG_JAEUM(9);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_DOT
-				&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
-					CHO_SEONG_JAEUM(11);
+					&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
+				CHO_SEONG_JAEUM(11);
 			} else if (finger[MIDLE_FINGER] == DIRECTION_UP
-				&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
-					CHO_SEONG_JAEUM(18);
+					&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
+				CHO_SEONG_JAEUM(18);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN
-				&&finger[MIDLE_FINGER] == DIRECTION_DOWN&&finger[RING__FINGER] == DIRECTION_DOWN) {
-					CHO_SEONG_JAEUM(10);
+					&&finger[MIDLE_FINGER] == DIRECTION_DOWN&&finger[RING__FINGER] == DIRECTION_DOWN) {
+				CHO_SEONG_JAEUM(10);
 			} else if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT
-				&& finger[MIDLE_FINGER] == DIRECTION_DOT) {
-					text_to_commit = String.format("%c", 12643);//'ㅣ'
-					Moeumbuffer[Moeumautomata_level]=20;
-					Moeumautomata_level += 1;
-					automata_level += 1;
+					&& finger[MIDLE_FINGER] == DIRECTION_DOT) {
+				text_to_commit = String.format("%c", 12643);//'ㅣ'
+				Moeumbuffer[Moeumautomata_level]=20;
+				Moeumautomata_level += 1;
+				automata_level += 1;
 			} else {
 				text_to_commit="";
 
@@ -189,14 +189,14 @@ public class Automata_type_Kor_1 extends IME_Automata {
 
 
 			if (finger[INDEX_FINGER] == DIRECTION_DOT&&finger[MIDLE_FINGER] == DIRECTION_DOT
-				&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
-					CHO_SEONG_JAEUM(12);
+			&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
+				CHO_SEONG_JAEUM(12);
 			} else if (finger[INDEX_FINGER] == DIRECTION_UP&&finger[MIDLE_FINGER] == DIRECTION_UP
-				&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
-					CHO_SEONG_JAEUM(14);
+					&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
+				CHO_SEONG_JAEUM(14);
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN&&finger[MIDLE_FINGER] == DIRECTION_DOWN
-				&&finger[RING__FINGER] == DIRECTION_DOWN&&finger[PINKY_FINGER] == DIRECTION_DOWN) {
-					CHO_SEONG_JAEUM(13);
+					&&finger[RING__FINGER] == DIRECTION_DOWN&&finger[PINKY_FINGER] == DIRECTION_DOWN) {
+				CHO_SEONG_JAEUM(13);
 			} else {
 				text_to_commit="";
 			}
@@ -230,8 +230,8 @@ public class Automata_type_Kor_1 extends IME_Automata {
 						buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level - 1];
 						text_to_commit = String.format("%c", (area_a));
 						checkmoeumcomplete=false;
-								 }
-								 break;
+					}
+					break;
 					case 18:
 						if(lastbuffer!=-1) {
 							JUNG_SEONG_MOEUM(13);
@@ -263,8 +263,8 @@ public class Automata_type_Kor_1 extends IME_Automata {
 						buffer[LEVEL_JUNG_SEONG] = Moeumbuffer[Moeumautomata_level];
 						text_to_commit = String.format("%c", (area_a));
 						checkmoeumcomplete=false;
-									 }
-									 break;
+					}
+					break;
 					case 13:
 						if(lastbuffer!=-1) {
 							JUNG_SEONG_MOEUM(17);
@@ -631,21 +631,21 @@ public class Automata_type_Kor_1 extends IME_Automata {
 
 
 			if (finger[INDEX_FINGER] == DIRECTION_DOT&&finger[MIDLE_FINGER] == DIRECTION_DOT
-				&&finger[RING__FINGER] == DIRECTION_DOT) {
-					JONG_SEONG_JAEUM(19);
-					firstjaeum_bokjaeum=9;
+			&&finger[RING__FINGER] == DIRECTION_DOT) {
+				JONG_SEONG_JAEUM(19);
+				firstjaeum_bokjaeum=9;
 			} else if (finger[MIDLE_FINGER] == DIRECTION_DOT
-				&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
-					JONG_SEONG_JAEUM(21);
-					firstjaeum_bokjaeum=11;
+					&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
+				JONG_SEONG_JAEUM(21);
+				firstjaeum_bokjaeum=11;
 			} else if (finger[MIDLE_FINGER] == DIRECTION_UP
-				&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
-					JONG_SEONG_JAEUM(27);
-					firstjaeum_bokjaeum=18;
+					&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
+				JONG_SEONG_JAEUM(27);
+				firstjaeum_bokjaeum=18;
 			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN
-				&&finger[MIDLE_FINGER] == DIRECTION_DOWN&&finger[RING__FINGER] == DIRECTION_DOWN) {
-					JONG_SEONG_JAEUM(20);
-					firstjaeum_bokjaeum=10;
+					&&finger[MIDLE_FINGER] == DIRECTION_DOWN&&finger[RING__FINGER] == DIRECTION_DOWN) {
+				JONG_SEONG_JAEUM(20);
+				firstjaeum_bokjaeum=10;
 			}else {
 				LEVEL_CHO_SEONG();
 			}
@@ -655,13 +655,13 @@ public class Automata_type_Kor_1 extends IME_Automata {
 
 
 			if (finger[INDEX_FINGER] == DIRECTION_DOT&&finger[MIDLE_FINGER] == DIRECTION_DOT
-				&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
-					JONG_SEONG_JAEUM(22);
-					firstjaeum_bokjaeum=12;
+			&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
+				JONG_SEONG_JAEUM(22);
+				firstjaeum_bokjaeum=12;
 			} else if (finger[INDEX_FINGER] == DIRECTION_UP&&finger[MIDLE_FINGER] == DIRECTION_UP
-				&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
-					JONG_SEONG_JAEUM(23);
-					firstjaeum_bokjaeum=14;
+					&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
+				JONG_SEONG_JAEUM(23);
+				firstjaeum_bokjaeum=14;
 			}else {
 				LEVEL_CHO_SEONG();
 			}
@@ -754,38 +754,38 @@ public class Automata_type_Kor_1 extends IME_Automata {
 
 
 			if (finger[INDEX_FINGER] == DIRECTION_DOT&&finger[MIDLE_FINGER] == DIRECTION_DOT
-				&&finger[RING__FINGER] == DIRECTION_DOT) {
-					if(buffer[LEVEL_JONG_SEONG]==1) {
-						buffer[LEVEL_JONG_SEONG] = 3;
-						nextjaeum=9;
-						BOK_JAEUM();
-					}
-					else if(buffer[LEVEL_JONG_SEONG]==8) {
-						buffer[LEVEL_JONG_SEONG] = 12;
-						nextjaeum=9;
-						BOK_JAEUM();
-					}
-					else if(buffer[LEVEL_JONG_SEONG]==17) {
-						buffer[LEVEL_JONG_SEONG] = 18;
-						nextjaeum=9;
-						BOK_JAEUM();
-					}
-					else
-						LEVEL_CHO_SEONG();
+			&&finger[RING__FINGER] == DIRECTION_DOT) {
+				if(buffer[LEVEL_JONG_SEONG]==1) {
+					buffer[LEVEL_JONG_SEONG] = 3;
+					nextjaeum=9;
+					BOK_JAEUM();
+				}
+				else if(buffer[LEVEL_JONG_SEONG]==8) {
+					buffer[LEVEL_JONG_SEONG] = 12;
+					nextjaeum=9;
+					BOK_JAEUM();
+				}
+				else if(buffer[LEVEL_JONG_SEONG]==17) {
+					buffer[LEVEL_JONG_SEONG] = 18;
+					nextjaeum=9;
+					BOK_JAEUM();
+				}
+				else
+					LEVEL_CHO_SEONG();
 			} else if (finger[MIDLE_FINGER] == DIRECTION_UP
-				&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
-					if(buffer[LEVEL_JONG_SEONG]==4) {
-						buffer[LEVEL_JONG_SEONG] = 6;
-						nextjaeum=18;
-						BOK_JAEUM();
-					}
-					else if(buffer[LEVEL_JONG_SEONG]==8) {
-						buffer[LEVEL_JONG_SEONG] = 15;
-						nextjaeum=18;
-						BOK_JAEUM();
-					}
-					else
-						LEVEL_CHO_SEONG();
+					&&finger[RING__FINGER] == DIRECTION_UP&&finger[PINKY_FINGER] == DIRECTION_UP) {
+				if(buffer[LEVEL_JONG_SEONG]==4) {
+					buffer[LEVEL_JONG_SEONG] = 6;
+					nextjaeum=18;
+					BOK_JAEUM();
+				}
+				else if(buffer[LEVEL_JONG_SEONG]==8) {
+					buffer[LEVEL_JONG_SEONG] = 15;
+					nextjaeum=18;
+					BOK_JAEUM();
+				}
+				else
+					LEVEL_CHO_SEONG();
 			} else if(finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT&& finger[MIDLE_FINGER] == DIRECTION_DOT){
 				ic.deleteSurroundingText(1,0);
 				text_to_commit = String.format("%c%c", generate_korean_char_code(buffer[CHO_SEONG], buffer[JUNG_SEONG],0),generate_korean_char_code(firstjaeum_bokjaeum,20,0));
@@ -806,14 +806,14 @@ public class Automata_type_Kor_1 extends IME_Automata {
 
 
 			if (finger[INDEX_FINGER] == DIRECTION_DOT&&finger[MIDLE_FINGER] == DIRECTION_DOT
-				&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
-					if(buffer[LEVEL_JONG_SEONG]==4) {
-						buffer[LEVEL_JONG_SEONG] = 5;
-						nextjaeum=12;
-						BOK_JAEUM();
-					}
-					else
-						LEVEL_CHO_SEONG();
+			&&finger[RING__FINGER] == DIRECTION_DOT&&finger[PINKY_FINGER] == DIRECTION_DOT) {
+				if(buffer[LEVEL_JONG_SEONG]==4) {
+					buffer[LEVEL_JONG_SEONG] = 5;
+					nextjaeum=12;
+					BOK_JAEUM();
+				}
+				else
+					LEVEL_CHO_SEONG();
 			}
 			else
 				LEVEL_CHO_SEONG();
@@ -878,8 +878,8 @@ public class Automata_type_Kor_1 extends IME_Automata {
 
 	};
 	public String execute(int[] finger_array, InputConnection input_connection) {
-
-
+		Log.i("AUTOMATA_LOG", "Location : Automata_type_Kor_1 - execute()");
+		
 		// kim // 150516 // init values
 		int idx = 5;
 		finger = finger_array;
@@ -896,9 +896,9 @@ public class Automata_type_Kor_1 extends IME_Automata {
 			Log.d("Automata bgn", "automata level : " + automata_level);
 			Log.d("Automata bgn", "finger count : " + count_finger);
 			Log.d("Automata bgn", "current buffer : " + buffer[CHO_SEONG] + " " + buffer[JUNG_SEONG] + " " + buffer[JONG_SEONG]
-			+ " " + buffer[3]);
+					+ " " + buffer[3]);
 			Log.d("Automata bgn", "motion : " + finger[THUMB_FINGER] + " " + finger[INDEX_FINGER] + " "
-				+ finger[MIDLE_FINGER] + " " + finger[RING__FINGER] + " " + finger[PINKY_FINGER]);
+					+ finger[MIDLE_FINGER] + " " + finger[RING__FINGER] + " " + finger[PINKY_FINGER]);
 			Log.d("Automata bgn", "moeum level : " + Moeumautomata_level);
 			Log.d("Automata bgn", "moeum level : " + Moeumbuffer[CHO_SEONG] + " " + Moeumbuffer[JUNG_SEONG] + " " + Moeumbuffer[JONG_SEONG]);
 		}
@@ -917,9 +917,9 @@ public class Automata_type_Kor_1 extends IME_Automata {
 		}
 
 		else if (count_finger == 2 && finger[THUMB_FINGER] == DIRECTION_DOT
-			&& finger[PINKY_FINGER] == DIRECTION_DOT) {
-				LEVEL_CHO_SEONG();
-				return "\n";
+				&& finger[PINKY_FINGER] == DIRECTION_DOT) {
+			LEVEL_CHO_SEONG();
+			return "\n";
 		}
 
 		// kim // 150413 // switch by automata level
@@ -948,6 +948,50 @@ public class Automata_type_Kor_1 extends IME_Automata {
 		}
 
 		return text_to_commit;
+	}
+
+	@Override
+	public boolean isAllocatedMotion(int[] finger) {
+		Log.i("AUTOMATA_LOG", "Location : Automata_type_Kor_1 - isAllocatedMotion()");
+		count_finger = 0;
+		int idx = 5;
+		while (idx-- > 0)
+			if (finger[idx] != DIRECTION_EMPTY)
+				count_finger++;
+
+		if(count_finger == 1 && ( (finger[INDEX_FINGER] == DIRECTION_DOT)  || (finger[MIDLE_FINGER] == DIRECTION_DOT)   || // ㄱ ㄴ
+				(finger[RING__FINGER] == DIRECTION_DOT)  || (finger[PINKY_FINGER] == DIRECTION_DOT)   || // ㄷ ㄹ
+				(finger[INDEX_FINGER] == DIRECTION_UP)   || (finger[INDEX_FINGER] == DIRECTION_DOWN)  || // ㅋ ㄲ
+				(finger[RING__FINGER] == DIRECTION_UP)   || (finger[RING__FINGER] == DIRECTION_DOWN)  || // ㅌ ㄸ
+				(finger[THUMB_FINGER] == DIRECTION_RIGHT)|| (finger[THUMB_FINGER] == DIRECTION_LEFT)  )) // space backspace
+			return true;
+		else if(count_finger == 2 && (((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_DOT))  || //ㅁ
+				((finger[MIDLE_FINGER] == DIRECTION_DOT)   && (finger[RING__FINGER] == DIRECTION_DOT))  || //ㅂ
+				((finger[MIDLE_FINGER] == DIRECTION_UP)    && (finger[RING__FINGER] == DIRECTION_UP))   || //ㅍ
+				((finger[MIDLE_FINGER] == DIRECTION_DOWN)  && (finger[RING__FINGER] == DIRECTION_DOWN)) || //ㅃ
+				((finger[THUMB_FINGER] == DIRECTION_DOT)   && (finger[INDEX_FINGER] == DIRECTION_DOT))  || //・
+				((finger[THUMB_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_DOT))  || //ㅡ
+				((finger[THUMB_FINGER] == DIRECTION_DOT)   && (finger[PINKY_FINGER] == DIRECTION_DOT))  || //enter
+				((finger[THUMB_FINGER] == DIRECTION_RIGHT) && (finger[MIDLE_FINGER] == DIRECTION_RIGHT))|| //right move
+				((finger[THUMB_FINGER] == DIRECTION_LEFT)  && (finger[MIDLE_FINGER] == DIRECTION_LEFT)) )) //left move
+			return true;
+		else if(count_finger == 3 && ( ((finger[INDEX_FINGER] == DIRECTION_DOT)  && (finger[MIDLE_FINGER] == DIRECTION_DOT)  && (finger[RING__FINGER] == DIRECTION_DOT))  || //ㅅ
+				((finger[INDEX_FINGER] == DIRECTION_DOWN) && (finger[MIDLE_FINGER] == DIRECTION_DOWN) && (finger[RING__FINGER] == DIRECTION_DOWN)) || //ㅆ
+				((finger[MIDLE_FINGER] == DIRECTION_DOT)  && (finger[RING__FINGER] == DIRECTION_DOT)  && (finger[PINKY_FINGER] == DIRECTION_DOT))  || //ㅇ
+				((finger[MIDLE_FINGER] == DIRECTION_UP)   && (finger[RING__FINGER] == DIRECTION_UP)   && (finger[PINKY_FINGER] == DIRECTION_UP))   || //ㅎ
+				((finger[THUMB_FINGER] == DIRECTION_DOT)  && (finger[INDEX_FINGER] == DIRECTION_DOT)  && (finger[MIDLE_FINGER] == DIRECTION_DOT))  )) //ㅣ
+			return true;
+		else if(count_finger == 4 && ( ((finger[INDEX_FINGER] == DIRECTION_DOT)  && (finger[MIDLE_FINGER] == DIRECTION_DOT)  &&
+				(finger[RING__FINGER] == DIRECTION_DOT)  && (finger[PINKY_FINGER] == DIRECTION_DOT)) || //ㅈ
+
+				((finger[INDEX_FINGER] == DIRECTION_UP)   && (finger[MIDLE_FINGER] == DIRECTION_UP)   &&
+						(finger[RING__FINGER] == DIRECTION_UP)   && (finger[PINKY_FINGER] == DIRECTION_UP))  || //ㅊ
+
+						((finger[INDEX_FINGER] == DIRECTION_DOWN) && (finger[MIDLE_FINGER] == DIRECTION_DOWN) &&
+								(finger[RING__FINGER] == DIRECTION_DOWN) && (finger[PINKY_FINGER] == DIRECTION_DOWN)))) //ㅉ
+			return true;
+		else
+			return false;
 	}
 
 

@@ -18,12 +18,14 @@ public class AutomataTest {
 		inputType.test();
 		Log.d("TestResult", "-----Automata 1 End-----");
 		*/
+		
 		/*
 		Log.d("TestResult", "-----Automata 2 Start-----");
 		inputType = new InputType2(ic);
 		inputType.test();
 		Log.d("TestResult", "-----Automata 2 End-----");
 		*/
+		
 		
 		Log.d("TestResult", "-----Automata 3 Start-----");
 		inputType = new InputType3(ic);
