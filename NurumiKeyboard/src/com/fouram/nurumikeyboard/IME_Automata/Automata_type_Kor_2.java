@@ -1008,7 +1008,7 @@ public class Automata_type_Kor_2 extends IME_Automata {
             }
         }  else
             LEVEL_CHO_SEONG();
-    }
+    };
 
 
 	// yoon // THIS IS WHAT I'M REALLY WANT TO DO !!
