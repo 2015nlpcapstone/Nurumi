@@ -43,7 +43,7 @@
             android:id="@+id/MKeyboardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.fouram.nurumikeyboard.NurumiIME.MKeyboardView"
+            class="kookmin.cs.fouram.nurumikeyboard.IME.MKeyboardView"
             android:background="#00000000" />
         
     </LinearLayout>

@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fouram.nurumikeyboard.NurumiIME"
+    package="kookmin.cs.fouram.nurumikeyboard"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="12"
+        android:minSdkVersion="11"
         android:targetSdkVersion="22" />
 
     <application
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         android:largeHeap="true" >
         
-        <service android:name=".NurumiIME"
+        <service android:name="kookmin.cs.fouram.nurumikeyboard.IME.NurumiIME"
 		    android:label="@string/subtype_lang"
 		    android:permission="android.permission.BIND_INPUT_METHOD"
             >
@@ -23,16 +23,17 @@
 		        <action android:name="android.view.InputMethod" />
             </intent-filter>
 		</service>
-
-        <activity android:name=".InformationActivity"
+		
+		<activity android:name="kookmin.cs.fouram.nurumikeyboard.IME.InformationActivity"
             android:theme="@android:style/Theme.Dialog">
         </activity>
 
         <activity
-            android:name=".SettingActivity"
+            android:name="kookmin.cs.fouram.nurumikeyboard.IME.SettingActivity"
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
-
+        
+        
     </application>
 
 </manifest>
