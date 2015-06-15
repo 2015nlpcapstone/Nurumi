@@ -1,4 +1,4 @@
-﻿package kookmin.cs.fouram.nurumikeyboard.IME;
+﻿package kookmin.cs.fouram.nurumikeyboard.inputmethod;
 
 /////////////////////////////////////////////
 /// @class OnMKeyboardGestureListener

@@ -1,4 +1,4 @@
-﻿package kookmin.cs.fouram.nurumikeyboard.IME;
+﻿package kookmin.cs.fouram.nurumikeyboard.inputmethod;
 
 //import kookmin.fouram.nurumikeyboard.NurumiIME.R;
 import kookmin.cs.fouram.nurumikeyboard.R;
@@ -92,43 +92,34 @@ public class InformationActivity extends Activity {
 	*/
 	private int setInformImage() {
 		Log.i("IME_LOG", "Location : InformationActivity - setInformImage()");
-		
-		// Hand: RIGHT && Language: Korean && Automata: 1
-		if(stateHand && stateLanguage.equals("1") && stateAutomata.equals("1"))
-			return R.drawable.img_auto1_rig_kor;
-		// Hand: RIGHT && Language: Korean && Automata: 2
-		else if(stateHand && stateLanguage.equals("1") && stateAutomata.equals("2"))
-			return R.drawable.img_auto2_rig_kor;
-		// Hand: RIGHT && Language: Korean && Automata: 3
-		else if(stateHand && stateLanguage.equals("1") && stateAutomata.equals("3"))
-			return R.drawable.img_auto3_rig_kor;
-
-		// Hand: LEFT && Language: Korean && Automata: 1
-		else if(!stateHand && stateLanguage.equals("1") && stateAutomata.equals("1"))
-			return R.drawable.img_auto1_lef_kor;
-		// Hand: LEFT && Language: Korean && Automata: 2
-		else if(!stateHand && stateLanguage.equals("1") && stateAutomata.equals("2"))
-			return R.drawable.img_auto2_lef_kor;
-		// Hand: LEFT && Language: Korean && Automata: 3
-		else if(!stateHand && stateLanguage.equals("1") && stateAutomata.equals("3"))
-			return R.drawable.img_auto3_lef_kor;
-
-		// Hand: RIGHT && Language: English && Automata: X
-		else if(stateHand && stateLanguage.equals("2"))// && stateAutomata.equals("1")*/)
-			return R.drawable.img_auto_rig_eng;
-		// Hand: LEFT && Language: English && Automata: X
-		else if(!stateHand && stateLanguage.equals("2"))// && stateAutomata.equals("1")*/)
-			return R.drawable.img_auto_lef_eng;
-
-		// Hand: RIGHT && Language: Special Character && Automata: X
-		else if(stateHand && stateLanguage.equals("3"))
-			return R.drawable.img_auto_rig_spe;
-		// Hand: LEFT && Language: Special Character && Automata: X
-		else if(!stateHand && stateLanguage.equals("3"))
-			return R.drawable.img_auto_lef_spe;
-
-		else // default setting [RIGHT/KOREAN/AUTOMATA3]
-			return R.drawable.img_auto3_rig_kor;
+		if(stateHand) { // right hand
+			if(stateLanguage.equals("1")) {
+				if(stateAutomata.equals("1"))
+					return R.drawable.img_auto1_rig_kor;
+				else if(stateAutomata.equals("2"))
+					return R.drawable.img_auto2_rig_kor;
+				else
+					return R.drawable.img_auto3_rig_kor;
+			}
+			else if(stateLanguage.equals("2"))
+				return R.drawable.img_auto_rig_eng;
+			else
+				return R.drawable.img_auto_rig_spe;
+		}
+		else { // left hand
+			if(stateLanguage.equals("1")) { // Korean
+				if(stateAutomata.equals("1"))
+					return R.drawable.img_auto1_lef_kor;
+				else if(stateAutomata.equals("2"))
+					return R.drawable.img_auto2_lef_kor;
+				else
+					return R.drawable.img_auto3_lef_kor;
+			}
+			else if(stateLanguage.equals("2"))
+				return R.drawable.img_auto_lef_eng;
+			else
+				return R.drawable.img_auto_lef_spe;
+		}
 	}
 	
 	/////////////////////////////////////////////

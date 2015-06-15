@@ -1,4 +1,4 @@
-﻿package kookmin.cs.fouram.nurumikeyboard.IME;
+﻿package kookmin.cs.fouram.nurumikeyboard.inputmethod;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import kookmin.cs.fouram.nurumikeyboard.automata.IME_Automata;
 import kookmin.cs.fouram.nurumikeyboard.R;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,6 +16,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.MotionEvent;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.AttributeSet;
@@ -22,7 +24,7 @@ import android.view.View;
 
 /////////////////////////////////////////////
 /// @class MKeyboardView
-///com.fouram.nurumikeyboard.NurumiIME \n
+/// kookmin.cs.fouram.nurumikeyboard.IME \n
 ///   ㄴ MKeyboardView.java
 /// @section Class information
 ///    |    Item    |    Contents    |
@@ -34,7 +36,7 @@ import android.view.View;
 ///	- This file is for the view of motion keyboard.\n
 ///	- This view will popup when user\n put cursor in textbox.\n
 /////////////////////////////////////////////
-public class MKeyboardView extends View {
+public class MotionKeyboardView extends View {
 	private Context ctx; 
 	private NurumiIME ime;
 
@@ -43,14 +45,9 @@ public class MKeyboardView extends View {
 	private final int STD_CIRCLE_SIZE	 = 70; /// dp value
 	private final int INNER_CIRCLE_SIZE	 = 40; /// dp value
 
-	// For initialize (initialize all or partly).
-	public static final boolean PARTLY	 = true;
-	public static final boolean ALL		 = false;
-
-
 	/////////////////////////////////////////////
 	/// @class CircleLinkedWithPtId
-	///com.fouram.nurumikeyboard.NurumiIME \n
+	/// kookmin.cs.fouram.nurumikeyboard.IME \n
 	///   ㄴ MKeyboardView.java
 	/// @section Class information
 	///    |    Item    |    Contents    |
@@ -62,12 +59,17 @@ public class MKeyboardView extends View {
 	///	- This class will bind pointerID with circleNum.\n
 	/////////////////////////////////////////////
 	public class CircleLinkedWithPtId {
+		CircleLinkedWithPtId(){}
+		CircleLinkedWithPtId(int pointerId, int circleNum) {
+			this.pointerId = pointerId;
+			this.circleNum = circleNum;
+		}
 		int pointerId;
 		int circleNum;		
 	}
 	/////////////////////////////////////////////
 	/// @class PtIdLinkedWithPtIndex
-	///com.fouram.nurumikeyboard.NurumiIME \n
+	/// kookmin.cs.fouram.nurumikeyboard.IME \n
 	///   ㄴ MKeyboardView.java
 	/// @section Class information
 	///    |    Item    |    Contents    |
@@ -80,6 +82,11 @@ public class MKeyboardView extends View {
 	/// 
 	/////////////////////////////////////////////
 	public class PtIdLinkedWithPtIndex {
+		PtIdLinkedWithPtIndex(){}
+		PtIdLinkedWithPtIndex(int pointerId, int pointerIndex) {
+			this.pointerId = pointerId;
+			this.pointerIndex = pointerIndex;
+		}
 		int pointerId;
 		int pointerIndex;	
 	}
@@ -87,7 +94,7 @@ public class MKeyboardView extends View {
 	private final static Comparator<PointF> comparator =
 			/////////////////////////////////////////////
 			/// @class 1
-			///com.fouram.nurumikeyboard.NurumiIME \n
+			/// kookmin.cs.fouram.nurumikeyboard.IME \n
 			///   ㄴ MKeyboardView.java
 			/// @section Class information
 			///    |    Item    |    Contents    |
@@ -105,7 +112,7 @@ public class MKeyboardView extends View {
 		}
 	};
 
-	// Variables in MKeyboardView
+	// Variables in MotionKeyboardView
 	private Paint pnt;
 
 	// GUI state
@@ -126,11 +133,10 @@ public class MKeyboardView extends View {
 
 	// Flags
 	private boolean motionStartFlag;
-	private boolean start;
+	private boolean standardPositionFlag;
 	private boolean startFlag;
 
 	// Bitmap images
-	private Bitmap bitmap;
 	private Bitmap dotImg;
 	private Bitmap upImg;
 	private Bitmap downImg;
@@ -149,28 +155,30 @@ public class MKeyboardView extends View {
 	/// // core code
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
-	public MKeyboardView(Context context, AttributeSet attrs) {		
+	public MotionKeyboardView(Context context, AttributeSet attrs) {		
 		super(context, attrs);
 		Log.i("IME_LOG", "Location : MKeyboardView - Constructor");
 		this.ctx = context;
 		setDpValues();
-		initialize(ALL);
+		initialize();
 		setBitmap();
 	}
 
 	private void setDpValues() {
 		Log.i("IME_LOG", "Location : MKeyboardView - setDpValues()");
 		standardCircleSize = (int) dpToPx(STD_CIRCLE_SIZE, ctx.getApplicationContext());
-		innerCircleSize = (int) dpToPx(INNER_CIRCLE_SIZE, ctx.getApplicationContext());
-		swipeThreshold = (int) dpToPx(SWIPE_MIN_DISTANCE, ctx.getApplicationContext());
 		Log.v("IME_LOG", "Process : setDpValues(). Standard circle size : " + standardCircleSize);
+		
+		innerCircleSize = (int) dpToPx(INNER_CIRCLE_SIZE, ctx.getApplicationContext());
 		Log.v("IME_LOG", "Process : setDpValues(). Inner circle size    : " + innerCircleSize);
+		
+		swipeThreshold = (int) dpToPx(SWIPE_MIN_DISTANCE, ctx.getApplicationContext());
 		Log.v("IME_LOG", "Process : setDpValues(). Swipe Threshold      : " + swipeThreshold);
 	}
 
 	/////////////////////////////////////////////
 	/// @fn convertDpToPixel
-	/// @brief Function information : Convers dp value to px value.
+	/// @brief Function information : Converts dp value to px value.
 	/// @remark
 	/// - Description : This method converts dp unit to equivalent pixels, depending on device density.
 	/// @param dp A value in dp (density independent pixels) unit. Which we need to convert into pixels.
@@ -195,29 +203,33 @@ public class MKeyboardView extends View {
 	/// // core code
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
-	protected void initialize(boolean flag)	{
+	protected void initialize()	{
 		Log.i("IME_LOG", "Location : MKeyboardView - initialize()");
-		if(flag == ALL) {
-			pnt = new Paint();
-			numFingers = NurumiIME.FIVE_FINGERS;
+	
+		pnt = new Paint();
+		numFingers = NurumiIME.FIVE_FINGERS;
 
-			startFlag = false;
-			start = false;
-			motionStartFlag = false;
+		startFlag = false;
+		standardPositionFlag = false;
+		motionStartFlag = false;
 
-			motion = new int[numFingers];
+		motion = new int[numFingers];
 
-			circleAvailable = new boolean[numFingers];
+		circleAvailable = new boolean[numFingers];
 
-			plp = new LinkedList<PtIdLinkedWithPtIndex>();
-			clp = new ArrayList<CircleLinkedWithPtId>();
+		plp = new LinkedList<PtIdLinkedWithPtIndex>();
+		clp = new ArrayList<CircleLinkedWithPtId>();
 
-			startPtArr = new ArrayList<PointF>();
-			oldPtArr = new ArrayList<PointF>();
-			ptArr = new ArrayList<PointF>();
+		startPtArr = new ArrayList<PointF>();
+		oldPtArr = new ArrayList<PointF>();
+		ptArr = new ArrayList<PointF>();
 
-			startPtArr.clear();
-		}
+		startPtArr.clear();
+		
+		clearLists();
+	}
+	
+	private void clearLists() {
 		oldPtArr.clear();
 		ptArr.clear();
 		clp.clear();
@@ -226,7 +238,7 @@ public class MKeyboardView extends View {
 			circleAvailable[i] = true;
 	}
 
-	public MKeyboardView(Context context) {
+	public MotionKeyboardView(Context context) {
 		super(context);
 		Log.i("IME_LOG", "Location : MKeyboardView - Constructor 2");
 		this.ctx = context;
@@ -242,43 +254,30 @@ public class MKeyboardView extends View {
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	private void setBitmap() {
-		Log.i("IME_LOG", "Location : MKeyboardView - setBitmap()");
+		Log.i("IME_LOG", "Location : MKeyboardView - setBitmap()");		
+		dotImg = setImgToBitmap(R.drawable.img_finger_dot, innerCircleSize);
+		upImg = setImgToBitmap(R.drawable.img_finger_up, innerCircleSize);
+		downImg = setImgToBitmap(R.drawable.img_finger_down, innerCircleSize);
+		leftImg = setImgToBitmap(R.drawable.img_finger_left, innerCircleSize);
+		rightImg = setImgToBitmap(R.drawable.img_finger_right, innerCircleSize);
+		stdCircleImg = setImgToBitmap(R.drawable.img_std_circle, standardCircleSize);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	Bitmap setImgToBitmap(int imgId, int size) {
 		BitmapDrawable drawable;
-
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_dot);
-		bitmap = drawable.getBitmap();
-		dotImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
-		drawable.getBitmap().recycle();
-
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_up);
-		bitmap = drawable.getBitmap();
-		upImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
-		drawable.getBitmap().recycle();
-
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_down);
-		bitmap = drawable.getBitmap();
-		downImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
-		drawable.getBitmap().recycle();
-
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_left);
-		bitmap = drawable.getBitmap();
-		leftImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
-		drawable.getBitmap().recycle();
-
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_finger_right);
-		bitmap = drawable.getBitmap();
-		rightImg = Bitmap.createScaledBitmap(drawable.getBitmap(), innerCircleSize*2, innerCircleSize*2, true);
-		drawable.getBitmap().recycle();
-
-		drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.img_std_circle);
-		bitmap = drawable.getBitmap();
-		stdCircleImg = Bitmap.createScaledBitmap(drawable.getBitmap(), standardCircleSize*2, standardCircleSize*2, true);
-		drawable.getBitmap().recycle();
-
+		Bitmap bitmap;
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+			drawable = (BitmapDrawable) getResources().getDrawable(imgId, null);
+		else 
+			drawable = (BitmapDrawable) getResources().getDrawable(imgId);
+		
+		bitmap = Bitmap.createScaledBitmap(drawable.getBitmap(), size*2, size*2, true);
 		drawable.setCallback(null);
 		drawable.getBitmap().recycle();
+		return bitmap;
 	}
-
 	/////////////////////////////////////////////
 	/// @fn onDestroyView
 	/// @brief Function information : Free all objects in this view.
@@ -291,8 +290,6 @@ public class MKeyboardView extends View {
 	protected void onDestroyView() {
 		Log.i("IME_LOG", "Location : MKeyboardView - onDestroyView()");
 		try {
-			if(bitmap != null)
-				bitmap.recycle();
 			if(dotImg != null)
 				dotImg.recycle();
 			if(upImg != null)
@@ -336,49 +333,49 @@ public class MKeyboardView extends View {
 	public void onDraw(Canvas canvas) { // No log for this method because this is real-time method so it updates frequently.
 		super.onDraw(canvas);
 		canvas.drawColor(Color.TRANSPARENT);
-
-		/* standard position */
+		
 		if(startPtArr.isEmpty())
 			return;
-
+		
+		/* standard position */
 		for(PointF spt : startPtArr) {
 			float pointX = spt.x - standardCircleSize;
 			float pointY = spt.y - standardCircleSize;
 			canvas.drawBitmap(stdCircleImg, pointX, pointY, pnt);
 		}
 
-		/* down event position */
-		if(!oldPtArr.isEmpty())	{			
-			for (PointF pt : oldPtArr) {
-				int circleNum = checkTouchedCircle((int)pt.x, (int)pt.y);
-				PointF spt = startPtArr.get(circleNum-1);
+		if(oldPtArr.isEmpty()) // cannot go upward because the standard position
+			return;			   // must always be drawn.
+		/* down event position */	
+		for (PointF pt : oldPtArr) {
+			int circleNum = checkTouchedCircle((int)pt.x, (int)pt.y);
+			PointF spt = startPtArr.get(circleNum-1);
 
-				/// Start points are the center points of circles.
-				/// Images will be drawn from upper left corner.
-				float pointX = spt.x - innerCircleSize;
-				float pointY = spt.y - innerCircleSize;
+			/// Start points are the center points of circles.
+			/// Images will be drawn from upper left corner.
+			float pointX = spt.x - innerCircleSize;
+			float pointY = spt.y - innerCircleSize;
 
-				switch(motion[circleNum-1])	{				
-					case IME_Automata.DIRECTION_DOT :		
-						canvas.drawBitmap(dotImg, pointX, pointY, pnt);
-						break;
-					case IME_Automata.DIRECTION_UP :
-						canvas.drawBitmap(upImg, pointX, pointY, pnt);
-						break;
-					case IME_Automata.DIRECTION_DOWN :
-						canvas.drawBitmap(downImg, pointX, pointY, pnt);
-						break;
-					case IME_Automata.DIRECTION_LEFT :
-						canvas.drawBitmap(leftImg, pointX, pointY, pnt);
-						break;
-					case IME_Automata.DIRECTION_RIGHT :
-						canvas.drawBitmap(rightImg, pointX, pointY, pnt);
-						break;
-					default :
-						break;
-				} // switch end
-			} // oldPtArr for-each end
-		} // if end
+			switch(motion[circleNum-1])	{				
+				case IME_Automata.DIRECTION_DOT :		
+					canvas.drawBitmap(dotImg, pointX, pointY, pnt);
+					break;
+				case IME_Automata.DIRECTION_UP :
+					canvas.drawBitmap(upImg, pointX, pointY, pnt);
+					break;
+				case IME_Automata.DIRECTION_DOWN :
+					canvas.drawBitmap(downImg, pointX, pointY, pnt);
+					break;
+				case IME_Automata.DIRECTION_LEFT :
+					canvas.drawBitmap(leftImg, pointX, pointY, pnt);
+					break;
+				case IME_Automata.DIRECTION_RIGHT :
+					canvas.drawBitmap(rightImg, pointX, pointY, pnt);
+					break;
+				default :
+					break;
+			} // switch end
+		} // oldPtArr for-each end
 	} // onDraw fin
 
 	@Override
@@ -403,8 +400,8 @@ public class MKeyboardView extends View {
 	/////////////////////////////////////////////
 	public boolean onTouchEvent (MotionEvent e)	{
 		int action = e.getAction() & MotionEvent.ACTION_MASK;
-
-		if(start == false)
+		
+		if(standardPositionFlag == false)
 			return startMultiTouch(e);
 		else {
 			// all cases meets return command. So There is no break command.
@@ -450,14 +447,11 @@ public class MKeyboardView extends View {
 						touchCount = numFingers;
 					for (int i=0; i<touchCount; i++)
 					{
-						PointF ptf = new PointF();
-						ptf.x = e.getX(i);
-						ptf.y = e.getY(i);
+						PointF ptf = new PointF(e.getX(i), e.getY(i));
 						ptArr.add(ptf);
-	
-						PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex(); // Link pointerID and pointer index.
-						pp.pointerIndex = i;
-						pp.pointerId = e.getPointerId(i);
+
+						// Link pointerID and pointer index.
+						PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex(e.getPointerId(i), i);
 						plp.add(pp);
 	
 						checkDirection(pp, ptf);
@@ -475,7 +469,7 @@ public class MKeyboardView extends View {
 					return true;
 				}
 				case MotionEvent.ACTION_UP : { // No point left.
-					if(!startFlag && start) { // If it is first touch to set standard position,
+					if(!startFlag && standardPositionFlag) { // If it is first touch to set standard position,
 						startFlag = true;	  // do nothing.
 						return true;
 					}
@@ -485,13 +479,13 @@ public class MKeyboardView extends View {
 					motionCheck();
 	
 					/* initialization for next motion */
-					initialize(PARTLY);
+					clearLists();
 					performClick();
 					invalidate();					
 					return true;
 				}
 				case MotionEvent.ACTION_CANCEL : // cancel all motions and initialize
-					initialize(PARTLY);
+					clearLists();
 					//no break or return for sharing part.
 				default :
 					invalidate();
@@ -561,24 +555,20 @@ public class MKeyboardView extends View {
 	/////////////////////////////////////////////
 	private boolean startMultiTouch(MotionEvent e) {
 		startPtArr.clear();
-		if ( e.getAction() == MotionEvent.ACTION_DOWN || e.getAction() == MotionEvent.ACTION_MOVE ) {
-			Log.i("IME_LOG", "Location : MKeyboardView - startMultiTouch()");
-			int touchCount = e.getPointerCount();		
-			if(touchCount == numFingers) {
-				start = true;
-				Log.d("IME_LOG", "Process : motionCheck(). Flag - Start : " + start);
-				for (int i=0; i<touchCount; i++) {
-					PointF ptf = new PointF();
-					ptf.x = e.getX(i);
-					ptf.y = e.getY(i);
-					startPtArr.add(ptf);
-				}
-				Collections.sort(startPtArr, comparator);
-				return true;
-			} // if(touchCount == numFingers) end
-			else {return true;}
-		} // motion event if end
-		else {return false;}
+		if ( e.getAction() != MotionEvent.ACTION_DOWN && e.getAction() != MotionEvent.ACTION_MOVE ) 
+			return false;
+		
+		Log.i("IME_LOG", "Location : MKeyboardView - startMultiTouch()");
+		int touchCount = e.getPointerCount();		
+		if(touchCount == numFingers) {
+			standardPositionFlag = true;
+			Log.d("IME_LOG", "Process : motionCheck(). standardPositionFlag : " + standardPositionFlag);
+			
+			for (int i=0; i<touchCount; i++)
+				startPtArr.add(new PointF(e.getX(i), e.getY(i)));
+			Collections.sort(startPtArr, comparator);
+		}
+		return true;		
 	} // startMultiTouch fin
 
 
@@ -618,27 +608,15 @@ public class MKeyboardView extends View {
 		}
 		if(circleNum == INVALID_CIRCLE) return;
 
-		float distanceX = oldPt.x - pt.x;
-		float distanceY = oldPt.y - pt.y;
+		float distanceX = Math.abs(oldPt.x - pt.x);
+		float distanceY = Math.abs(oldPt.y - pt.y);
 
-		if( Math.abs(distanceX) < swipeThreshold && Math.abs(distanceY) < swipeThreshold )
+		if( distanceX < swipeThreshold && distanceY < swipeThreshold )
 			motion[circleNum-1] = IME_Automata.DIRECTION_DOT;
-		else if( Math.abs(distanceX) > swipeThreshold || Math.abs(distanceY) > swipeThreshold ) {
-			if( Math.abs(distanceY/distanceX) < 1 && Math.abs(distanceX) > swipeThreshold) {
-				// Gradient is smaller than 1.
-				if(distanceX > 0)
-					motion[circleNum-1] = IME_Automata.DIRECTION_LEFT;
-				else
-					motion[circleNum-1] = IME_Automata.DIRECTION_RIGHT;
-			}
-			else if( Math.abs(distanceY/distanceX) >= 1 && Math.abs(distanceY) > swipeThreshold) {
-				// Gradient is 1 or larger.
-				if(distanceY > 0)
-					motion[circleNum-1] = IME_Automata.DIRECTION_UP;
-				else
-					motion[circleNum-1] = IME_Automata.DIRECTION_DOWN;
-			}
-		} // direction UDLR end
+		else if( distanceY/distanceX < 1 && distanceX > swipeThreshold) // Gradient is smaller than 1.
+			motion[circleNum-1] = ( (oldPt.x > pt.x) ? IME_Automata.DIRECTION_LEFT : IME_Automata.DIRECTION_RIGHT );
+		else if( distanceY/distanceX >= 1 && distanceY > swipeThreshold) // Gradient is 1 or larger.			
+			motion[circleNum-1] = ( (oldPt.y > pt.y) ? IME_Automata.DIRECTION_UP : IME_Automata.DIRECTION_DOWN );
 	} // checkDirection fin
 
 }

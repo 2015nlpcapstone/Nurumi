@@ -23,5 +23,8 @@
     <string name="txt_10finger">양손</string>
 
     <string name="txt_language">사용할 언어</string>
-
+	
+    <string name="informImgView">정보창 이미지 뷰</string>
+    <string name="informbutton">정보 버튼</string>
+    <string name="settingsbutton">설정 버튼</string>
 </resources>

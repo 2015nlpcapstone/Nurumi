@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         android:largeHeap="true" >
         
-        <service android:name="kookmin.cs.fouram.nurumikeyboard.IME.NurumiIME"
+        <service android:name="kookmin.cs.fouram.nurumikeyboard.inputmethod.NurumiIME"
 		    android:label="@string/subtype_lang"
 		    android:permission="android.permission.BIND_INPUT_METHOD"
             >
@@ -24,12 +24,12 @@
             </intent-filter>
 		</service>
 		
-		<activity android:name="kookmin.cs.fouram.nurumikeyboard.IME.InformationActivity"
+		<activity android:name="kookmin.cs.fouram.nurumikeyboard.inputmethod.InformationActivity"
             android:theme="@android:style/Theme.Dialog">
         </activity>
 
         <activity
-            android:name="kookmin.cs.fouram.nurumikeyboard.IME.SettingActivity"
+            android:name="kookmin.cs.fouram.nurumikeyboard.inputmethod.SettingActivity"
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         
