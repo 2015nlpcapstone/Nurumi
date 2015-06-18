@@ -132,9 +132,9 @@ public class MotionKeyboardView extends View {
 	private ArrayList<PointF> ptArr;
 
 	// Flags
-	private boolean motionStartFlag;
+	private boolean inputStartFlag;
 	private boolean standardPositionFlag;
-	private boolean startFlag;
+	private boolean motionStartFlag;
 
 	// Bitmap images
 	private Bitmap dotImg;
@@ -209,9 +209,9 @@ public class MotionKeyboardView extends View {
 		pnt = new Paint();
 		numFingers = NurumiIME.FIVE_FINGERS;
 
-		startFlag = false;
-		standardPositionFlag = false;
 		motionStartFlag = false;
+		standardPositionFlag = false;
+		inputStartFlag = false;
 
 		motion = new int[numFingers];
 
@@ -234,7 +234,7 @@ public class MotionKeyboardView extends View {
 		ptArr.clear();
 		clp.clear();
 		plp.clear();
-		for(int i=0; i<numFingers; i++)
+		for(int i = 0; i < numFingers; i++)
 			circleAvailable[i] = true;
 	}
 
@@ -400,100 +400,93 @@ public class MotionKeyboardView extends View {
 	/////////////////////////////////////////////
 	public boolean onTouchEvent (MotionEvent e)	{
 		int action = e.getAction() & MotionEvent.ACTION_MASK;
-		
 		if(standardPositionFlag == false)
 			return startMultiTouch(e);
-		else {
-			// all cases meets return command. So There is no break command.
-			switch(action) {
-				case MotionEvent.ACTION_DOWN : {
-					if( checkTouchedCircle((int)e.getX(), (int)e.getY()) == INVALID_CIRCLE )
-						return false;
-					for(int i=0; i<numFingers; i++) // initialize motion array
-						motion[i] = IME_Automata.DIRECTION_EMPTY;
-					motionStartFlag = true;
-					Log.d("IME_LOG", "Process : onTouchEvent(). Motion input start"); 
-				}
-				// No break or return for sharing part. 
-				case MotionEvent.ACTION_POINTER_DOWN : {
-					Log.v("IME_LOG", "Process : onTouchEvent(). Finger added");
-					int touchCount = e.getPointerCount();
-					int circleNum = checkTouchedCircle((int)e.getX(touchCount-1), (int)e.getY(touchCount-1));
-					if(touchCount>numFingers || circleNum == INVALID_CIRCLE || !motionStartFlag || !circleAvailable[circleNum-1]) {
-						invalidate();
-						return true;
-					}
-					circleAvailable[circleNum-1] = false; // One finger in one circle.
-					motion[circleNum-1] = IME_Automata.DIRECTION_DOT;
-	
-					PointF ptf = new PointF(); // Add start position.
-					ptf.x = e.getX(touchCount-1);
-					ptf.y = e.getY(touchCount-1);
-					oldPtArr.add(ptf);
-	
-					CircleLinkedWithPtId cp = new CircleLinkedWithPtId(); // Link pointerID and circle number.
-					cp.pointerId = e.getPointerId(touchCount-1);
-					cp.circleNum = circleNum;
-					clp.add(cp);
-	
-					invalidate();
-					return true;
-				}
-				case MotionEvent.ACTION_MOVE : {
-					ptArr.clear();
-					plp.clear();
-					int touchCount = e.getPointerCount();
-					if(touchCount>numFingers)
-						touchCount = numFingers;
-					for (int i=0; i<touchCount; i++)
-					{
-						PointF ptf = new PointF(e.getX(i), e.getY(i));
-						ptArr.add(ptf);
-
-						// Link pointerID and pointer index.
-						PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex(e.getPointerId(i), i);
-						plp.add(pp);
-	
-						checkDirection(pp, ptf);
-					}
-					invalidate();
-					return true;
-				}
-				case MotionEvent.ACTION_POINTER_UP : {
-					Log.v("IME_LOG", "Process : onTouchEvent() . Finger detached");
-					motionStartFlag = false; // stop getting new touch
-	
-					int touchCount = e.getPointerCount();
-					if(touchCount>numFingers)
-						touchCount = numFingers;
-					return true;
-				}
-				case MotionEvent.ACTION_UP : { // No point left.
-					if(!startFlag && standardPositionFlag) { // If it is first touch to set standard position,
-						startFlag = true;	  // do nothing.
-						return true;
-					}
-					int touchCount = e.getPointerCount();
-					if(touchCount>numFingers)
-						touchCount = numFingers;
-					motionCheck();
-	
-					/* initialization for next motion */
-					clearLists();
-					performClick();
-					invalidate();					
-					return true;
-				}
-				case MotionEvent.ACTION_CANCEL : // cancel all motions and initialize
-					clearLists();
-					//no break or return for sharing part.
-				default :
-					invalidate();
+		int touchCount = e.getPointerCount();
+		if(touchCount > numFingers)
+			return false;		
+		int circleNum = checkTouchedCircle((int)e.getX(touchCount-1), (int)e.getY(touchCount-1));
+		
+		// all cases meets return command. So There is no break command.
+		switch(action) {		
+			case MotionEvent.ACTION_DOWN :
+			case MotionEvent.ACTION_POINTER_DOWN :
+				if( circleDown(e, circleNum, touchCount, action) == false )
 					return false;
-			} // switch end
-		} // else end (for start flag)
+				break;
+				
+			case MotionEvent.ACTION_MOVE :
+				ptArr.clear();
+				plp.clear();
+				
+				for (int i = 0; i < touchCount; i++) {
+					PointF ptf = new PointF(e.getX(i), e.getY(i));
+					ptArr.add(ptf);
+
+					// Link pointerID and pointer index.
+					PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex(e.getPointerId(i), i);
+					plp.add(pp);
+					checkDirection(pp, ptf);
+				}
+				invalidate();
+				break;
+				
+			case MotionEvent.ACTION_POINTER_UP :
+				Log.v("IME_LOG", "Process : onTouchEvent() . Finger detached");
+				inputStartFlag = false; // stop getting new touch				
+				break;
+				
+			case MotionEvent.ACTION_UP : // No point left.
+				if(!motionStartFlag && standardPositionFlag) { // If it is first touch to set standard position,
+					motionStartFlag = true;	 // do nothing.
+					break;
+				}
+				motionCheck();
+				/* initialization for next motion */
+				clearLists();
+				performClick();
+				invalidate();					
+				break;
+				
+			case MotionEvent.ACTION_CANCEL : // cancel all motions and initialize
+				clearLists();
+				//no break or return for sharing part.
+			default :
+				invalidate();
+				return false;
+		} // switch end		
+		return true;
 	} // onTouchEvent fin
 
+	
+	private boolean circleDown(MotionEvent e, int circleNum, int touchCount, int action) {
+		if(circleNum == INVALID_CIRCLE) { // If circle is not touched, return
+			invalidate(); 
+			return false;
+		}
+		if(action == MotionEvent.ACTION_DOWN) { // If it is initial down action
+			for(int i = 0; i < numFingers; i++) // initialize motion array
+				motion[i] = IME_Automata.DIRECTION_EMPTY;
+			inputStartFlag = true;				// motion input start
+			Log.d("IME_LOG", "Process : circleDown(). Motion input start");
+		}
+		
+		if(!inputStartFlag || !circleAvailable[circleNum-1]) {
+			invalidate(); // If motionStartFlag is false
+			return false; // or the touched circle is already being used
+		}
+		Log.v("IME_LOG", "Process : circleDown(). Finger added");
+		
+		circleAvailable[circleNum-1] = false; // One finger in one circle.
+		motion[circleNum-1] = IME_Automata.DIRECTION_DOT;
+
+		oldPtArr.add(new PointF(e.getX(touchCount-1), e.getY(touchCount-1))); // Add start position.
+		clp.add(new CircleLinkedWithPtId(e.getPointerId(touchCount-1), circleNum)); // Link pointerID and circle number.
+
+		invalidate();
+		return true;
+	}
+	
 	/////////////////////////////////////////////
 	/// @fn motionCheck
 	/// @brief Motion checking method 
@@ -506,8 +499,8 @@ public class MotionKeyboardView extends View {
 	/////////////////////////////////////////////
 	private void motionCheck() {
 		Log.i("IME_LOG", "Location : MKeyboardView - motionCheck()");
-		int checkEmpty=numFingers;
-		for(int i=0; i<numFingers; i++)
+		int checkEmpty = numFingers;
+		for(int i = 0; i < numFingers; i++)
 			checkEmpty += motion[i]; // Empty motion value is -1.
 		Log.d("IME_LOG", "Process : motionCheck(). Motion input end"); 
 		if(checkEmpty == 0)
@@ -564,7 +557,7 @@ public class MotionKeyboardView extends View {
 			standardPositionFlag = true;
 			Log.d("IME_LOG", "Process : motionCheck(). standardPositionFlag : " + standardPositionFlag);
 			
-			for (int i=0; i<touchCount; i++)
+			for (int i = 0; i < touchCount; i++)
 				startPtArr.add(new PointF(e.getX(i), e.getY(i)));
 			Collections.sort(startPtArr, comparator);
 		}
