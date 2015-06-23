@@ -14,13 +14,10 @@ import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-//import org.w3c.dom.Text;
-//import static android.support.v4.app.ActivityCompat.startActivityForResult;
-//import android.widget.EditText;
 
 /////////////////////////////////////////////
 /// @class NurumiIME
-///com.fouram.nurumikeyboard.NurumiIME \n
+///kookmin.cs.fouram.nurumikeyboard.inputmethod \n
 ///   ㄴ NurumiIME.java
 /// @section Class information
 ///    |    Item    |    Contents    |
@@ -28,7 +25,7 @@ import android.widget.ImageButton;
 ///    | Company | 4:00 A.M. |    
 ///    | Author | Park, Hyung Soon |
 ///    | Date | 2015. 3. 26. |
-/// @section Description
+/// @section Description : \n
 ///  - Input method service class.\n
 ///  - This class makes user to replace keyboard.\n
 /////////////////////////////////////////////
@@ -68,17 +65,13 @@ public class NurumiIME extends InputMethodService implements
 		super.onFinishInputView(finishingInput);
 	}
 
-	// ///////////////////////////////////////////
-	// / @fn
-	// / @brief (Override method) Function information
-	// / @remark
-	// / - Description
-	// / When user put cursor in text box,\n
-	// / custom layout will popup.\n
-	// / The xml file of custom keyboard layout is in
-	// res\layout\mkeyboardlayout.xml\n
-	// / @see android.inputmethodservice.InputMethodService#onCreateInputView()
-	// ///////////////////////////////////////////
+	//////////////////////////////////////////////
+	/// @fn onCreateInputView()
+	/// @brief (Override method) Function information
+	/// @remark
+	/// - Description : When user put cursor in text box, custom layout will pop-up.\n
+	/// The xml file of custom keyboard layout is in res\layout\mkeyboardlayout.xml\n
+	/////////////////////////////////////////////
 	@Override
 	public View onCreateInputView() {
 		Log.i("IME_LOG", "Location : NurumiIME - onCreateView()");
@@ -87,7 +80,7 @@ public class NurumiIME extends InputMethodService implements
 		int layoutId = R.layout.motionkeyboardlayout;
 		entireView = (View) getLayoutInflater().inflate(layoutId, null);
 		vg = (ViewGroup) entireView;
-		mKeyboardView = (MotionKeyboardView) vg.findViewById(R.id.MKeyboardView);
+		mKeyboardView = (MotionKeyboardView) vg.findViewById(R.id.MotionKeyboardView);
 		mKeyboardView.setIme(this);
 		numFingers = FIVE_FINGERS;
 		motion = new int[numFingers];
@@ -102,6 +95,15 @@ public class NurumiIME extends InputMethodService implements
 		return entireView;
 	}
 
+	//////////////////////////////////////////////
+	/// @fn restartMng()
+	/// @brief This method will restart the inputMethodService.
+	/// @remark
+	/// - Description :
+	/// Because the android os will not finish the 'service' completely, \n
+	/// there will be errors when the users change input method.\n
+	/// So the first time when this method shows up, it will restart.
+	/////////////////////////////////////////////
 	private void restartMng() {
 		Log.i("IME_LOG", "Location : NurumiIME - restartMng()");
 		SharedPreferences sharedPref = getSharedPreferences("RestartMng", MODE_PRIVATE);
@@ -114,15 +116,13 @@ public class NurumiIME extends InputMethodService implements
 			android.os.Process.killProcess(android.os.Process.myPid());
 	}
 
-	// ///////////////////////////////////////////
-	// / @fn
-	// / @brief (Override method) When the IME service started from
-	// SettingActivity
-	// / @remark
-	// / - Description Load settings preferences.
-	// / @see android.app.Service#onStartCommand(android.content.Intent, int,
-	// int)
-	// ///////////////////////////////////////////
+	/////////////////////////////////////////////
+	/// @fn onStartCommand
+	/// @brief (Override method) When the IME service started from
+	/// SettingActivity
+	/// @remark
+	/// - Description : Load settings preferences.
+	/////////////////////////////////////////////
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
@@ -138,7 +138,6 @@ public class NurumiIME extends InputMethodService implements
 	 * @brief This method sets default value when the application executes.
 	 *
 	 * @data vg is Layout's View Group.
-	 * @see android.inputmethodservice.InputMethodService#onCreateInputView()
 	 * @author Soyeong Park
 	 * @date 2015-04-15
 	 */
@@ -187,15 +186,14 @@ public class NurumiIME extends InputMethodService implements
 		return true;
 	}
 
-	// ///////////////////////////////////////////
-	// / @fn
-	// / @brief (Override method) Function information
-	// / @remark
-	// / - Description
-	// / Reset keyboard view when the input method window has been hidden from
-	// the user.
-	// / @see android.inputmethodservice.InputMethodService#onWindowHidden()
-	// ///////////////////////////////////////////
+	/////////////////////////////////////////////
+	/// @fn onWindowHidden()
+	/// @brief (Override method) Function information
+	/// @remark
+	/// - Description :
+	/// Reset keyboard view when the input method window has been hidden from
+	/// the user.
+	/////////////////////////////////////////////
 	@Override
 	public void onWindowHidden() {
 		super.onWindowHidden();
@@ -224,14 +222,13 @@ public class NurumiIME extends InputMethodService implements
 		super.setExtractViewShown(true);
 	}
 
-	// ///////////////////////////////////////////
-	// / @fn
-	// / @brief (Override method) Destructor of IME
-	// / @remark
-	// / - Description Free all bitmap objects.\n
-	// / Initialize language to Korean(default value when start).
-	// / @see android.inputmethodservice.InputMethodService#onDestroy()
-	// ///////////////////////////////////////////
+	//////////////////////////////////////////////
+	/// @fn onDestroy()
+	/// @brief (Override method) Destructor of IME
+	/// @remark
+	/// - Description : Free all bitmap objects.\n
+	/// Initialize language to Korean(default value when start).
+	/////////////////////////////////////////////
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -247,14 +244,14 @@ public class NurumiIME extends InputMethodService implements
 	}
 
 	/* Custom gesture listener */
-	// ///////////////////////////////////////////
-	// / @fn
-	// / @brief (Override method) Gesture listener
-	// / @remark
-	// / - Description Get gesture input from MKeyboardView
-	// / @see
-	// com.fouram.nurumikeyboard.NurumiIME.OnMKeyboardGestureListener#onFinishGesture(java.lang.String)
-	// ///////////////////////////////////////////
+	/////////////////////////////////////////////
+	/// @fn onFinishGesture
+	/// @brief (Override method) Gesture listener
+	/// @remark
+	/// - Description : Get gesture input from MKeyboardView
+	/// @see
+	/// kookmin.cs.fouram.nurumikeyboard.inputmethod.OnMKeyboardGestureListener#onFinishGesture(java.lang.String)
+	/////////////////////////////////////////////
 	@Override
 	public void onFinishGesture(int[] motion) {
 		Log.i("IME_LOG", "Location : NurumiIME - onFinishGesture()");
@@ -300,29 +297,28 @@ public class NurumiIME extends InputMethodService implements
 		Log.i("IME_LOG", "Location : NurumiIME - setState()");
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 		stateAutomata = sharedPref.getString("prefAutomata", "1");
-		stateHand = sharedPref.getBoolean("prefHand", true);
-		stateLanguage = sharedPref.getString("prefLanguage", "1");
-		setKeyboardFlag(stateLanguage);
-
-		setAutomata(keyboardTypeFlag, stateAutomata);
 		Log.d("IME_LOG", "Process : setState(). Pref. Automata : " + stateAutomata);
+		stateHand = sharedPref.getBoolean("prefHand", true);
 		Log.d("IME_LOG", "Process : setState(). Pref. Hand     : " + stateHand + "(Right = true | Left = false)");
+		stateLanguage = sharedPref.getString("prefLanguage", "1");
 		Log.d("IME_LOG", "Process : setState(). Pref. Language : " + stateLanguage + "(Kor = 1 | Eng = 2 | Spc = 3)");
+		setKeyboardFlag(stateLanguage);		
 		Log.v("IME_LOG", "Process : setState(). Flag - keyboardTypeFlag : "	+ keyboardTypeFlag + "(KOR = 1 | ENG = 2 | SPC = 3)");
+		setAutomata(keyboardTypeFlag, stateAutomata);		
 	}
 
-	// ///////////////////////////////////////////
-	// / @fn setAutomata
-	// / @brief Function information : Set input automata
-	// / @remark
-	// / - Description : Set input automata with flag and preference.
-	// / @param keyboardTypeFlag Flag for language
-	// / @param automataType Preference value of automata type.
-	// /
-	// /~~~~~~~~~~~~~{.java}
-	// / // core code
-	// /~~~~~~~~~~~~~
-	// ///////////////////////////////////////////
+	/////////////////////////////////////////////
+	/// @fn setAutomata
+	/// @brief Function information : Set input automata
+	/// @remark
+	/// - Description : Set input automata with flag and preference.
+	/// @param keyboardTypeFlag Flag for language
+	/// @param automataType Preference value of automata type.
+	///
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private void setAutomata(int keyboardTypeFlag, String automataType) {
 		Log.i("IME_LOG", "Location : NurumiIME - setAutomata()");
 		switch (keyboardTypeFlag) {
@@ -356,26 +352,26 @@ public class NurumiIME extends InputMethodService implements
 		System.gc();
 	}
 
-	// ///////////////////////////////////////////
-	// / @fn changeKeyboardType
-	// / @brief Function information : Change keyboard language.
-	// / @remark
-	// / - Description : If motion is language change motion, change preference
-	// and flag.
-	// / @param motion Input motion event.
-	// / @return If motion is language change motion, return true.
-	// /
-	// /~~~~~~~~~~~~~{.java}
-	// / // core code
-	// /~~~~~~~~~~~~~
-	// ///////////////////////////////////////////
+	/////////////////////////////////////////////
+	/// @fn changeKeyboardType
+	/// @brief Function information : Change keyboard language.
+	/// @remark
+	/// - Description : If motion is language change motion, change preference
+	/// and flag.
+	/// @param motion Input motion event.
+	/// @return If motion is language change motion, return true.
+	///
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private boolean changeKeyboardType(int[] motion) {
 		Log.i("IME_LOG", "Location : NurumiIME - changeKeyboardType()");
 		if (motion[IME_Automata.THUMB_FINGER] != IME_Automata.DIRECTION_DOT
-				|| motion[IME_Automata.INDEX_FINGER] != IME_Automata.DIRECTION_DOT
-				|| motion[IME_Automata.MIDLE_FINGER] != IME_Automata.DIRECTION_DOT
-				|| motion[IME_Automata.RING__FINGER] != IME_Automata.DIRECTION_DOT
-				|| motion[IME_Automata.PINKY_FINGER] != IME_Automata.DIRECTION_DOT) {
+		 || motion[IME_Automata.INDEX_FINGER] != IME_Automata.DIRECTION_DOT
+		 || motion[IME_Automata.MIDLE_FINGER] != IME_Automata.DIRECTION_DOT
+		 || motion[IME_Automata.RING__FINGER] != IME_Automata.DIRECTION_DOT
+		 || motion[IME_Automata.PINKY_FINGER] != IME_Automata.DIRECTION_DOT) {
 			Log.v("IME_LOG", "Process : changeKeyboardType(). No change");
 			return false;
 		}
@@ -402,16 +398,16 @@ public class NurumiIME extends InputMethodService implements
 		return true;
 	}
 
-	// ///////////////////////////////////////////
-	// / @fn setToKorKeyboard
-	// / @brief Function information : Set Language to Korean
-	// / @remark
-	// / - Description : Set Language to Korean forcibly
-	// /
-	// /~~~~~~~~~~~~~{.java}
-	// / // core code
-	// /~~~~~~~~~~~~~
-	// ///////////////////////////////////////////
+	/////////////////////////////////////////////
+	/// @fn setToKorKeyboard
+	/// @brief Function information : Set Language to Korean
+	/// @remark
+	/// - Description : Set Language to Korean forcibly
+	///
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private void setToKorKeyboard() {
 		Log.i("IME_LOG", "Location : NurumiIME - setToKorKeyboard()");
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
@@ -425,18 +421,17 @@ public class NurumiIME extends InputMethodService implements
 		Log.v("IME_LOG", "Process : setToKorKeyboard(). Set keyboard to KOR");
 	}
 
-	// ///////////////////////////////////////////
-	// / @fn setKeyboardFlag
-	// / @brief Function information : Set keyboarTypeFlag with using
-	// stateLanguage.
-	// / @remark
-	// / - Description : Synchronize with current language state preference.
-	// / @param stateLanguage Current language state preference.
-	// /
-	// /~~~~~~~~~~~~~{.java}
-	// / // core code
-	// /~~~~~~~~~~~~~
-	// ///////////////////////////////////////////
+	//////////////////////////////////////////////
+	/// @fn setKeyboardFlag
+	/// @brief Function information : Set keyboarTypeFlag with using stateLanguage.
+	/// @remark
+	/// - Description : Synchronize with current language state preference.
+	/// @param stateLanguage Current language state preference.
+	///
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private void setKeyboardFlag(String stateLanguage) {
 		Log.i("IME_LOG", "Location : NurumiIME - setKeyboardFlag()");
 		switch (stateLanguage) {

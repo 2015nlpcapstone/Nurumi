@@ -2,7 +2,7 @@
 
 /////////////////////////////////////////////
 /// @class OnMKeyboardGestureListener
-///com.fouram.nurumikeyboard.NurumiIME \n
+///kookmin.cs.fouram.nurumikeyboard.inputmethod \n
 ///   ㄴ OnMKeyboardGestureListener.java
 /// @section Class information
 ///    |    Item    |    Contents    |

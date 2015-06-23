@@ -6,7 +6,7 @@ import android.view.inputmethod.InputConnection;
 
 /////////////////////////////////////////////
 /// @class IME_Automata
-///com.fouram.nurumikeyboard.NurumiIME \n
+/// kookmin.cs.fouram.nurumikeyboard.automata \n
 ///   ㄴ IME_Automata.java
 /// @section Class information
 ///    |    Item    |    Contents    |

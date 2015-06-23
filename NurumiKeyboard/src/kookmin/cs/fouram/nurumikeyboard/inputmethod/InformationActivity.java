@@ -1,10 +1,11 @@
 ﻿package kookmin.cs.fouram.nurumikeyboard.inputmethod;
 
-//import kookmin.fouram.nurumikeyboard.NurumiIME.R;
 import kookmin.cs.fouram.nurumikeyboard.R;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class InformationActivity extends Activity {
 	private Boolean stateHand;
 	private String stateLanguage;	
 	private ImageView imageView;
+	
 	/**
 	* @function onCreate(Bundle savedInstanceState)
 	*
@@ -48,7 +50,9 @@ public class InformationActivity extends Activity {
 	*
 	* @author Soyeong Park
 	* @date 2015-05-08
-	*/
+	*/	
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,7 +70,11 @@ public class InformationActivity extends Activity {
 		setContentView(R.layout.information);
 
 		// Set Image according to setting's conditions using BitmapDrawable
-		BitmapDrawable dr = (BitmapDrawable)getResources().getDrawable(setInformImage());
+		BitmapDrawable dr;
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+			dr = (BitmapDrawable)getResources().getDrawable(setInformImage(), null);
+		else
+			dr = (BitmapDrawable)getResources().getDrawable(setInformImage());
 		imageView = (ImageView)findViewById(R.id.imgView);
 		imageView.setImageDrawable(dr);
 
@@ -85,7 +93,7 @@ public class InformationActivity extends Activity {
 	* @variable stateLanguage is a setting's condition about Language like Korean, English...
 	* @variable stateSpecial is a mode's condition about Special Character & Numbers.
 	*
-	* @return R.drawable.? is an image according to setting's conditions
+	* @return R.drawable.* is an image according to setting's conditions
 	*
 	* @author Soyeong Park
 	* @date 2015-05-08
@@ -123,11 +131,10 @@ public class InformationActivity extends Activity {
 	}
 	
 	/////////////////////////////////////////////
-	/// @fn 
+	/// @fn onDestroy()
 	/// @brief (Override method) Destructor for evade memory leakage.
 	/// @remark
 	/// - Description
-	/// @see android.app.Activity#onDestroy()
 	/////////////////////////////////////////////
 	@Override
 	public void onDestroy() {

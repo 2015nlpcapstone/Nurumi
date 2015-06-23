@@ -23,18 +23,18 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /////////////////////////////////////////////
-/// @class MKeyboardView
-/// kookmin.cs.fouram.nurumikeyboard.IME \n
-///   ㄴ MKeyboardView.java
+/// @class MotionKeyboardView
+/// kookmin.cs.fouram.nurumikeyboard.inputmethod \n
+///   ㄴ MotionKeyboardView.java
 /// @section Class information
 ///    |    Item    |    Contents    |
 ///    | :-------------: | -------------   |
 ///    | Company | 4:00 A.M. |    
 ///    | Author | Park, Hyung Soon |
 ///    | Date | 2015. 3. 26. |
-/// @section Description
+/// @section Description :\n
 ///	- This file is for the view of motion keyboard.\n
-///	- This view will popup when user\n put cursor in textbox.\n
+///	- This view will pop-up when user\n put cursor in text-box.\n
 /////////////////////////////////////////////
 public class MotionKeyboardView extends View {
 	private Context ctx; 
@@ -47,15 +47,15 @@ public class MotionKeyboardView extends View {
 
 	/////////////////////////////////////////////
 	/// @class CircleLinkedWithPtId
-	/// kookmin.cs.fouram.nurumikeyboard.IME \n
-	///   ㄴ MKeyboardView.java
+	/// kookmin.cs.fouram.nurumikeyboard.inputmethod \n
+	///   ㄴ MotionKeyboardView.java
 	/// @section Class information
 	///    |    Item    |    Contents    |
 	///    | :-------------: | -------------   |
 	///    | Company | 4:00 A.M. |    
 	///    | Author | Park, Hyung Soon |
 	///    | Date | 2015. 3. 26. |
-	/// @section Description
+	/// @section Description : \n
 	///	- This class will bind pointerID with circleNum.\n
 	/////////////////////////////////////////////
 	public class CircleLinkedWithPtId {
@@ -69,17 +69,16 @@ public class MotionKeyboardView extends View {
 	}
 	/////////////////////////////////////////////
 	/// @class PtIdLinkedWithPtIndex
-	/// kookmin.cs.fouram.nurumikeyboard.IME \n
-	///   ㄴ MKeyboardView.java
+	/// kookmin.cs.fouram.nurumikeyboard.inputmethod \n
+	///   ㄴ MotionKeyboardView.java
 	/// @section Class information
 	///    |    Item    |    Contents    |
 	///    | :-------------: | -------------   |
 	///    | Company | 4:00 A.M. |    
 	///    | Author | Park, Hyung Soon |
 	///    | Date | 2015. 3. 26. |
-	/// @section Description
-	///  - This class will bind pointerID with pointerIndex.\n
-	/// 
+	/// @section Description : \n
+	///  - This class will bind pointerID with pointerIndex.
 	/////////////////////////////////////////////
 	public class PtIdLinkedWithPtIndex {
 		PtIdLinkedWithPtIndex(){}
@@ -93,18 +92,18 @@ public class MotionKeyboardView extends View {
 
 	private final static Comparator<PointF> comparator =
 			/////////////////////////////////////////////
-			/// @class 1
-			/// kookmin.cs.fouram.nurumikeyboard.IME \n
-			///   ㄴ MKeyboardView.java
+			/// @class Comparator
+			/// kookmin.cs.fouram.nurumikeyboard.inputmethod \n
+			///   ㄴ MotionKeyboardView.java
 			/// @section Class information
 			///    |    Item    |    Contents    |
 			///    | :-------------: | -------------   |
 			///    | Company | 4:00 A.M. |    
 			///    | Author | Park, Hyung Soon |
 			///    | Date | 2015. 3. 26. |
-			/// @section Description
+			/// @section Description : \n
 			///  - Comparator function for sort Circle number.\n
-			///  - For right handed user.\n
+			///  - For right handed user.
 			/////////////////////////////////////////////
 			new Comparator<PointF> () {
 		public int compare(PointF pt1, PointF pt2) {
@@ -145,7 +144,7 @@ public class MotionKeyboardView extends View {
 	private Bitmap stdCircleImg;
 
 	/////////////////////////////////////////////
-	/// @fn 
+	/// @fn MotionKeyboardView
 	/// @brief Constructor of Motion keyboard view 
 	/// @remark
 	/// - Description : Initialize all variables and lists for gesture recognition.
@@ -157,28 +156,33 @@ public class MotionKeyboardView extends View {
 	/////////////////////////////////////////////
 	public MotionKeyboardView(Context context, AttributeSet attrs) {		
 		super(context, attrs);
-		Log.i("IME_LOG", "Location : MKeyboardView - Constructor");
+		Log.i("IME_LOG", "Location : MotionKeyboardView - Constructor");
 		this.ctx = context;
 		setDpValues();
 		initialize();
 		setBitmap();
 	}
 
+	/////////////////////////////////////////////
+	/// @fn setDpValues()
+	/// @brief Set DP values to all 'size variables'.
+	/// @remark
+	/// - Description : Set dp values with constant values. Calls dpToPx() method.
+	/// @see kookmin.cs.fouram.nurumikeyboard.inputmethod.MotionKeyboardView#dpToPx()
+	/////////////////////////////////////////////
 	private void setDpValues() {
-		Log.i("IME_LOG", "Location : MKeyboardView - setDpValues()");
+		Log.i("IME_LOG", "Location : MotionKeyboardView - setDpValues()");
 		standardCircleSize = (int) dpToPx(STD_CIRCLE_SIZE, ctx.getApplicationContext());
-		Log.v("IME_LOG", "Process : setDpValues(). Standard circle size : " + standardCircleSize);
-		
+		Log.v("IME_LOG", "Process : setDpValues(). Standard circle size : " + standardCircleSize);		
 		innerCircleSize = (int) dpToPx(INNER_CIRCLE_SIZE, ctx.getApplicationContext());
-		Log.v("IME_LOG", "Process : setDpValues(). Inner circle size    : " + innerCircleSize);
-		
+		Log.v("IME_LOG", "Process : setDpValues(). Inner circle size    : " + innerCircleSize);		
 		swipeThreshold = (int) dpToPx(SWIPE_MIN_DISTANCE, ctx.getApplicationContext());
 		Log.v("IME_LOG", "Process : setDpValues(). Swipe Threshold      : " + swipeThreshold);
 	}
 
 	/////////////////////////////////////////////
-	/// @fn convertDpToPixel
-	/// @brief Function information : Converts dp value to px value.
+	/// @fn dpToPx
+	/// @brief Converts dp value to px value.
 	/// @remark
 	/// - Description : This method converts dp unit to equivalent pixels, depending on device density.
 	/// @param dp A value in dp (density independent pixels) unit. Which we need to convert into pixels.
@@ -204,7 +208,7 @@ public class MotionKeyboardView extends View {
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	protected void initialize()	{
-		Log.i("IME_LOG", "Location : MKeyboardView - initialize()");
+		Log.i("IME_LOG", "Location : MotionKeyboardView - initialize()");
 	
 		pnt = new Paint();
 		numFingers = NurumiIME.FIVE_FINGERS;
@@ -229,6 +233,15 @@ public class MotionKeyboardView extends View {
 		clearLists();
 	}
 	
+	/////////////////////////////////////////////
+	/// @fn clearLists
+	/// @brief Clear lists.
+	/// @remark
+	/// - Description : This method clears all lists except standard position list.
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private void clearLists() {
 		oldPtArr.clear();
 		ptArr.clear();
@@ -240,21 +253,19 @@ public class MotionKeyboardView extends View {
 
 	public MotionKeyboardView(Context context) {
 		super(context);
-		Log.i("IME_LOG", "Location : MKeyboardView - Constructor 2");
+		Log.i("IME_LOG", "Location : MotionKeyboardView - Constructor 2");
 		this.ctx = context;
 	}
 
 	/////////////////////////////////////////////
 	/// @fn setBitmap
-	/// @brief Function information : Set bitmap images. 
+	/// @brief Set bitmap images. 
 	/// @remark
-	/// - Description : Set bitmap images for directions.
-	///~~~~~~~~~~~~~{.java}
-	/// // core code
-	///~~~~~~~~~~~~~
+	/// - Description : Set bitmap images for directions. calls setImgToBitmap
+	/// @see kookmin.cs.fouram.nurumikeyboard.inputmethod.MotionKeyboardView#setImgToBitmap()
 	/////////////////////////////////////////////
 	private void setBitmap() {
-		Log.i("IME_LOG", "Location : MKeyboardView - setBitmap()");		
+		Log.i("IME_LOG", "Location : MotionKeyboardView - setBitmap()");		
 		dotImg = setImgToBitmap(R.drawable.img_finger_dot, innerCircleSize);
 		upImg = setImgToBitmap(R.drawable.img_finger_up, innerCircleSize);
 		downImg = setImgToBitmap(R.drawable.img_finger_down, innerCircleSize);
@@ -263,9 +274,20 @@ public class MotionKeyboardView extends View {
 		stdCircleImg = setImgToBitmap(R.drawable.img_std_circle, standardCircleSize);
 	}
 	
+	/////////////////////////////////////////////
+	/// @fn setImgToBitmap
+	/// @brief returns bitmap image  
+	/// @remark
+	/// - Description : This method will return bitmap image.
+	/// @param imgId image ID that starts with R.drawable.~ 
+	/// @param halfSize half size of image
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	@SuppressWarnings("deprecation")
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-	Bitmap setImgToBitmap(int imgId, int size) {
+	Bitmap setImgToBitmap(int imgId, int halfSize) {
 		BitmapDrawable drawable;
 		Bitmap bitmap;
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -273,14 +295,14 @@ public class MotionKeyboardView extends View {
 		else 
 			drawable = (BitmapDrawable) getResources().getDrawable(imgId);
 		
-		bitmap = Bitmap.createScaledBitmap(drawable.getBitmap(), size*2, size*2, true);
+		bitmap = Bitmap.createScaledBitmap(drawable.getBitmap(), halfSize*2, halfSize*2, true);
 		drawable.setCallback(null);
 		drawable.getBitmap().recycle();
 		return bitmap;
 	}
 	/////////////////////////////////////////////
 	/// @fn onDestroyView
-	/// @brief Function information : Free all objects in this view.
+	/// @brief Free all objects in this view.
 	/// @remark
 	/// - Description : To evade memory leak user have to free up Bitmap object. Android OS will not free up all Bitmaps.
 	///~~~~~~~~~~~~~{.java}
@@ -288,7 +310,7 @@ public class MotionKeyboardView extends View {
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	protected void onDestroyView() {
-		Log.i("IME_LOG", "Location : MKeyboardView - onDestroyView()");
+		Log.i("IME_LOG", "Location : MotionKeyboardView - onDestroyView()");
 		try {
 			if(dotImg != null)
 				dotImg.recycle();
@@ -312,22 +334,17 @@ public class MotionKeyboardView extends View {
 	/// @remark
 	/// - Description : Set parent ime and link with IME variable MKeyboard View.\n
 	/// @param ime Parent IME
-	///~~~~~~~~~~~~~{.java}
-	/// // core code
-	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	protected void setIme(NurumiIME ime) {
-		Log.i("IME_LOG", "Location : MKeyboardView - setIME()");
+		Log.i("IME_LOG", "Location : MotionKeyboardView - setIME()");
 		this.ime = ime;		
 	}
 
 	/////////////////////////////////////////////
-	/// @fn 
+	/// @fn onDraw
 	/// @brief (Override method) Screen drawing function.
 	/// @remark
-	/// - Description
-	///	Draw 5 or 10 start point circles and touched point circles.\n
-	/// @see android.view.View#onDraw(android.graphics.Canvas)
+	/// - Description : Draw 5 or 10 start point circles and touched point circles.\n
 	/////////////////////////////////////////////
 	@Override
 	public void onDraw(Canvas canvas) { // No log for this method because this is real-time method so it updates frequently.
@@ -393,7 +410,7 @@ public class MotionKeyboardView extends View {
 	///	Used MotionEvent.ACTION_MASK for recognize ACTION_POINTER events.\n
 	/// ACTION_DOWN, ACTION_POINTER_DOWN, ACTION_UP, ACTION_POINTER_UP, ACTION_MOVE, ACTION_CANCEL, and other event(default) will be recognzied.
 	/// @param e A motion event
-	/// @return Returns boolean value wether the touch event is valid or not.
+	/// @return Returns boolean value whether the touch event is valid or not.
 	///~~~~~~~~~~~~~{.java}
 	/// // core code
 	///~~~~~~~~~~~~~
@@ -419,13 +436,11 @@ public class MotionKeyboardView extends View {
 				ptArr.clear();
 				plp.clear();
 				
-				for (int i = 0; i < touchCount; i++) {
-					PointF ptf = new PointF(e.getX(i), e.getY(i));
-					ptArr.add(ptf);
-
-					// Link pointerID and pointer index.
-					PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex(e.getPointerId(i), i);
-					plp.add(pp);
+				for (int pointerIndex = 0; pointerIndex < touchCount; pointerIndex++) {
+					PointF ptf = new PointF(e.getX(pointerIndex), e.getY(pointerIndex));
+					ptArr.add(ptf);					
+					PtIdLinkedWithPtIndex pp = new PtIdLinkedWithPtIndex(e.getPointerId(pointerIndex), pointerIndex);
+					plp.add(pp); // Link pointerID and pointer index.
 					checkDirection(pp, ptf);
 				}
 				invalidate();
@@ -459,6 +474,17 @@ public class MotionKeyboardView extends View {
 	} // onTouchEvent fin
 
 	
+	/////////////////////////////////////////////
+	/// @fn circleDown
+	/// @brief called when touch event is ACTION_DOWN or ACTION_POINTER_DOWN 
+	/// @remark
+	/// - Description : In ACTION_DOWN motion event, this method will initialize motion array.\n 
+	/// And inputStartFlag will be true. In ACTION_DOWN, ACTION_POINTER_DOWN motion events, this method will\n
+	/// save the position where down event occurred, and link pointerId with circle number.
+	///~~~~~~~~~~~~~{.java}
+	/// // core code
+	///~~~~~~~~~~~~~
+	/////////////////////////////////////////////
 	private boolean circleDown(MotionEvent e, int circleNum, int touchCount, int action) {
 		if(circleNum == INVALID_CIRCLE) { // If circle is not touched, return
 			invalidate(); 
@@ -498,7 +524,7 @@ public class MotionKeyboardView extends View {
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
 	private void motionCheck() {
-		Log.i("IME_LOG", "Location : MKeyboardView - motionCheck()");
+		Log.i("IME_LOG", "Location : MotionKeyboardView - motionCheck()");
 		int checkEmpty = numFingers;
 		for(int i = 0; i < numFingers; i++)
 			checkEmpty += motion[i]; // Empty motion value is -1.
@@ -538,7 +564,7 @@ public class MotionKeyboardView extends View {
 	/// @fn startMultiTouch
 	/// @brief Start multi touch recognition. 
 	/// @remark
-	/// - Description : If 'numFingers' of fingers are touched, set 'start' flag true and start multi touch motion recognition.\n
+	/// - Description : If 'numFingers' fingers are touched, set 'start' flag true and start multi touch motion recognition.\n
 	/// Set 'numFingers' of starting points.
 	/// @param e A motion event
 	/// @return Returns the boolean value of motion event is valid or not.
@@ -551,7 +577,7 @@ public class MotionKeyboardView extends View {
 		if ( e.getAction() != MotionEvent.ACTION_DOWN && e.getAction() != MotionEvent.ACTION_MOVE ) 
 			return false;
 		
-		Log.i("IME_LOG", "Location : MKeyboardView - startMultiTouch()");
+		Log.i("IME_LOG", "Location : MotionKeyboardView - startMultiTouch()");
 		int touchCount = e.getPointerCount();		
 		if(touchCount == numFingers) {
 			standardPositionFlag = true;
@@ -611,5 +637,4 @@ public class MotionKeyboardView extends View {
 		else if( distanceY/distanceX >= 1 && distanceY > swipeThreshold) // Gradient is 1 or larger.			
 			motion[circleNum-1] = ( (oldPt.y > pt.y) ? IME_Automata.DIRECTION_UP : IME_Automata.DIRECTION_DOWN );
 	} // checkDirection fin
-
 }

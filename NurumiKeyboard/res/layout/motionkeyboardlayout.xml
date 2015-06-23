@@ -41,7 +41,7 @@
         android:layout_weight="0.92" >
 
         <view
-            android:id="@+id/MKeyboardView"
+            android:id="@+id/MotionKeyboardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             class="kookmin.cs.fouram.nurumikeyboard.inputmethod.MotionKeyboardView"
