@@ -387,7 +387,7 @@ public class KoreanCheonJiIn extends IME_Automata {
 			break; // kim // 150413 // break for two finger
 
 		case 3: // kim // 150413 // case for three fingers
-			if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT) {
+			if (finger[THUMB_FINGER] == DIRECTION_DOT && finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) {
 				switch (Moeumautomata_level) {
 				case 0:
 
