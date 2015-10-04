@@ -73,6 +73,14 @@ public abstract class IME_Automata {
 	protected int[] finger;
 	protected InputConnection ic;
 	
+	public boolean isEnter(int [] finger_array) {
+		if(finger_array[THUMB_FINGER] == DIRECTION_DOT && finger_array[PINKY_FINGER] == DIRECTION_DOT) {
+			if(finger_array[INDEX_FINGER] == DIRECTION_EMPTY && finger_array[MIDLE_FINGER] == DIRECTION_EMPTY && finger_array[RING__FINGER] == DIRECTION_EMPTY)
+				return true;
+		}
+		return false;
+	}
+	
 	public void finalize() {
 		Log.i("IME_LOG", "Location : IME_Automata - finalize()");
 	}

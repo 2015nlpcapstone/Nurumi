@@ -591,7 +591,7 @@ public class KoreanNaratgul extends IME_Automata {
 											bok_ja_eum_jong_seong)));
 
 					ic.deleteSurroundingText(1, 0);
-					ic.commitText(String.valueOf(text_to_commit + '_'), 2);
+					ic.commitText(String.valueOf(text_to_commit + ' '), 2);
 
 					int wisp_flare = buffer[WISP_FLARE];
 					buffer_clean();
@@ -612,7 +612,7 @@ public class KoreanNaratgul extends IME_Automata {
 											bok_ja_eum_jong_seong)));
 
 					ic.deleteSurroundingText(1, 0);
-					ic.commitText(String.valueOf(text_to_commit + '_'), 2);
+					ic.commitText(String.valueOf(text_to_commit + ' '), 2);
 
 					int wisp_flare = buffer[WISP_FLARE];
 					buffer_clean();
@@ -632,7 +632,7 @@ public class KoreanNaratgul extends IME_Automata {
 											bok_ja_eum_jong_seong)));
 
 					ic.deleteSurroundingText(1, 0);
-					ic.commitText(String.valueOf(text_to_commit + '_'), 2);
+					ic.commitText(String.valueOf(text_to_commit + ' '), 2);
 
 					int wisp_flare = buffer[WISP_FLARE];
 					buffer_clean();

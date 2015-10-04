@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -264,13 +265,17 @@ public class NurumiIME extends InputMethodService implements
 		}
 		Log.d("IME_LOG", "Process : onFinishGesture(). HandSetting : " + stateHand + " (true = right | false = left)");
 		
-
+		
 		if (changeKeyboardType(this.motion)) {
 			setAutomata(keyboardTypeFlag, stateAutomata);
 			Log.d("IME_LOG", "Process : onFinishGesture(). Language setting changed");
 		}
 		else if (automata.isAllocatedMotion(motion)) { // If motion is allocated motion, do automata.execute()
 			Log.d("IME_LOG", "Process : onFinishGesture(). Write text");
+			if(automata.isEnter(motion)) {
+				this.sendDownUpKeyEvents(KeyEvent.KEYCODE_ENTER);
+				Log.d("IME_LOG", "Process : onFinishGesture(). Enter");
+			}
 			InputConnection ic = getCurrentInputConnection();
 			ic.commitText(String.valueOf(automata.execute(this.motion, ic)), 1);
 		}
