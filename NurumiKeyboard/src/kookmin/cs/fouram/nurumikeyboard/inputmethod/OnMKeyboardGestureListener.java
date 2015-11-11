@@ -24,5 +24,5 @@ public interface OnMKeyboardGestureListener {
 	/// - Description : When the gesture from the keyboard view is finished, this method will be called.
 	/// @param motion Motion array which has result of motion
 	/////////////////////////////////////////////
-	public void onFinishGesture(int[] motion);
+	public void onFinishGesture(long motion);
 }

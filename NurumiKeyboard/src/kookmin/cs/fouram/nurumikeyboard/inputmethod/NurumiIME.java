@@ -45,7 +45,7 @@ public class NurumiIME extends InputMethodService implements
 	private MotionKeyboardView mKeyboardView;
 
 	private int numFingers;
-	private int[] motion;
+	private long motion;
 
 	// Soyeong
 	private ImageButton ibtnInform;
@@ -84,7 +84,6 @@ public class NurumiIME extends InputMethodService implements
 		mKeyboardView = (MotionKeyboardView) vg.findViewById(R.id.MotionKeyboardView);
 		mKeyboardView.setIme(this);
 		numFingers = FIVE_FINGERS;
-		motion = new int[numFingers];
 
 		setViewId();
 		setKeyboardFlag("1");
@@ -254,19 +253,19 @@ public class NurumiIME extends InputMethodService implements
 	/// kookmin.cs.fouram.nurumikeyboard.inputmethod.OnMKeyboardGestureListener#onFinishGesture(java.lang.String)
 	/////////////////////////////////////////////
 	@Override
-	public void onFinishGesture(int[] motion) {
+	public void onFinishGesture(long motionValue) {
 		Log.i("IME_LOG", "Location : NurumiIME - onFinishGesture()");
 
 		for(int i = 0; i < numFingers; i++) {
-			if(stateHand == true) // right handed
+			/*if(stateHand == true) // right handed
 				this.motion[i] = motion[i]; // get gesture input
 			else 				  // left handed
-				this.motion[i] = motion[(numFingers - 1) - i]; // get gesture input
+				this.motion[i] = motion[(numFingers - 1) - i]; // get gesture input*/
 		}
+		motion = motionValue;
 		Log.d("IME_LOG", "Process : onFinishGesture(). HandSetting : " + stateHand + " (true = right | false = left)");
 		
-		
-		if (changeKeyboardType(this.motion)) {
+		if (changeKeyboardType(motion)) {
 			setAutomata(keyboardTypeFlag, stateAutomata);
 			Log.d("IME_LOG", "Process : onFinishGesture(). Language setting changed");
 		}
@@ -276,8 +275,9 @@ public class NurumiIME extends InputMethodService implements
 				this.sendDownUpKeyEvents(KeyEvent.KEYCODE_ENTER);
 				Log.d("IME_LOG", "Process : onFinishGesture(). Enter");
 			}
+			Log.d("IME_LOG", "Process : onFinishGesture(). motion : " + motion);
 			InputConnection ic = getCurrentInputConnection();
-			ic.commitText(String.valueOf(automata.execute(this.motion, ic)), 1);
+			ic.commitText(String.valueOf(automata.execute(motion, ic)), 1);
 		}
 		// Ignore if the motion is not allocated motion
 	}
@@ -330,20 +330,20 @@ public class NurumiIME extends InputMethodService implements
 			case KOR: {
 				switch (automataType) {
 					case "1":
-						automata = new KoreanCheonJiIn();
+					/*	automata = new KoreanCheonJiIn();
 						Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_1");
 						break;
 					case "2":
 						automata = new KoreanNaratgul();
 						Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_2");
 						break;
-					case "3":
-						automata = new KoreanAdvancedNatartgul();
+*/					case "3":
+						automata = new KoreanAdvancedNaratgul();
 						Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_3");
 						break;
 				}
 			} break;
-			case ENG:
+/*			case ENG:
 				automata = new English();
 				Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Eng");
 				break;
@@ -351,6 +351,7 @@ public class NurumiIME extends InputMethodService implements
 				automata = new SpecialCharacters();
 				Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Spc");
 				break;
+*/
 			default:
 				Log.e("IME_LOG", "Process : setAutomata(). Error : keyboardTypeFlag error. (Value : " + stateLanguage + ")");
 		}
@@ -370,13 +371,9 @@ public class NurumiIME extends InputMethodService implements
 	/// // core code
 	///~~~~~~~~~~~~~
 	/////////////////////////////////////////////
-	private boolean changeKeyboardType(int[] motion) {
+	private boolean changeKeyboardType(long motion) {
 		Log.i("IME_LOG", "Location : NurumiIME - changeKeyboardType()");
-		if (motion[IME_Automata.THUMB_FINGER] != IME_Automata.DIRECTION_DOT
-		 || motion[IME_Automata.INDEX_FINGER] != IME_Automata.DIRECTION_DOT
-		 || motion[IME_Automata.MIDLE_FINGER] != IME_Automata.DIRECTION_DOT
-		 || motion[IME_Automata.RING__FINGER] != IME_Automata.DIRECTION_DOT
-		 || motion[IME_Automata.PINKY_FINGER] != IME_Automata.DIRECTION_DOT) {
+		if (motion != 1082401L) {
 			Log.v("IME_LOG", "Process : changeKeyboardType(). No change");
 			return false;
 		}

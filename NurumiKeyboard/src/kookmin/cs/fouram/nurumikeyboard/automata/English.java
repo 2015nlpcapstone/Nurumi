@@ -1,4 +1,6 @@
-﻿package kookmin.cs.fouram.nurumikeyboard.automata;
+package kookmin.cs.fouram.nurumikeyboard.automata;
+
+import java.util.HashMap;
 
 import android.util.Log;
 import android.view.inputmethod.InputConnection;
@@ -7,6 +9,140 @@ import android.view.inputmethod.InputConnection;
  * Created by soyeong on 15. 5. 17..
  */
 public class English extends IME_Automata {
+	
+	private void setText(String str) {
+		text_to_commit = str;
+	}
+	
+	
+	protected class EnglishCharacter {
+		private char name;
+		private int unicode;
+
+		// Constructor
+		public EnglishCharacter(char name, int unicode) {
+			this.name = name;
+			this.unicode = unicode;
+		}
+		// getter
+		public char getName() {
+			return name;
+		}
+		public int getUnicode() {
+			return unicode;
+		}
+	}
+	protected final EnglishCharacter small_a = new EnglishCharacter('a', 65);
+	protected final EnglishCharacter small_b = new EnglishCharacter('b', 66);
+	protected final EnglishCharacter small_c = new EnglishCharacter('c', 67);
+	protected final EnglishCharacter small_d = new EnglishCharacter('d', 68);
+	protected final EnglishCharacter small_e = new EnglishCharacter('e', 69);
+	protected final EnglishCharacter small_f = new EnglishCharacter('f', 70);
+	protected final EnglishCharacter small_g = new EnglishCharacter('g', 71);
+	protected final EnglishCharacter small_h = new EnglishCharacter('h', 72);
+	protected final EnglishCharacter small_i = new EnglishCharacter('i', 73);
+	protected final EnglishCharacter small_j = new EnglishCharacter('j', 74);
+	protected final EnglishCharacter small_k = new EnglishCharacter('k', 75);
+	protected final EnglishCharacter small_l = new EnglishCharacter('l', 76);
+	protected final EnglishCharacter small_m = new EnglishCharacter('m', 77);
+	protected final EnglishCharacter small_n = new EnglishCharacter('n', 78);
+	protected final EnglishCharacter small_o = new EnglishCharacter('o', 79);
+	protected final EnglishCharacter small_p = new EnglishCharacter('p', 80);
+	protected final EnglishCharacter small_q = new EnglishCharacter('q', 81);
+	protected final EnglishCharacter small_r = new EnglishCharacter('r', 82);
+	protected final EnglishCharacter small_s = new EnglishCharacter('s', 83);
+	protected final EnglishCharacter small_t = new EnglishCharacter('t', 84);
+	protected final EnglishCharacter small_u = new EnglishCharacter('u', 85);
+	protected final EnglishCharacter small_v = new EnglishCharacter('v', 86);
+	protected final EnglishCharacter small_w = new EnglishCharacter('w', 87);
+	protected final EnglishCharacter small_x = new EnglishCharacter('x', 88);
+	protected final EnglishCharacter small_y = new EnglishCharacter('y', 89);
+	protected final EnglishCharacter small_z = new EnglishCharacter('z', 90);
+
+	protected final EnglishCharacter big_a = new EnglishCharacter('A', 97);
+	protected final EnglishCharacter big_b = new EnglishCharacter('B', 98);
+	protected final EnglishCharacter big_c = new EnglishCharacter('C', 99);
+	protected final EnglishCharacter big_d = new EnglishCharacter('D', 100);
+	protected final EnglishCharacter big_e = new EnglishCharacter('E', 101);
+	protected final EnglishCharacter big_f = new EnglishCharacter('F', 102);
+	protected final EnglishCharacter big_g = new EnglishCharacter('G', 103);
+	protected final EnglishCharacter big_h = new EnglishCharacter('H', 104);
+	protected final EnglishCharacter big_i = new EnglishCharacter('I', 105);
+	protected final EnglishCharacter big_j = new EnglishCharacter('J', 106);
+	protected final EnglishCharacter big_k = new EnglishCharacter('K', 107);
+	protected final EnglishCharacter big_l = new EnglishCharacter('L', 108);
+	protected final EnglishCharacter big_m = new EnglishCharacter('M', 109);
+	protected final EnglishCharacter big_n = new EnglishCharacter('N', 110);
+	protected final EnglishCharacter big_o = new EnglishCharacter('O', 111);
+	protected final EnglishCharacter big_p = new EnglishCharacter('P', 112);
+	protected final EnglishCharacter big_q = new EnglishCharacter('Q', 113);
+	protected final EnglishCharacter big_r = new EnglishCharacter('R', 114);
+	protected final EnglishCharacter big_s = new EnglishCharacter('S', 115);
+	protected final EnglishCharacter big_t = new EnglishCharacter('T', 116);
+	protected final EnglishCharacter big_u = new EnglishCharacter('U', 117);
+	protected final EnglishCharacter big_v = new EnglishCharacter('V', 118);
+	protected final EnglishCharacter big_w = new EnglishCharacter('W', 119);
+	protected final EnglishCharacter big_x = new EnglishCharacter('X', 120);
+	protected final EnglishCharacter big_y = new EnglishCharacter('Y', 121);
+	protected final EnglishCharacter big_z = new EnglishCharacter('Z', 122);
+
+	HashMap<Long, EnglishCharacter> eMap = new HashMap<Long, EnglishCharacter>();
+
+	public English() {
+		eMap.put(32L, small_a);
+		eMap.put(1024L, small_b);
+		eMap.put(32768L, small_c);
+		eMap.put(1048576L, small_d);
+		eMap.put(135296L, small_e);
+		eMap.put(4224L, small_f);
+		eMap.put(135168L, small_g);
+		eMap.put(262400L, small_h);
+		eMap.put(256L, small_i);
+		eMap.put(8192L, small_j);
+		eMap.put(8224L, small_k);
+		eMap.put(131072L, small_l);
+		eMap.put(270592L, small_m);
+		eMap.put(8448L, small_n);
+		eMap.put(1056L, small_o);
+		eMap.put(32800L, small_p);
+		eMap.put(1048608L, small_q);
+		eMap.put(33792L, small_r);
+		eMap.put(16896L, small_s);
+		eMap.put(4096L, small_t);
+		eMap.put(65600L, small_u);
+		eMap.put(2112L, small_v);
+		eMap.put(67648L, small_w);
+		eMap.put(96L, small_x);
+		eMap.put(67584L, small_y);
+		eMap.put(540672L, small_z);
+		eMap.put(33L, big_a);
+		eMap.put(1025L, big_b);
+		eMap.put(32769L, big_c);
+		eMap.put(1048577L, big_d);
+		eMap.put(135297L, big_e);
+		eMap.put(4225L, big_f);
+		eMap.put(135169L, big_g);
+		eMap.put(262401L, big_h);
+		eMap.put(257L, big_i);
+		eMap.put(8193L, big_j);
+		eMap.put(8225L, big_k);
+		eMap.put(131073L, big_l);
+		eMap.put(270593L, big_m);
+		eMap.put(8449L, big_n);
+		eMap.put(1057L, big_o);
+		eMap.put(32801L, big_p);
+		eMap.put(1048609L, big_q);
+		eMap.put(33793L, big_r);
+		eMap.put(16897L, big_s);
+		eMap.put(4097L, big_t);
+		eMap.put(65601L, big_u);
+		eMap.put(2113L, big_v);
+		eMap.put(67649L, big_w);
+		eMap.put(97L, big_x);
+		eMap.put(67585L, big_y);
+		eMap.put(540673L, big_z);
+	}
+/*
 	// 0.A 1.B 2.C 3.D 4.E 5.F 6.G 7.H 8.I 9.J 10.K 11.L 12.M 13.N
 	// 14.O 15.P 16.Q 17.R 18.S 19.T 20.U 21.V 22.W 23.X 24.Y 25.Z
 	private final int[] PREF_ENGLISH_B = {65, 66, 67, 68, 69, 70, 71,
@@ -20,194 +156,30 @@ public class English extends IME_Automata {
 			104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117,
 			118, 119, 120, 121, 122
 	};
-
+*/
 
 	private void MODE_ENGLISH() {
-		switch (count_finger) {
-		case 1: // [A, B, C, D, I, J, L, T]
-			if (finger[INDEX_FINGER] == DIRECTION_DOT) { // a
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[0]);
-			} else if (finger[MIDLE_FINGER] == DIRECTION_DOT) { // b
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[1]);
-			} else if (finger[RING__FINGER] == DIRECTION_DOT) { // c
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[2]);
-			} else if (finger[PINKY_FINGER] == DIRECTION_DOT) { // d
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[3]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN) { // i
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[8]);
-			} else if (finger[MIDLE_FINGER] == DIRECTION_DOWN) { // j
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[9]);
-			} else if (finger[RING__FINGER] == DIRECTION_RIGHT) { // l
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[11]);
-			} else if (finger[MIDLE_FINGER] == DIRECTION_RIGHT) { // t
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[19]);
-			}
-			else {
-				text_to_commit="";
-			}
-			break;
-
-		case 2: // [F, G, H, K, N, O, P, Q, R, S, U, V, X, Y, Z]
-			if(finger[THUMB_FINGER] == DIRECTION_DOT){
-				if (finger[INDEX_FINGER] == DIRECTION_DOT) { // a
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[0]);
-				} else if (finger[MIDLE_FINGER] == DIRECTION_DOT) { // b
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[1]);
-				} else if (finger[RING__FINGER] == DIRECTION_DOT) { // c
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[2]);
-				} else if (finger[PINKY_FINGER] == DIRECTION_DOT) { // d
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[3]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOWN) { // i
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[8]);
-				} else if (finger[MIDLE_FINGER] == DIRECTION_DOWN) { // j
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[9]);
-				} else if (finger[RING__FINGER] == DIRECTION_RIGHT) { // l
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[11]);
-				} else if (finger[MIDLE_FINGER] == DIRECTION_RIGHT) { // t
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[19]);
-				}else {
-					text_to_commit="";
-				}
-			} else if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT) { // F
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[5]);
-			} else if (finger[MIDLE_FINGER] == DIRECTION_RIGHT && finger[RING__FINGER] == DIRECTION_RIGHT) { // G
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[6]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[RING__FINGER] == DIRECTION_DOWN) { // H
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[7]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOWN) { // K
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[10]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN) { // N
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[13]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) { // O
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[14]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) { // P
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[15]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT) { // Q
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[16]);
-			} else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) { // R
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[17]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_LEFT && finger[MIDLE_FINGER] == DIRECTION_LEFT) { // S
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[18]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[RING__FINGER] == DIRECTION_UP) { // U
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[20]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[MIDLE_FINGER] == DIRECTION_UP) { // V
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[21]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_UP) { // X
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[23]);
-			} else if (finger[MIDLE_FINGER] == DIRECTION_UP && finger[RING__FINGER] == DIRECTION_UP) { // Y
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[24]);
-			} else if (finger[MIDLE_FINGER] == DIRECTION_LEFT && finger[RING__FINGER] == DIRECTION_LEFT) { // Z
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[25]);
-			}
-			else {
-				text_to_commit="";
-			}
-			break;
-
-		case 3: // [E, M, W]
-			if(finger[THUMB_FINGER] == DIRECTION_DOT){
-				if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT) { // F
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[5]);
-				} else if (finger[MIDLE_FINGER] == DIRECTION_RIGHT && finger[RING__FINGER] == DIRECTION_RIGHT) { // G
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[6]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[RING__FINGER] == DIRECTION_DOWN) { // H
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[7]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOWN) { // K
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[10]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN) { // N
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[13]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_DOT) { // O
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[14]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) { // P
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[15]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[PINKY_FINGER] == DIRECTION_DOT) { // Q
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[16]);
-				} else if (finger[MIDLE_FINGER] == DIRECTION_DOT && finger[RING__FINGER] == DIRECTION_DOT) { // R
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[17]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_LEFT && finger[MIDLE_FINGER] == DIRECTION_LEFT) { // S
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[18]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[RING__FINGER] == DIRECTION_UP) { // U
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[20]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[MIDLE_FINGER] == DIRECTION_UP) { // V
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[21]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOT && finger[MIDLE_FINGER] == DIRECTION_UP) { // X
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[23]);
-				} else if (finger[MIDLE_FINGER] == DIRECTION_UP && finger[RING__FINGER] == DIRECTION_UP) { // Y
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[24]);
-				} else if (finger[MIDLE_FINGER] == DIRECTION_LEFT && finger[RING__FINGER] == DIRECTION_LEFT) { // Z
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[25]);
-				}
-				else {
-					text_to_commit="";
-				}
-			}else if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT
-					&& finger[RING__FINGER] == DIRECTION_RIGHT) { // E
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[4]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN
-					&& finger[RING__FINGER] == DIRECTION_DOWN) { // M
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[12]);
-			} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[MIDLE_FINGER] == DIRECTION_UP
-					&& finger[RING__FINGER] == DIRECTION_UP) { // W
-				text_to_commit = String.format("%c", PREF_ENGLISH_S[22]);
-			}
-			else {
-				text_to_commit="";
-			}
-			break;
-		case 4:
-			if(finger[THUMB_FINGER] == DIRECTION_DOT){
-				if (finger[INDEX_FINGER] == DIRECTION_RIGHT && finger[MIDLE_FINGER] == DIRECTION_RIGHT
-						&& finger[RING__FINGER] == DIRECTION_RIGHT) { // E
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[4]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_DOWN && finger[MIDLE_FINGER] == DIRECTION_DOWN
-						&& finger[RING__FINGER] == DIRECTION_DOWN) { // M
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[12]);
-				} else if (finger[INDEX_FINGER] == DIRECTION_UP && finger[MIDLE_FINGER] == DIRECTION_UP
-						&& finger[RING__FINGER] == DIRECTION_UP) { // W
-					text_to_commit = String.format("%c", PREF_ENGLISH_B[22]);
-				}
-				else {
-					text_to_commit="";
-				}
-			}
-			else {
-				text_to_commit="";
-			}
-		default:
-			text_to_commit="";
-			break;
-		}
+		EnglishCharacter temp = eMap.get(motion);
+		setText(String.format("%c", temp.getUnicode()));
 	}
 
 
-	public String execute(int[] finger_array, InputConnection input_connection) {
+	public String execute(long motionValue, InputConnection input_connection) {
 		Log.i("AUTOMATA_LOG", "Location : Automata_type_Eng - execute()");
 
 		// kim // 150516 // init values
-		int idx = 5;
-		finger = finger_array;
-		ic = input_connection;
-		count_finger = 0;
-
-		// kim // 150412 // count finger
-		while (idx-- > 0)
-			if (finger[idx] != DIRECTION_EMPTY)
-				count_finger++;
 
 
 		// kim // 150507 // functional keys
-		if (count_finger == 1 && finger[THUMB_FINGER] == DIRECTION_RIGHT) {
+		motion = motionValue;
+		ic = input_connection;
+
+		if(motion == 4L) {
 			return " ";
 		}
-
-		else if (count_finger == 1 && finger[THUMB_FINGER] == DIRECTION_LEFT) {
+		else if(motion == 16L) {
 			ic.deleteSurroundingText(1, 0);
 			return "";
-		}
-
-		else if (count_finger == 2 && finger[THUMB_FINGER] == DIRECTION_DOT
-				&& finger[PINKY_FINGER] == DIRECTION_DOT) {
-			return "\n";
 		}
 		else {
 			MODE_ENGLISH();
@@ -219,44 +191,19 @@ public class English extends IME_Automata {
 
 
 	@Override
-	public boolean isAllocatedMotion(int[] finger) {
-		Log.i("AUTOMATA_LOG", "Location : Automata_type_Eng - isAllocatedMotion()");
-		count_finger = 0;
-		int idx = 5;
-		while (idx-- > 0)
-			if (finger[idx] != DIRECTION_EMPTY)
-				count_finger++;
-
-		if(count_finger == 1 && ( (finger[INDEX_FINGER] == DIRECTION_DOT)  || (finger[MIDLE_FINGER] == DIRECTION_DOT)   || // a b
-				(finger[RING__FINGER] == DIRECTION_DOT)  || (finger[PINKY_FINGER] == DIRECTION_DOT)   || // c d
-				(finger[INDEX_FINGER] == DIRECTION_DOWN) || (finger[MIDLE_FINGER] == DIRECTION_DOWN)  || // i j
-				(finger[RING__FINGER] == DIRECTION_RIGHT)|| (finger[MIDLE_FINGER] == DIRECTION_RIGHT) || // l t
-				(finger[THUMB_FINGER] == DIRECTION_RIGHT)|| (finger[THUMB_FINGER] == DIRECTION_LEFT)  )) // space backspace
+	public boolean isAllocatedMotion(long motion) {
+		Log.i("AUTOMATA_LOG", "Location : Automata_type_Kor_3 - isAllocatedMotion()");
+		if( motion == 32L || motion == 1024L || motion == 32768L || motion == 1048576L || motion == 135296L ||
+				motion == 4224L || motion == 135168L || motion == 262400L || motion == 256L || motion == 8192L ||
+				motion == 8224L || motion == 131072L || motion == 270592L || motion == 8448L || motion == 1056L ||
+				motion == 32800L || motion == 1048608L || motion == 33792L || motion == 16896L || motion == 4096L ||
+				motion == 65600L || motion == 2112L || motion == 67648L || motion == 96L || motion == 67584L ||
+				motion == 540672L || motion == 33L || motion == 1025L || motion == 32769L || motion == 1048577L || motion == 135297L ||
+				motion == 4225L || motion == 135169L || motion == 262401L || motion == 257L || motion == 8193L ||
+				motion == 8225L || motion == 131073L || motion == 270593L || motion == 8449L || motion == 1057L || motion == 32801L ||
+				motion == 1048609L || motion == 33793L || motion == 16897L || motion == 4097L || motion == 65601L ||
+				motion == 2113L || motion == 67649L || motion == 97L || motion == 67585L || motion == 540673L)
 			return true;
-		else if(count_finger == 2 && (((finger[INDEX_FINGER] == DIRECTION_RIGHT) && (finger[MIDLE_FINGER] == DIRECTION_RIGHT))|| //F
-				((finger[MIDLE_FINGER] == DIRECTION_RIGHT) && (finger[RING__FINGER] == DIRECTION_RIGHT))|| //G
-				((finger[INDEX_FINGER] == DIRECTION_DOWN)  && (finger[RING__FINGER] == DIRECTION_DOWN)) || //H
-				((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_DOWN)) || //K
-				((finger[INDEX_FINGER] == DIRECTION_DOWN)  && (finger[MIDLE_FINGER] == DIRECTION_DOWN)) || //N
-				((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_DOT))  || //O
-				((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[RING__FINGER] == DIRECTION_DOT))  || //P
-				((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[PINKY_FINGER] == DIRECTION_DOT))  || //Q
-				((finger[MIDLE_FINGER] == DIRECTION_DOT)   && (finger[RING__FINGER] == DIRECTION_DOT))  || //R
-				((finger[INDEX_FINGER] == DIRECTION_LEFT)  && (finger[MIDLE_FINGER] == DIRECTION_LEFT)) || //S
-				((finger[INDEX_FINGER] == DIRECTION_UP)    && (finger[RING__FINGER] == DIRECTION_UP))   || //U
-				((finger[INDEX_FINGER] == DIRECTION_UP)    && (finger[MIDLE_FINGER] == DIRECTION_UP))   || //V
-				((finger[INDEX_FINGER] == DIRECTION_DOT)   && (finger[MIDLE_FINGER] == DIRECTION_UP))   || //X
-				((finger[MIDLE_FINGER] == DIRECTION_UP)    && (finger[RING__FINGER] == DIRECTION_UP))   || //Y
-				((finger[MIDLE_FINGER] == DIRECTION_LEFT)  && (finger[RING__FINGER] == DIRECTION_LEFT)) || //Z
-				((finger[THUMB_FINGER] == DIRECTION_DOT)   && (finger[PINKY_FINGER] == DIRECTION_DOT))  || //enter
-				((finger[THUMB_FINGER] == DIRECTION_RIGHT) && (finger[MIDLE_FINGER] == DIRECTION_RIGHT))|| //right move
-				((finger[THUMB_FINGER] == DIRECTION_LEFT)  && (finger[MIDLE_FINGER] == DIRECTION_LEFT)) )) //left move
-			return true;
-		else if(count_finger == 3 && ( ((finger[INDEX_FINGER] == DIRECTION_RIGHT) && (finger[MIDLE_FINGER] == DIRECTION_RIGHT) && (finger[RING__FINGER] == DIRECTION_RIGHT)) || //E
-				((finger[INDEX_FINGER] == DIRECTION_DOWN)  && (finger[MIDLE_FINGER] == DIRECTION_DOWN)  && (finger[RING__FINGER] == DIRECTION_DOWN))  || //M
-				((finger[INDEX_FINGER] == DIRECTION_UP)    && (finger[MIDLE_FINGER] == DIRECTION_UP)    && (finger[RING__FINGER] == DIRECTION_UP))    )) //W
-			return true;
-		else
-			return false;
+		return false;
 	}
 }

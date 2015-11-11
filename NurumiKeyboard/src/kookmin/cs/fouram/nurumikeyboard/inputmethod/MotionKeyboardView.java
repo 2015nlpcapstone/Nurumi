@@ -45,6 +45,20 @@ public class MotionKeyboardView extends View {
 	private final int STD_CIRCLE_SIZE	 = 70; /// dp value
 	private final int INNER_CIRCLE_SIZE	 = 40; /// dp value
 
+	public static final int DIRECTION_EMPTY = -1;
+	public static final int DIRECTION_DOT = 0;
+	public static final int DIRECTION_DOWN = 1;
+	public static final int DIRECTION_LEFT = 2;
+	public static final int DIRECTION_UP = 3;
+	public static final int DIRECTION_RIGHT = 4;
+	
+	public static final int THUMB_FINGER = 0;
+	public static final int INDEX_FINGER = 1;
+	public static final int MIDLE_FINGER = 2;
+	public static final int RING__FINGER = 3;
+	public static final int PINKY_FINGER = 4;
+
+	
 	/////////////////////////////////////////////
 	/// @class CircleLinkedWithPtId
 	/// kookmin.cs.fouram.nurumikeyboard.inputmethod \n
@@ -374,19 +388,19 @@ public class MotionKeyboardView extends View {
 			float pointY = spt.y - innerCircleSize;
 
 			switch(motion[circleNum-1])	{				
-				case IME_Automata.DIRECTION_DOT :		
+				case DIRECTION_DOT :		
 					canvas.drawBitmap(dotImg, pointX, pointY, pnt);
 					break;
-				case IME_Automata.DIRECTION_UP :
+				case DIRECTION_UP :
 					canvas.drawBitmap(upImg, pointX, pointY, pnt);
 					break;
-				case IME_Automata.DIRECTION_DOWN :
+				case DIRECTION_DOWN :
 					canvas.drawBitmap(downImg, pointX, pointY, pnt);
 					break;
-				case IME_Automata.DIRECTION_LEFT :
+				case DIRECTION_LEFT :
 					canvas.drawBitmap(leftImg, pointX, pointY, pnt);
 					break;
-				case IME_Automata.DIRECTION_RIGHT :
+				case DIRECTION_RIGHT :
 					canvas.drawBitmap(rightImg, pointX, pointY, pnt);
 					break;
 				default :
@@ -492,7 +506,7 @@ public class MotionKeyboardView extends View {
 		}
 		if(action == MotionEvent.ACTION_DOWN) { // If it is initial down action
 			for(int i = 0; i < numFingers; i++) // initialize motion array
-				motion[i] = IME_Automata.DIRECTION_EMPTY;
+				motion[i] = DIRECTION_EMPTY;
 			inputStartFlag = true;				// motion input start
 			Log.d("IME_LOG", "Process : circleDown(). Motion input start");
 		}
@@ -504,7 +518,7 @@ public class MotionKeyboardView extends View {
 		Log.v("IME_LOG", "Process : circleDown(). Finger added");
 		
 		circleAvailable[circleNum-1] = false; // One finger in one circle.
-		motion[circleNum-1] = IME_Automata.DIRECTION_DOT;
+		motion[circleNum-1] = DIRECTION_DOT;
 
 		oldPtArr.add(new PointF(e.getX(touchCount-1), e.getY(touchCount-1))); // Add start position.
 		clp.add(new CircleLinkedWithPtId(e.getPointerId(touchCount-1), circleNum)); // Link pointerID and circle number.
@@ -532,7 +546,69 @@ public class MotionKeyboardView extends View {
 		if(checkEmpty == 0)
 			return;
 		/* key event will be here. */
-		ime.onFinishGesture(motion);
+		
+		ime.onFinishGesture(motionAryToLong(motion));
+	}
+	
+	private long motionAryToLong(int[] motion) {
+		long convertedValue = 0L;
+		
+		if(motion[0] == DIRECTION_DOT)
+			convertedValue += 1L;
+		else if(motion[0] == DIRECTION_UP)
+			convertedValue += 2L;
+		else if(motion[0] == DIRECTION_DOWN)
+			convertedValue += 4L;
+		else if(motion[0] == DIRECTION_LEFT)
+			convertedValue += 8L;
+		else if(motion[0] == DIRECTION_RIGHT)
+			convertedValue += 16L;
+		
+		if(motion[1] == DIRECTION_DOT)
+			convertedValue += 32L;
+		else if(motion[1] == DIRECTION_UP)
+			convertedValue += 64L;
+		else if(motion[1] == DIRECTION_DOWN)
+			convertedValue += 128L;
+		else if(motion[1] == DIRECTION_LEFT)
+			convertedValue += 256L;
+		else if(motion[1] == DIRECTION_RIGHT)
+			convertedValue += 512L;
+		
+		if(motion[2] == DIRECTION_DOT)
+			convertedValue += 1024L;
+		else if(motion[2] == DIRECTION_UP)
+			convertedValue += 2048L;
+		else if(motion[2] == DIRECTION_DOWN)
+			convertedValue += 4096L;
+		else if(motion[2] == DIRECTION_LEFT)
+			convertedValue += 8192L;
+		else if(motion[2] == DIRECTION_RIGHT)
+			convertedValue += 16384L;
+		
+		if(motion[3] == DIRECTION_DOT)
+			convertedValue += 32768L;
+		else if(motion[3] == DIRECTION_UP)
+			convertedValue += 65536L;
+		else if(motion[3] == DIRECTION_DOWN)
+			convertedValue += 131072L;
+		else if(motion[3] == DIRECTION_LEFT)
+			convertedValue += 262144L;
+		else if(motion[3] == DIRECTION_RIGHT)
+			convertedValue += 524288L;
+		
+		if(motion[4] == DIRECTION_DOT)
+			convertedValue += 1048576L;
+		else if(motion[4] == DIRECTION_UP)
+			convertedValue += 2097152L;
+		else if(motion[4] == DIRECTION_DOWN)
+			convertedValue += 4194304L;
+		else if(motion[4] == DIRECTION_LEFT)
+			convertedValue += 8388608L;
+		else if(motion[4] == DIRECTION_RIGHT)
+			convertedValue += 16777216L;
+		
+		return convertedValue;
 	}
 
 	/////////////////////////////////////////////
@@ -631,10 +707,10 @@ public class MotionKeyboardView extends View {
 		float distanceY = Math.abs(oldPt.y - pt.y);
 
 		if( distanceX < swipeThreshold && distanceY < swipeThreshold )
-			motion[circleNum-1] = IME_Automata.DIRECTION_DOT;
+			motion[circleNum-1] = DIRECTION_DOT;
 		else if( distanceY/distanceX < 1 && distanceX > swipeThreshold) // Gradient is smaller than 1.
-			motion[circleNum-1] = ( (oldPt.x > pt.x) ? IME_Automata.DIRECTION_LEFT : IME_Automata.DIRECTION_RIGHT );
+			motion[circleNum-1] = ( (oldPt.x > pt.x) ? DIRECTION_LEFT : DIRECTION_RIGHT );
 		else if( distanceY/distanceX >= 1 && distanceY > swipeThreshold) // Gradient is 1 or larger.			
-			motion[circleNum-1] = ( (oldPt.y > pt.y) ? IME_Automata.DIRECTION_UP : IME_Automata.DIRECTION_DOWN );
+			motion[circleNum-1] = ( (oldPt.y > pt.y) ? DIRECTION_UP : DIRECTION_DOWN );
 	} // checkDirection fin
 }
