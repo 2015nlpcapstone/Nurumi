@@ -1,12 +1,5 @@
-﻿package kookmin.cs.fouram.nurumikeyboard.inputmethod;
+package kookmin.cs.fouram.nurumikeyboard.inputmethod;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-
-import kookmin.cs.fouram.nurumikeyboard.automata.IME_Automata;
-import kookmin.cs.fouram.nurumikeyboard.R;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,12 +8,19 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.MotionEvent;
 import android.os.Build;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+
+import kookmin.cs.fouram.nurumikeyboard.R;
 
 /////////////////////////////////////////////
 /// @class MotionKeyboardView
@@ -433,11 +433,13 @@ public class MotionKeyboardView extends View {
 		int action = e.getAction() & MotionEvent.ACTION_MASK;
 		if(standardPositionFlag == false)
 			return startMultiTouch(e);
+
 		int touchCount = e.getPointerCount();
 		if(touchCount > numFingers)
-			return false;		
+			return false;
+
 		int circleNum = checkTouchedCircle((int)e.getX(touchCount-1), (int)e.getY(touchCount-1));
-		
+
 		// all cases meets return command. So There is no break command.
 		switch(action) {		
 			case MotionEvent.ACTION_DOWN :
@@ -520,7 +522,7 @@ public class MotionKeyboardView extends View {
 		circleAvailable[circleNum-1] = false; // One finger in one circle.
 		motion[circleNum-1] = DIRECTION_DOT;
 
-		oldPtArr.add(new PointF(e.getX(touchCount-1), e.getY(touchCount-1))); // Add start position.
+		oldPtArr.add(new PointF(e.getX(touchCount - 1), e.getY(touchCount - 1))); // Add start position.
 		clp.add(new CircleLinkedWithPtId(e.getPointerId(touchCount-1), circleNum)); // Link pointerID and circle number.
 
 		invalidate();
@@ -540,6 +542,7 @@ public class MotionKeyboardView extends View {
 	private void motionCheck() {
 		Log.i("IME_LOG", "Location : MotionKeyboardView - motionCheck()");
 		int checkEmpty = numFingers;
+
 		for(int i = 0; i < numFingers; i++)
 			checkEmpty += motion[i]; // Empty motion value is -1.
 		Log.d("IME_LOG", "Process : motionCheck(). Motion input end"); 
@@ -552,62 +555,30 @@ public class MotionKeyboardView extends View {
 	
 	private long motionAryToLong(int[] motion) {
 		long convertedValue = 0L;
-		
-		if(motion[0] == DIRECTION_DOT)
-			convertedValue += 1L;
-		else if(motion[0] == DIRECTION_UP)
-			convertedValue += 2L;
-		else if(motion[0] == DIRECTION_DOWN)
-			convertedValue += 4L;
-		else if(motion[0] == DIRECTION_LEFT)
-			convertedValue += 8L;
-		else if(motion[0] == DIRECTION_RIGHT)
-			convertedValue += 16L;
-		
-		if(motion[1] == DIRECTION_DOT)
-			convertedValue += 32L;
-		else if(motion[1] == DIRECTION_UP)
-			convertedValue += 64L;
-		else if(motion[1] == DIRECTION_DOWN)
-			convertedValue += 128L;
-		else if(motion[1] == DIRECTION_LEFT)
-			convertedValue += 256L;
-		else if(motion[1] == DIRECTION_RIGHT)
-			convertedValue += 512L;
-		
-		if(motion[2] == DIRECTION_DOT)
-			convertedValue += 1024L;
-		else if(motion[2] == DIRECTION_UP)
-			convertedValue += 2048L;
-		else if(motion[2] == DIRECTION_DOWN)
-			convertedValue += 4096L;
-		else if(motion[2] == DIRECTION_LEFT)
-			convertedValue += 8192L;
-		else if(motion[2] == DIRECTION_RIGHT)
-			convertedValue += 16384L;
-		
-		if(motion[3] == DIRECTION_DOT)
-			convertedValue += 32768L;
-		else if(motion[3] == DIRECTION_UP)
-			convertedValue += 65536L;
-		else if(motion[3] == DIRECTION_DOWN)
-			convertedValue += 131072L;
-		else if(motion[3] == DIRECTION_LEFT)
-			convertedValue += 262144L;
-		else if(motion[3] == DIRECTION_RIGHT)
-			convertedValue += 524288L;
-		
-		if(motion[4] == DIRECTION_DOT)
-			convertedValue += 1048576L;
-		else if(motion[4] == DIRECTION_UP)
-			convertedValue += 2097152L;
-		else if(motion[4] == DIRECTION_DOWN)
-			convertedValue += 4194304L;
-		else if(motion[4] == DIRECTION_LEFT)
-			convertedValue += 8388608L;
-		else if(motion[4] == DIRECTION_RIGHT)
-			convertedValue += 16777216L;
-		
+		long directionBit = 1L;
+
+		for(int i = 0; i < numFingers; i++) {
+			switch (motion[i]) {
+				case DIRECTION_DOT :
+					convertedValue |= directionBit;
+					break;
+				case DIRECTION_UP :
+					convertedValue |= (directionBit << 1);
+					break;
+				case DIRECTION_DOWN :
+					convertedValue |= (directionBit << 2);
+					break;
+				case DIRECTION_LEFT :
+					convertedValue |= (directionBit << 3);
+					break;
+				case DIRECTION_RIGHT :
+					convertedValue |= (directionBit << 4);
+					break;
+			}
+
+			directionBit <<= 5;
+		}
+
 		return convertedValue;
 	}
 
