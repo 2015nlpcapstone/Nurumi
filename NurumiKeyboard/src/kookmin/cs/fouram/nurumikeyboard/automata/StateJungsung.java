@@ -46,7 +46,7 @@ public class StateJungsung implements BuildState {
                 buffer[0] = tempBuildBokJaEum;
             } else {
                 result = String.format("%c%c", buffer[0].getUnicode(), buffer[1].getUnicode());
-                buffer[0] = buffer[1];
+                context.setState(new StateJungThreeJaEum());
             }
         }
 

@@ -1,7 +1,5 @@
 package kookmin.cs.fouram.nurumikeyboard.automata;
 
-import android.util.Log;
-
 import kookmin.cs.fouram.nurumikeyboard.automata.koreanCharacter.Consonant;
 import kookmin.cs.fouram.nurumikeyboard.automata.koreanCharacter.KoreanCharacter;
 
@@ -11,7 +9,6 @@ import kookmin.cs.fouram.nurumikeyboard.automata.koreanCharacter.KoreanCharacter
 public class StateChosung implements BuildState {
 
     public String buildCharacter(AutomataStateContext context, KoreanCharacter inputChar, KoreanCharacter buffer[]) {
-        Log.d("mytag", "chosung");
         KoreanCharacter tempBuildBokMoEum;
         Korean korean = AutomataStateContext.getInstance().getKorean();
 

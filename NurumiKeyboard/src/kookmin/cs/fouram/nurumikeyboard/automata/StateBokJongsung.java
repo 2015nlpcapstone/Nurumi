@@ -37,7 +37,7 @@ public class StateBokJongsung implements BuildState {
                                 ((Consonant) buffer[2]).getCharNumJong()),
                         buffer[3].getUnicode());
 
-                context.setState(new StateJongToCho());
+                context.setState(new StateBokJongThreeJaEum());
             }
         }
         // 모음이 입력 되었을 때
