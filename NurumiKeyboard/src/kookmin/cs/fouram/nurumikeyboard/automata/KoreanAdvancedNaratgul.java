@@ -9,7 +9,7 @@ public class KoreanAdvancedNaratgul extends Korean {
 
     public KoreanAdvancedNaratgul() {
 
-        AutomataStateContext.getInstance().setKorean(this);
+        asc.setKorean(this);
 
         kMap.put(32L, YIEUNG);
         kMap.put(1024L, MIEUM);

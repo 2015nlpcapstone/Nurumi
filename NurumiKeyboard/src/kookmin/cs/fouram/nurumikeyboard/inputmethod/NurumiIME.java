@@ -198,6 +198,7 @@ public class NurumiIME extends InputMethodService implements
 	public void onWindowHidden() {
 		super.onWindowHidden();
 		Log.v("IME_LOG", "Location : NurumiIME - onWindowHidden()");
+		((Korean)automata).initAutomataState();
 		mKeyboardView.initialize();
 	}
 
