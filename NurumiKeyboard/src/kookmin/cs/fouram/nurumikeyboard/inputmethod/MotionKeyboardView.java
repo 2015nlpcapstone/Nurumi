@@ -243,7 +243,6 @@ public class MotionKeyboardView extends View {
 		ptArr = new ArrayList<PointF>();
 
 		startPtArr.clear();
-		
 		clearLists();
 	}
 	
@@ -575,7 +574,6 @@ public class MotionKeyboardView extends View {
 					convertedValue |= (directionBit << 4);
 					break;
 			}
-
 			directionBit <<= 5;
 		}
 

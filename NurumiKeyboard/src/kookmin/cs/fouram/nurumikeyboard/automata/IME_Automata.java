@@ -1,4 +1,4 @@
-﻿package kookmin.cs.fouram.nurumikeyboard.automata;
+package kookmin.cs.fouram.nurumikeyboard.automata;
 
 import android.util.Log;
 import android.view.inputmethod.InputConnection;
@@ -28,8 +28,12 @@ public abstract class IME_Automata {
 	/// @param finger_array : motion array.
 	/// @return If motion is allocated, return true. If not, return false.
 	/////////////////////////////////////////////
-	public abstract boolean isAllocatedMotion(long finger_array);
-	
+	public boolean isAllocatedMotion(long motion) {
+		// 기능키. 엔터, 백스페이스, 스페이스
+		if (motion == 1048577L || motion == 8L || motion == 16L)
+			return true;
+		return false;
+	}
 	/////////////////////////////////////////////
 	/// @fn execute
 	/// @brief Function information : Get motion and returns output string.
@@ -40,18 +44,19 @@ public abstract class IME_Automata {
 	/// @return Output string.
 	/////////////////////////////////////////////
 	public abstract String execute(long motion, InputConnection input_connection);
-	
-	protected String text_to_commit = null;
-	protected long motion;
-	protected int[] finger;
+
 	protected InputConnection ic;
-	
+
 	public boolean isEnter(long motion) {
 		if(motion == 1048577L)
 			return true;
 		return false;
 	}
-	
+
+	protected void deleteSurroundingText() {
+		if( ic != null ) ic.deleteSurroundingText(1, 0);
+	}
+
 	public void finalize() {
 		Log.i("IME_LOG", "Location : IME_Automata - finalize()");
 	}

@@ -1,7 +1,5 @@
-﻿package kookmin.cs.fouram.nurumikeyboard.inputmethod;
+package kookmin.cs.fouram.nurumikeyboard.inputmethod;
 
-import kookmin.cs.fouram.nurumikeyboard.automata.*;
-import kookmin.cs.fouram.nurumikeyboard.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
@@ -14,6 +12,13 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import kookmin.cs.fouram.nurumikeyboard.R;
+import kookmin.cs.fouram.nurumikeyboard.automata.English;
+import kookmin.cs.fouram.nurumikeyboard.automata.IME_Automata;
+import kookmin.cs.fouram.nurumikeyboard.automata.Korean;
+import kookmin.cs.fouram.nurumikeyboard.automata.KoreanAdvancedNaratgul;
+import kookmin.cs.fouram.nurumikeyboard.automata.SpecialCharacters;
 
 
 /////////////////////////////////////////////
@@ -198,7 +203,7 @@ public class NurumiIME extends InputMethodService implements
 	public void onWindowHidden() {
 		super.onWindowHidden();
 		Log.v("IME_LOG", "Location : NurumiIME - onWindowHidden()");
-		((Korean)automata).initAutomataState();
+		if(automata instanceof Korean) ((Korean)automata).initAutomataState();
 		mKeyboardView.initialize();
 	}
 
@@ -255,7 +260,7 @@ public class NurumiIME extends InputMethodService implements
 	/////////////////////////////////////////////
 	@Override
 	public void onFinishGesture(long motionValue) {
-		Log.i("IME_LOG", "Location : NurumiIME - onFinishGesture()");
+		Log.i("IME_LOG", "Location : NurumiIME - onFinishGesture() " + motionValue);
 
 		for(int i = 0; i < numFingers; i++) {
 			/*if(stateHand == true) // right handed
@@ -275,6 +280,7 @@ public class NurumiIME extends InputMethodService implements
 			if(automata.isEnter(motion)) {
 				this.sendDownUpKeyEvents(KeyEvent.KEYCODE_ENTER);
 				Log.d("IME_LOG", "Process : onFinishGesture(). Enter");
+				return ;
 			}
 			Log.d("IME_LOG", "Process : onFinishGesture(). motion : " + motion);
 			InputConnection ic = getCurrentInputConnection();
@@ -328,7 +334,7 @@ public class NurumiIME extends InputMethodService implements
 	private void setAutomata(int keyboardTypeFlag, String automataType) {
 		Log.i("IME_LOG", "Location : NurumiIME - setAutomata()");
 		switch (keyboardTypeFlag) {
-			case KOR: {
+			case KOR:
 				switch (automataType) {
 					case "1":
 					/*	automata = new KoreanCheonJiIn();
@@ -343,8 +349,8 @@ public class NurumiIME extends InputMethodService implements
 						Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_3");
 						break;
 				}
-			} break;
-/*			case ENG:
+				break;
+			case ENG:
 				automata = new English();
 				Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Eng");
 				break;
@@ -352,7 +358,7 @@ public class NurumiIME extends InputMethodService implements
 				automata = new SpecialCharacters();
 				Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Spc");
 				break;
-*/
+
 			default:
 				Log.e("IME_LOG", "Process : setAutomata(). Error : keyboardTypeFlag error. (Value : " + stateLanguage + ")");
 		}

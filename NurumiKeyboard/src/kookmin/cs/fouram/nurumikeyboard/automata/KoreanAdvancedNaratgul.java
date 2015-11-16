@@ -112,10 +112,6 @@ public class KoreanAdvancedNaratgul extends Korean {
     @Override
     public boolean isAllocatedMotion(long motion) {
         Log.i("AUTOMATA_LOG", "Location : Automata_type_Kor_3 - isAllocatedMotion()");
-
-        // 기능키. 엔터, 백스페이스, 스페이스
-        if (motion == 1048577L || motion == 8L || motion == 16L)
-            return true;
-        return kMap.containsKey(motion);
+        return ( super.isAllocatedMotion(motion) || kMap.containsKey(motion) );
     }
 }

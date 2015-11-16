@@ -1,9 +1,9 @@
 package kookmin.cs.fouram.nurumikeyboard.automata;
 
-import java.util.HashMap;
-
 import android.util.Log;
 import android.view.inputmethod.InputConnection;
+
+import java.util.HashMap;
 
 /**
  * Created by kimminho on 15. 5. 21..
@@ -37,7 +37,6 @@ public class SpecialCharacters extends IME_Automata {
     protected final SpecialCharacter Eight = new SpecialCharacter('8', 56);
     protected final SpecialCharacter Nine = new SpecialCharacter('9', 57);
 
-
     protected final SpecialCharacter Dot = new SpecialCharacter('.', 46);
     protected final SpecialCharacter Comma = new SpecialCharacter(',', 44);
     protected final SpecialCharacter Point = new SpecialCharacter('!', 33);
@@ -69,62 +68,44 @@ public class SpecialCharacters extends IME_Automata {
         sMap.put(1082368L, Nine);
         sMap.put(1082400L, Zero);
         sMap.put(64L, Dot);
-        sMap.put(256L, Comma);
-        sMap.put(128L, Point);
-        sMap.put(512L, Question);
+        sMap.put(128L, Comma);
+        sMap.put(512L, Point);
+        sMap.put(256L, Question);
         sMap.put(2048L, Computing);
-        sMap.put(8192L, Swungdash);
-        sMap.put(4096L, Slash);
-        sMap.put(16384L, Semicolon);
+        sMap.put(4096L, Swungdash);
+        sMap.put(16384L, Slash);
+        sMap.put(8192L, Semicolon);
         sMap.put(65536L, Hyphen);
-        sMap.put(262144L, Under_hyphen);
-        sMap.put(131072L, Left_parentheses);
-        sMap.put(524288L, Right_parentheses);
+        sMap.put(131072L, Under_hyphen);
+        sMap.put(524288L, Left_parentheses);
+        sMap.put(262144L, Right_parentheses);
         sMap.put(2097152L, Plus);
-        sMap.put(8388608L, Star);
-        sMap.put(4194304L, At);
-        sMap.put(16777216L, Equal);
+        sMap.put(4194304L, Star);
+        sMap.put(16777216L, At);
+        sMap.put(8388608L, Equal);
     }
-    private void text_to_commit(String str) {
-        text_to_commit = str;
-    }
-    private void MODE_SPECIAL() {
-        SpecialCharacter temp = sMap.get(motion);
-        text_to_commit(String.format("%c", temp.getUnicode()));
-    }
-    
+
     public String execute(long motionValue, InputConnection input_connection) {
     	Log.i("AUTOMATA_LOG", "Location : Automata_type_Spc - execute()");
         // kim // 150516 // init values
-        motion = motionValue;
         ic = input_connection;
 
         // kim // 150412 // count finger
 
-        if(motion == 4L) {
+        if(motionValue == 16L) {
             return " ";
         }
-        else if(motion == 16L) {
-            ic.deleteSurroundingText(1, 0);
+        else if(motionValue == 8L) {
+            deleteSurroundingText();
             return "";
         }
-        else {
-            MODE_SPECIAL();
-        }// kim // 150413 // switch by automata level
 
-
-        return text_to_commit;
+        return String.format("%c", sMap.get(motionValue).getUnicode());
     }
 
     @Override
     public boolean isAllocatedMotion(long motion) {
         Log.i("AUTOMATA_LOG", "Location : Automata_type_Kor_3 - isAllocatedMotion()");
-        if( motion == 32L || motion == 1024L || motion == 32768L || motion == 1048576L || motion == 1056L ||
-                motion == 33792L || motion == 1081344L || motion == 33824L || motion == 1082368L || motion == 1082400L ||
-                motion == 64L || motion == 256L || motion == 128L || motion == 512L || motion == 2048L ||
-                motion == 8192L || motion == 4096L || motion == 16384L || motion == 65536L || motion == 262144L ||
-                motion == 131072L || motion == 524288L || motion == 2097152L || motion == 8388608L || motion == 4194304L || motion == 16777216L )
-            return true;
-        return false;
+        return ( super.isAllocatedMotion(motion) || sMap.containsKey(motion) );
     }
 }

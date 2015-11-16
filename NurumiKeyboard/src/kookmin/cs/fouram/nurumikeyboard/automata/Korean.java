@@ -76,8 +76,6 @@ public abstract class Korean extends IME_Automata {
     protected final KoreanCharacter EUI = new Vowel('ㅢ', 12642, 19);
     protected final KoreanCharacter YI = new Vowel('ㅣ', 12643, 20);
 
-    public abstract boolean isAllocatedMotion(long finger_array);
-
     // yoon // 150516 // get a Korean character code key value
     protected int generate_korean_char_code(int cho_seong, int jung_seong, int jong_seong) {
         return ((AC00 + ((cho_seong * 21) + jung_seong) * 28) + jong_seong);
@@ -89,7 +87,7 @@ public abstract class Korean extends IME_Automata {
     }
 
     public String execute(long motionValue, InputConnection input_connection) {
-        Log.d("AUTOMATA_LOG", "Location : Automata_type_Kor_3 - execute(). motion : " + motion + ", motionValue : " + motionValue);
+        Log.d("AUTOMATA_LOG", "Location : Automata_type_Kor_3 - execute(). motion : " + motionValue + ", motionValue : " + motionValue);
 
         ic = input_connection;
 
@@ -114,10 +112,6 @@ public abstract class Korean extends IME_Automata {
         inputChar = null;
 
         return result;
-    }
-
-    protected void deleteSurroundingText() {
-        ic.deleteSurroundingText(1, 0);
     }
 
     protected KoreanCharacter[] divideBokJaEum(KoreanCharacter bok_ja_eum) {
