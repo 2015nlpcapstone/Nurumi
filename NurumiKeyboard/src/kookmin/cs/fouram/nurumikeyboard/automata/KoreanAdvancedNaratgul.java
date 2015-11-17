@@ -11,72 +11,47 @@ public class KoreanAdvancedNaratgul extends Korean {
 
         asc.setKorean(this);
 
-        kMap.put(32L, YIEUNG);
-        kMap.put(1024L, MIEUM);
-        kMap.put(32768L, NIEUN);
-        kMap.put(1048576L, LIEUL);
+        kMap.put(32L, YIEUNG);    // ㅇ
+        kMap.put(1024L, MIEUM);   // ㅁ
+        kMap.put(32768L, NIEUN);  // ㄴ
+        kMap.put(1048576L, LIEUL);// ㄹ
 
-        kMap.put(1056L, GIYEOK);
-        kMap.put(33792L, DIGEUT);
-        kMap.put(32800L, BIEUP);
-        kMap.put(1082368L, SIOT);
-        kMap.put(33824L, JIEUT);
-        kMap.put(1082400L, HIEUT);
+        kMap.put(1056L, GIYEOK);  // ㄱ
+        kMap.put(33792L, DIGEUT); // ㄷ
+        kMap.put(32800L, BIEUP);  // ㅂ
+        kMap.put(1082368L, SIOT); // ㅅ
+        kMap.put(33824L, JIEUT);  // ㅈ
+        kMap.put(1082400L, HIEUT);// ㅎ
 
-        kMap.put(3L, KIEUK); // 임의의 KEY값
-        kMap.put(5L, TIEUT);
-        kMap.put(9L, PIEUP);
-        kMap.put(17L, CHIEUT);
+        kMap.put(1057L, SSANG_GIYEOK);  // ㄲ
+        kMap.put(33793L, SSANG_DIGEUT); // ㄸ
+        kMap.put(32801L, SSANG_BIEUP);  // ㅃ
+        kMap.put(1082369L, SSANG_SIOT); // ㅆ
+        kMap.put(33825L, SSANG_JIEUT);  // ㅉ
 
-        kMap.put(1057L, SSANG_GIYEOK);
-        kMap.put(33793L, SSANG_DIGEUT);
-        kMap.put(32801L, SSANG_BIEUP);
-        kMap.put(1082369L, SSANG_SIOT);
-        kMap.put(33825L, SSANG_JIEUT);
-
-        kMap.put(64L, OH);
-        kMap.put(512L, AH);
-        kMap.put(128L, WOO);
-        kMap.put(256L, UH);
-        kMap.put(2112L, YO);
-        kMap.put(16896L, YA);
-        kMap.put(4224L, YOO);
-        kMap.put(8448L, YUH);
-        kMap.put(17318400L, EU);
-        kMap.put(4329600L, YI);
-        kMap.put(524800L, AE);
-        kMap.put(262400L, E);
-        kMap.put(541184L, YAE);
-        kMap.put(270592L, YE);
-
-        kMap.put(18L, WA);
-        kMap.put(19L, WAE);
-        kMap.put(20L, OE);
-        kMap.put(21L, WUH);
-        kMap.put(22L, WEH);
-        kMap.put(23L, WUI);
-        kMap.put(24L, EUI);
-
-        kMap.put(25L, GIYEOK_SIOT);
-        kMap.put(26L, NIEUN_JIEUT);
-        kMap.put(27L, NIEUN_HIEUT);
-        kMap.put(28L, LIEUL_GIYEOK);
-        kMap.put(29L, LIEUL_MIEUM);
-        kMap.put(30L, LIEUL_BIEUP);
-        kMap.put(31L, LIEUL_SIOT);
-        kMap.put(35L, LIEUL_TIEUT);
-        kMap.put(37L, LIEUL_PIEUP);
-        kMap.put(38L, LIEUL_HIEUT);
-        kMap.put(39L, BIEUP_SIOT);
+        kMap.put(64L, OH);   // ㅗ
+        kMap.put(512L, AH);  // ㅏ
+        kMap.put(128L, WOO); // ㅜ
+        kMap.put(256L, UH);  // ㅓ
+        kMap.put(2112L, YO); // ㅛ
+        kMap.put(16896L, YA);// ㅑ
+        kMap.put(4224L, YOO);// ㅠ
+        kMap.put(8448L, YUH);// ㅕ
+        kMap.put(17318400L, EU);// ㅡ
+        kMap.put(4329600L, YI); // ㅣ
+        kMap.put(524800L, AE);  // ㅐ
+        kMap.put(262400L, E);   // ㅔ
+        kMap.put(541184L, YAE); // ㅒ
+        kMap.put(270592L, YE);  // ㅖ
     }
 
     protected KoreanCharacter buildBokJaEum(KoreanCharacter first, KoreanCharacter second) {
-        KoreanCharacter bokJaEum = null;
+        KoreanCharacter bokJaEum = super.buildBokJaEum(first, second);
 
-        if ((bokJaEum = super.buildBokJaEum(first, second)) != null)
+        if ( bokJaEum != null )
             return bokJaEum;
 
-        if (first == null || second == null)
+        if ( first == null || second == null )
             return null;
 
         switch (first.getName()) {

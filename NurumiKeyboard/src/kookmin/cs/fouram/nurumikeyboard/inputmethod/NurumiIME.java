@@ -18,6 +18,7 @@ import kookmin.cs.fouram.nurumikeyboard.automata.English;
 import kookmin.cs.fouram.nurumikeyboard.automata.IME_Automata;
 import kookmin.cs.fouram.nurumikeyboard.automata.Korean;
 import kookmin.cs.fouram.nurumikeyboard.automata.KoreanAdvancedNaratgul;
+import kookmin.cs.fouram.nurumikeyboard.automata.KoreanNaratgul;
 import kookmin.cs.fouram.nurumikeyboard.automata.SpecialCharacters;
 
 
@@ -340,11 +341,12 @@ public class NurumiIME extends InputMethodService implements
 					/*	automata = new KoreanCheonJiIn();
 						Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_1");
 						break;
+						*/
 					case "2":
 						automata = new KoreanNaratgul();
 						Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_2");
 						break;
-*/					case "3":
+					case "3":
 						automata = new KoreanAdvancedNaratgul();
 						Log.v("IME_LOG", "Process : setAutomata(). Automata changed to Kor_3");
 						break;
