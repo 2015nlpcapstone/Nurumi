@@ -30,7 +30,7 @@ public abstract class IME_Automata {
 	/////////////////////////////////////////////
 	public boolean isAllocatedMotion(long motion) {
 		// 기능키. 엔터, 백스페이스, 스페이스
-		if (motion == 1048577L || motion == 8L || motion == 16L)
+		if (motion == 131073L || motion == 8L || motion == 16L)
 			return true;
 		return false;
 	}
@@ -48,7 +48,7 @@ public abstract class IME_Automata {
 	protected InputConnection ic;
 
 	public boolean isEnter(long motion) {
-		if(motion == 1048577L)
+		if(motion == 131073L)
 			return true;
 		return false;
 	}
