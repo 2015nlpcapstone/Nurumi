@@ -20,6 +20,12 @@ public class StateJongsung implements BuildState {
 
         // 종성에 자음이 입력되었을 때
         if (inputChar instanceof Consonant) {
+            if( ((Consonant)buffer[2]).getCharNumJong() == -1) {
+                result = String.format("%c", buffer[2].getUnicode());
+                buffer[0] = buffer[2];
+                context.setState(new StateJungsung());
+                return result;
+            }
             // 한글을 생성해서 출력
             result = String.format("%c", korean.generate_korean_char_code(((Consonant) buffer[0]).getCharNumCho(),
                     buffer[1].getCharNum(),
