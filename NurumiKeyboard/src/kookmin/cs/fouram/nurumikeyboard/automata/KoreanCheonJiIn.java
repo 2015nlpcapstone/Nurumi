@@ -1,10 +1,10 @@
 ﻿package kookmin.cs.fouram.nurumikeyboard.automata;
 
 import android.util.Log;
-import android.view.inputmethod.InputConnection;
 
-public class KoreanCheonJiIn extends IME_Automata {
+public class KoreanCheonJiIn extends Korean {
 
+/*
 	private final int area_a=12685;
 	private final int ssangarea_a=4514;
 
@@ -994,5 +994,5 @@ public class KoreanCheonJiIn extends IME_Automata {
 			return false;
 	}
 
-
+*/
 }

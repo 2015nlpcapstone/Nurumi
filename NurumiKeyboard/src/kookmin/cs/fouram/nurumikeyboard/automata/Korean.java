@@ -85,7 +85,15 @@ public abstract class Korean extends IME_Automata {
         asc.setState(new StateChosung());
         asc.clear_buffer();
     }
-
+    
+    @Override
+    public boolean isEnter(long motion) {
+    	boolean isEnterEvent = super.isEnter(motion);
+    	if(isEnterEvent)
+    		initAutomataState();
+    	return isEnterEvent;
+    }
+    
     public String execute(long motionValue, InputConnection input_connection) {
         Log.d("AUTOMATA_LOG", "Location : Automata_type_Kor_3 - execute(). motion : " + motionValue + ", motionValue : " + motionValue);
 

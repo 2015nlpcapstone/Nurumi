@@ -1,8 +1,6 @@
 package kookmin.cs.fouram.nurumikeyboard.automata;
 
 import android.util.Log;
-import android.view.inputmethod.InputConnection;
-
 import kookmin.cs.fouram.nurumikeyboard.automata.koreanCharacter.KoreanCharacter;
 
 public class KoreanNaratgul extends Korean {
@@ -96,10 +94,6 @@ public class KoreanNaratgul extends Korean {
         }
 
         return bokJaEum;
-    }
-
-    public String execute(long motionValue, InputConnection input_connection) {
-        return super.execute(motionValue, input_connection);
     }
 
     @Override
